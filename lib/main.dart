@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
 import 'channel.dart';
+import 'http/http_demo.dart';
+import 'launch_page.dart';
 import 'statelesswidget_demo.dart';
 
 // import 'statefulwidget_demo.dart';
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
         "statefulwidget":(BuildContext context) => StatefulWidgetDemo(),
         "layoutwidget":(BuildContext context) => LayoutDemoWidget(),
         "channel":(BuildContext context) => const PlatformChannel(),
+        "launchpage":(BuildContext context) =>  LaunchPage(),
+        "http":(BuildContext context) =>  HttpDemo(),
       },
     );
   }
@@ -66,6 +70,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('StatefulWidget组件的使用', StatefulWidgetDemo(), 'statefulwidget'),
         _item('布局的使用', LayoutDemoWidget(), 'layoutwidget'),
         _item('flutter和原生通信', const PlatformChannel(), 'channel'),
+        _item('打开第三方应用', LaunchPage(), 'launchpage'),
+        _item('http请求', HttpDemo(), 'http'),
       ],
     );
   }

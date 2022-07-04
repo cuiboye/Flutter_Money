@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
+import 'package:flutter_money/view/custom_appbar.dart';
+import 'package:flutter_money/view/custom_materialapp.dart';
 
 /**
  * StatefulWidget组件的使用
@@ -17,18 +19,12 @@ class _StatefulWidgetDemoState extends State<StatefulWidgetDemo> {
   // final Dio _dio = Dio();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CustomMaterialApp(
       title: "StatefulWidget组件的使用",
-      theme: ThemeData(
-          primarySwatch: Colors.blue
-      ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("StatefulWidget组件的使用"),
-          leading: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(Icons.arrow_back)
-          ),
+        appBar: CustomAppbar(
+          title: 'StatefulWidget组件的使用',
+          context: context,
         ),
         body:mCurrentSelectedIndex==0?
         RefreshIndicator(//RefreshIndicator和ListView一起使用才会生效

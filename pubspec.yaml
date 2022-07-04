@@ -50,6 +50,8 @@ dependencies:
   provider: ^6.0.3
 #  path_provider: ^2.0.11 #文件操作
   dio: ^4.0.6 #http请求封裝库
+  json_annotation: ^4.5.0 # 序列化
+  shared_preferences: ^2.0.15  #SharedPreferences存储数据
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,7 +62,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+  # 下面两个是处理序列化的
+  build_runner: ^2.1.11
+  json_serializable: ^6.2.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -71,7 +75,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/view/custom_appbar.dart';
+import 'package:flutter_money/view/custom_materialapp.dart';
 
 /**
  * 布局相关组件：
@@ -36,15 +38,12 @@ class LayoutDemoWidget extends StatefulWidget {
 class _LayoutDemoWidgetState extends State<LayoutDemoWidget> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CustomMaterialApp(
       title: "布局的使用",
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("布局的使用"),
-          leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(Icons.arrow_back),
-          ),
+        appBar:CustomAppbar(
+          title: '布局的使用',
+          context: context,
         ),
         body: Container(
           decoration: BoxDecoration(color: Colors.grey),

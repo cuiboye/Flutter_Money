@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/view/custom_appbar.dart';
+import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher_android/url_launcher_android.dart';
 
@@ -12,7 +14,7 @@ class LaunchPage extends StatefulWidget {
 class _LaunchPageState extends State<LaunchPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CustomMaterialApp(
       home: Scaffold(
         body: Column(
           children: [
@@ -22,8 +24,9 @@ class _LaunchPageState extends State<LaunchPage> {
             )
           ],
         ),
-        appBar: AppBar(
-          title: Text("如何打开第三方应用?"),
+        appBar:CustomAppbar(
+          title: '打开浏览器',
+          context: context,
         ),
       ),
     );

@@ -72,6 +72,7 @@ class _GridViewLayoutState extends State<GridViewLayout> {
 
           Expanded(
               child: GridView(
+                  scrollDirection:Axis.horizontal,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,//每一行3个
                     childAspectRatio: 1.0//宽高比为1

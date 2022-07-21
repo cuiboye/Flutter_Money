@@ -14,8 +14,11 @@ import 'package:flutter_money/scroll/scrollcontroller.dart';
 import 'package:flutter_money/scroll/singlechildscrollview.dart';
 import 'package:flutter_money/sharedpreference.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
+import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
+import 'package:flutter_money/wajiu/main.dart';
+import 'package:flutter_money/wajiu/personal_page.dart';
 import 'package:flutter_money/widget/button_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/icon_demo.dart';
@@ -24,6 +27,9 @@ import 'package:flutter_money/widget/input_add_form.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'channel.dart';
 import 'http/dio_demo.dart';
 import 'http/futurebuild_demo.dart';
@@ -51,13 +57,14 @@ import 'view/custom_materialapp.dart';//扩展方法
 //Flutter 应用中 main 函数为应用程序的入口。main 函数中调用了runApp 方法，它的功能是启
 //动Flutter应用。runApp它接受一个 Widget参数，
 //main函数使用了(=>)符号，这是 Dart 中单行函数或方法的简写。
-void main(){
+void main() {
+  //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
+  SharedPreferences.setMockInitialValues({});
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     //去除半透明状态栏，设置完成后需要重新运行下项目才会生效
@@ -71,63 +78,75 @@ class MyApp extends StatelessWidget {
     print("调用扩展方法");
     print("#90F7EC".toColor());
 
-    //MaterialApp 是Material 库中提供的 Flutter APP 框架，通过它可以设置应用的名
-    //称、主题、语言、首页及路由列表等。MaterialApp也是一个 widget。
-    return CustomMaterialApp(
-      title: 'Flutter Demo',
-      home:  Scaffold(
-          appBar: CustomAppbar(
-            title: '主页',
-            showLeftArrow: false,
-            callback: () => print("我是主页"), context: context,
-          ),
-          body: RouteNavigator()
-      ),//home 为 Flutter 应用的首页，它也是一个 widget。
-      routes:  <String,WidgetBuilder>{
-        "statelesswidget":(BuildContext context) => StatelessWidgetDemo(),
-        "statefulwidget":(BuildContext context) => StatefulWidgetDemo(),
-        "layoutwidget":(BuildContext context) => LayoutDemoWidget(),
-        "channel":(BuildContext context) => const PlatformChannel(),
-        "launchpage":(BuildContext context) =>  LaunchPage(),
-        "http":(BuildContext context) =>  HttpDemo(),
-        "dio":(BuildContext context) =>  DioDemo(),
-        "futurebuilder":(BuildContext context) =>  FutureBuilderDemo(),
-        "test_extension_widget":(BuildContext context) =>  TestExtensionWidget(),
-        "weiget_main":(BuildContext context) =>  WeigetMain(),
-        "text":(BuildContext context) =>  TextDemo(),
-        "button":(BuildContext context) =>  ButtonDemo(),
-        "icon":(BuildContext context) =>  IconDemo(),
-        "switchaddselectBox":(BuildContext context) =>  SwitchAddSelectBox(),
-        "inputaddform":(BuildContext context) =>  InputAddForm(),//输入框和form
-        "indicator":(BuildContext context) =>  IndicatorWidget(),//进度指示器
-        "sizecontainer":(BuildContext context) =>  SizeContainer(),//尺寸限制类容器
-        "linearlayout":(BuildContext context) =>  LinearLayout(),//线性布局
-        "linearlayout2":(BuildContext context) =>  LinearLayout2(),//Column嵌套Column或者Row嵌套Row的情况
-        "flex_layout":(BuildContext context) =>  FlexLayout(),//Flex布局
-        "wrapaddflow":(BuildContext context) =>  WrapAddFlow(),//流式布局-Wrap，Flow
-        "stack_positioned":(BuildContext context) =>  StackAddPositioned(),//流式布局-Wrap，Flow
-        "align_widget":(BuildContext context) =>  AlianWidget(),//对齐与相对定位（Align）
-        "container_widget":(BuildContext context) =>  ContainerWidget(),//容器类组件
-        "fittedbox_layout":(BuildContext context) =>  FittedBoxLayout(),//空间适配
-        "scaffold_layout":(BuildContext context) =>  ScaffoldLayout(),// 页面骨架
-        "scroll_widget":(BuildContext context) =>  ScrollWidget(),// 可滚动组件
-        "scrollbar_widget":(BuildContext context) =>  ScrollBarWidget(),// ScrollBar
-        "singlechildscrollview":(BuildContext context) =>  SinglechildScrollViewWidget(),// ScrollBar
-        "listview_widget":(BuildContext context) =>  ListViewWidget(),// ListView
-        "scrollcontroller_widget":(BuildContext context) =>  ScrollControllerWidget(),// ScrollController控制器
-        // ignore: equal_keys_in_map
-        "animatedlist":(BuildContext context) =>  AnimatedListLayout(),// AnimatedList
-        "gridview":(BuildContext context) =>  GridViewLayout(),// gridview
-        "pageview":(BuildContext context) =>  PageViewLayout(),// PageView
-        "tabbarview":(BuildContext context) =>  TabBarViewLayout(),// PageView
-        "customscrollview_slivers":(BuildContext context) =>  CustomScrollViewAddSlivers(),// CustomScrollView 和 Slivers
-        "dialog":(BuildContext context) =>  DialogDemo(),// 对话框
-        "dialog":(BuildContext context) =>  NotificationDemo(),// Notification
-        "sharedpreference":(BuildContext context) =>  SharedPreferenceWidget(),// Notification
+    //屏幕适配，入口初始化一次
+    return ScreenUtilInit(
+      designSize: const Size(375,812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context , child) {
+        //MaterialApp 是Material 库中提供的 Flutter APP 框架，通过它可以设置应用的名
+        //称、主题、语言、首页及路由列表等。MaterialApp也是一个 widget。
+        return CustomMaterialApp(
+          title: 'Flutter Demo',
+          home:  Scaffold(
+              appBar: CustomAppbar(
+                title: '主页',
+                showLeftArrow: false,
+                callback: () => print("我是主页"), context: context,
+              ),
+              body: RouteNavigator()
+          ),//home 为 Flutter 应用的首页，它也是一个 widget。
+          routes:  <String,WidgetBuilder>{
+            "statelesswidget":(BuildContext context) => StatelessWidgetDemo(),
+            "statefulwidget":(BuildContext context) => StatefulWidgetDemo(),
+            "layoutwidget":(BuildContext context) => LayoutDemoWidget(),
+            "channel":(BuildContext context) => const PlatformChannel(),
+            "launchpage":(BuildContext context) =>  LaunchPage(),
+            "http":(BuildContext context) =>  HttpDemo(),
+            "dio":(BuildContext context) =>  DioDemo(),
+            "futurebuilder":(BuildContext context) =>  FutureBuilderDemo(),
+            "test_extension_widget":(BuildContext context) =>  TestExtensionWidget(),
+            "weiget_main":(BuildContext context) =>  WeigetMain(),
+            "text":(BuildContext context) =>  TextDemo(),
+            "button":(BuildContext context) =>  ButtonDemo(),
+            "icon":(BuildContext context) =>  IconDemo(),
+            "switchaddselectBox":(BuildContext context) =>  SwitchAddSelectBox(),
+            "inputaddform":(BuildContext context) =>  InputAddForm(),//输入框和form
+            "indicator":(BuildContext context) =>  IndicatorWidget(),//进度指示器
+            "sizecontainer":(BuildContext context) =>  SizeContainer(),//尺寸限制类容器
+            "linearlayout":(BuildContext context) =>  LinearLayout(),//线性布局
+            "linearlayout2":(BuildContext context) =>  LinearLayout2(),//Column嵌套Column或者Row嵌套Row的情况
+            "flex_layout":(BuildContext context) =>  FlexLayout(),//Flex布局
+            "wrapaddflow":(BuildContext context) =>  WrapAddFlow(),//流式布局-Wrap，Flow
+            "stack_positioned":(BuildContext context) =>  StackAddPositioned(),//流式布局-Wrap，Flow
+            "align_widget":(BuildContext context) =>  AlianWidget(),//对齐与相对定位（Align）
+            "container_widget":(BuildContext context) =>  ContainerWidget(),//容器类组件
+            "fittedbox_layout":(BuildContext context) =>  FittedBoxLayout(),//空间适配
+            "scaffold_layout":(BuildContext context) =>  ScaffoldLayout(),// 页面骨架
+            "scroll_widget":(BuildContext context) =>  ScrollWidget(),// 可滚动组件
+            "scrollbar_widget":(BuildContext context) =>  ScrollBarWidget(),// ScrollBar
+            "singlechildscrollview":(BuildContext context) =>  SinglechildScrollViewWidget(),// ScrollBar
+            "listview_widget":(BuildContext context) =>  ListViewWidget(),// ListView
+            "scrollcontroller_widget":(BuildContext context) =>  ScrollControllerWidget(),// ScrollController控制器
+            // ignore: equal_keys_in_map
+            "animatedlist":(BuildContext context) =>  AnimatedListLayout(),// AnimatedList
+            "gridview":(BuildContext context) =>  GridViewLayout(),// gridview
+            "pageview":(BuildContext context) =>  PageViewLayout(),// PageView
+            "tabbarview":(BuildContext context) =>  TabBarViewLayout(),// PageView
+            "customscrollview_slivers":(BuildContext context) =>  CustomScrollViewAddSlivers(),// CustomScrollView 和 Slivers
+            "dialog":(BuildContext context) =>  DialogDemo(),// 对话框
+            "dialog":(BuildContext context) =>  NotificationDemo(),// Notification
+            "sharedpreference":(BuildContext context) =>  SharedPreferenceWidget(),// Notification
+            "test":(BuildContext context) =>  Test(),// Test
+            "wajiu_main_page":(BuildContext context) =>  WajiuMainPage(),// Test
+          },
+        );
       },
+      // child: const HomePage(title: 'First Method'),
     );
   }
 }
+
 class RouteNavigator extends StatefulWidget {
   const RouteNavigator({Key? key}) : super(key: key);
 
@@ -176,9 +195,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               _item('Dialog', DialogDemo(), 'dialog'),
               _item('Notification', NotificationDemo(), 'notification'),
               _item('SharedPreference数据存储', SharedPreferenceWidget(), 'sharedpreference'),
+              _item('test', Test(), 'test'),
+              _item('wajiu_main_page', WajiuMainPage(), 'wajiu_main_page'),
             ],
           ),
-
     )
     );
   }

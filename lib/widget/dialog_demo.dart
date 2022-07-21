@@ -35,6 +35,15 @@ class _DialogDemoState extends State<DialogDemo> {
                 //弹出对话框并等待其关闭
                 bool? delete = await showDeleteConfirmDialog();
                 if (delete == null) {
+                  Fluttertoast.showToast(
+                      msg: "This is Center Short Toast",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
                   print("取消删除");
                 } else {
                   print("已确认删除");

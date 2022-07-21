@@ -52,6 +52,8 @@ dependencies:
   dio: ^4.0.6 #http请求封裝库
   json_annotation: ^4.5.0 # 序列化
   shared_preferences: ^2.0.15  #SharedPreferences存储数据
+  flutter_swiper : ^1.1.6   #轮播组件
+  flutter_screenutil: ^5.5.3 #屏幕适配
 dev_dependencies:
   flutter_test:
     sdk: flutter

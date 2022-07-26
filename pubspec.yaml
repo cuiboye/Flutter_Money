@@ -47,13 +47,18 @@ dependencies:
   # Color color1 = ColorUtil.color('#f2f2f2');
   flutter_color_plugin: ^1.1.0
   english_words: ^4.0.0
-  provider: ^6.0.3
+  provider: ^6.0.3   #provider状态管理
 #  path_provider: ^2.0.11 #文件操作
   dio: ^4.0.6 #http请求封裝库
+  dio_log: ^2.0.4 #基于dio的网络请求日志
   json_annotation: ^4.5.0 # 序列化
   shared_preferences: ^2.0.15  #SharedPreferences存储数据
   flutter_swiper : ^1.1.6   #轮播组件
   flutter_screenutil: ^5.5.3 #屏幕适配
+  permission_handler: ^10.0.0 #权限管理
+  cached_network_image: ^2.2.0+1
+  flutter_rating_bar: ^3.0.1+1
+  sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
 dev_dependencies:
   flutter_test:
     sdk: flutter

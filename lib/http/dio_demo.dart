@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/utils/http.dart';
 
 import '../model/product_list_model.dart';
 import '../view/custom_appbar.dart';
@@ -23,6 +26,11 @@ class _DioDemoState extends State<DioDemo> {
   @override
   void initState() {
     super.initState();
+
+    //测试Dio单例
+    var params = Map<String, dynamic>();
+    DioInstance.getInstance().get("http://v.juhe.cn/joke/content/text.php?page=1&pagesize=20&key=03303e4d34effe095cf6a4257474cda9", params);
+
     _future = getdata();
   }
 
@@ -104,8 +112,8 @@ class _DioDemoState extends State<DioDemo> {
   //获取数据的逻辑，利用dio库进行网络请求，拿到数据后利用json_serializable解析json数据
   //并将列表的数据包装在一个future中
   Future<List<ListData>?> getdata() async {
-    // Response response = await _dio.get("http://192.168.5.199:8082/danyuan/getBaokuanzhijiang?page=1");
-    Response response = await _dio.get("http://192.168.0.102:8082/danyuan/getBaokuanzhijiang?page=1");
+    Response response = await _dio.get("http://192.168.5.199:8082/danyuan/getBaokuanzhijiang?page=1");
+    // Response response = await _dio.get("http://192.168.0.102:8082/danyuan/getBaokuanzhijiang?page=1");
     final responseData = json.decode(response.toString());
     ProductListModel productListModel = ProductListModel.fromJson(responseData);
     if(productListModel.states!=200){

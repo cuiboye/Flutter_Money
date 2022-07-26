@@ -17,9 +17,11 @@ import androidx.annotation.Nullable;
 
 import java.util.logging.StreamHandler;
 
+import io.flutter.Log;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.android.FlutterView;
 import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -41,6 +43,10 @@ public class MainActivity extends FlutterActivity {
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        // 需要添加的插件
+        registerWith(flutterEngine);
+
+
         new EventChannel(flutterEngine.getDartExecutor(), CHARGING_CHANNEL).setStreamHandler(
                 new EventChannel.StreamHandler() {
                     private BroadcastReceiver chargingStateChangeReceiver;
@@ -77,6 +83,40 @@ public class MainActivity extends FlutterActivity {
                     }
                 }
         );
+    }
+    private static final String TAG = "GeneratedPluginRegistrant";
+
+    public  void registerWith(@NonNull FlutterEngine flutterEngine) {
+        try {
+            flutterEngine.getPlugins().add(new io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin path_provider_android, io.flutter.plugins.pathprovider.PathProviderPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.baseflow.permissionhandler.PermissionHandlerPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin permission_handler_android, com.baseflow.permissionhandler.PermissionHandlerPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin shared_preferences_android, io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.tekartik.sqflite.SqflitePlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin sqflite, com.tekartik.sqflite.SqflitePlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin url_launcher_android, io.flutter.plugins.urllauncher.UrlLauncherPlugin", e);
+        }
     }
 
     private BroadcastReceiver createChargingStateChangeReceiver(final EventChannel.EventSink events) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/extension/text_extension.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../utils/text_utils.dart';
 import '../view/custom_appbar.dart';
 import '../view/custom_materialapp.dart';
 
@@ -35,18 +36,9 @@ class _DialogDemoState extends State<DialogDemo> {
                 //弹出对话框并等待其关闭
                 bool? delete = await showDeleteConfirmDialog();
                 if (delete == null) {
-                  Fluttertoast.showToast(
-                      msg: "This is Center Short Toast",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-                  print("取消删除");
+                  showToast("用户选择了取消");
                 } else {
-                  print("已确认删除");
+                  showToast("用户选择了删除");
                   //... 删除文件
                 }
               },
@@ -291,6 +283,21 @@ class _DialogDemoState extends State<DialogDemo> {
         curve: Curves.easeOut,
       ),
       child: child,
+    );
+  }
+
+  void showToast(String into){
+    if(TextUtils.isEmpty(into)){
+      return;
+    }
+    Fluttertoast.showToast(
+        msg: into,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
     );
   }
 }

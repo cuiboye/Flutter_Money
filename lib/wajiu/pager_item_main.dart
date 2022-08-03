@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
+import 'package:flutter_money/provide/provider_mvvm_example/service/joke_service.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:provider/provider.dart';
 import '../view/custom_materialapp.dart';
+import 'view_model/orderlist_view_model.dart';
 
 /**
  * 挖酒-主页

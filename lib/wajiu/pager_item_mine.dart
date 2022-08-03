@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
+import 'package:flutter_money/utils/get_navigation_utils.dart';
 import '../view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/extension/wajiu_mine_order.dart';
+
+import 'order_list_page.dart';
 
 class PageItemMine extends StatefulWidget {
   @override
@@ -80,23 +83,29 @@ class _PageItemMineState extends State<PageItemMine> {
                                   width: 25, height: 25))
                         ],
                       ))),
-              Container(
-                padding: EdgeInsets.only(left: 18, right: 13, top: 10, bottom: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        child: Text(
+              GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.only(left: 18, right: 13, top: 10, bottom: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child:Text(
                           "我的订单",
                           style: TextStyle(color: Colors.black),
-                        )),
-                    Image.asset(
-                      "images/icon_rihgt_more.png",
-                      width: 15,
-                      height: 15,
-                    )
-                  ],
+                        ),
+                      ),
+                      Image.asset(
+                        "images/icon_rihgt_more.png",
+                        width: 15,
+                        height: 15,
+                      )
+                    ],
+                  ),
                 ),
+                onTap: ()=>{
+                  GetNavigationUtils.navigateRightToLeft(OrderListPage())
+                },
               ),
               Container(
                 height: 0.1,

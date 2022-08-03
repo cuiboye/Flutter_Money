@@ -82,8 +82,8 @@ class _LinearLayoutState extends State<LinearLayout> {
             //Row的实际宽度等于所有子组件占用的的水平空间；
             //2)如果这里设置了MainAxisSize.min，textDirection属性就不会生效了
             mainAxisSize: MainAxisSize.max,
-            //1)mainAxisAlignment：表示子组件在Row所占用的水平空间内对齐方式，如果mainAxisSize值为MainAxisSize.min，则此属性无意义，因为子组件的
-            //宽度等于Row的宽度。只有当mainAxisSize的值为MainAxisSize.max时，此属性才有意义
+            // 1)mainAxisAlignment：表示子组件在Row所占用的水平空间内对齐方式，如果mainAxisSize值为MainAxisSize.min，则此属性无意义，因为子组件的
+            // 宽度等于Row的宽度。只有当mainAxisSize的值为MainAxisSize.max时，此属性才有意义
             //  MainAxisAlignment的属性值：
             //  start: 默认值，从开始位置排列
             //  end: 排列在尾部

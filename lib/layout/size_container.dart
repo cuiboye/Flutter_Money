@@ -144,8 +144,7 @@ class _DioDemoState extends State<SizeContainer> {
                     )
                 ),
                 Text("4)AspectRatio可以指定子组件的长宽比"),
-                  AspectRatio(
-                    //AspectRatio可以指定自组件的长宽比
+                  AspectRatio( //AspectRatio可以指定自组件的长宽比
                     aspectRatio: 5.0 / 2.0, //设置宽高比为5:2
                     child: Image.network("http://www.devio.org/img/avatar.png",
                         fit: BoxFit.cover //需设置一下裁剪模式来查看效果

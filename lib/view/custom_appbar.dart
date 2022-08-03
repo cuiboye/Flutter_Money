@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 ///自定义标题栏
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
@@ -80,7 +81,8 @@ class _CustomAppbarState extends State<CustomAppbar> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(widget.context);
+                            Get.back();
+                            // Navigator.pop(widget.context);
                           },
                           child: widget.showLeftArrow == true
                               ? Image.asset("images/back_icon_white.png",width: 20,height: 20,)

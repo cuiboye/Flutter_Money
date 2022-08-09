@@ -1,8 +1,8 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
-import 'package:flutter_money/channel.dart';
+import 'package:flutter_money/channel/channer_main.dart';
+import 'package:flutter_money/channel/flutter_open_native_page.dart';
+import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/http/dio_demo.dart';
@@ -27,6 +27,7 @@ import 'package:flutter_money/layout/wrap_flow.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/getx/navigation/navigation_demo.dart';
 import 'package:flutter_money/notification_demo.dart';
+import 'package:flutter_money/wajiu/page/account_topup.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/next_page.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/provide_demo.dart';
@@ -47,6 +48,7 @@ import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
+import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/button_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/icon_demo.dart';
@@ -59,6 +61,8 @@ import 'package:flutter_money/widget/weiget_main.dart';
 import '../getx/navigation/navigation_demo2.dart';
 import '../getx/state/getx_state.dart';
 import '../getx/state/other_page.dart';
+import '../inherited_widget_example.dart';
+import '../inherited_widget_test.dart';
 import '../main.dart';
 import '../getx/navigation/navigation_demo3.dart';
 
@@ -165,6 +169,18 @@ class RouterUtils {
       "getx_state_demo": (BuildContext context) => GetXStateDemo(),
       "getx_state_demo": (BuildContext context) => GetXStateDemo(),
       "getx_state_other": (BuildContext context) => OtherPage(),
+      //账户充值
+      "account_topup": (BuildContext context) => AccountTopup(),
+      //Flutter和Native通信
+      "channer_main": (BuildContext context) => ChannerMain(),
+      //Flutter将数据传递给Native
+      "flutter_to_native_withdata_main": (BuildContext context) => FlutterToNativeWithDataMain(),
+      //Flutter打开Native页面
+      "flutter_open_native_page": (BuildContext context) => FlutterOpenNativePage(),
+      "webview_demo": (BuildContext context) => WebViewNativeDemo(),
+      //InheritedWidget的使用
+      "inderited_widget": (BuildContext context) => TestWidget(),
+      "inderited_widget_test_router": (BuildContext context) => InheritedWidgetTestRoute(),
     };
     return routes;
   }

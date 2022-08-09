@@ -9,5 +9,5 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="将数据传递给Flutter" />
+        android:text="发送消息到Flutter" />
 </LinearLayout>

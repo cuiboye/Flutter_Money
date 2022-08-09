@@ -4,8 +4,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
+import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
+import 'package:flutter_money/inherited_widget_example.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
@@ -22,6 +24,7 @@ import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/utils/router.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/wajiu/main.dart';
+import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,6 +34,7 @@ import 'getx/state/getx_state.dart';
 import 'http/dio_demo.dart';
 import 'http/futurebuild_demo.dart';
 import 'http/http_demo.dart';
+import 'inherited_widget_test.dart';
 import 'launch_page.dart';
 import 'layout/align.dart';
 import 'layout/container_widget.dart';
@@ -183,6 +187,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('widget_recyclelife', WidgetLifecycle(), 'widget_recyclelife'),
         _item('navigation_page', NavigationDemo(), 'navigation_page'),
         _item('getx_state_demo', GetXStateDemo(), 'getx_state_demo'),
+        _item('Flutter和Native通信', ChannerMain(), 'channer_main'),
+        _item('Webview以及和js交互', WebViewNativeDemo(), 'channer_main'),
+        _item('InheritedWidget的使用', InheritedWidgetTestRoute(), 'inderited_widget_test_router'),
       ],
     )));
   }

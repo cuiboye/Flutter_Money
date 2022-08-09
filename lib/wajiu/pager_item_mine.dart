@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
+import 'package:flutter_money/wajiu/page/account_topup.dart';
 import '../view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/extension/wajiu_mine_order.dart';
 
@@ -321,19 +322,26 @@ class _PageItemMineState extends State<PageItemMine> {
   }
 
   Widget _getFunctionListWidget(int index) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          border: Border(
-              right: BorderSide(width: 1.0, color: Colors.black12),
-              bottom: BorderSide(width: 1.0, color: Colors.black12))),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(functionListImage[index],width: 40,height: 40,),
-          Text(functionListStr[index],style: TextStyle(fontSize: 12),),
-        ],
-      )
+    return GestureDetector(
+      onTap: ()=>{
+        if(index == 0){
+          GetNavigationUtils.navigateRightToLeft(AccountTopup())
+        }
+      },
+      child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              border: Border(
+                  right: BorderSide(width: 1.0, color: Colors.black12),
+                  bottom: BorderSide(width: 1.0, color: Colors.black12))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(functionListImage[index],width: 40,height: 40,),
+              Text(functionListStr[index],style: TextStyle(fontSize: 12),),
+            ],
+          )
+      ),
     );
   }
 }

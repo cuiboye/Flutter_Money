@@ -22,9 +22,11 @@ import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.android.FlutterView;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry;
+import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 //findViewById(R.id.jump).setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,12 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 public class MainActivity extends FlutterActivity {
     private static final String BATTERY_CHANNEL = "samples.flutter.io/battery";
     private static final String CHARGING_CHANNEL = "samples.flutter.io/charging";
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -83,9 +91,50 @@ public class MainActivity extends FlutterActivity {
                     }
                 }
         );
+        /**
+         * Flutter传递数据到原生
+         */
+        BasicMessageChannel<Object> basicMessageChannel = new BasicMessageChannel<Object>(
+          flutterEngine.getDartExecutor().getBinaryMessenger(),//Flutter引擎
+          "101",//消息通道标识
+                StandardMessageCodec.INSTANCE//信息编码
+        );
+        //设置监听  message为收到Flutter发送的消息，reply为收到消息的回执
+        basicMessageChannel.setMessageHandler(new BasicMessageChannel.MessageHandler<Object>() {
+            @Override
+            public void onMessage(@Nullable Object message, @NonNull BasicMessageChannel.Reply<Object> reply) {
+                Log.i("loglog666","收到Flutter传递过来的消息为："+message.toString());
+                reply.reply("Flutter你好，我已经收到你发送发来的消息，消息为："+message.toString());
+            }
+        });
+
+        /**
+         * Flutter打开原生页面
+         */
+        new MethodChannel(flutterEngine.getDartExecutor(), "flutter_open_native.android").setMethodCallHandler(
+                new MethodChannel.MethodCallHandler() {
+                    @Override
+                    public void onMethodCall(MethodCall call, MethodChannel.Result result) {
+                        if (call.method.equals("openAndroidpage")) {
+                            Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                            startActivity(intent);
+
+                            result.success("成功打开了第二个页面");
+
+                            //如果这里不是跳转，而是逻辑操作，可以根据情况设置失败的情况
+//                            result.error("UNAVAILABLE", "Battery level not available.", null);
+                        } else {
+                            result.notImplemented();
+                        }
+                    }
+                }
+        );
     }
+
+
     private static final String TAG = "GeneratedPluginRegistrant";
 
+    //这里是注册Flutter的插件
     public void registerWith(@NonNull FlutterEngine flutterEngine) {
         try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
@@ -126,6 +175,11 @@ public class MainActivity extends FlutterActivity {
             flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin url_launcher_android, io.flutter.plugins.urllauncher.UrlLauncherPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.webviewflutter.WebViewFlutterPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin webview_flutter_android, io.flutter.plugins.webviewflutter.WebViewFlutterPlugin", e);
         }
     }
 

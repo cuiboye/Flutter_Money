@@ -18,14 +18,13 @@ class GetXStateDemo extends StatelessWidget {
     return Scaffold(
         // 使用Obx(()=>每当改变计数时，就更新Text()。
         appBar: AppBar(title: Obx(() => Text("Clicks: ${c.count}"))),
-
         // 用一个简单的Get.to()即可代替Navigator.push那8行，无需上下文！
         body: Center(
             child: ElevatedButton(
-                child: Text("Go to Other"), onPressed: () => Get.to(OtherPage()))),
+                child: Text("Go to Other"),
+                onPressed: () => Get.to(OtherPage()))),
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add), onPressed: c.increment));
   }
 }
-
 

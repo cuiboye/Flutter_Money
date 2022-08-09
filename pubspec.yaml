@@ -61,6 +61,8 @@ dependencies:
   sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
   get: ^4.6.5 #getx
   image_picker: ^0.8.5+3 #选择图片
+  animations: ^2.0.3 #flutter官方提供的动画
+  webview_flutter: ^3.0.4 # webview以及和js交互
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -86,6 +88,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/
+    - assets/files/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:get/get.dart';
 
 ///自定义标题栏
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   final double contentHeight; //从外部指定高度
-  Color navigationBarBackgroundColor; //设置导航栏背景的颜色
+  Color? navigationBarBackgroundColor; //设置导航栏背景的颜色
   bool? leadingWidget;
   String? trailingWidget;
   String? title;
@@ -25,7 +26,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
     this.rightImage,
     this.callback,
     required this.context,
-    this.navigationBarBackgroundColor = Colors.blue,
+    this.navigationBarBackgroundColor,
     this.trailingWidget,
   }) : super();
 
@@ -60,7 +61,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.navigationBarBackgroundColor,
+      color: ColorUtil.color("#f56e1d"),
       //afeArea通过MediaQuery来检测屏幕尺寸，使应用程序的大小能与屏幕适配。
       //然后返回了一个Padding Widget 来包裹住我们编写的页面。这样我们的页面就不会被异形屏幕给遮挡住了。
       child: SafeArea(//安全区域

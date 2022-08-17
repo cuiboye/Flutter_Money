@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/animated_switcher.dart';
+import 'package:flutter_money/animation_main.dart';
+import 'package:flutter_money/animation_widget.dart';
+import 'package:flutter_money/animationbuild_example.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
+import 'package:flutter_money/catch_error.dart';
 import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/channel/flutter_open_native_page.dart';
 import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
@@ -54,6 +60,7 @@ import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/icon_demo.dart';
 import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/input_add_form.dart';
+import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
@@ -181,6 +188,14 @@ class RouterUtils {
       //InheritedWidget的使用
       "inderited_widget": (BuildContext context) => TestWidget(),
       "inderited_widget_test_router": (BuildContext context) => InheritedWidgetTestRoute(),
+      "catch_error": (BuildContext context) => CatchError(),
+      //多级可展开的列表
+      "expansiontile_sample": (BuildContext context) => ExpansionTileSample(),
+      "animation_main": (BuildContext context) => AnimationMain(),
+      "animatedwidget_example": (BuildContext context) => AnimatedWidgetExample(),
+      "animatedbuild_example": (BuildContext context) => AnimatedBuilderExample(),
+      "stagger_animation": (BuildContext context) => StaggerAnimationExample(),
+      "animatedswitch_example": (BuildContext context) => AnimatedSwitcherExample(),
     };
     return routes;
   }

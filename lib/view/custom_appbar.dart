@@ -62,7 +62,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   Widget build(BuildContext context) {
     return Container(
       color: ColorUtil.color("#f56e1d"),
-      //afeArea通过MediaQuery来检测屏幕尺寸，使应用程序的大小能与屏幕适配。
+      //SafeArea通过MediaQuery来检测屏幕尺寸，使应用程序的大小能与屏幕适配。
       //然后返回了一个Padding Widget 来包裹住我们编写的页面。这样我们的页面就不会被异形屏幕给遮挡住了。
       child: SafeArea(//安全区域
         top: true,

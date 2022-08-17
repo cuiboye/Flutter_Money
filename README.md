@@ -168,3 +168,7 @@ https://liujunmin.com/flutter/io/path_provider.html
 3.全面屏的适配
 1）通过MaterialApp+Scaffold的方式，系统自动为我们适配全面屏的安全区域
 2）使用 MediaQuery 来控制距离上下的距离
+3）在Android的AndroidManifest中添加设置：
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.3" />

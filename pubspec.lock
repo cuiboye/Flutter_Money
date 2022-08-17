@@ -244,6 +244,34 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_baidu_mapapi_base:
+    dependency: transitive
+    description:
+      name: flutter_baidu_mapapi_base
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
+  flutter_baidu_mapapi_map:
+    dependency: "direct main"
+    description:
+      name: flutter_baidu_mapapi_map
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.1"
+  flutter_baidu_mapapi_search:
+    dependency: "direct main"
+    description:
+      name: flutter_baidu_mapapi_search
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
+  flutter_baidu_mapapi_utils:
+    dependency: "direct main"
+    description:
+      name: flutter_baidu_mapapi_utils
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -251,6 +279,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
+  flutter_bmflocation:
+    dependency: "direct main"
+    description:
+      name: flutter_bmflocation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.0"
   flutter_cache_manager:
     dependency: transitive
     description:

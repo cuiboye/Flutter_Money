@@ -14,7 +14,6 @@ class GetXStateDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     // 使用Get.put()实例化你的类，使其对当下的所有子路由可用。
     final Controller c = Get.put(Controller());
-
     return Scaffold(
         // 使用Obx(()=>每当改变计数时，就更新Text()。
         appBar: AppBar(title: Obx(() => Text("Clicks: ${c.count}"))),
@@ -27,4 +26,5 @@ class GetXStateDemo extends StatelessWidget {
             child: Icon(Icons.add), onPressed: c.increment));
   }
 }
+
 

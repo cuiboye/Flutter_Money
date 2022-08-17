@@ -32,7 +32,7 @@ class _OrderListItemState extends State<OrderListItem> {
       return ListView.builder(
         //ListView嵌套ListView
           itemCount: orderListViewModel.orderList?.length,
-          shrinkWrap: true,
+          // shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return _viewItem(orderListViewModel.orderList![index].goodsLists,orderListViewModel.orderList![index].totalPrice);
           });

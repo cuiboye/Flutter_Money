@@ -31,7 +31,10 @@ class _WeigetMainState extends State<WeigetMain> {
           itemBuilder: (BuildContext buildContext, int index) {
             return ListTile(title: GestureDetector(
               child: Text(list[index]),
-              onTap: ()=>Navigator.pushNamed(context, pushNamedList[index]),
+              onTap: ()=>{
+                print("${pushNamedList[index]}"),
+                Navigator.pushNamed(context, pushNamedList[index])
+              },
             ));
           },
           //分割器构造器

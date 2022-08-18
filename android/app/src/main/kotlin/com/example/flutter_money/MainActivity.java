@@ -137,6 +137,31 @@ public class MainActivity extends FlutterActivity {
     //这里是注册Flutter的插件
     public void registerWith(@NonNull FlutterEngine flutterEngine) {
         try {
+            flutterEngine.getPlugins().add(new com.baidu.mapapi.base.FlutterBmfbasePlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_base, com.baidu.mapapi.base.FlutterBmfbasePlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.baidu.bmfmap.FlutterBmfmapPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_map, com.baidu.bmfmap.FlutterBmfmapPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.baidu.mapapi.search.FlutterBmfsearchPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_search, com.baidu.mapapi.search.FlutterBmfsearchPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.baidu.mapapi.utils.FlutterBmfUtilsPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_utils, com.baidu.mapapi.utils.FlutterBmfUtilsPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.baidu.flutter_bmflocation.FlutterBmflocationPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_bmflocation, com.baidu.flutter_bmflocation.FlutterBmflocationPlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin flutter_plugin_android_lifecycle, io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin", e);
@@ -150,6 +175,11 @@ public class MainActivity extends FlutterActivity {
             flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.jiguang.jpush.JPushPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin jpush_flutter, com.jiguang.jpush.JPushPlugin", e);
         }
         try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());

@@ -9,11 +9,13 @@ import 'package:flutter_money/catch_error.dart';
 import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/channel/flutter_open_native_page.dart';
 import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
+import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/http/dio_demo.dart';
 import 'package:flutter_money/http/futurebuild_demo.dart';
 import 'package:flutter_money/http/http_demo.dart';
+import 'package:flutter_money/jiguang_push_main.dart';
 import 'package:flutter_money/launch_page.dart';
 import 'package:flutter_money/layout/align.dart';
 import 'package:flutter_money/layout/animatedlist.dart';
@@ -33,6 +35,7 @@ import 'package:flutter_money/layout/wrap_flow.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/getx/navigation/navigation_demo.dart';
 import 'package:flutter_money/notification_demo.dart';
+import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/next_page.dart';
@@ -72,9 +75,11 @@ import '../inherited_widget_example.dart';
 import '../inherited_widget_test.dart';
 import '../main.dart';
 import '../getx/navigation/navigation_demo3.dart';
+import '../map/map_example.dart';
 
 
-class RouterUtils {
+class
+RouterUtils {
   static Map<String, WidgetBuilder> getRouter() {
     Map<String, WidgetBuilder>? routes = {
       "main": (BuildContext context) => MyApp(),
@@ -196,6 +201,10 @@ class RouterUtils {
       "animatedbuild_example": (BuildContext context) => AnimatedBuilderExample(),
       "stagger_animation": (BuildContext context) => StaggerAnimationExample(),
       "animatedswitch_example": (BuildContext context) => AnimatedSwitcherExample(),
+      "map_main_example": (BuildContext context) => MapMainExample(),
+      "jiguang_push": (BuildContext context) => JiguangPushMain(),
+      "pull_refresh_main": (BuildContext context) => PullRefreshMain(),
+      "device_info": (BuildContext context) => DeviceInfoMain(),
     };
     return routes;
   }

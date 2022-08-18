@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
+import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/inherited_widget_example.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_money/provide/provider_count_example/provide_demo.dart';
 import 'package:flutter_money/provide/provider_example/provide_demo.dart';
 import 'package:flutter_money/provide/provider_mvvm_example/provide_demo.dart';
 import 'package:flutter_money/provide/selector_example/provide_demo.dart';
+import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/sharedpreference.dart';
 import 'package:flutter_money/sqflite_demo.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
@@ -32,6 +34,7 @@ import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'animated_switcher.dart';
 import 'animation_main.dart';
@@ -44,6 +47,7 @@ import 'http/dio_demo.dart';
 import 'http/futurebuild_demo.dart';
 import 'http/http_demo.dart';
 import 'inherited_widget_test.dart';
+import 'jiguang_push_main.dart';
 import 'launch_page.dart';
 import 'layout/align.dart';
 import 'layout/container_widget.dart';
@@ -54,6 +58,7 @@ import 'layout/linearlayout2.dart';
 import 'layout/scaffold_layout.dart';
 import 'getx/navigation/navigation_demo.dart';
 import 'getx/navigation/navigation_demo3.dart';
+import 'map/map_example.dart';
 import 'scroll/scroll_widget.dart';
 import 'layout/size_container.dart';
 import 'layout/stack_positioned.dart';
@@ -67,7 +72,7 @@ import 'package:get/get.dart';
 //Flutter 应用中 main 函数为应用程序的入口。main 函数中调用了runApp 方法，它的功能是启
 //动Flutter应用。runApp它接受一个 Widget参数，
 //main函数使用了(=>)符号，这是 Dart 中单行函数或方法的简写。
-void main() {
+void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
   SharedPreferences.setMockInitialValues({});
 
@@ -231,6 +236,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('AnimatedBuilder的使用', AnimatedBuilderExample(), 'animatedbuild_example'),
         _item('组合动画', StaggerAnimationExample(), 'stagger_animation'),
         _item('动画切换组件', AnimatedSwitcherExample(), 'animatedswitch_example'),
+        _item('百度地图', MapMainExample(), 'map_main_example'),
+        _item('极光推送', JiguangPushMain(), 'jiguang_push'),
+        _item('上拉刷新下拉加载', PullRefreshMain(), 'pull_refresh_main'),
+        _item('获取设备信息', DeviceInfoMain(), 'device_info'),
       ],
     )));
   }

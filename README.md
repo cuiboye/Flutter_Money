@@ -211,3 +211,10 @@ manifestPlaceholders = [
         JPUSH_CHANNEL: "developer-default", /*暂时填写默认值即可.*/
 ]
 3）正式环境记得在配置混淆
+
+6.配置闪屏页
+1）pubspec.yaml添加依赖
+ flutter_native_splash: ^2.2.8
+2)新建flutter_native_splash.yaml
+3)运行此包
+flutter pub run flutter_native_splash:create

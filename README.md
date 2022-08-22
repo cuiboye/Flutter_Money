@@ -218,3 +218,4 @@ manifestPlaceholders = [
 2)新建flutter_native_splash.yaml
 3)运行此包
 flutter pub run flutter_native_splash:create
+4)还需要对android12进行兼容，这个项目没有做兼容处理

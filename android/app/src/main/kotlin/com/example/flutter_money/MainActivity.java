@@ -137,6 +137,11 @@ public class MainActivity extends FlutterActivity {
     //这里是注册Flutter的插件
     public void registerWith(@NonNull FlutterEngine flutterEngine) {
         try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.deviceinfo.DeviceInfoPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin device_info, io.flutter.plugins.deviceinfo.DeviceInfoPlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new com.baidu.mapapi.base.FlutterBmfbasePlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_base, com.baidu.mapapi.base.FlutterBmfbasePlugin", e);

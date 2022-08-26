@@ -10,7 +10,7 @@ flutter_native_splash:
   # 使用 background_image 可将 png 图像设置为闪屏界面的背景。该图像会被拉伸以适应应用大小。
   # color 和 background_image 不能同时设置，只有一个会被使用。
 #  color: "#42a5f5"
-  background_image: "images/mine_zuji.png"
+  background_image: "images/welcome.png"
 
   # 以下是可选的参数。去掉注释前面的 #可使参数起作用。
 

@@ -12,6 +12,7 @@ import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
+import 'package:flutter_money/home_page.dart';
 import 'package:flutter_money/http/dio_demo.dart';
 import 'package:flutter_money/http/futurebuild_demo.dart';
 import 'package:flutter_money/http/http_demo.dart';
@@ -34,6 +35,7 @@ import 'package:flutter_money/layout/tabbarview.dart';
 import 'package:flutter_money/layout/wrap_flow.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/getx/navigation/navigation_demo.dart';
+import 'package:flutter_money/mediaquery_youhua.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
@@ -205,6 +207,7 @@ RouterUtils {
       "jiguang_push": (BuildContext context) => JiguangPushMain(),
       "pull_refresh_main": (BuildContext context) => PullRefreshMain(),
       "device_info": (BuildContext context) => DeviceInfoMain(),
+      "homepage_widget": (BuildContext context) => HomePageWidget(),
     };
     return routes;
   }

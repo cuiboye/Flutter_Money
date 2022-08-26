@@ -79,6 +79,8 @@ dependencies:
   device_info: ^2.0.3
   #闪屏页
   flutter_native_splash: ^2.2.8
+  #动画 执行flutter pub add simple_animations就可以
+  simple_animations: ^5.0.0+2
 dev_dependencies:
   flutter_test:
     sdk: flutter

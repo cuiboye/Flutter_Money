@@ -164,3 +164,20 @@ var results = await batch.commit();
 
 2.File
 https://liujunmin.com/flutter/io/path_provider.html
+
+3.报错解决
+1)Execution failed for task ':app:transformClassesAndResourcesWithR8ForRelease'.  
+解决方法：#Disables R8 for Android Library modules only.
+android.enableR8.libraries = false
+#Disables R8 for all modules.
+android.enableR8 = false
+2)What went wrong:
+  Execution failed for task ':app:transformClassesAndResourcesWithProguardForRelease'.
+  java.io.IOException: Can't read [/Users/wj/Library/Android/sdk/platforms/android-33/optional/android.car.jar] (Can't process class [android/car/Car$CarServiceLifecycleListener.class] (Unsupported version number [55.0] (maximum 54.0, Java 10)))   
+解决方法：报错前app下的build.gradle中的compileSdkVersion为33，改为31就可以了
+3)Execution failed for task ':app:transformClassesAndResourcesWithProguardForRelease'.
+java.io.IOException: Can't write [/Users/wj/cuiboye/FlutterProject/flutter_money/build/app/intermediates/transforms/proguard/release/0.jar] (Can't read [/Users/wj/cuiboye/FlutterProject/flutter_money/build/app/tmp/kotlin-classes/release(;;;;;;;**.class)] (Can't read [com] (Can't read [example] (Can't read [flutter_money] (Can't read [MainActivity.class] (Duplicate jar entry [com/example/flutter_money/MainActivity.class]))))))
+解决办法：在com.example.flutter_money包下存在两个MainActivity，删除那个不是自己创建的就可以
+4)如果报kotlin_version相关的报错，解决办法就是将modle和主项目的版本改成一致就可以
+4.打包命令
+flutter build apk --release --no-sound-null-safety

@@ -181,3 +181,57 @@ java.io.IOException: Can't write [/Users/wj/cuiboye/FlutterProject/flutter_money
 4)如果报kotlin_version相关的报错，解决办法就是将modle和主项目的版本改成一致就可以
 4.打包命令
 flutter build apk --release --no-sound-null-safety
+4.全面屏的适配
+1）通过MaterialApp+Scaffold的方式，系统自动为我们适配全面屏的安全区域
+2）使用 MediaQuery 来控制距离上下的距离
+3）在Android的AndroidManifest中添加设置：
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.3" />
+5.百度地图
+可以参考官方：
+https://lbsyun.baidu.com/index.php?title=flutter/loc/create-map/location
+
+6.极光推送
+Flutter中的配置：
+1）pubspec.yaml中添加：
+jpush_flutter: ^2.3.6
+2）开启极光推送
+JPush jpushTag =  JPush();
+jpushTag.setup(
+    appKey: '03fe40aece7ccb8a95b48478',
+    channel: 'developer-default',
+    production: true,
+    debug: true);
+/// 监听jpush
+jpushTag.addEventHandler(
+  onReceiveNotification: (Map<String, dynamic> message) async {
+    print('jpushTag接收到的数据为： + $message');
+    // if (message.length > 0) G.hideMessage = true;
+  },
+  onOpenNotification: (Map<String, dynamic> message) async {
+    /// 点击通知栏消息，跳转至消息列表页面
+    // G.hideMessage = true;
+    // G.pushNamed('/echo', callback: (val) => false);
+  },
+);
+Android中的配置：
+1）AndroidManifest.xml中配置：
+<meta-data
+    android:name="com.baidu.lbsapi.API_KEY"
+    android:value="wZqKbGEtWCYiTGO5YX3CG9PIwXmH3IbR" />
+2）app中的build.gradle中的defaultConfig配置：
+manifestPlaceholders = [
+        JPUSH_PKGNAME: applicationId,
+        JPUSH_APPKEY : "03fe40aece7ccb8a95b48478", /*NOTE: JPush 上注册的包名对应的 Appkey.*/
+        JPUSH_CHANNEL: "developer-default", /*暂时填写默认值即可.*/
+]
+3）正式环境记得在配置混淆
+
+7.配置闪屏页
+1）pubspec.yaml添加依赖
+ flutter_native_splash: ^2.2.8
+2)新建flutter_native_splash.yaml
+3)运行此包
+flutter pub run flutter_native_splash:create
+4)还需要对android12进行兼容，这个项目没有做兼容处理

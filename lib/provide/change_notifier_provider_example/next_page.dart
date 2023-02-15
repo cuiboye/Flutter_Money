@@ -6,6 +6,11 @@ import 'package:provider/provider.dart';
 
 class NextPage extends StatelessWidget {
   @override
+  StatelessElement createElement() {
+    // TODO: implement createElement
+    return super.createElement();
+  }
+  @override
   Widget build(BuildContext context) {
     return CustomMaterialApp(
       home: Scaffold(

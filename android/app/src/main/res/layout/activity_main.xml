@@ -6,18 +6,8 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/jump"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to" />
-    <Button
-        android:id="@+id/jump2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to2" />
-    <EditText
-        android:id="@+id/paramInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="初次加载RN传递的数据" />
+        android:text="将数据传递给Flutter" />
 </LinearLayout>

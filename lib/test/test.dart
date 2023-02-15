@@ -15,12 +15,17 @@ class _TestState extends State<Test> {
     return CustomMaterialApp(
       home: Scaffold(
         body: Row(
-            children: [
-              Flexible(
-                  child:  Text("hello"*1000)
-              )
-
-            ],
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // 直接通过of静态方法来获取ScaffoldState
+                ScaffoldState _state = Scaffold.of(context);
+                // 打开抽屉菜单
+                _state.openDrawer();
+              },
+              child: Text('打开抽屉菜单2'),
+            )
+          ],
         ),
         appBar:CustomAppbar(
           title: 'Test',

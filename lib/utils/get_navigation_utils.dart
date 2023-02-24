@@ -13,6 +13,11 @@ import '../getx/navigation/navigation_demo3.dart';
  * Get.back()：返回到上一个页面(对应于Get.to放到到路由页面跳转有效，off方法页面跳转无效)
  */
 class GetNavigationUtils {
+  //返回上一个页面并携带参数
+  static void backWithParams(dynamic backParams){
+    Get.back(result: "$backParams");
+  }
+
   //通过名字跳转
   static void navigateWithName(String routerName) {
     Get.toNamed(routerName);
@@ -24,13 +29,10 @@ class GetNavigationUtils {
   }
 
   //通过非名字跳转，传递参数;接收上一个页面返回的参数
-  static void navigateRightToLeftWithParams(dynamic page,dynamic arguments) {
-    Get.to(page, transition: Transition.rightToLeft,arguments: arguments)
-        ?.then((value) => {
-          if(null!=value){
-              print("从上一个页面返回的参数：$value")
-          }
-    });
+  //下个页面返回的参数如下设置：
+  //Get.back(result: "我是第二个页面返回的数据")
+  static Future<dynamic>? navigateRightToLeftWithParams(dynamic page,dynamic arguments) {
+    return Get.to(page, transition: Transition.rightToLeft,arguments: arguments);
   }
 
   //跳转到下一个页面，当前这个页面销毁
@@ -38,8 +40,8 @@ class GetNavigationUtils {
     Get.off(page, transition: Transition.rightToLeft);
   }
 
-  //跳转到下一个页面，当前这个页面销毁
-  static void navigateRightToLeftWithAllOff(dynamic page) {
+  //跳转到下一个页面，销毁前面所有的页面
+  static void navigateRightToLeftWithAllOff(dynamic page,String tag) {
     // Get.offUntil(
     //     GetPageRoute<dynamic>(
     //         settings: RouteSettings(
@@ -54,11 +56,12 @@ class GetNavigationUtils {
     //type 'MaterialPageRoute<dynamic>' is not a subtype of type 'GetPageRoute<dynamic>' in type cast
     Get.offUntil(
         MaterialPageRoute(
-            builder: (context) => NavigationPage3(),
+            builder: (context) => page,
             settings: RouteSettings(arguments: "hello")), (route) {
       var currentRoute = route.settings.name;
       debugPrint("Get.currentRoute --- $currentRoute");
-      if (currentRoute == "/NavigationDemo") {
+      // if (currentRoute == "/WajiuMainPage") {//销毁WajiuMainPage之前所有的页面
+      if (currentRoute == "/$tag") {
         return true;
       } else {
         return false;

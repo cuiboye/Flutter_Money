@@ -37,7 +37,11 @@ class _DioDemoState extends State<DioDemo> {
     var params = Map<String, dynamic>();
     DioInstance.getInstance().get(
         "http://v.juhe.cn/joke/content/text.php?page=1&pagesize=20&key=03303e4d34effe095cf6a4257474cda9",
-        params);
+        params, success: (json) {//注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
+      print("获取到的数据：$json");
+    }, fail: (reason, code) {
+      print("获取到的数据：$reason");
+    });
 
     _future = getdata();
   }

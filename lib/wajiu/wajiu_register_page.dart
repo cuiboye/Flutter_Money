@@ -1,86 +1,53 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/utils/http.dart';
-import 'package:flutter_money/utils/text_utils.dart';
+import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
-import 'package:flutter_money/wajiu/constant/apiservice.dart';
-import 'package:flutter_money/wajiu/main.dart';
-import 'package:flutter_money/wajiu/wajiu_phone_login.dart';
-import 'package:flutter_money/wajiu/wajiu_register_page.dart';
+import 'package:flutter_money/wajiu/model/login_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../view/custom_appbar.dart';
-import 'package:http/http.dart' as http;
-
-import 'model/login_model.dart';
-
-/**
- * 挖酒-登录
- */
-class WajiuLogin extends StatefulWidget {
+class WajiuRegisterPage extends StatefulWidget {
   @override
-  _WajiuLoginState createState() => _WajiuLoginState();
+  _WajiuRegisterPageState createState() => _WajiuRegisterPageState();
 }
 
-class _WajiuLoginState extends State<WajiuLogin> {
+class _WajiuRegisterPageState extends State<WajiuRegisterPage> {
   String inputUserName = "";
-  String inputPassword = "";
-  String? backRegisterUserName = "";
   @override
   Widget build(BuildContext context) {
-    //controller监听文本输入内容
-    //text 这里给的是个默认值
-    TextEditingController _inputUserNameController = TextEditingController(text: backRegisterUserName??"");
+    //controller监听用户名输入内容
+    TextEditingController _inputUserNameController = TextEditingController();
     _inputUserNameController.addListener(() {
       inputUserName = _inputUserNameController.text;//获取文本输入内容
     });
 
-    TextEditingController _inputPasswordController = TextEditingController();
-    _inputPasswordController.addListener(() {
-      inputPassword = _inputPasswordController.text;//获取文本输入内容
-    });
-
     return CustomMaterialApp(
-        title: "登录",
+        title: "注册",
         home: Scaffold(
           appBar: CustomAppbar(
-            title: '登录',
-            rightText: "注册",
-            callback: ()=>_toRegister(),
+            title: '注册',
             context: context,
           ),
           body: Container(
             margin: const EdgeInsets.fromLTRB(13.0,0,13.0,0),
-            child: _loginWidget(_inputUserNameController,_inputPasswordController),
+            child: _loginWidget(_inputUserNameController),
           ),
         ));
   }
 
-  void _toRegister() {
-    GetNavigationUtils.navigateRightToLeftWithParams(
-            WajiuRegisterPage(), "第一个页面的参数")
-        ?.then((value) => {
-              setState(() {
-                print("注册的用户为：$value");
-              })
-            });
-  }
-
-  Widget _loginWidget(TextEditingController inputUserNameController,TextEditingController _inputPasswordController){
+  Widget _loginWidget(TextEditingController inputUserNameController){
     return ConstrainedBox(constraints: const BoxConstraints.expand(),
         child:  Column(
           children: [
             TextField(
               controller:inputUserNameController, //通过controller也可以获取文本输入内容
               decoration: InputDecoration(
-                  labelText: '账号',
+                  labelText: "账号",
                   hintText: "请输入账号",
                   prefixIcon: Icon(Icons.person),
                   enabledBorder: UnderlineInputBorder(//未获取焦点时，下滑线为灰色
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                           color: Colors.grey
                       )
                   ),
@@ -90,7 +57,6 @@ class _WajiuLoginState extends State<WajiuLogin> {
               ),
             ),
             TextField(
-              controller: _inputPasswordController,
               decoration: InputDecoration(
                   labelText: "密码",
                   hintText: "请输入密码",
@@ -103,23 +69,6 @@ class _WajiuLoginState extends State<WajiuLogin> {
                   focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue)//获取焦点时，下滑线为蓝色
                   )
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              child: Row(
-                textDirection: TextDirection.ltr,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    child: Text("手机验证码登录",style: TextStyle(color: ColorUtil.color("ff0000"),fontWeight: FontWeight.bold)),
-                    onTap: ()=>{
-                      GetNavigationUtils.navigateRightToLeft(WajiuPhoneLogin())
-                    },
-                  ),
-                  Text("忘记密码?",style: TextStyle(color: ColorUtil.color("ff0000"),fontWeight: FontWeight.bold)),
-                ],
               ),
             ),
             _loginButtonWidget()
@@ -138,20 +87,24 @@ class _WajiuLoginState extends State<WajiuLogin> {
           borderRadius: BorderRadius.circular(8),
           color: ColorUtil.color("#ff0000"),
         ),
-        child: Text("登录",
+        child: Text("注册",
             style: TextStyle(color: ColorUtil.color("#ffffff"))),
       ),
-      onTap: () => _toLogin(),
+      onTap: () => {
+        for(int i=0;i<1000;i++){
+          _toRegister(i)
+        }
+      },
     );
   }
 
-  Future<void> _toLogin() async {
-    var params = Map<String, dynamic>();
-    params["username"] = inputUserName;
-    params["password"] = inputPassword;
-    DioInstance.getInstance().get(
-        ApiService.login,
-        params, success: (json) {//注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
+  Future<void> _toRegister(int i) async {
+    var formData = FormData.fromMap({
+      "username":"用户$i"
+    });
+    DioInstance.getInstance().post(
+        "http://192.168.5.206:8083/danyuan/saveUser",
+        formData, success: (json) {//注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
       print("获取到的数据：$json");
       // var result = json.decode(utf8decoder.convert(response.bodyBytes));
       print("获取到的数据_toLogin：$json");
@@ -161,7 +114,7 @@ class _WajiuLoginState extends State<WajiuLogin> {
         String msg = model.msg;
         if(status == 200){
           Fluttertoast.showToast(
-              msg: "登录成功",
+              msg: msg,
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.CENTER,
               timeInSecForIosWeb: 1,
@@ -169,9 +122,9 @@ class _WajiuLoginState extends State<WajiuLogin> {
               textColor: Colors.white,
               fontSize: 16.0
           );
-          // GetNavigationUtils.navigateRightToLeftWithAllOff(WajiuMainPage(),"WajiuMainPage");
-          GetNavigationUtils.navigateRightToLeftWithOff(WajiuMainPage());
-        }else if(status == 201){//用户不存在
+          //返回登录页面，并携带参数 GetNavigationUtils
+          GetNavigationUtils.backWithParams("$inputUserName");
+        }else if(status == 201){//用户已经存在
           print("$status");
           Fluttertoast.showToast(
               msg: msg,
@@ -190,4 +143,3 @@ class _WajiuLoginState extends State<WajiuLogin> {
     });
   }
 }
-

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/layout/cart_page.dart';
 import 'package:flutter_money/layout/page_item_info.dart';
 import 'package:flutter_money/wajiu/pager_item_main.dart';
 import 'package:flutter_money/wajiu/pager_item_mine.dart';
@@ -36,15 +37,6 @@ class _WajiuMainPageState extends State<WajiuMainPage> {
             onPageChanged:(index)=>{//onPageChanged:监听PageView页面滑动
               setState(() {
                 _currentIndex = index;
-                Fluttertoast.showToast(
-                    msg: "This is Center Short Toast",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                );
               })
             } ,
             controller: _controller,//相当于Android中ViewPage的滑动监听
@@ -52,7 +44,7 @@ class _WajiuMainPageState extends State<WajiuMainPage> {
               PageItemMain(info: "首页"),
               PageViewItem(info: "分类"),
               PageInfoItem(info: "信息台"),
-              PageViewItem(info: "采购车"),
+              ShopCartItem(info: "采购车"),
               PageItemMine(info: "我的"),
             ],
             // physics: NeverScrollableScrollPhysics(),//禁止左右滑动

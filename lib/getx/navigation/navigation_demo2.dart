@@ -38,7 +38,7 @@ class _NavigationDemoState extends State<NavigationPage2> {
           body:Column(
             children: [
               ElevatedButton(
-                  onPressed: ()=>{GetNavigationUtils.navigateRightToLeftWithAllOff(NavigationPage3())},
+                  onPressed: ()=>{GetNavigationUtils.navigateRightToLeftWithAllOff(NavigationPage3(),"NavigationPage3")},
                   child: Text("跳转到第三个页面,从第三个页面点击返回将返回到第一个页面")
               ),
               ElevatedButton(

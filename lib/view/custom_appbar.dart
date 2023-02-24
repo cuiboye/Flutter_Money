@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
+import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:get/get.dart';
 
 ///自定义标题栏
@@ -9,7 +10,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   final double contentHeight; //从外部指定高度
   Color? navigationBarBackgroundColor; //设置导航栏背景的颜色
   bool? leadingWidget;
-  String? trailingWidget;
+  String? rightText;
   String? title;
   bool showLeftArrow; //是否展示返回键
   String? leftText; //左侧文字
@@ -27,7 +28,7 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
     this.callback,
     required this.context,
     this.navigationBarBackgroundColor,
-    this.trailingWidget,
+    this.rightText,
   }) : super();
 
   @override
@@ -61,7 +62,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorUtil.color("#f56e1d"),
+      color: ColorConstant.systemColor,
       //SafeArea通过MediaQuery来检测屏幕尺寸，使应用程序的大小能与屏幕适配。
       //然后返回了一个Padding Widget 来包裹住我们编写的页面。这样我们的页面就不会被异形屏幕给遮挡住了。
       child: SafeArea(//安全区域
@@ -120,7 +121,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                               widget.callback();
                             },
                             child: Text(
-                              widget.trailingWidget ?? "",
+                              widget.rightText ?? "",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),

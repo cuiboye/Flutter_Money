@@ -121,7 +121,7 @@ class _LinearLayoutState extends State<LinearLayout> {
             ],
           ),
         ),
-        Text("4)end"),
+        Text("4)spaceBetween"),
         Container(
           decoration: BoxDecoration(color: Colors.red),
           child: Row(

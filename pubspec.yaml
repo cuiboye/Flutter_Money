@@ -63,7 +63,7 @@ dependencies:
   image_picker: ^0.8.5+3 #选择图片
   animations: ^2.0.3 #flutter官方提供的动画
   webview_flutter: ^3.0.4 # webview以及和js交互
-
+  flutter_pickers: ^2.1.8 #省市区选择器 参考：https://zhuanlan.zhihu.com/p/350350490
   #百度地图官网，flutter插件：https://lbsyun.baidu.com/index.php?title=flutter/loc/download
   #百度地图插件
   flutter_baidu_mapapi_map: ^3.2.1

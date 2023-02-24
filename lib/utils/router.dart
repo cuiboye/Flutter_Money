@@ -38,6 +38,7 @@ import 'package:flutter_money/getx/navigation/navigation_demo.dart';
 import 'package:flutter_money/mediaquery_youhua.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
+import 'package:flutter_money/wajiu/list_anim_demo_page.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/next_page.dart';
@@ -59,7 +60,12 @@ import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
+import 'package:flutter_money/wajiu/sliver_list_demo_page.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
+import 'package:flutter_money/wajiu/wajiu_phone_login.dart';
+import 'package:flutter_money/wajiu/wajiu_phone_login_password.dart';
+import 'package:flutter_money/wajiu/wajiu_register_page.dart';
+import 'package:flutter_money/wajiu/wajiu_splash_page.dart';
 import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/button_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
@@ -88,6 +94,12 @@ RouterUtils {
       "main": (BuildContext context) => MyApp(),
       "statelesswidget": (BuildContext context) => StatelessWidgetDemo(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
+      "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
+      "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),
+      "listanimdemopage2": (BuildContext context) => ListAnimDemoPage2(),
+      "wajiuphoneloginpassword": (BuildContext context) => WajiuPhoneLoginPassword(),
+      "wajiuregisterpage": (BuildContext context) => WajiuRegisterPage(),
+      "wajiusplashpage": (BuildContext context) => WajiuSplashPage(),
       "statefulwidget": (BuildContext context) => StatefulWidgetDemo(),
       "layoutwidget": (BuildContext context) => LayoutDemoWidget(),
       // "channel": (BuildContext context) => const PlatformChannel(),

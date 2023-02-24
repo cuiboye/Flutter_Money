@@ -140,161 +140,161 @@ class _PageItemMineState extends State<PageItemMine> {
                 width: MediaQuery.of(context).size.width,
                 color: Colors.grey,
               ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(child:  Container(
-                            decoration: BoxDecoration(
-                              //也可以设置4个边框 Border.all();
-                                border: Border(
-                                    right: BorderSide(
-                                        width: 0.1,
-                                        color: Colors.grey
-                                    ),
-                                    bottom: BorderSide(
-                                        width: 0.1,
-                                        color: Colors.grey
-                                    )
-                                )
-                            ),
-                            child: Expanded(child:Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
-                                  child: Row(
-                                    children: [
-                                      Image.asset("images/ic_balance.png",width: 20,height: 20),
-                                      Text("余额",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
-                                    ],
-                                  ),
-                                ),
-
-                                Container(
-                                  margin: EdgeInsets.only(left: 30),
-                                  child: Row(
-                                    children: [
-                                      Text("¥"),
-                                      Text("93,628,115,05")
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )),
-                          ),),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                //也可以设置4个边框 Border.all();
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          width: 0.1, color: Colors.grey))),
-                              child: Expanded(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
-                                        child: Row(
-                                          children: [
-                                            Image.asset("images/ic_balance.png",
-                                                width: 20, height: 20),
-                                            Text("金币",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 30),
-                                          child: Text("205,272.35")
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          )
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                //也可以设置4个边框 Border.all();
-                                  border: Border(
-                                      right: BorderSide(
-                                          width: 0.1,color: Colors.grey
-                                      ),
-                                      bottom: BorderSide(
-                                          width: 0.1, color: Colors.grey))),
-                              child: Expanded(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
-                                        child: Row(
-                                          children: [
-                                            Image.asset("images/ic_balance.png",
-                                                width: 20, height: 20),
-                                            Text("优惠券",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 30),
-                                          child: Text("29张")
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                //也可以设置4个边框 Border.all();
-                                  border: Border(
-                                      right: BorderSide(
-                                          width: 0.1,color: Colors.grey
-                                      ),
-                                      bottom: BorderSide(
-                                          width: 0.1, color: Colors.grey))),
-                              child: Expanded(
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
-                                        child: Row(
-                                          children: [
-                                            Image.asset("images/ic_balance.png",
-                                                width: 20, height: 20),
-                                            Text("样品券",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 30),
-                                          child: Text("1000张")
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        color: Colors.grey,
-                        width: 1,
-                      )
-                    ],
-                  ),
-
-                ],
-              ),
+              // Stack(
+              //   alignment: Alignment.center,
+              //   children: [
+              //     Column(
+              //       children: [
+              //         Row(
+              //           children: [
+              //             Expanded(child:  Container(
+              //               decoration: BoxDecoration(
+              //                 //也可以设置4个边框 Border.all();
+              //                   border: Border(
+              //                       right: BorderSide(
+              //                           width: 0.1,
+              //                           color: Colors.grey
+              //                       ),
+              //                       bottom: BorderSide(
+              //                           width: 0.1,
+              //                           color: Colors.grey
+              //                       )
+              //                   )
+              //               ),
+              //               child: Expanded(child:Row(
+              //                 children: [
+              //                   Container(
+              //                     margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
+              //                     child: Row(
+              //                       children: [
+              //                         Image.asset("images/ic_balance.png",width: 20,height: 20),
+              //                         Text("余额",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
+              //                       ],
+              //                     ),
+              //                   ),
+              //
+              //                   Container(
+              //                     margin: EdgeInsets.only(left: 30),
+              //                     child: Row(
+              //                       children: [
+              //                         Text("¥"),
+              //                         Text("93,628,115,05")
+              //                       ],
+              //                     ),
+              //                   )
+              //                 ],
+              //               )),
+              //             ),),
+              //             Expanded(
+              //               child: Container(
+              //                 decoration: BoxDecoration(
+              //                   //也可以设置4个边框 Border.all();
+              //                     border: Border(
+              //                         bottom: BorderSide(
+              //                             width: 0.1, color: Colors.grey))),
+              //                 child: Expanded(
+              //                     child: Row(
+              //                       children: [
+              //                         Container(
+              //                           margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
+              //                           child: Row(
+              //                             children: [
+              //                               Image.asset("images/ic_balance.png",
+              //                                   width: 20, height: 20),
+              //                               Text("金币",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
+              //                             ],
+              //                           ),
+              //                         ),
+              //                         Container(
+              //                             margin: EdgeInsets.only(left: 30),
+              //                             child: Text("205,272.35")
+              //                         )
+              //                       ],
+              //                     )),
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //
+              //         Row(
+              //           children: [
+              //             Expanded(
+              //               child: Container(
+              //                 decoration: BoxDecoration(
+              //                   //也可以设置4个边框 Border.all();
+              //                     border: Border(
+              //                         right: BorderSide(
+              //                             width: 0.1,color: Colors.grey
+              //                         ),
+              //                         bottom: BorderSide(
+              //                             width: 0.1, color: Colors.grey))),
+              //                 child: Expanded(
+              //                     child: Row(
+              //                       children: [
+              //                         Container(
+              //                           margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
+              //                           child: Row(
+              //                             children: [
+              //                               Image.asset("images/ic_balance.png",
+              //                                   width: 20, height: 20),
+              //                               Text("优惠券",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
+              //                             ],
+              //                           ),
+              //                         ),
+              //                         Container(
+              //                             margin: EdgeInsets.only(left: 30),
+              //                             child: Text("29张")
+              //                         )
+              //                       ],
+              //                     )),
+              //               ),
+              //             ),
+              //             Expanded(
+              //               child: Container(
+              //                 decoration: BoxDecoration(
+              //                   //也可以设置4个边框 Border.all();
+              //                     border: Border(
+              //                         right: BorderSide(
+              //                             width: 0.1,color: Colors.grey
+              //                         ),
+              //                         bottom: BorderSide(
+              //                             width: 0.1, color: Colors.grey))),
+              //                 child: Expanded(
+              //                     child: Row(
+              //                       children: [
+              //                         Container(
+              //                           margin: EdgeInsets.fromLTRB(13, 10, 0, 10),
+              //                           child: Row(
+              //                             children: [
+              //                               Image.asset("images/ic_balance.png",
+              //                                   width: 20, height: 20),
+              //                               Text("样品券",style: TextStyle(fontSize: 12,color: ColorUtil.color("#666666"))),
+              //                             ],
+              //                           ),
+              //                         ),
+              //                         Container(
+              //                             margin: EdgeInsets.only(left: 30),
+              //                             child: Text("1000张")
+              //                         )
+              //                       ],
+              //                     )),
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ],
+              //     ),
+              //     Column(
+              //       children: [
+              //         Container(
+              //           color: Colors.grey,
+              //           width: 1,
+              //         )
+              //       ],
+              //     ),
+              //
+              //   ],
+              // ),
               Container(
                 height: 8,
                 color: ColorUtil.color("#eeeeee"),

@@ -10,7 +10,7 @@ class OrderListViewModel with ChangeNotifier {
 
   bool loading = true;
 
-  setJokeList(OrdertListModel ordertListModel) {
+  setOrderList(OrdertListModel ordertListModel) {
     _orderList = [];
     _orderList = ordertListModel.result.list;
     loading = false;
@@ -22,8 +22,5 @@ class OrderListViewModel with ChangeNotifier {
   }
 
   List<ListBean>? get orderList => _orderList;
-
   ListBean get joke => _orderItem;
-
-
 }

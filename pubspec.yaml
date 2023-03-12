@@ -73,7 +73,7 @@ dependencies:
   flutter_bmflocation: ^3.2.0
   #极光推送
   jpush_flutter: ^2.3.6
-  #上拉加载下拉刷新
+  #上拉加载下拉刷新,参考：https://pub.flutter-io.cn/packages/pull_to_refresh
   pull_to_refresh: ^2.0.0
   #获取设备信息
   device_info: ^2.0.3
@@ -81,6 +81,7 @@ dependencies:
   flutter_native_splash: ^2.2.8
   #动画 执行flutter pub add simple_animations就可以
   simple_animations: ^5.0.0+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

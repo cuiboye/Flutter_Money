@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_money/provide/provider_mvvm_example/service/joke_service.dart';
 import 'package:flutter_money/wajiu/model/orderlist.dart';
+import 'package:flutter_money/wajiu/service/order_service.dart';
 import 'package:flutter_money/wajiu/view_model/orderlist_view_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -15,12 +16,11 @@ class OrderListItem extends StatefulWidget {
   _OrderListItemState createState() => _OrderListItemState();
 }
 
-List<String> list = ['a', 'b', 'c'];
 
 class _OrderListItemState extends State<OrderListItem> {
   @override
   void initState() {
-    JokeService.getOrderList(Provider.of<OrderListViewModel>(context, listen: false));
+    OrderService.getOrderList(Provider.of<OrderListViewModel>(context, listen: false));
 
     super.initState();
   }

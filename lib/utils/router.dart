@@ -13,6 +13,7 @@ import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/home_page.dart';
+import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/http/dio_demo.dart';
 import 'package:flutter_money/http/futurebuild_demo.dart';
 import 'package:flutter_money/http/http_demo.dart';
@@ -60,7 +61,10 @@ import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
+import 'package:flutter_money/wajiu/page/my_balance.dart';
 import 'package:flutter_money/wajiu/sliver_list_demo_page.dart';
+import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
+import 'package:flutter_money/wajiu/view/wajiu_my_balance.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
 import 'package:flutter_money/wajiu/wajiu_phone_login.dart';
 import 'package:flutter_money/wajiu/wajiu_phone_login_password.dart';
@@ -99,6 +103,9 @@ RouterUtils {
       "listanimdemopage2": (BuildContext context) => ListAnimDemoPage2(),
       "wajiuphoneloginpassword": (BuildContext context) => WajiuPhoneLoginPassword(),
       "wajiuregisterpage": (BuildContext context) => WajiuRegisterPage(),
+      "mybalance": (BuildContext context) => MyBalance(),
+      "wajiugoodsdetail": (BuildContext context) => WajiuGoodsDetail(),
+      "honordemopage": (BuildContext context) => HonorDemoPage(),
       "wajiusplashpage": (BuildContext context) => WajiuSplashPage(),
       "statefulwidget": (BuildContext context) => StatefulWidgetDemo(),
       "layoutwidget": (BuildContext context) => LayoutDemoWidget(),

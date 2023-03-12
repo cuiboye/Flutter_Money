@@ -17,18 +17,4 @@ class JokeService {
       jokeViewModel.setJokeList(jokeModel);
     }
   }
-
-  static Future<void> getOrderList(OrderListViewModel orderListViewModel) async {
-
-    var response = await Dio().get("http://192.168.5.199:8082/danyuan/getOrderList");
-    if (response.statusCode == 200) {
-      // 转换模型
-      final responseData = json.decode(response.toString());
-      print("ordertListModel===========>${responseData}");
-
-      OrdertListModel ordertListModel = OrdertListModel.fromJson(responseData);
-      // 更新数据
-      orderListViewModel.setJokeList(ordertListModel);
-    }
-  }
 }

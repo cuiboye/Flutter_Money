@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/extension/text_extension.dart';
+import 'package:flutter_money/utils/dialog_utils.dart';
+import 'package:flutter_money/utils/toast_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../utils/text_utils.dart';
@@ -20,6 +22,41 @@ class DialogDemo extends StatefulWidget {
 }
 
 class _DialogDemoState extends State<DialogDemo> {
+  List<String> nameItems = <String>[
+    '微信',
+    '朋友圈',
+    'QQ',
+    'QQ空间',
+    '微博',
+    'FaceBook',
+    '邮件',
+    '链接'
+  ];
+
+
+  //弹出框列表的数据
+  List<String> list = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return CustomMaterialApp(
@@ -70,10 +107,43 @@ class _DialogDemoState extends State<DialogDemo> {
                 child: Text("IOS风格日历选择器"),
                 onPressed: () =>_showDatePicker2()
             ),
+            ElevatedButton(
+                child: Text("弹框列表"),
+                onPressed: () =>{
+                  DialogUtils.showCommitOptionDialog(context, list, (index) {
+                    ToastUtils.showToast("点击的数据为 ${list[index]}");
+                  }, height: 400.0)
+                }
+            ),
+            ElevatedButton(
+                child: Text("底部弹框分享框"),
+                onPressed: () =>{
+                  shareDialogWidget(context)
+                }
+            ),
+            ElevatedButton(
+                child: Text("自定义确定取消弹框"),
+                onPressed: () =>{
+                  DialogUtils.showAlertDialog(context,"确定要删除吗?",(result){
+                    ToastUtils.showToast("删除成功");
+                  })
+                }
+            ),
           ],
         ),
       ),
     );
+  }
+
+  shareDialogWidget(context){
+    showModalBottomSheet(
+        isDismissible: false,//禁止点击外部消息
+        enableDrag: false,//禁止拖拽
+        context: context,
+        builder: (BuildContext context) {
+          return DialogUtils.shareWidget(context,nameItems);
+        });
+
   }
 
   //日历选择器

@@ -11,6 +11,7 @@ import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
+import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/inherited_widget_example.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/notification_demo.dart';
@@ -120,6 +121,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             }),
         _item('StatelessWidget组件的使用', StatelessWidgetDemo(), 'statelesswidget'),
+        _item('共性元素动画', HonorDemoPage(), 'honordemopage'),
         _item('wajiuLogin', WajiuLogin(), 'wajiuLogin'),
         _item('StatefulWidget组件的使用', StatefulWidgetDemo(), 'statefulwidget'),
         _item('布局的使用', LayoutDemoWidget(), 'layoutwidget'),

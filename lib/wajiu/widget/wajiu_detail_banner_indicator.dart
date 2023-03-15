@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 
+/**
+ * 商品详情页-banner自定义小圆点
+ */
 class NLIndicator extends StatelessWidget{
   var _currentIndex;
   var _count;

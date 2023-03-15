@@ -112,6 +112,16 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         child: SingleChildScrollView(
             child: Column(
       children: <Widget>[
+       Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Text("ListView和PageView花式嵌套可以查看:"),
+           Text("1)ListViewNestVP 垂直  ListView 嵌套垂直  ViewPager，"),
+           Text("2)VPNestListView，垂直  ViewPager 嵌套垂直 ListView"),
+           Text("3)ListViewLinkListView，垂直  ListView 联动  ListView"),
+           Text("4)VPListView ListView 嵌套 ViewPager 解决斜着滑动问题"),
+         ],
+       ),
         SwitchListTile(
             title: Text('${byName ? '' : '不'}通过路由名跳转'),
             value: byName,

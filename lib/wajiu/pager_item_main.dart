@@ -9,6 +9,7 @@ import 'package:flutter_money/wajiu/constant/apiservice.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/model/common_request_model.dart';
 import 'package:flutter_money/wajiu/model/product_list_model.dart';
+import 'package:flutter_money/wajiu/view/vp_list_demo_page.dart';
 import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

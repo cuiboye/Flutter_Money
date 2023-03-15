@@ -23,7 +23,7 @@ class DioInstance {
       connectTimeout: 30000,
       receiveTimeout: 30000,
       sendTimeout: 30000,
-      baseUrl: "http://192.168.0.101:8083",
+      baseUrl: "http://192.168.5.86:8083",
       responseType: ResponseType.json,
     ));
     //添加拦截器，这里添加Dio的日志

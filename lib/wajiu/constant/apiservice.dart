@@ -1,4 +1,6 @@
-
+/**
+ * 接口地址
+ */
 class ApiService{
   //登录
   static const String login = "/loginaccount/login";

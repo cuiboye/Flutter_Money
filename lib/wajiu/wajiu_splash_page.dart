@@ -14,7 +14,7 @@ class _WajiuSplashPageState extends State<WajiuSplashPage> {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      "./images/wajiu_splash.png",
+      "./images/launchimage.jpg",
       fit: BoxFit.fill,
     );
   }

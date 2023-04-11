@@ -15,24 +15,24 @@ class NLIndicator extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(_count, (index){
           return _currentIndex == index ? Container(
-            width: 8,
-            height: 8,
-            margin: EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(4)
-            ),
-          ) : Container(
-            width: 8,
-            height: 8,
+            width: 5,
+            height: 5,
             margin: EdgeInsets.only(right: 8),
             decoration: BoxDecoration(
                 color: ColorConstant.systemColor,
+                borderRadius: BorderRadius.circular(4)
+            ),
+          ) : Container(
+            width: 5,
+            height: 5,
+            margin: EdgeInsets.only(right: 8),
+            decoration: BoxDecoration(
+                color: ColorConstant.color_80ffffff,
                 borderRadius: BorderRadius.circular(20)
             ),
           );
         }),
-      ),
+      )
     );
   }
 }

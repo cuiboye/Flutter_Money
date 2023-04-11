@@ -16,6 +16,8 @@
     <!-- 百度地图需要的权限-->
     
     <application
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:label="flutter_money"
         android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher">

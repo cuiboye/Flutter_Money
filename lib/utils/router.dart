@@ -10,6 +10,7 @@ import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/channel/flutter_open_native_page.dart';
 import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
 import 'package:flutter_money/device_info_main.dart';
+import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/home_page.dart';
@@ -36,9 +37,11 @@ import 'package:flutter_money/layout/tabbarview.dart';
 import 'package:flutter_money/layout/wrap_flow.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/getx/navigation/navigation_demo.dart';
+import 'package:flutter_money/list_scroll_dock_page.dart';
 import 'package:flutter_money/mediaquery_youhua.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
+import 'package:flutter_money/route_demo_page.dart';
 import 'package:flutter_money/wajiu/list_anim_demo_page.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
@@ -98,6 +101,7 @@ RouterUtils {
     Map<String, WidgetBuilder>? routes = {
       "main": (BuildContext context) => MyApp(),
       "statelesswidget": (BuildContext context) => StatelessWidgetDemo(),
+      "routedemopage": (BuildContext context) => RouteDemoPage(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
       "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
       "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),
@@ -105,6 +109,8 @@ RouterUtils {
       "wajiuphoneloginpassword": (BuildContext context) => WajiuPhoneLoginPassword(),
       "wajiuregisterpage": (BuildContext context) => WajiuRegisterPage(),
       "mybalance": (BuildContext context) => MyBalance(),
+      "listscrolldockpage": (BuildContext context) => ListScrollDockPage(),
+      "dropselectdemopage": (BuildContext context) => DropSelectDemoPage(),
       "listviewnestvp": (BuildContext context) => ListViewNestVP(),
       "vpnestlistview": (BuildContext context) => VPNestListView(),
       "listviewlinklistview": (BuildContext context) => ListViewLinkListView(),

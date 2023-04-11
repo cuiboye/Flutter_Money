@@ -95,7 +95,7 @@ class _SplashState extends State<MyApp> with NavigatorObserver{
           //去除右上角的"DEBUG"水印
           debugShowCheckedModeBanner:false,
           title: 'Flutter Demo',
-          home: Image.asset("images/welcome.png",fit: BoxFit.fill),
+          home: Image.asset("images/launchimage.jpg",fit: BoxFit.fill),
           routes: RouterUtils.getRouter(),
           // // RouterUtils.getRouter()
         );

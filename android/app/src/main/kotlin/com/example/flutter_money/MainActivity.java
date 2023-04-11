@@ -176,11 +176,11 @@ public class MainActivity extends FlutterActivity {
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin", e);
         }
-        try {
-            flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
-        }
+//        try {
+//            flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
+//        } catch(Exception e) {
+//            Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
+//        }
         try {
             flutterEngine.getPlugins().add(new com.jiguang.jpush.JPushPlugin());
         } catch(Exception e) {

@@ -9,11 +9,13 @@ import 'package:flutter_money/ExpansionTileSample.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/device_info_main.dart';
+import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/inherited_widget_example.dart';
 import 'package:flutter_money/layout_demo.dart';
+import 'package:flutter_money/list_scroll_dock_page.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/provide_demo.dart';
@@ -22,6 +24,7 @@ import 'package:flutter_money/provide/provider_example/provide_demo.dart';
 import 'package:flutter_money/provide/provider_mvvm_example/provide_demo.dart';
 import 'package:flutter_money/provide/selector_example/provide_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
+import 'package:flutter_money/route_demo_page.dart';
 import 'package:flutter_money/sharedpreference.dart';
 import 'package:flutter_money/sqflite_demo.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
@@ -130,6 +133,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
                 byName = value;
               });
             }),
+        _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
+        _item('测试路由嵌套', RouteDemoPage(), 'routedemopage'),
+        _item('下拉筛选', DropSelectDemoPage(), 'dropselectdemopage'),
         _item('StatelessWidget组件的使用', StatelessWidgetDemo(), 'statelesswidget'),
         _item('共性元素动画', HonorDemoPage(), 'honordemopage'),
         _item('wajiuLogin', WajiuLogin(), 'wajiuLogin'),

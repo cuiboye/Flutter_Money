@@ -59,20 +59,20 @@ class _WajiuMainPageState extends State<WajiuMainPage> {
             },
             type: BottomNavigationBarType.fixed,//这里需要设置为fixed，否则看不到文字
             items: [
-              _itemBottomNavigation('首页', Icons.home),
-              _itemBottomNavigation('分类', Icons.list),
-              _itemBottomNavigation('信息台', Icons.info_rounded),
-              _itemBottomNavigation('采购车', Icons.search),
-              _itemBottomNavigation('我的', Icons.account_circle),
+              _itemBottomNavigation('首页',"images/tabbar_home_red.png"),
+              _itemBottomNavigation('分类', "images/tabbar_category_red.png"),
+              _itemBottomNavigation('信息台', "images/tabbar_information_desk_red.png"),
+              _itemBottomNavigation('采购车', "images/tabbar_shopping_car_red.png"),
+              _itemBottomNavigation('我的', "images/tabbar_mine_red.png"),
             ],
           ),
         ));
   }
 
-  BottomNavigationBarItem _itemBottomNavigation(String title, IconData? icon) {
+  BottomNavigationBarItem _itemBottomNavigation(String title, String imagePath) {
     return BottomNavigationBarItem(
-        icon: Icon(icon,color:_defaultColor),//未选中tab
-        activeIcon: Icon(icon,color:_activityColor),//选中tab
+        icon: Image.asset(imagePath,color:_defaultColor,height: 20,),//未选中tab
+        activeIcon:  Image.asset(imagePath,color:_activityColor,height: 20,),//选中tab
         label: title,//文字
         tooltip: ""//这个是去除当点击tab标签的时候，在tab上方弹出的toast
     );

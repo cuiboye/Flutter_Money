@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_money/wajiu/view/wajiu_detail_appbar.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/wajiu/widget/wajiu_detail_banner_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class WajiuGoodsDetail extends StatefulWidget {
   @override
@@ -402,7 +404,7 @@ class KeepAliveListViewState extends State<KeepAliveListView>
         itemCount: 5,
         autoplay: true, //是否自动轮播
         pagination: SwiperPagination(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomCenter,
             builder: SwiperCustomPagination(
                 builder: (BuildContext context, SwiperPluginConfig config) {
               return NLIndicator(config.activeIndex, 5);
@@ -465,9 +467,7 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
     if (_listScrollController?.hasClients == true &&
         _listScrollController?.position.context.storageContext != null) {
       ///获取 ListView 的  renderBox
-      final RenderBox? renderBox = _listScrollController
-          ?.position.context.storageContext
-          .findRenderObject() as RenderBox;
+      final RenderBox? renderBox = _listScrollController?.position.context.storageContext.findRenderObject() as RenderBox;
 
       ///判断触摸的位置是否在 ListView 内
       ///不在范围内一般是因为 ListView 已经滑动上去了，坐标位置和触摸位置不一致
@@ -483,6 +483,8 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
 
     ///这时候就可以认为是 PageView 需要滑动
     _activeScrollController = _pageController;
+    print("position的值为：${ _pageController?.position}");
+
     _drag = _pageController?.position.drag(details, _disposeDrag);
   }
 
@@ -596,13 +598,21 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
                     ),
                   ),
                 ),
+                //这里还有问题，因为是自定义的手势，这个WebView滑动有问题
                 Container(
-                  color: Colors.green,
-                  child: Center(
-                    child: Text(
-                      'Page View',
-                      style: TextStyle(fontSize: 50),
-                    ),
+                  child: WebView(
+                    initialUrl: getAssetsPath("assets/files/good_detail.html"),
+                    //JS执行模式 是否允许JS执行
+                    javascriptMode: JavascriptMode.unrestricted,
+                    onWebResourceError: (WebResourceError error){
+                      print("${error.description}");
+                    },
+                    onPageFinished: (String url){
+                      print("$url");
+                    },
+                    onWebViewCreated: (WebViewController controller){
+                      print("加载完成");
+                    },
                   ),
                 )
               ],
@@ -611,5 +621,12 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
           appBar: WajiuDetailAppBar(
               context: context, title: "dsfdsfds", alphaBg: appBarColorAlpha)),
     );
+  }
+  String getAssetsPath(String path) {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return 'file:///android_asset/flutter_assets/' + path;
+    } else {
+      return 'file://Frameworks/App.framework/flutter_assets/' + path;
+    }
   }
 }

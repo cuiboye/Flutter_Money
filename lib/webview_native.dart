@@ -38,10 +38,9 @@ class _WebViewNativeDemoState extends State<WebViewNativeDemo> {
         appBar: CustomAppbar(context: context,
         title: "WebView以及和JS交互"),
         body:WebView(
-          // initialUrl: "https://flutterchina.club/",
+          initialUrl: getAssetsPath("assets/files/good_detail.html"),//这个链接中包含了图片和视频
           //   initialUrl: getAssetsPath("assets/files/helloword.html"),//这个链接是测试Fluttter调用JS
-            initialUrl: getAssetsPath("assets/files/js_flutter.html"),//这个链接是测试JS调用Flutter
-            // initialUrl: "http://www.baidu.com",
+          //   initialUrl: getAssetsPath("assets/files/js_flutter.html"),//这个链接是测试JS调用Flutter
             //JS执行模式 是否允许JS执行
             javascriptMode: JavascriptMode.unrestricted,
           onWebResourceError: (WebResourceError error){

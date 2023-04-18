@@ -66,16 +66,14 @@ class KeepAliveListViewState extends State<KeepAliveListView>
                       children: [
                         Image.asset(
                           "images/word_grab_new.png",
-                          width: 40,
-                          height: 30,
+                          height: 20,
                           fit: BoxFit.fill,
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 10),
                           child: Image.asset(
                             "images/limit_time.png",
-                            width: 40,
-                            height: 20,
+                            height: 15,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -599,6 +597,7 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
                   ),
                 ),
                 //这里还有问题，因为是自定义的手势，这个WebView滑动有问题
+
                 Container(
                   child: WebView(
                     initialUrl: getAssetsPath("assets/files/good_detail.html"),
@@ -613,8 +612,24 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
                     onWebViewCreated: (WebViewController controller){
                       print("加载完成");
                     },
-                  ),
+                  )
                 )
+                // Container(
+                //   child: WebView(
+                //     initialUrl: getAssetsPath("assets/files/good_detail.html"),
+                //     //JS执行模式 是否允许JS执行
+                //     javascriptMode: JavascriptMode.unrestricted,
+                //     onWebResourceError: (WebResourceError error){
+                //       print("${error.description}");
+                //     },
+                //     onPageFinished: (String url){
+                //       print("$url");
+                //     },
+                //     onWebViewCreated: (WebViewController controller){
+                //       print("加载完成");
+                //     },
+                //   ),
+                // )
               ],
             ),
           ),

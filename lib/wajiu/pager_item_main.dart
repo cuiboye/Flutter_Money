@@ -1032,18 +1032,22 @@ class _PageItemMainState extends State<PageItemMain>
     if (isOnRefresh) {
       listData.clear();
       mCurrentPageNum = 0;
-      params["pageNum"] = mCurrentPageNum;
     } else {
       mCurrentPageNum++;
-      params["pageNum"] = mCurrentPageNum;
     }
-    params["pageSize"] = 10;
-    DioInstance.getInstance().get(ApiService.findAllProduct, params,
+    params["userId"] = "32659";
+    DioInstance.getInstance().get(ApiService.indexApp, params,
         success: (json) {
       //注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
       print("获取到的数据：$json");
       // var result = json.decode(utf8decoder.convert(response.bodyBytes));
       print("获取到的数据_toLogin：$json");
+      //通知下，刷新成功
+      if (isOnRefresh) {
+        _refreshController.refreshCompleted();
+      } else {
+        _refreshController.loadComplete();
+      }
       ProductListModel model = ProductListModel.fromJson(json);
       if (null != model) {
         int status = model.states;
@@ -1056,12 +1060,7 @@ class _PageItemMainState extends State<PageItemMain>
               listData.addAll(model.result.productList);
               print("数组的长度为：${listData.length}");
             });
-            //通知下，刷新成功
-            if (isOnRefresh) {
-              _refreshController.refreshCompleted();
-            } else {
-              _refreshController.loadComplete();
-            }
+
           }
         }
       } else {

@@ -70,8 +70,12 @@ class GetNavigationUtils {
   }
 
   //可以销毁多个页面，这是单纯的销毁，没有参数返回
-  void destroryMorePageNoParams(int pageNumber) {
+  static void destroryMorePageNoParams(int pageNumber) {
     Get.close(pageNumber);
   }
 
+  //销毁当前页面
+  static void back(){
+    Get.back();
+  }
 }

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_money/home_page.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/utils/router.dart';
+import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'statefulwidget_demo.dart';
 import 'package:get/get.dart';
@@ -65,9 +66,11 @@ class _SplashState extends State<MyApp> with NavigatorObserver{
     Timer(Duration(seconds: 2), handleTimeOut);
   }
 
-  void handleTimeOut(){//倒计时回调
+  void handleTimeOut(){//倒计时结束回调
     print("+++++++++++++++++++++1");
+    //TODO HomePageWidget这个为测试用的页面
     GetNavigationUtils.navigateRightToLeftWithOff(HomePageWidget());
+    // GetNavigationUtils.navigateRightToLeftWithOff(WajiuMainPage());
   }
   
   @override
@@ -78,6 +81,7 @@ class _SplashState extends State<MyApp> with NavigatorObserver{
       SystemUiOverlayStyle _style =
       SystemUiOverlayStyle(statusBarColor: Colors.transparent);
       SystemChrome.setSystemUIOverlayStyle(_style);
+      print("当前设备平台为：${TargetPlatform.android}");
     }
 
     //扩展方法

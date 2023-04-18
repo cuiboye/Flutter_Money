@@ -104,37 +104,19 @@ class _WajiuRegisterPageState extends State<WajiuRegisterPage> {
     });
     DioInstance.getInstance().post(
         "http://192.168.5.206:8083/danyuan/saveUser",
-        formData, success: (json) {//注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
+        formData: formData, success: (json) {//注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
       print("获取到的数据：$json");
       // var result = json.decode(utf8decoder.convert(response.bodyBytes));
       print("获取到的数据_toLogin：$json");
       LoginModel model =  LoginModel.fromJson(json);
       if(null!=model){
         int status = model.states;
-        String msg = model.msg;
+        String? msg = model.msg;
         if(status == 200){
-          Fluttertoast.showToast(
-              msg: msg,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0
-          );
           //返回登录页面，并携带参数 GetNavigationUtils
           GetNavigationUtils.backWithParams("$inputUserName");
         }else if(status == 201){//用户已经存在
           print("$status");
-          Fluttertoast.showToast(
-              msg: msg,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0
-          );
         }
       }
       print("获取到的数据：$model");

@@ -235,3 +235,4 @@ manifestPlaceholders = [
 3)运行此包
 flutter pub run flutter_native_splash:create
 4)还需要对android12进行兼容，这个项目没有做兼容处理
+如果闪屏页有问题，可以参考：https://blog.csdn.net/pfourfire/article/details/123115828

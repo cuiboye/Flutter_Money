@@ -15,7 +15,10 @@ class PageViewItem extends StatefulWidget {
   PageViewItem({this.info});
 }
 
-class _PageViewItemState extends State<PageViewItem> {
+class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true;//保持页面状态
+
   List<String> leftTypeList = [
     "特色",
     "品牌推荐",
@@ -150,7 +153,9 @@ class _PageViewItemState extends State<PageViewItem> {
                                 line_height: 0.5);
                           },
                         ),
-                      ))),
+                      )
+                  )
+              ),
             ),
             Expanded(
                 child: Container(

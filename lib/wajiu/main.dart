@@ -62,6 +62,8 @@ class _WajiuMainPageState extends State<WajiuMainPage> {
           //点击"我的"，判断是否已经登录
           if (index == 4) {
             getLoginToken().then((value) {
+              ToastUtils.showToast("=======>获取的token为：$value" );
+              print("=======>获取的token为：$value" );
               if (TextUtils.isEmpty(value)) {
                 ToastUtils.showToast("请先登录");
                 GetNavigationUtils.navigateRightToLeft(WajiuLogin());

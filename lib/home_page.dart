@@ -39,7 +39,7 @@ import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
+// import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'animated_switcher.dart';
 import 'animation_main.dart';

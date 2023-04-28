@@ -112,7 +112,21 @@ packages:
       name: cached_network_image
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.5.1"
+    version: "3.2.1"
+  cached_network_image_platform_interface:
+    dependency: transitive
+    description:
+      name: cached_network_image_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
+  cached_network_image_web:
+    dependency: transitive
+    description:
+      name: cached_network_image_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   characters:
     dependency: transitive
     description:
@@ -334,7 +348,7 @@ packages:
       name: flutter_blurhash
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.5.0"
+    version: "0.7.0"
   flutter_bmflocation:
     dependency: "direct main"
     description:
@@ -348,7 +362,7 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.2"
+    version: "3.3.0"
   flutter_color_plugin:
     dependency: "direct main"
     description:
@@ -397,7 +411,7 @@ packages:
       name: flutter_rating_bar
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.2.0+1"
+    version: "4.0.1"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -442,7 +456,7 @@ packages:
       name: fluttertoast
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "8.0.9"
+    version: "8.2.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -512,7 +526,7 @@ packages:
       name: intl
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.17.0"
+    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -520,13 +534,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.4"
-  jpush_flutter:
-    dependency: "direct main"
-    description:
-      name: jpush_flutter
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.4.3"
   js:
     dependency: transitive
     description:
@@ -610,7 +617,7 @@ packages:
       name: octo_image
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.0"
+    version: "1.0.2"
   package_config:
     dependency: transitive
     description:
@@ -666,7 +673,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.6"
   pedantic:
     dependency: transitive
     description:
@@ -785,7 +792,7 @@ packages:
       name: rxdart
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.25.0"
+    version: "0.27.7"
   shared_preferences:
     dependency: "direct main"
     description:

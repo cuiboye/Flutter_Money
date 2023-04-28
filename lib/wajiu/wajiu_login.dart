@@ -184,7 +184,7 @@ class _WajiuLoginState extends State<WajiuLogin> {
         ToastUtils.showToast("登录成功");
         GetNavigationUtils.back();
       } else {
-        ToastUtils.showToast(TextUtils.isEmpty(msg) ? "登录异常，请重试！" : msg);
+        ToastUtils.showToast(msg ?? "登录异常，请重试！");
       }
     }, fail: (reason, code) {
       print("获取到的数据：$reason");

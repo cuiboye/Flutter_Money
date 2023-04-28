@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
@@ -5,12 +7,16 @@ import 'package:flutter_money/layout/container_widget.dart';
 import 'package:flutter_money/utils/dialog_utils.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/utils/http.dart';
+import 'package:flutter_money/utils/text_utils.dart';
 import 'package:flutter_money/utils/toast_utils.dart';
+import 'package:flutter_money/utils/wajiu_utils.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/wajiu/constant/apiservice.dart';
+import 'package:flutter_money/wajiu/constant/app_strings.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/main_tabview.dart';
 import 'package:flutter_money/wajiu/model/common_request_model.dart';
+import 'package:flutter_money/wajiu/model/home_main_model.dart';
 import 'package:flutter_money/wajiu/model/product_list_model.dart';
 import 'package:flutter_money/wajiu/order_list_item_main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
@@ -18,9 +24,11 @@ import 'package:flutter_money/wajiu/view/vp_list_demo_page.dart';
 import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
 import 'package:flutter_money/wajiu/widget/marquee_widget.dart';
 import 'package:flutter_money/wajiu/widget/wajiu_detail_banner_indicator.dart';
+import 'package:flutter_money/widget/net_image_utils.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /**
  * 挖酒-主页
@@ -37,15 +45,21 @@ class _PageItemMainState extends State<PageItemMain>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true; //保持页面状态
-  List<ProductList> listData = []; //商品列表数据
-  var imageList = []; //轮播图数据
+  List<AppNewIndexCategories?> appNewIndexCategories = [];//轮播图数据
+  List<AppNewIndexCategories?> checkerboardAppNewIndexCategories = [];//棋盘格数据
+  List<AppNewIndexCategories?> announcementAppNewIndexCategories = [];//快报
+  String rankPictureUrl = "";
+  String newpinShoufaPictureUrl = "";
+  String hotSellingRecommendationPictureUrl = "";
   var checkerboardImageList = []; //棋盘格图片数据
   var checkerboardImageList2 = []; //棋盘格图片数据
   var checkerboardTitleList = []; //棋盘格文字数据
   var checkerboardTitleList2 = []; //棋盘格文字数据
-  var countryList = []; //国家馆数据
+  List<BannerInternational?>  countryList = []; //国家馆数据
+  List<NewProductPriorities?>  newProductPriorities = []; //新品优先抢
+  List<WorldHotProducts?>  worldHotProductsList = []; //全球热卖
   int mCurrentPageNum = 0;
-  bool showScrollToTop = false;
+  bool showScrollToTop = false;//请求数据结束后，再设置轮播图自动滚动
 
   //快报
   List<String> loopList = [
@@ -55,6 +69,7 @@ class _PageItemMainState extends State<PageItemMain>
   ];
   bool hasData = true; //下拉加载，是否还有数据
   late ScrollController scrollController;
+  bool requestDataSuccess = false;
 
   @override
   void initState() {
@@ -68,18 +83,25 @@ class _PageItemMainState extends State<PageItemMain>
       } else {
         showScrollToTop = false;
       }
+      print("addListener");
       setState(() {
         //更新回到顶部的图标的状态
       });
     });
-    imageList = _getBannerDatas();
+    // imageList = _getBannerDatas();
     checkerboardImageList = getCheckerboardImageList();
     checkerboardImageList2 = getCheckerboardImageList2();
     checkerboardTitleList = getCheckerboardTitleList();
     checkerboardTitleList2 = getCheckerboardTitleList2();
-    countryList = getCountryList();
+    // countryList = getCountryList();
 
-    _getProductListData(true);
+    requestData(true);
+  }
+  
+  void requestData(bool refresh){
+    getLoginToken().then((token) {
+      _getProductListData(refresh,token??"");
+    });
   }
 
   RefreshController _refreshController =
@@ -87,15 +109,19 @@ class _PageItemMainState extends State<PageItemMain>
 
   void _onRefresh() async {
     // monitor network fetch
-    _getProductListData(true);
+    requestData(true);
     // if failed,use refreshFailed()
-    if (mounted) setState(() {});
+    if (mounted) setState(() {
+      print("===============>_onRefresh");
+    });
   }
 
   void _onLoading() async {
     // monitor network fetch
-    _getProductListData(false);
-    if (mounted) setState(() {});
+    requestData(false);
+    if (mounted) setState(() {
+      print("===============>_onLoading");
+    });
   }
 
   @override
@@ -256,8 +282,8 @@ class _PageItemMainState extends State<PageItemMain>
                   onTap: (index) {
                     ToastUtils.showToast("点击了第 ${index + 1}个");
                   },
-                  itemCount: imageList.length,
-                  autoplay: true,
+                  itemCount:  appNewIndexCategories?.length??0,
+                  autoplay: requestDataSuccess?true:false,
                   //是否自动轮播
                   pagination: SwiperPagination(
                       //指示器
@@ -267,13 +293,11 @@ class _PageItemMainState extends State<PageItemMain>
                       builder: SwiperCustomPagination(builder:
                           (BuildContext context, SwiperPluginConfig config) {
                         return NLIndicator(
-                            config.activeIndex, imageList.length);
+                            config.activeIndex, appNewIndexCategories?.length??0);
                       })),
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.asset(
-                      imageList[index],
-                      fit: BoxFit.fill,
-                    );
+                    // print("加载图片 ${appNewIndexCategories[index]?.picture ?? ""}");
+                    return NetImageView(url:appNewIndexCategories[index]?.picture ?? "", boxFit: BoxFit.fill,);
                   },
                 ),
               )),
@@ -408,18 +432,22 @@ class _PageItemMainState extends State<PageItemMain>
                 child: MarqueeWidget(
                   //子Item构建器
                   itemBuilder: (BuildContext context, int index) {
-                    String itemStr = loopList[index];
+                    if(!WajiuUtils.collectionIsSafe(announcementAppNewIndexCategories, index)){
+                      return Text("");
+                    }
+                    String itemStr = announcementAppNewIndexCategories[index]?.indexName ?? "";
                     //通常可以是一个 Text文本
                     return GestureDetector(
                       onTap: () {
                         ToastUtils.showToast("$itemStr");
                       },
-                      child: Text(itemStr,
+                      child: Text(itemStr,style: TextStyle(fontSize: 13),
                           maxLines: 1, overflow: TextOverflow.ellipsis),
                     );
                   },
                   //循环的提示消息数量
-                  count: loopList.length,
+                  count: announcementAppNewIndexCategories.length,
+                  loopSeconds: 4, //每隔4秒轮播一次
                 ),
               ))
             ],
@@ -443,7 +471,7 @@ class _PageItemMainState extends State<PageItemMain>
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(right: 4),
-                      child: Image.asset("images/home_rank.png"),
+                      child: NetImageView(url:rankPictureUrl ?? ""),
                     ),
                   ),
                   Expanded(
@@ -453,11 +481,11 @@ class _PageItemMainState extends State<PageItemMain>
                       children: [
                         Container(
                           margin: EdgeInsets.only(bottom: 4),
-                          child: Image.asset("images/rexiaoxinpin.png"),
+                          child: NetImageView(url:newpinShoufaPictureUrl ?? ""),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 4),
-                          child: Image.asset("images/rexiaoshoufa.png"),
+                          child: NetImageView(url:hotSellingRecommendationPictureUrl ?? ""),
                         ),
                       ],
                     ),
@@ -705,23 +733,17 @@ class _PageItemMainState extends State<PageItemMain>
             ],
           ),
         )),
-        SliverPadding(
-          padding: EdgeInsets.only(left: 13, right: 13),
-          sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, //Grid按4列显示
-                mainAxisSpacing: 10.0, //item水平之间的距离
-                crossAxisSpacing: 10.0, //item垂直方向的距离
-                childAspectRatio: 0.8 //宽高比
-                ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                //创建子widget
-                return Container(child: _hotListItem(index));
-              },
-              childCount: listData.length, //GridView的数量
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(left: 13,right: 13),
+            child: StaggeredGrid.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              // children: _hotListItem(),
+              children:_hotListItem(),
             ),
-          ),
+          )
         ),
       ],
     );
@@ -744,10 +766,14 @@ class _PageItemMainState extends State<PageItemMain>
 
   List<Widget> newGoodItem() {
     List<Widget> list = [];
-    for (int i = 0; i < 4; i++) {
+
+    if(WajiuUtils.collectionIsEmpty(newProductPriorities) == true){
+      return list;
+    }
+    for (int index = 0; index < newProductPriorities.length; index++) {
       Widget widget = GestureDetector(
         onTap: () {
-          ToastUtils.showToast("$i");
+          ToastUtils.showToast("$index");
         },
         child: Container(
           decoration: BoxDecoration(
@@ -780,7 +806,7 @@ class _PageItemMainState extends State<PageItemMain>
                               left: 20, right: 20, top: 20, bottom: 40),
                           margin: EdgeInsets.only(bottom: 8),
                           child:
-                              Image.asset("images/xinpinyouxianqiang_item.png"),
+                              Image.network(newProductPriorities[index]?.productPic ?? ""),
                         ),
                         Positioned(
                             bottom: 8,
@@ -792,11 +818,11 @@ class _PageItemMainState extends State<PageItemMain>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset("images/time_icon.png",
-                                      height: 15),
+                                      height: 16),
                                   Container(
                                     margin: EdgeInsets.only(left: 8),
                                     child: Text(
-                                      "剩余抢购时间:13天",
+                                      newProductPriorities[index]?.maturityDate ?? "",
                                       style: TextStyle(
                                           fontSize: 12,
                                           color: ColorConstant.color_fb8a47),
@@ -809,26 +835,14 @@ class _PageItemMainState extends State<PageItemMain>
                             ))
                       ],
                     ),
-                    const Text("吉莫尔父子夏布利一级园瓦雍干白_2020_6支木箱",
+                     Text(newProductPriorities[index]?.productName ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: 13, color: ColorConstant.color_343434)),
                     Container(
                       margin: EdgeInsets.only(top: 8, bottom: 10),
-                      child: Row(
-                        children: const [
-                          Text(
-                            "¥",
-                            style: TextStyle(
-                                fontSize: 12, color: ColorConstant.systemColor),
-                          ),
-                          Text("198.00",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: ColorConstant.systemColor))
-                        ],
-                      ),
+                      child: getNewProductPrioritiesPrice(index)
                     )
                   ],
                 ),
@@ -848,85 +862,133 @@ class _PageItemMainState extends State<PageItemMain>
     return list;
   }
 
+  Widget getNewProductPrioritiesPrice(int index) {
+    getLoginToken().then((value) {
+      if (TextUtils.isEmpty(value)) {
+        print("getNewProductPrioritiesPrice-value $value");
+        return Text(
+          "登录查看价格",
+          style: TextStyle(fontSize: 14, color: ColorConstant.systemColor),
+        );
+      } else {
+        return Row(
+          children: [
+            Text(
+              "¥",
+              style: TextStyle(fontSize: 12, color: ColorConstant.systemColor),
+            ),
+            Text("${newProductPriorities[index]?.startPrice}",
+                style:
+                    TextStyle(fontSize: 14, color: ColorConstant.systemColor)),
+            Text("~"),
+            Text(
+              "¥",
+              style: TextStyle(fontSize: 12, color: ColorConstant.systemColor),
+            ),
+            Text("${newProductPriorities[index]?.endPrice}",
+                style:
+                    TextStyle(fontSize: 14, color: ColorConstant.systemColor))
+          ],
+        );
+      }
+    });
+    return Text(
+      "登录查看价格",
+      style: TextStyle(fontSize: 14, color: ColorConstant.systemColor),
+    );
+  }
+
+  Future<String?> getLoginToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? loginToken = prefs.getString(Constant.LOGIN_TOKEN);
+    return loginToken;
+  }
+
   Widget countryItem(int index) {
-    Widget child = Image.asset(countryList[index]);
+    print("countryList:$countryList");
+    Widget child = NetImageView(url: countryList[index]?.picture ?? "",);
     return GestureDetector(
       child: Container(
         margin: EdgeInsets.only(right: 15),
         child: child,
       ),
       onTap: () {
-        ToastUtils.showToast("$index");
+        ToastUtils.showToast("${countryList[index]?.indexName}");
       },
     );
   }
 
-  Widget _hotListItem(int index) {
-    return GestureDetector(
-      onTap: () => {
-        // DialogUtils.showAlertDialog(context,"确定要将该商品加入购物车吗?",(result){
-        //   _addGoodToShopCar(index);
-        // })
-        GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail())
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: ColorConstant.color_ffffff,
-            border: Border.all(width: 1, color: ColorConstant.color_ffffff),
-            borderRadius: BorderRadius.all(Radius.circular(6.0))),
-        child: Column(
-          children: [
-            Image(
-              height: 140,
-              image: NetworkImage(
-                  "http://image.59cdn.com/static/upload/image/product/20220111/o_1641897087670.png"),
-            ),
-            Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 8),
-                  padding: EdgeInsets.only(left: 8, right: 8),
-                  child: Text(
-                    '${listData[index].productName}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 14),
+  List<Widget> _hotListItem() {
+    List<Widget> widgetList = [];
+    if(WajiuUtils.collectionIsEmpty(worldHotProductsList) == true){
+      return widgetList;
+    }
+    for(int index=0;index<worldHotProductsList.length;index++){
+      Widget widget =  GestureDetector(
+        onTap: () => {
+          GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail())
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: ColorConstant.color_ffffff,
+              border: Border.all(width: 1, color: ColorConstant.color_ffffff),
+              borderRadius: BorderRadius.all( Radius.circular(6.0))),
+          child: Column(
+            children: [
+              Image(
+                height: 140,
+                image: NetworkImage(
+                    worldHotProductsList[index]?.picture??""),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: 8),
+                    padding: EdgeInsets.only(left: 8, right: 8),
+                    child: Text(
+                      '${worldHotProductsList[index]?.cname??""}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 14),
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  width: double.infinity,
-                  child: Text("法国",
-                      style: TextStyle(
-                          color: ColorConstant.color_a4a5a7, fontSize: 11)),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  width: double.infinity,
-                  child: Row(
-                    children: const [
-                      Text(
-                        "¥",
+                  Container(
+                    margin: EdgeInsets.only(left: 8),
+                    width: double.infinity,
+                    child: Text(worldHotProductsList[index]?.countryName??"",
                         style: TextStyle(
-                            fontSize: 11, color: ColorConstant.systemColor),
-                      ),
-                      Text(
-                        "36.0",
-                        style: TextStyle(
-                            fontSize: 16, color: ColorConstant.systemColor),
-                      )
-                    ],
+                            color: ColorConstant.color_a4a5a7, fontSize: 11)),
                   ),
-                )
-              ],
-            ))
-          ],
+                  Container(
+                    margin: EdgeInsets.only(left: 8),
+                    width: double.infinity,
+                    child: Row(
+                      children:  [
+                        Text(
+                          "¥",
+                          style: TextStyle(
+                              fontSize: 11, color: ColorConstant.systemColor),
+                        ),
+                        Text(
+                          "${worldHotProductsList[index]?.jnPrice??0.0}",
+                          style: TextStyle(
+                              fontSize: 16, color: ColorConstant.systemColor),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+      // Widget widget = Text("11dsfdsf");
+      widgetList.add(widget);
+    }
+    return widgetList;
   }
 
   List<String> _getBannerDatas() {
@@ -994,74 +1056,106 @@ class _PageItemMainState extends State<PageItemMain>
   Widget _getGridViewDataTwo(int index) {
     return GestureDetector(
       onTap: () {
-        ToastUtils.showToast("${checkerboardTitleList2[index]}");
+        ToastUtils.showToast("${checkerboardAppNewIndexCategories[index+8]?.indexName}");
       },
       child: Column(children: [
         Container(
-          child: Image.asset(
-            checkerboardImageList2[index],
+          child: Image.network(
+            checkerboardAppNewIndexCategories[index+8]?.picture ?? "",
             width: 50,
             height: 50,
           ),
         ),
-        Text("${checkerboardTitleList2[index]}")
+        Text("${checkerboardAppNewIndexCategories[index+8]?.indexName ?? ""}")
       ]),
     );
   }
 
   Widget _getGridViewData(int index) {
+    if(WajiuUtils.collectionIsEmpty(checkerboardAppNewIndexCategories) == true){
+      return Text("");
+    }
+    print("_getGridViewDataTwo $checkerboardAppNewIndexCategories");
     return GestureDetector(
-        onTap: () {
-          ToastUtils.showToast("${checkerboardTitleList[index]}");
-        },
-        child: Column(children: [
-          Container(
-            child: Image.asset(
-              checkerboardImageList[index],
-              width: 50,
-              height: 50,
-            ),
+      onTap: () {
+        print("${checkerboardAppNewIndexCategories[index]?.indexName}");
+        ToastUtils.showToast("${checkerboardAppNewIndexCategories[index]?.indexName}");
+      },
+      child: Column(children: [
+        Container(
+          child: Image.network(
+            checkerboardAppNewIndexCategories[index]?.picture ?? "",
+            width: 50,
+            height: 50,
           ),
-          Text("${checkerboardTitleList[index]}")
-        ]));
+        ),
+        Text("${checkerboardAppNewIndexCategories[index]?.indexName ?? ""}")
+      ]),
+    );
   }
 
   //从接口获取数据
-  void _getProductListData(bool isOnRefresh) {
+  void _getProductListData(bool isOnRefresh,String token) {
+    print("请求接口了");
     var params = Map<String, dynamic>();
     if (isOnRefresh) {
-      listData.clear();
+      worldHotProductsList.clear();
       mCurrentPageNum = 0;
     } else {
       mCurrentPageNum++;
     }
-    params["userId"] = "32659";
+    print("Uri.encodeComponent============>${Uri.encodeComponent("60R64HMPXUjGBQikTPRZH5z5MdBHGMfFLG/NRE73No+HSjJEeuFLRA==")}");
+
+    if(!TextUtils.isEmpty(token)){
+      print("Uri.encodeComponent============>${Uri.encodeComponent("60R64HMPXUjGBQikTPRZH5z5MdBHGMfFLG/NRE73No+HSjJEeuFLRA==")}");
+      params["req_token"] = Uri.encodeComponent(token);
+    }
     DioInstance.getInstance().get(ApiService.indexApp, params,
         success: (json) {
       //注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
-      print("获取到的数据：$json");
       // var result = json.decode(utf8decoder.convert(response.bodyBytes));
-      print("获取到的数据_toLogin：$json");
       //通知下，刷新成功
       if (isOnRefresh) {
         _refreshController.refreshCompleted();
       } else {
         _refreshController.loadComplete();
       }
-      ProductListModel model = ProductListModel.fromJson(json);
+      HomeMainModel model = HomeMainModel.fromJson(json);
       if (null != model) {
         int status = model.states;
         String msg = model.msg;
         if (status == 200) {
-          if (null != model.result) {
-            setState(() {
-              // listData = model.result.productList;
-              hasData = model.result.productList.length < 10 ? false : true;
-              listData.addAll(model.result.productList);
-              print("数组的长度为：${listData.length}");
-            });
+          print("status == 200");
+          // if (null != model.result) {
+          //   setState(() {
+          //     hasData = model.result.productList.length < 10 ? false : true;
+          //     listData.addAll(model.result.productList);
+          //     print("数组的长度为：${listData.length}");
+          //   });
+          //
+          // }
+          hasData = false;
+          //初始化轮播图数据
+          appNewIndexCategories = model.result?.indexList?.focusPicture?.appNewIndexCategories ?? [];
+          //初始化棋盘格数据
+          checkerboardAppNewIndexCategories = model.result?.indexList?.homeButton?.appNewIndexCategories ??[];
+          //快报
+          announcementAppNewIndexCategories = model.result?.indexList?.announcement.appNewIndexCategories ??[];
+          //排行榜，新品首发，新品推荐
+          rankPictureUrl = model.result?.advertising?.ranking?.picture ?? "";
+          newpinShoufaPictureUrl = model.result?.advertising?.advertising_0?.picture ?? "";
+          hotSellingRecommendationPictureUrl = model.result?.advertising?.hotSellingRecommendation?? "";
+          //国家馆
+          countryList = model.result?.banner_international ?? [];
+          //新品优先抢
+          newProductPriorities = model.result?.newProduct_priorities ?? [];
+          //全球热卖
+          worldHotProductsList = model.result?.worldHotProducts ?? [];
+          setState(() {
+            requestDataSuccess = true;
+            print("===============>请求数据结束！");
+          });
 
-          }
         }
       } else {
         //通知下，刷新失败
@@ -1071,9 +1165,7 @@ class _PageItemMainState extends State<PageItemMain>
           _refreshController.loadFailed();
         }
       }
-      print("获取到的数据：$model");
     }, fail: (reason, code) {
-      print("获取到的数据：$reason");
       if (isOnRefresh) {
         _refreshController.refreshFailed();
       } else {
@@ -1084,29 +1176,29 @@ class _PageItemMainState extends State<PageItemMain>
 
   //加入采购车
   void _addGoodToShopCar(int index) {
-    var params = Map<String, dynamic>();
-    params["productID"] = listData[index].productid;
-    params["cangkuId"] = listData[index].cangkuId;
-    params["productName"] = listData[index].productName;
-    params["joinToShopCar"] = 1;
-    DioInstance.getInstance().get(ApiService.addGoodToShopCar, params,
-        success: (json) {
-      //注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
-      print("获取到的数据：$json");
-      // var result = json.decode(utf8decoder.convert(response.bodyBytes));
-      print("获取到的数据_toLogin：$json");
-      CommonRequestModel model = CommonRequestModel.fromJson(json);
-      if (null != model) {
-        int status = model.states;
-        String msg = model.msg;
-        if (status == 200) {
-          ToastUtils.showToast(msg);
-        }
-      }
-      print("获取到的数据：$model");
-    }, fail: (reason, code) {
-      print("获取到的数据：$reason");
-    });
+    // var params = Map<String, dynamic>();
+    // params["productID"] = worldHotProductsList[index].productid;
+    // params["cangkuId"] = listData[index].cangkuId;
+    // params["productName"] = listData[index].productName;
+    // params["joinToShopCar"] = 1;
+    // DioInstance.getInstance().get(ApiService.addGoodToShopCar, params,
+    //     success: (json) {
+    //   //注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
+    //   print("获取到的数据：$json");
+    //   // var result = json.decode(utf8decoder.convert(response.bodyBytes));
+    //   print("获取到的数据_toLogin：$json");
+    //   CommonRequestModel model = CommonRequestModel.fromJson(json);
+    //   if (null != model) {
+    //     int status = model.states;
+    //     String msg = model.msg;
+    //     if (status == 200) {
+    //       ToastUtils.showToast(msg);
+    //     }
+    //   }
+    //   print("获取到的数据：$model");
+    // }, fail: (reason, code) {
+    //   print("获取到的数据：$reason");
+    // });
   }
 }
 

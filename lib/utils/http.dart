@@ -33,7 +33,7 @@ class DioInstance {
       receiveTimeout: 30000,
       sendTimeout: 30000,
       // baseUrl: "http://192.168.0.101:8083",
-      baseUrl: "https://apptest.wajiu.com/",
+      baseUrl: "https://wjapp.iopenx.com/",
       responseType: ResponseType.json,
     );
 
@@ -50,6 +50,7 @@ class DioInstance {
       baseOptions.headers["appVersion"] = "3.80.5";
       baseOptions.headers["systemType"] = "wajiu.android";
       baseOptions.headers["macAddress"] = "E5:B0:R3:B7:02:13";
+      baseOptions.headers["androidId"] = "84cd3d602cdef656";
       // baseOptions.headers["req_token"] = "";
     }
 
@@ -73,6 +74,7 @@ class DioInstance {
     _dio?.get(uri, queryParameters: params,options:Options(responseType: ResponseType.plain)).then((response) {
       if (response.statusCode == 200) {
         if (success != null) {
+          print("33333 ${json.decode(response.data)}");
           success(json.decode(response.data));
         }
       } else {

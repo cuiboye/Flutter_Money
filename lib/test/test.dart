@@ -36,7 +36,8 @@ class _TestState extends State<Test> {
   }
   //_下划线
   _test(){
-    name ??= "lisi";
+    String? name;
+    name ??= "lisi";//当且仅当b为null时才赋值
     var result = name ?? "zhangsan";
     print(name?.length);
   }

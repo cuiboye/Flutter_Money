@@ -39,11 +39,17 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
               ? null
               : NewProductPriorities.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..worldHotProducts = (json['worldHotProducts'] as List<dynamic>?)
-        ?.map((e) => e == null
-            ? null
-            : WorldHotProducts.fromJson(e as Map<String, dynamic>))
-        .toList();
+    )
+      ..worldHotProducts = (json['worldHotProducts'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : WorldHotProducts.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..kindSet = (json['kindSet'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : KindSetList.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'indexList': instance.indexList,
@@ -51,6 +57,40 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'banner_international': instance.banner_international,
       'newProduct_priorities': instance.newProduct_priorities,
       'worldHotProducts': instance.worldHotProducts,
+      'kindSet': instance.kindSet,
+    };
+
+KindSetList _$KindSetListFromJson(Map<String, dynamic> json) => KindSetList(
+      json['kindName'] as String?,
+      (json['productInfoList'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : ProductInfoList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$KindSetListToJson(KindSetList instance) =>
+    <String, dynamic>{
+      'kindName': instance.kindName,
+      'productInfoList': instance.productInfoList,
+    };
+
+ProductInfoList _$ProductInfoListFromJson(Map<String, dynamic> json) =>
+    ProductInfoList(
+      json['productId'] as int,
+      json['cname'] as String?,
+      json['picture'] as String?,
+      json['jnPrice'] as String?,
+      json['parameter'] as String?,
+    );
+
+Map<String, dynamic> _$ProductInfoListToJson(ProductInfoList instance) =>
+    <String, dynamic>{
+      'productId': instance.productId,
+      'cname': instance.cname,
+      'picture': instance.picture,
+      'jnPrice': instance.jnPrice,
+      'parameter': instance.parameter,
     };
 
 WorldHotProducts _$WorldHotProductsFromJson(Map<String, dynamic> json) =>

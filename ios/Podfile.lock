@@ -38,13 +38,6 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - JCore (4.2.0)
-  - JPush (5.0.0):
-    - JCore (>= 2.0.0)
-  - jpush_flutter (0.0.2):
-    - Flutter
-    - JCore (= 4.2.0)
-    - JPush (= 5.0.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -73,7 +66,6 @@ DEPENDENCIES:
   - flutter_bmflocation (from `.symlinks/plugins/flutter_bmflocation/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - jpush_flutter (from `.symlinks/plugins/jpush_flutter/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
@@ -86,8 +78,6 @@ SPEC REPOS:
     - BaiduMapKit
     - BMKLocationKit
     - FMDB
-    - JCore
-    - JPush
     - Toast
 
 EXTERNAL SOURCES:
@@ -111,8 +101,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  jpush_flutter:
-    :path: ".symlinks/plugins/jpush_flutter/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   permission_handler_apple:
@@ -138,11 +126,8 @@ SPEC CHECKSUMS:
   flutter_baidu_mapapi_utils: e843f27e39cc368e0891881561a242716d34629d
   flutter_bmflocation: d9349d0de769fc2fa6b665556577c92221403e53
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
-  fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
+  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  JCore: ea09330f4b5b5031f37c40cf6facc669ffc172be
-  JPush: 4f1c88acfd13660b8e128bd7e4c56bb115f35e06
-  jpush_flutter: d3b70542430de253c82a8b8f7c72d6fc6d16c913
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472

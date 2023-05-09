@@ -36,13 +36,61 @@ class Result {
 
   @JsonKey(name: 'newProduct_priorities')
   List<NewProductPriorities?>? newProduct_priorities;
+
+  @JsonKey(name: 'worldHotProducts')
   List<WorldHotProducts?>? worldHotProducts;
+
+  @JsonKey(name: 'kindSet')
+  List<KindSetList?>? kindSet;
 
   Result(this.indexList, this.advertising, this.banner_international,this.newProduct_priorities);
 
   factory Result.fromJson(Map<String, dynamic> srcJson) =>
       _$ResultFromJson(srcJson);
 }
+
+@JsonSerializable()
+class KindSetList {
+  @JsonKey(name: 'kindName')
+  String? kindName;
+
+  @JsonKey(name: 'productInfoList')
+  List<ProductInfoList?>? productInfoList;
+
+  KindSetList(this.kindName, this.productInfoList,);
+
+  factory KindSetList.fromJson(Map<String, dynamic> srcJson) =>
+      _$KindSetListFromJson(srcJson);
+}
+
+@JsonSerializable()
+class ProductInfoList {
+  @JsonKey(name: 'productId')
+  int productId;
+
+  @JsonKey(name: 'cname')
+  String? cname;
+
+  @JsonKey(name: 'picture')
+  String? picture;
+
+  @JsonKey(name: 'jnPrice')
+  String? jnPrice;
+
+  @JsonKey(name: 'parameter')
+  String? parameter;
+
+  ProductInfoList(
+      this.productId,
+      this.cname,
+      this.picture,
+      this.jnPrice,
+      this.parameter);
+
+  factory ProductInfoList.fromJson(Map<String, dynamic> srcJson) =>
+      _$ProductInfoListFromJson(srcJson);
+}
+
 
 @JsonSerializable()
 class WorldHotProducts {

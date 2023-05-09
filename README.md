@@ -236,3 +236,49 @@ manifestPlaceholders = [
 flutter pub run flutter_native_splash:create
 4)还需要对android12进行兼容，这个项目没有做兼容处理
 如果闪屏页有问题，可以参考：https://blog.csdn.net/pfourfire/article/details/123115828
+
+Android面试题：
+1.启动的4中模式有哪几种
+2.如何使用Hanlder
+3.使用到的第三方SDK有哪些
+4.存储方式有哪几种
+5.RecycleView是如何进行缓存的
+6.View的加载流程
+7.热修复的原理以及双亲委托模式和双亲委托模式的好处
+8.App的启动流程是怎样的
+9.内存泄漏的场景和解决办法
+10.Glide原理以及LRU原理和LinkedHashMap实现
+
+
+Flutter:
+1.Flutter中静态方法如何定义
+2.ListView和GridView顶部留有空白的问题是如何解决的
+3.Flutter中实现控件权重的方法有哪些
+4.GridView是如何自适应布局的
+5.XCode怎样实现热重载
+6.Flutter安卓端WebView不能正常显示http的图片，如何解决
+7.Flutter的屏幕适配是如何实现的
+8.Flutter和原生交互的3中方式以及实现原理
+9.Dart中的单线程是如何运行的？
+10.Flutter中的持久化存储方案有哪些
+11.Flutter中的状态管理框架了解哪些，为什么要用状态管理框架，平时工作中使用到了哪个，最好可以聊聊原理
+12.Dart中async和await区别
+13.Flutter的生命周期有哪几个
+14.Future还是isolate场景分析？
+    1、如果一段代码不会被中断，那么就直接使用正常的同步执行就行。
+    2、如果代码段可以独立运行而不会影响应用程序的流畅性，建议使用 Future  （需要花费几毫秒时间）
+    3、如果繁重的处理可能要花一些时间才能完成，而且会影响应用程序的流畅性，建议使用 isolate （需要几百毫秒）
+    下面列出一些使用 isolate 的具体场景:
+    1、JSON解析: 解码JSON，这是HttpRequest的结果，可能需要一些时间，可以使用封装好的 isolate 的 compute 顶层方法。
+    2、加解密: 加解密过程比较耗时
+    3、图片处理: 比如裁剪图片比较耗时
+    4、从网络中加载大图
+15.级联操作符 .. 和  .
+Dart 当中的 「..」意思是 「级联操作符」，为了方便配置而使用。「..」和「.」不同的是 调用「..」后返回的
+相当于是 this，而「.」返回的则是该方法返回的值 。
+16.??=和??    
+String? name;
+name ??= "lisi";//当且仅当name为null时才赋值
+var result = name ?? "zhangsan";//name不为空返回name的值，name为空返回"zhangsan"
+
+

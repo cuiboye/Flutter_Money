@@ -4,13 +4,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
+import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/layout/container_widget.dart';
 import 'package:flutter_money/utils/dialog_utils.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/utils/http.dart';
+import 'package:flutter_money/utils/log_utils.dart';
 import 'package:flutter_money/utils/text_utils.dart';
 import 'package:flutter_money/utils/toast_utils.dart';
 import 'package:flutter_money/utils/wajiu_utils.dart';
+import 'package:flutter_money/view/cacheimage/load_image.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/wajiu/constant/apiservice.dart';
 import 'package:flutter_money/wajiu/constant/app_strings.dart';
@@ -23,6 +26,8 @@ import 'package:flutter_money/wajiu/model/home_productlist_model.dart';
 import 'package:flutter_money/wajiu/model/product_list_model.dart';
 import 'package:flutter_money/wajiu/order_list_item_main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
+import 'package:flutter_money/wajiu/page_mingzhuangxianhuo.dart';
+import 'package:flutter_money/wajiu/view/mingzhuangxianhuo_list_page.dart';
 import 'package:flutter_money/wajiu/view/vp_list_demo_page.dart';
 import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
 import 'package:flutter_money/wajiu/widget/marquee_widget.dart';
@@ -45,9 +50,11 @@ class PageItemMain extends StatefulWidget {
   PageItemMain({this.info});
 }
 
-class _PageItemMainState extends State<PageItemMain>
-    // with AutomaticKeepAliveClientMixin,SingleTickerProviderStateMixin {
-    with AutomaticKeepAliveClientMixin,TickerProviderStateMixin {
+class _PageItemMainState extends State<
+        PageItemMain> // with AutomaticKeepAliveClientMixin,SingleTickerProviderStateMixin {
+    with
+        AutomaticKeepAliveClientMixin,
+        TickerProviderStateMixin {
   //
   @override
   bool get wantKeepAlive => true; //保持页面状态
@@ -56,19 +63,19 @@ class _PageItemMainState extends State<PageItemMain>
   List<AppNewIndexCategories?> announcementAppNewIndexCategories = []; //快报
   String rankPictureUrl = "";
   String newpinShoufaPictureUrl = "";
+  String mingzhuangxianhuoPictureUrl = "";
   String hotSellingRecommendationPictureUrl = "";
   var checkerboardImageList = []; //棋盘格图片数据
   var checkerboardImageList2 = []; //棋盘格图片数据
-  var checkerboardTitleList = []; //棋盘格文字数据
-  var checkerboardTitleList2 = []; //棋盘格文字数据
   List<BannerInternational?> countryList = []; //国家馆数据
+  List<BrandHall?> brandHallList = []; //国家馆数据
   List<NewProductPriorities?> newProductPriorities = []; //新品优先抢
   List<WorldHotProducts?> worldHotProductsList = []; //全球热卖
   List<KindSetList?> kindSetList = []; //tab标签数据
+  String wsetIconUrl = "";
   int mCurrentPageNum = 0;
   bool showScrollToTop = false; //请求数据结束后，再设置轮播图自动滚动
   int _select = 0; //选中tab小标
-
   //快报
   List<String> loopList = [
     "小挖新闻社-2023年3月葡萄酒行业新资讯",
@@ -78,6 +85,7 @@ class _PageItemMainState extends State<PageItemMain>
   bool hasData = true; //下拉加载，是否还有数据
   late ScrollController scrollController;
   bool requestDataSuccess = false;
+
   // late TabController _tabController;
   @override
   void initState() {
@@ -91,15 +99,14 @@ class _PageItemMainState extends State<PageItemMain>
       } else {
         showScrollToTop = false;
       }
-      setState(() {
-        //更新回到顶部的图标的状态
-      });
+      //不在这里处理显示和隐藏"回到顶部"的处理，这样处理只要页面一滑动，就会触发setState
+      // setState(() {
+      //   //更新回到顶部的图标的状态
+      // });
     });
     // imageList = _getBannerDatas();
     checkerboardImageList = getCheckerboardImageList();
     checkerboardImageList2 = getCheckerboardImageList2();
-    checkerboardTitleList = getCheckerboardTitleList();
-    checkerboardTitleList2 = getCheckerboardTitleList2();
     // countryList = getCountryList();
 
     requestData(true);
@@ -117,18 +124,16 @@ class _PageItemMainState extends State<PageItemMain>
   void _onRefresh() async {
     // monitor network fetch
     requestData(true);
+    print("_onRefresh");
     // if failed,use refreshFailed()
-    if (mounted)
-      setState(() {
-      });
+    if (mounted) setState(() {});
   }
 
   void _onLoading() async {
     // monitor network fetch
     loadMoreData();
-    if (mounted)
-      setState(() {
-      });
+    print("_onLoading");
+    if (mounted) setState(() {});
   }
 
   void loadMoreData() {
@@ -277,7 +282,7 @@ class _PageItemMainState extends State<PageItemMain>
       slivers: <Widget>[
         SliverToBoxAdapter(
           child: Container(
-              padding: EdgeInsets.only(left: 13, right: 13),
+              padding: const EdgeInsets.only(left: 13, right: 13),
               decoration: const BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -293,7 +298,9 @@ class _PageItemMainState extends State<PageItemMain>
                 borderRadius: BorderRadius.circular(8.0),
                 child: Swiper(
                   onTap: (index) {
-                    ToastUtils.showToast("点击了第 ${index + 1}个");
+                    GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail());
+
+                    // ToastUtils.showToast("点击了第 ${index + 1}个");
                   },
                   itemCount: appNewIndexCategories?.length ?? 0,
                   autoplay: requestDataSuccess ? true : false,
@@ -491,7 +498,9 @@ class _PageItemMainState extends State<PageItemMain>
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(right: 4),
-                      child: NetImageView(url: rankPictureUrl ?? ""),
+                      child: LoadImage(
+                        rankPictureUrl ?? "",
+                      ),
                     ),
                   ),
                   Expanded(
@@ -500,14 +509,21 @@ class _PageItemMainState extends State<PageItemMain>
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
+                          margin: const EdgeInsets.only(bottom: 4),
                           child:
-                              NetImageView(url: newpinShoufaPictureUrl ?? ""),
+                              // NetImageView(url: newpinShoufaPictureUrl ?? ""),
+                              LoadImage(
+                            newpinShoufaPictureUrl ?? "",
+                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 4),
-                          child: NetImageView(
-                              url: hotSellingRecommendationPictureUrl ?? ""),
+                          margin: const EdgeInsets.only(top: 4),
+                          child:
+                              // NetImageView(
+                              //     url: hotSellingRecommendationPictureUrl ?? ""),
+                              LoadImage(
+                            hotSellingRecommendationPictureUrl ?? "",
+                          ),
                         ),
                       ],
                     ),
@@ -721,16 +737,26 @@ class _PageItemMainState extends State<PageItemMain>
                     height: 60,
                     child: ListView.builder(
                         itemBuilder: (context, index) {
-                          return countryItem(index);
+                          return brandHallItem(index);
                         },
-                        itemCount: countryList.length,
+                        itemCount: brandHallList.length,
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal)),
               )
             ],
           ),
         ),
-
+        SliverToBoxAdapter(
+          child: GestureDetector(
+            onTap: (){
+              GetNavigationUtils.navigateRightToLeft(MingzhuangxianhuoPage());
+            },
+            child: Container(
+              padding: EdgeInsets.only(left: 13,right: 13,top: 8),
+              child: NetImageView(url: mingzhuangxianhuoPictureUrl,radius: 8.0),
+            ),
+          )
+        ),
         SliverToBoxAdapter(
           child: _getTarBarView(),
         ),
@@ -773,8 +799,8 @@ class _PageItemMainState extends State<PageItemMain>
     );
   }
 
-  Widget _getTarBarView(){
-    if(WajiuUtils.collectionIsEmpty(kindSetList) == true){
+  Widget _getTarBarView() {
+    if (WajiuUtils.collectionIsEmpty(kindSetList) == true) {
       return Text("");
     }
     return MainPageTabbarview(kindSetList);
@@ -930,7 +956,23 @@ class _PageItemMainState extends State<PageItemMain>
         child: child,
       ),
       onTap: () {
-        ToastUtils.showToast("${countryList[index]?.indexName}");
+        GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail());
+        // ToastUtils.showToast("${countryList[index]?.indexName}");
+      },
+    );
+  }
+
+  Widget brandHallItem(int index) {
+    Widget child = NetImageView(
+      url: brandHallList[index]?.appPictrueAddress ?? "",
+    );
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(right: 15),
+        child: child,
+      ),
+      onTap: () {
+        ToastUtils.showToast("${brandHallList[index]?.appPictrueAddress}");
       },
     );
   }
@@ -941,74 +983,77 @@ class _PageItemMainState extends State<PageItemMain>
       return widgetList;
     }
     for (int index = 0; index < worldHotProductsList.length; index++) {
-      Widget widget = GestureDetector(
-        onTap: () =>
-            {GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail())},
-        child: Container(
-          decoration: BoxDecoration(
-              color: ColorConstant.color_ffffff,
-              border: Border.all(width: 1, color: ColorConstant.color_ffffff),
-              borderRadius: BorderRadius.all(Radius.circular(6.0))),
-          child: Column(
-            children: [
-              // Image(
-              //   height: 140,
-              //   image: NetworkImage(worldHotProductsList[index]?.picture ?? ""),
-              // ),
-              CacheImageView(
-                url: worldHotProductsList[index]?.picture ?? "",
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.only(top: 8),
-                    padding: EdgeInsets.only(left: 8, right: 8),
-                    child: Text(
-                      '${worldHotProductsList[index]?.cname ?? ""}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
+      if (index == 1) {
+        Widget widget =
+            NetImageView(url: worldHotProductsList[index]?.picture ?? "");
+        widgetList.add(widget);
+      } else {
+        Widget widget = GestureDetector(
+          onTap: () =>
+              {GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail())},
+          child: Container(
+            decoration: BoxDecoration(
+                color: ColorConstant.color_ffffff,
+                border: Border.all(width: 1, color: ColorConstant.color_ffffff),
+                borderRadius: const BorderRadius.all(Radius.circular(6.0))),
+            child: Column(
+              children: [
+                CacheImageView(
+                  url: worldHotProductsList[index]?.picture ?? "",
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      child: Text(
+                        '${worldHotProductsList[index]?.cname ?? ""}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 8),
-                    width: double.infinity,
-                    child: Text(worldHotProductsList[index]?.countryName ?? "",
-                        style: TextStyle(
-                            color: ColorConstant.color_a4a5a7, fontSize: 11)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 8),
-                    width: double.infinity,
-                    child: Row(
-                      children: [
-                        Text(
-                          "¥",
+                    Container(
+                      margin: EdgeInsets.only(left: 8),
+                      width: double.infinity,
+                      child: Text(
+                          worldHotProductsList[index]?.countryName ?? "",
                           style: TextStyle(
-                              fontSize: 11, color: ColorConstant.systemColor),
-                        ),
-                        Text(
-                          "${worldHotProductsList[index]?.jnPrice ?? 0.0}",
-                          style: TextStyle(
-                              fontSize: 16, color: ColorConstant.systemColor),
-                        )
-                      ],
+                              color: ColorConstant.color_a4a5a7, fontSize: 11)),
                     ),
-                  )
-                ],
-              )
-            ],
+                    Container(
+                      margin: EdgeInsets.only(left: 8),
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Text(
+                            "¥",
+                            style: TextStyle(
+                                fontSize: 11, color: ColorConstant.systemColor),
+                          ),
+                          Text(
+                            "${worldHotProductsList[index]?.jnPrice ?? 0.0}",
+                            style: TextStyle(
+                                fontSize: 16, color: ColorConstant.systemColor),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
-      );
-      // Widget widget = Text("11dsfdsf");
-      widgetList.add(widget);
+        );
+        widgetList.add(widget);
+      }
     }
+    print("${widgetList.length}===========>");
+
     return widgetList;
   }
-
 
   List<String> getCheckerboardImageList() {
     var imageList = [
@@ -1036,16 +1081,6 @@ class _PageItemMainState extends State<PageItemMain>
     return imageList;
   }
 
-  List<String> getCheckerboardTitleList() {
-    var imageList = ['新品', '现货', '预售', '包销', 'OEM', '获奖酒', '名庄现货', '酒周边'];
-    return imageList;
-  }
-
-  List<String> getCheckerboardTitleList2() {
-    var imageList = ['精品方舟', '品牌馆', '营销海报', '挖酒金融', 'WSET', "帮我卖酒"];
-    return imageList;
-  }
-
   List<String> getCountryList() {
     var imageList = [
       './images/country_item1.png',
@@ -1057,6 +1092,18 @@ class _PageItemMainState extends State<PageItemMain>
       './images/country_item7.png',
     ];
     return imageList;
+  }
+
+  @override
+  void didUpdateWidget(covariant PageItemMain oldWidget) {
+    print("============>>didUpdateWidget");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void deactivate() {
+    print("============>>deactivate");
+    super.deactivate();
   }
 
   Widget _getGridViewDataTwo(int index) {
@@ -1114,8 +1161,10 @@ class _PageItemMainState extends State<PageItemMain>
 
     if (!TextUtils.isEmpty(token)) {
       params["req_token"] = Uri.encodeComponent(token);
+      print("首页数据的token:=====》》》${Uri.encodeComponent(token)}");
     }
-    DioInstance.getInstance().get(ApiService.indexApp, params, success: (json) {
+    DioInstance.getInstance().get(ApiService.indexApp, params,
+        success: (resultData) {
       //注意：这里的json字段要和 typedef Success = void Function(dynamic json)中的字段一致
       // var result = json.decode(utf8decoder.convert(response.bodyBytes));
       //通知下，刷新成功
@@ -1124,7 +1173,7 @@ class _PageItemMainState extends State<PageItemMain>
       } else {
         _refreshController.loadComplete();
       }
-      HomeMainModel model = HomeMainModel.fromJson(json);
+      HomeMainModel model = HomeMainModel.fromJson(resultData);
       if (null != model) {
         int status = model.states;
         String msg = model.msg;
@@ -1145,14 +1194,35 @@ class _PageItemMainState extends State<PageItemMain>
               model.result?.advertising?.advertising_0?.picture ?? "";
           hotSellingRecommendationPictureUrl =
               model.result?.advertising?.hotSellingRecommendation ?? "";
+          //名庄现货
+          mingzhuangxianhuoPictureUrl = "${model.result?.advertising?.advertising_1?.picture ?? ""}?imageView2/2/w/740/h/314/q/100";
           //国家馆
           countryList = model.result?.banner_international ?? [];
+          //品牌馆
+          brandHallList = model.result?.brandHall ?? [];
           //新品优先抢
           newProductPriorities = model.result?.newProduct_priorities ?? [];
           //全球热卖
           worldHotProductsList = model.result?.worldHotProducts ?? [];
+          LogUtil.v('worldHotProductsList数据为：:${worldHotProductsList.length}');
+
+          wsetIconUrl =
+              "${model.result?.wsetIcon ?? ""}?imageView2/2/w/740/h/314/q/100";
+          if (!TextUtils.isEmpty(wsetIconUrl)) {
+            Map<String, dynamic> srcJson = {
+              "picture": "$wsetIconUrl",
+              "jnPrice": 0.0
+            };
+            worldHotProductsList.insert(1, WorldHotProducts.fromJson(srcJson));
+          }
+
+          String jsonStr = jsonEncode(worldHotProductsList);
+          LogUtil.init(title: "来自LogUtil", isDebug: true, limitLength: 100);
+          LogUtil.v('worldHotProductsList数据为：:$jsonStr');
+
           //tab数据
           kindSetList = model.result?.kindSet ?? [];
+
           // _tabController = TabController(vsync: this, length: kindSetList.length);
           // _tabController.addListener(() {
           //   setState(() {
@@ -1191,8 +1261,9 @@ class _PageItemMainState extends State<PageItemMain>
       params["req_token"] = Uri.encodeComponent(token);
     }
     params["pageId"] = mCurrentPageNum;
-    DioInstance.getInstance().get(ApiService.indexAppProduct, params, success: (json) {
-      HomeProductListModel model = HomeProductListModel.fromJson(json);
+    DioInstance.getInstance().get(ApiService.indexAppProduct, params,
+        success: (resultData) {
+      HomeProductListModel model = HomeProductListModel.fromJson(resultData);
       if (null != model) {
         int status = model.states;
         String msg = model.msg;
@@ -1200,34 +1271,40 @@ class _PageItemMainState extends State<PageItemMain>
           print("status == 200");
           if (null != model.result) {
             setState(() {
-              hasData = (model.result?.productList?.length??0) < 10 ? false : true;
-              List<HotWorldProductList?>? productList = model?.result?.productList??[];
-              if(WajiuUtils.collectionIsEmpty(productList) == false){
-                for(int i=0;i<productList.length;i++){
-                  if(!WajiuUtils.collectionIsSafe(productList, i)){
+              hasData =
+                  (model.result?.productList?.length ?? 0) < 10 ? false : true;
+              List<HotWorldProductList?>? productList =
+                  model?.result?.productList ?? [];
+              if (WajiuUtils.collectionIsEmpty(productList) == false) {
+                for (int i = 0; i < productList.length; i++) {
+                  if (!WajiuUtils.collectionIsSafe(productList, i)) {
                     continue;
                   }
                   HotWorldProductList? hotWorldProductListBean = productList[i];
 
                   Map<String, dynamic> worldHostProductBeanJson = {};
-                  worldHostProductBeanJson['jnPrice']= hotWorldProductListBean?.jnPrice??0.0;
+                  worldHostProductBeanJson['jnPrice'] =
+                      hotWorldProductListBean?.jnPrice ?? 0.0;
                   //?imageView2/2/w/740/h/314/q/100   这个是取压缩后的七牛云图片
-                  worldHostProductBeanJson['picture'] = "${hotWorldProductListBean?.picture}?imageView2/2/w/740/h/314/q/100";
-                  worldHostProductBeanJson['cname']= hotWorldProductListBean?.cname;
-                  worldHostProductBeanJson['countryName'] = hotWorldProductListBean?.countryName;
+                  worldHostProductBeanJson['picture'] =
+                      "${hotWorldProductListBean?.picture}?imageView2/2/w/740/h/314/q/100";
+                  worldHostProductBeanJson['cname'] =
+                      hotWorldProductListBean?.cname;
+                  worldHostProductBeanJson['countryName'] =
+                      hotWorldProductListBean?.countryName;
 
-                  WorldHotProducts? worldHostProductBean = WorldHotProducts.fromJson(worldHostProductBeanJson);
+                  WorldHotProducts? worldHostProductBean =
+                      WorldHotProducts.fromJson(worldHostProductBeanJson);
                   worldHotProductsList.add(worldHostProductBean);
+                  print(
+                      "worldHotProductsList的数据为${jsonEncode(worldHotProductsList)}");
                 }
               }
               _refreshController.loadComplete();
-              setState(() {
-
-              });
+              setState(() {});
               print("数组的长度为：${worldHotProductsList.length}");
             });
           }
-
         }
       } else {
         //通知下，刷新失败

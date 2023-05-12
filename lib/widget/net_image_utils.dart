@@ -9,6 +9,7 @@ class NetImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("NetImageView-build");
     if(url.isEmpty){
       return Image.asset("images/wajiu_default_image_bg.9.png");
     }
@@ -23,5 +24,11 @@ class NetImageView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  @override
+  void didChangeDependencies() {
+    // ignore: must_call_super
   }
 }

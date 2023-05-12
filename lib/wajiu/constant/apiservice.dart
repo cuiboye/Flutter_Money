@@ -6,6 +6,8 @@ class ApiService{
   static const String login = "/api/login/appLogin";
   //获取首页数据
   static const String indexApp = "/api/index/indexApp";
+  //名庄现货列表
+  static const String appGaoduan = "/api/shop/appGaoduan/5/9";
   //全球热卖 加载更多
   static const String indexAppProduct = "/api/index/indexAppProduct";
   static const String findAllProduct = "/shopcarproduct/getDataWithPage";

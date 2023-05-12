@@ -13,7 +13,7 @@ class WajiuUtils {
    * 判断集合是否越界
    */
   static bool collectionIsSafe(List data, int pos) {
-    if (data.isEmpty) {
+    if (data.isEmpty || null==data) {
       return false;
     }
     if (pos < 0 || pos > data.length - 1) {

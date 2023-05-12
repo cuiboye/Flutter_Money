@@ -39,7 +39,12 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
               ? null
               : NewProductPriorities.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['wsetIcon'] as String?,
     )
+      ..brandHall = (json['brandHall'] as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : BrandHall.fromJson(e as Map<String, dynamic>))
+          .toList()
       ..worldHotProducts = (json['worldHotProducts'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
@@ -55,9 +60,11 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'indexList': instance.indexList,
       'advertising': instance.advertising,
       'banner_international': instance.banner_international,
+      'brandHall': instance.brandHall,
       'newProduct_priorities': instance.newProduct_priorities,
       'worldHotProducts': instance.worldHotProducts,
       'kindSet': instance.kindSet,
+      'wsetIcon': instance.wsetIcon,
     };
 
 KindSetList _$KindSetListFromJson(Map<String, dynamic> json) => KindSetList(
@@ -135,6 +142,14 @@ Map<String, dynamic> _$NewProductPrioritiesToJson(
       'maturityDate': instance.maturityDate,
     };
 
+BrandHall _$BrandHallFromJson(Map<String, dynamic> json) => BrandHall(
+      json['appPictrueAddress'] as String?,
+    );
+
+Map<String, dynamic> _$BrandHallToJson(BrandHall instance) => <String, dynamic>{
+      'appPictrueAddress': instance.appPictrueAddress,
+    };
+
 BannerInternational _$BannerInternationalFromJson(Map<String, dynamic> json) =>
     BannerInternational(
       json['picture'] as String?,
@@ -171,6 +186,10 @@ Advertising _$AdvertisingFromJson(Map<String, dynamic> json) => Advertising(
           ? null
           : Advertising0.fromJson(
               json['advertising_0'] as Map<String, dynamic>),
+      json['advertising_1'] == null
+          ? null
+          : Advertising0.fromJson(
+              json['advertising_1'] as Map<String, dynamic>),
       json['hotSellingRecommendation'] as String?,
     );
 
@@ -178,6 +197,7 @@ Map<String, dynamic> _$AdvertisingToJson(Advertising instance) =>
     <String, dynamic>{
       'ranking': instance.ranking,
       'advertising_0': instance.advertising_0,
+      'advertising_1': instance.advertising_1,
       'hotSellingRecommendation': instance.hotSellingRecommendation,
     };
 

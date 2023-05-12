@@ -12,9 +12,9 @@ class BalanceService{
     params["pageNum"]=pageNum;
     params["pageSize"]=pageSize;
     await DioInstance.getInstance().get(ApiService.getBalanceData, params,
-        success: (json) {
-          print("获取到的数据：$json");
-          WajiuBalanceModel model = WajiuBalanceModel.fromJson(json);
+        success: (resultData) {
+          print("获取到的数据：$resultData");
+          WajiuBalanceModel model = WajiuBalanceModel.fromJson(resultData);
           if (null != model) {
             int status = model.states;
             String msg = model.msg;

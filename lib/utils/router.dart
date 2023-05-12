@@ -65,7 +65,9 @@ import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/order_list_page.dart';
 import 'package:flutter_money/wajiu/page/my_balance.dart';
+import 'package:flutter_money/wajiu/page_mingzhuangxianhuo.dart';
 import 'package:flutter_money/wajiu/sliver_list_demo_page.dart';
+import 'package:flutter_money/wajiu/view/mingzhuangxianhuo_list_page.dart';
 import 'package:flutter_money/wajiu/view/vp_list_demo_page.dart';
 import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
 import 'package:flutter_money/wajiu/view/wajiu_my_balance.dart';
@@ -115,6 +117,7 @@ RouterUtils {
       "vpnestlistview": (BuildContext context) => VPNestListView(),
       "listviewlinklistview": (BuildContext context) => ListViewLinkListView(),
       "vplistview": (BuildContext context) => VPListView(),
+      "mingzhuangxianhuopage": (BuildContext context) => MingzhuangxianhuoPage(),
       "wajiugoodsdetail": (BuildContext context) => WajiuGoodsDetail(),
       "honordemopage": (BuildContext context) => HonorDemoPage(),
       "wajiusplashpage": (BuildContext context) => WajiuSplashPage(),

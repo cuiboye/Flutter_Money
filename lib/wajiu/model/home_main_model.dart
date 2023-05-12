@@ -34,6 +34,9 @@ class Result {
   @JsonKey(name: 'banner_international')
   List<BannerInternational?>? banner_international;
 
+  @JsonKey(name: 'brandHall')
+  List<BrandHall?>? brandHall;
+
   @JsonKey(name: 'newProduct_priorities')
   List<NewProductPriorities?>? newProduct_priorities;
 
@@ -43,7 +46,10 @@ class Result {
   @JsonKey(name: 'kindSet')
   List<KindSetList?>? kindSet;
 
-  Result(this.indexList, this.advertising, this.banner_international,this.newProduct_priorities);
+  @JsonKey(name: 'wsetIcon')
+  String? wsetIcon;
+
+  Result(this.indexList, this.advertising, this.banner_international,this.newProduct_priorities,this.wsetIcon);
 
   factory Result.fromJson(Map<String, dynamic> srcJson) =>
       _$ResultFromJson(srcJson);
@@ -120,7 +126,16 @@ class WorldHotProducts {
       this.countryName,
       this.grade,
       );
-
+  Map toJson() {
+    Map map = {};
+    map["cname"] = this.cname;
+    map["ename"] = this.ename;
+    map["picture"] = this.picture;
+    map["jnPrice"] = this.jnPrice;
+    map["countryName"] = this.countryName;
+    map["grade"] = this.grade;
+    return map;
+  }
   factory WorldHotProducts.fromJson(Map<String, dynamic> srcJson) =>
       _$WorldHotProductsFromJson(srcJson);
 }
@@ -156,6 +171,17 @@ class NewProductPriorities {
 
   factory NewProductPriorities.fromJson(Map<String, dynamic> srcJson) =>
       _$NewProductPrioritiesFromJson(srcJson);
+}
+
+@JsonSerializable()
+class BrandHall {
+  @JsonKey(name: 'appPictrueAddress')
+  String? appPictrueAddress;
+
+  BrandHall(this.appPictrueAddress,);
+
+  factory BrandHall.fromJson(Map<String, dynamic> srcJson) =>
+      _$BrandHallFromJson(srcJson);
 }
 
 @JsonSerializable()
@@ -204,10 +230,14 @@ class Advertising {
   @JsonKey(name: 'advertising_0')
   Advertising0? advertising_0;
 
+  @JsonKey(name: 'advertising_1')
+  Advertising0? advertising_1;
+
+
   @JsonKey(name: 'hotSellingRecommendation')
   String? hotSellingRecommendation;
 
-  Advertising(this.ranking, this.advertising_0, this.hotSellingRecommendation);
+  Advertising(this.ranking, this.advertising_0,this.advertising_1, this.hotSellingRecommendation);
 
   factory Advertising.fromJson(Map<String, dynamic> srcJson) =>
       _$AdvertisingFromJson(srcJson);

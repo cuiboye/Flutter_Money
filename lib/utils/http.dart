@@ -7,8 +7,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_money/utils/md5_utils.dart';
+import 'package:flutter_money/wajiu/constant/app_strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-typedef Success = void Function(dynamic json);
+typedef Success = void Function(dynamic resultData);
 typedef Fail = void Function(String? reason, int? code);
 typedef After = void Function();
 
@@ -59,6 +61,12 @@ class DioInstance {
     dio.interceptors.add(DioLogInterceptor());
 
     return dio;
+  }
+
+   Future<String?> getLoginToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? loginToken = prefs.getString(Constant.LOGIN_TOKEN);
+    return loginToken;
   }
 
   Future<void> get(String uri, Map<String, dynamic> queryParametersMap, {Success? success, Fail? fail, After? after}) {
@@ -136,7 +144,10 @@ class DioInstance {
       params["appVersion"] = "3.80.5";
       params["systemType"] = "wajiu.android";
       params["macAddress"] = "E5:B0:R3:B7:02:13";
-      // params["req_token"] = "";
+      getLoginToken().then((value) {
+        // params["req_token"] =Uri.encodeComponent(value??"");
+        params["req_token"] ="60R64HMPXUjGBQikTPRZH5z5MdBHGMfFSHPlQcZLBt9sNuTyEsmhbw%253D%253D";
+      });
       params["deviceID"] = "02ffff10102b2ff0263d393677fc1b7270d9e08c8f";
     }
     return params;

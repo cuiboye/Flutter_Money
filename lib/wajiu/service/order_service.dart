@@ -8,9 +8,9 @@ class OrderService{
   static Future<void> getOrderList(OrderListViewModel orderListViewModel) async {
     var params = Map<String, dynamic>();
     await DioInstance.getInstance().get(ApiService.getOrderList, params,
-        success: (json) {
-          print("获取到的数据：$json");
-          OrdertListModel ordertListModel = OrdertListModel.fromJson(json);
+        success: (resultData) {
+          print("获取到的数据：$resultData");
+          OrdertListModel ordertListModel = OrdertListModel.fromJson(resultData);
           if (null != ordertListModel) {
             int status = ordertListModel.states;
             String msg = ordertListModel.msg;

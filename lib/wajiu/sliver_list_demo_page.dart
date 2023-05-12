@@ -634,9 +634,9 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
       params["select"] = 0;
     }
     DioInstance.getInstance().get(ApiService.changeProductSelectStatus, params,
-        success: (json) {
-      print("getShopCarData：$json");
-      CommonRequestModel model = CommonRequestModel.fromJson(json);
+        success: (resultData) {
+      print("getShopCarData：$resultData");
+      CommonRequestModel model = CommonRequestModel.fromJson(resultData);
       print("JoinedProductListModel：$model");
 
       if (null != model) {
@@ -729,9 +729,9 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
   void getShopCarData() {
     var params = Map<String, dynamic>();
     DioInstance.getInstance().get(ApiService.getShopCarData, params,
-        success: (json) {
-      print("getShopCarData：$json");
-      JoinedProductListModel model = JoinedProductListModel.fromJson(json);
+        success: (resultData) {
+      print("getShopCarData：$resultData");
+      JoinedProductListModel model = JoinedProductListModel.fromJson(resultData);
       print("JoinedProductListModel：$model");
 
       if (null != model) {

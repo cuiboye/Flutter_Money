@@ -4,8 +4,10 @@ class NetImageView extends StatelessWidget {
   final String url;
   final double radius;
   final BoxFit? boxFit;
+  final double width;
+  final double height;
 
-  const NetImageView({required this.url, this.radius = 0,this.boxFit = BoxFit.fill});
+  const NetImageView({required this.url, this.radius = 0,this.height = 0,this.width = 0,this.boxFit = BoxFit.fill});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class NetImageView extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius),
       child: FadeInImage.assetNetwork(
         placeholder: "images/wajiu_default_image_bg.9.png",
+        width: width,
         image: url,
         fit: boxFit,
         imageErrorBuilder: (context, error, stackTrace) {
@@ -24,11 +27,5 @@ class NetImageView extends StatelessWidget {
         },
       ),
     );
-  }
-
-  @override
-  @override
-  void didChangeDependencies() {
-    // ignore: must_call_super
   }
 }

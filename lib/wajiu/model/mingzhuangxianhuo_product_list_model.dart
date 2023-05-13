@@ -75,13 +75,16 @@ class Productlist{
   @JsonKey(name: 'picture')
   String? picture;
 
+  @JsonKey(name: 'jnPrice')
+  String? jnPrice;
+
   @JsonKey(name: 'replenishMent')
   int replenishMent;
 
   @JsonKey(name: 'operate')
   Operate operate;
 
-  Productlist(this.id,this.cname,this.ename,this.description1,this.picture,this.replenishMent,this.operate,);
+  Productlist(this.id,this.cname,this.ename,this.description1,this.picture,this.replenishMent,this.operate,this.jnPrice);
 
   factory Productlist.fromJson(Map<String, dynamic> srcJson) => _$ProductlistFromJson(srcJson);
 

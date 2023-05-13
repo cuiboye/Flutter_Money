@@ -60,6 +60,7 @@ Productlist _$ProductlistFromJson(Map<String, dynamic> json) => Productlist(
       json['picture'] as String?,
       json['replenishMent'] as int,
       Operate.fromJson(json['operate'] as Map<String, dynamic>),
+      json['jnPrice'] as String?,
     );
 
 Map<String, dynamic> _$ProductlistToJson(Productlist instance) =>
@@ -69,6 +70,7 @@ Map<String, dynamic> _$ProductlistToJson(Productlist instance) =>
       'ename': instance.ename,
       'description1': instance.description1,
       'picture': instance.picture,
+      'jnPrice': instance.jnPrice,
       'replenishMent': instance.replenishMent,
       'operate': instance.operate,
     };

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 /**
  * 图片缓存
  */
-class CacheImageView extends StatelessWidget {
+class CacheImageViewWithSize extends StatelessWidget {
   final String url;
   final double radius;
   final double width;
   final double height;
   final BoxFit? boxFit;
 
-  const CacheImageView(
+  const CacheImageViewWithSize(
       {required this.url,
       this.radius = 0,
       this.width = 0,
@@ -29,7 +29,7 @@ class CacheImageView extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius),
         child: CachedNetworkImage(
           imageUrl: url,
-          // width: width,
+          width: width,
           // height: height,
           // 占位
           placeholder: (

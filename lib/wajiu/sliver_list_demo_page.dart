@@ -12,6 +12,7 @@ import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/model/common_request_model.dart';
 import 'package:flutter_money/wajiu/model/joined_product_list_model.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
+import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_money/widget/net_image_utils.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -427,7 +428,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
           children: [
             Container(
               padding: EdgeInsets.only(left: 20,right: 20),
-              child: NetImageView(url: i==0?"error_image":"http://image.59cdn.com/static/upload/image/product/20170819/o_1503125726461.jpg",),
+              child: CacheImageView(url: i==0?"error_image":"http://image.59cdn.com/static/upload/image/product/20170819/o_1503125726461.jpg",),
             ),
             Container(
               margin: EdgeInsets.only(left: 13,right: 13),

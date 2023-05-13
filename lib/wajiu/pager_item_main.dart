@@ -13,7 +13,6 @@ import 'package:flutter_money/utils/log_utils.dart';
 import 'package:flutter_money/utils/text_utils.dart';
 import 'package:flutter_money/utils/toast_utils.dart';
 import 'package:flutter_money/utils/wajiu_utils.dart';
-import 'package:flutter_money/view/cacheimage/load_image.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/wajiu/constant/apiservice.dart';
 import 'package:flutter_money/wajiu/constant/app_strings.dart';
@@ -85,11 +84,18 @@ class _PageItemMainState extends State<
   bool hasData = true; //下拉加载，是否还有数据
   late ScrollController scrollController;
   bool requestDataSuccess = false;
+@override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    print("=======>>>didChangeDependencies");
 
+}
   // late TabController _tabController;
   @override
   void initState() {
     super.initState();
+    print("=======>>>initState");
     //initialScrollOffset：滚动初始位置
     scrollController = ScrollController(initialScrollOffset: 0);
     scrollController.addListener(() {
@@ -147,7 +153,7 @@ class _PageItemMainState extends State<
     super.build(context);
     //获取安全区域
     final padding = MediaQuery.of(context).padding;
-    print("build====================");
+    print("=======>>>build");
     return Stack(
       children: [
         Container(
@@ -282,15 +288,15 @@ class _PageItemMainState extends State<
       slivers: <Widget>[
         SliverToBoxAdapter(
           child: Container(
-              padding: const EdgeInsets.only(left: 13, right: 13),
+              padding: EdgeInsets.only(left: 13, right: 13),
               decoration: const BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                    ColorConstant.color_ef7134,
-                    ColorConstant.color_f4f4f4
-                  ])),
+                        ColorConstant.color_ef7134,
+                        ColorConstant.color_f4f4f4
+                      ])),
               height: MediaQuery.of(context).size.width / 2.5413,
               //根据具体情况来设置比例
               width: MediaQuery.of(context).size.width,
@@ -298,28 +304,24 @@ class _PageItemMainState extends State<
                 borderRadius: BorderRadius.circular(8.0),
                 child: Swiper(
                   onTap: (index) {
-                    GetNavigationUtils.navigateRightToLeft(WajiuGoodsDetail());
-
-                    // ToastUtils.showToast("点击了第 ${index + 1}个");
+                    ToastUtils.showToast("点击了第 ${index + 1}个");
                   },
-                  itemCount: appNewIndexCategories?.length ?? 0,
-                  autoplay: requestDataSuccess ? true : false,
+                  itemCount:  appNewIndexCategories?.length??0,
+                  autoplay: requestDataSuccess?true:false,
                   //是否自动轮播
                   pagination: SwiperPagination(
-                      //指示器
+                    //指示器
                       margin: EdgeInsets.only(bottom: 5),
                       //在这里控制指示器距离底部的距离，默认距离是10
                       // alignment: Alignment.bottomCenter,//指示器的位置不在这里控制了，在NLIndicator中控制
                       builder: SwiperCustomPagination(builder:
                           (BuildContext context, SwiperPluginConfig config) {
-                        return NLIndicator(config.activeIndex,
-                            appNewIndexCategories?.length ?? 0);
+                        return NLIndicator(
+                            config.activeIndex, appNewIndexCategories?.length??0);
                       })),
                   itemBuilder: (BuildContext context, int index) {
-                    return NetImageView(
-                      url: appNewIndexCategories[index]?.picture ?? "",
-                      boxFit: BoxFit.fill,
-                    );
+                    // print("加载图片 ${appNewIndexCategories[index]?.picture ?? ""}");
+                    return NetImageView(url:appNewIndexCategories[index]?.picture ?? "", boxFit: BoxFit.fill,);
                   },
                 ),
               )),
@@ -355,22 +357,7 @@ class _PageItemMainState extends State<
             ),
           ),
         ),
-        // SliverGrid(
-        //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //       crossAxisCount: 4, //Grid按4列显示
-        //       mainAxisSpacing: 10.0, //item水平之间的距离
-        //       crossAxisSpacing: 10.0, //item垂直方向的距离
-        //       childAspectRatio: 1.3),
-        //   delegate: SliverChildBuilderDelegate(
-        //         (BuildContext context, int index) {
-        //       //创建子widget
-        //       return Container(
-        //           child:
-        //           Center(child: Image.asset("images/image1.jpeg")));
-        //     },
-        //     childCount: 8,
-        //   ),
-        // ),
+
         //在实际布局中，我们通常需要往 CustomScrollView 中添加一些自定义的组件，而这些组件并非都
         //有 Sliver 版本，为此 Flutter 提供了一个 SliverToBoxAdapter 组件，它是一个适配器：可
         //以将 RenderBox 适配为 Sliver。
@@ -480,7 +467,6 @@ class _PageItemMainState extends State<
             ],
           ),
         )),
-        //1047 267
         SliverToBoxAdapter(
             child: Column(
           children: [
@@ -498,8 +484,8 @@ class _PageItemMainState extends State<
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(right: 4),
-                      child: LoadImage(
-                        rankPictureUrl ?? "",
+                      child: CacheImageView(
+                        url: rankPictureUrl ?? "",
                       ),
                     ),
                   ),
@@ -510,19 +496,14 @@ class _PageItemMainState extends State<
                       children: [
                         Container(
                           margin: const EdgeInsets.only(bottom: 4),
-                          child:
-                              // NetImageView(url: newpinShoufaPictureUrl ?? ""),
-                              LoadImage(
-                            newpinShoufaPictureUrl ?? "",
+                          child: CacheImageView(
+                            url: newpinShoufaPictureUrl ?? "",
                           ),
                         ),
                         Container(
                           margin: const EdgeInsets.only(top: 4),
-                          child:
-                              // NetImageView(
-                              //     url: hotSellingRecommendationPictureUrl ?? ""),
-                              LoadImage(
-                            hotSellingRecommendationPictureUrl ?? "",
+                          child: CacheImageView(
+                            url: hotSellingRecommendationPictureUrl ?? "",
                           ),
                         ),
                       ],
@@ -747,16 +728,16 @@ class _PageItemMainState extends State<
           ),
         ),
         SliverToBoxAdapter(
-          child: GestureDetector(
-            onTap: (){
-              GetNavigationUtils.navigateRightToLeft(MingzhuangxianhuoPage());
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 13,right: 13,top: 8),
-              child: NetImageView(url: mingzhuangxianhuoPictureUrl,radius: 8.0),
-            ),
-          )
-        ),
+            child: GestureDetector(
+          onTap: () {
+            GetNavigationUtils.navigateRightToLeft(MingzhuangxianhuoPage());
+          },
+          child: Container(
+            padding: EdgeInsets.only(left: 13, right: 13, top: 8),
+            child:
+                CacheImageView(url: mingzhuangxianhuoPictureUrl, radius: 8.0),
+          ),
+        )),
         SliverToBoxAdapter(
           child: _getTarBarView(),
         ),
@@ -847,8 +828,9 @@ class _PageItemMainState extends State<
                           padding: EdgeInsets.only(
                               left: 20, right: 20, top: 20, bottom: 40),
                           margin: EdgeInsets.only(bottom: 8),
-                          child: Image.network(
-                              newProductPriorities[index]?.productPic ?? ""),
+                          child: CacheImageView(
+                              url:
+                                  "${newProductPriorities[index]?.productPic}?imageView2/2/w/740/h/314/q/100"),
                         ),
                         Positioned(
                             bottom: 8,
@@ -947,8 +929,8 @@ class _PageItemMainState extends State<
   }
 
   Widget countryItem(int index) {
-    Widget child = NetImageView(
-      url: countryList[index]?.picture ?? "",
+    Widget child = CacheImageView(
+      url: "${countryList[index]?.picture}?imageView2/2/w/740/h/314/q/100",
     );
     return GestureDetector(
       child: Container(
@@ -963,8 +945,9 @@ class _PageItemMainState extends State<
   }
 
   Widget brandHallItem(int index) {
-    Widget child = NetImageView(
-      url: brandHallList[index]?.appPictrueAddress ?? "",
+    Widget child = CacheImageView(
+      url:
+          "${brandHallList[index]?.appPictrueAddress}?imageView2/2/w/740/h/314/q/100",
     );
     return GestureDetector(
       child: Container(
@@ -984,8 +967,9 @@ class _PageItemMainState extends State<
     }
     for (int index = 0; index < worldHotProductsList.length; index++) {
       if (index == 1) {
-        Widget widget =
-            NetImageView(url: worldHotProductsList[index]?.picture ?? "");
+        Widget widget = CacheImageView(
+            url:
+                "${worldHotProductsList[index]?.picture}?imageView2/2/w/740/h/314/q/100");
         widgetList.add(widget);
       } else {
         Widget widget = GestureDetector(
@@ -1114,10 +1098,9 @@ class _PageItemMainState extends State<
       },
       child: Column(children: [
         Container(
-          child: Image.network(
-            checkerboardAppNewIndexCategories[index + 8]?.picture ?? "",
-            width: 50,
-            height: 50,
+          child: NetImageView(url:
+            "${checkerboardAppNewIndexCategories[index + 8]?.picture}?imageView2/2/w/740/h/314/q/100",
+            width: 55,
           ),
         ),
         Text("${checkerboardAppNewIndexCategories[index + 8]?.indexName ?? ""}")
@@ -1137,10 +1120,9 @@ class _PageItemMainState extends State<
       },
       child: Column(children: [
         Container(
-          child: Image.network(
-            checkerboardAppNewIndexCategories[index]?.picture ?? "",
-            width: 50,
-            height: 50,
+          child: NetImageView(url:
+            "${checkerboardAppNewIndexCategories[index]?.picture}?imageView2/2/w/740/h/314/q/100",
+            width: 55,
           ),
         ),
         Text("${checkerboardAppNewIndexCategories[index]?.indexName ?? ""}")
@@ -1189,13 +1171,15 @@ class _PageItemMainState extends State<
           announcementAppNewIndexCategories =
               model.result?.indexList?.announcement.appNewIndexCategories ?? [];
           //排行榜，新品首发，新品推荐
-          rankPictureUrl = model.result?.advertising?.ranking?.picture ?? "";
+          rankPictureUrl =
+              "${model.result?.advertising?.ranking?.picture}?imageView2/2/w/740/h/314/q/100";
           newpinShoufaPictureUrl =
-              model.result?.advertising?.advertising_0?.picture ?? "";
+              "${model.result?.advertising?.advertising_0?.picture}?imageView2/2/w/740/h/314/q/100";
           hotSellingRecommendationPictureUrl =
-              model.result?.advertising?.hotSellingRecommendation ?? "";
+              "${model.result?.advertising?.hotSellingRecommendation}?imageView2/2/w/740/h/314/q/100";
           //名庄现货
-          mingzhuangxianhuoPictureUrl = "${model.result?.advertising?.advertising_1?.picture ?? ""}?imageView2/2/w/740/h/314/q/100";
+          mingzhuangxianhuoPictureUrl =
+              "${model.result?.advertising?.advertising_1?.picture ?? ""}?imageView2/2/w/740/h/314/q/100";
           //国家馆
           countryList = model.result?.banner_international ?? [];
           //品牌馆
@@ -1206,8 +1190,7 @@ class _PageItemMainState extends State<
           worldHotProductsList = model.result?.worldHotProducts ?? [];
           LogUtil.v('worldHotProductsList数据为：:${worldHotProductsList.length}');
 
-          wsetIconUrl =
-              "${model.result?.wsetIcon ?? ""}?imageView2/2/w/740/h/314/q/100";
+          wsetIconUrl = "${model.result?.wsetIcon ?? ""}";
           if (!TextUtils.isEmpty(wsetIconUrl)) {
             Map<String, dynamic> srcJson = {
               "picture": "$wsetIconUrl",

@@ -38,6 +38,10 @@ void main() async{
   }, onError: (error, stackTrace) async {
     print("========> ${error.toString()}");
   });
+
+  PaintingBinding.instance.imageCache.maximumSize =100000;
+  PaintingBinding.instance?.imageCache?.maximumSizeBytes =
+      300 << 20;
 }
 
 void setCustomErrorPage(){

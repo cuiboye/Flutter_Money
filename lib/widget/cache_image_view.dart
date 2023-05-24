@@ -20,7 +20,6 @@ class CacheImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build=======");
     if (url.isEmpty) {
       return Image.asset("images/wajiu_default_image_bg.9.png");
     }

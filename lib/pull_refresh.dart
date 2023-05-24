@@ -28,15 +28,15 @@ class _PullRefreshMainState extends State<PullRefreshMain> with SingleTickerProv
     "images/ic_progressbar_2.png",
     "images/ic_progressbar_3.png",
     "images/ic_progressbar_4.png",
-    "images/ic_progressbar_5.png"
-    "images/ic_progressbar_6.png"
-    "images/ic_progressbar_7.png"
+    "images/ic_progressbar_5.png",
+    "images/ic_progressbar_6.png",
+    "images/ic_progressbar_7.png",
     "images/ic_progressbar_8.png"
   ];
 
   void _onRefresh() async {
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: 6000));
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
@@ -53,9 +53,10 @@ class _PullRefreshMainState extends State<PullRefreshMain> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    controller=AnimationController(vsync: this,duration:Duration(milliseconds: 700) );
+    controller=AnimationController(vsync: this,duration:Duration(milliseconds: 500) );
     animation=Tween<double>(begin: 0,end: images.length.toDouble()).animate(controller);
     controller.forward();
+
     animation.addStatusListener((status) {
       if (status==AnimationStatus.completed) {controller.forward(from: 0);} //循环执行动画
     });
@@ -82,9 +83,8 @@ class _PullRefreshMainState extends State<PullRefreshMain> with SingleTickerProv
                 //     : mode == RefreshStatus.completed
                 //     ? "刷新成功!"
                 //     : "刷新失败")
-            // child: Image.asset(images[animation.value.toInt()]),
-              //帧动画可以考虑使用gif图，上面的 animation.value.toInt() 有一些问题
-            child: Image.asset("images/zoulu.gif",width: 50,height: 50,),
+            child: Image.asset(images[animation.value.toInt()],width: 60,height: 60,),
+            // child: Image.asset("images/zoulu.gif",width: 50,height: 50,),
             );
           }, onOffsetChange: (offset) {
             //do some ani

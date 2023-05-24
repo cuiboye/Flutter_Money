@@ -29,7 +29,7 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
+    print("InheritedWidgetTestRoute-build");
     return  Center(
       child: ShareDataWidget( //使用ShareDataWidget
         data: count,

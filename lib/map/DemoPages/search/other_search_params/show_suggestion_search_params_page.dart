@@ -92,6 +92,8 @@ class _ShowSuggestionSearchParamsPageState
     );
   }
 
+//=========================渲染相关======================
+
   /// 检索数据
   void _onTapConfirm() {
     BMFSuggestionSearchOption suggestionSearchOption =

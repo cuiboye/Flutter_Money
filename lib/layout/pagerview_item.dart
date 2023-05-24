@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
-import 'package:flutter_money/layout/linearlayout.dart';
+import 'package:flutter_money/layout/product_list_page.dart';
+import 'package:flutter_money/utils/get_navigation_utils.dart';
+import 'package:flutter_money/utils/http.dart';
+import 'package:flutter_money/utils/text_utils.dart';
+import 'package:flutter_money/utils/wajiu_utils.dart';
 import 'package:flutter_money/view/over_scroll_behavior.dart';
+import 'package:flutter_money/wajiu/constant/apiservice.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
+import 'package:flutter_money/wajiu/model/category_second_type_list_model.dart';
+import 'package:flutter_money/wajiu/model/category_type_list_model.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
+import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class PageViewItem extends StatefulWidget {
   @override
@@ -15,82 +24,17 @@ class PageViewItem extends StatefulWidget {
   PageViewItem({this.info});
 }
 
-class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClientMixin{
-  @override
-  bool get wantKeepAlive => true;//保持页面状态
-
-  List<String> leftTypeList = [
-    "特色",
-    "品牌推荐",
-    "干红",
-    "干白",
-    "桃红",
-    "甜型",
-    "起泡酒",
-    "半干",
-    "半甜",
-    "无醇",
-    "配制酒",
-    "啤酒",
-    "烈酒",
-    "酒周边"
-  ];
-
-  List<String> rightItem1 = [
-    "0-20元",
-    "21-30元",
-    "31-50元",
-    "51-100元",
-    "101-150元",
-    "151以上"
-  ];
-  List<String> rightItem2 = [
-    "法国",
-    "意大利",
-    "西班牙",
-    "德国",
-    "南非",
-    "阿根廷",
-    "葡萄牙",
-    "澳大利亚",
-    "匈牙利",
-    "斯洛文尼亚"
-  ];
-  List<String> rightItem3 = [
-    "坦普尼罗/丹魄",
-    "雷司令",
-    "长相思",
-    "赛美容",
-    "琼瑶浆",
-    "玫瑰香",
-    "慕思卡黛",
-    "白诗南",
-    "宝石解百纳",
-    "特雷比奥罗",
-    "阿依仑",
-    "西万尼",
-    "莫斯卡托",
-    "玛尔维萨",
-    "布拉凯多",
-    "罗丽红",
-    "巴罗卡红",
-    "费尔诺皮埃斯",
-    "莎斯拉",
-    "肯纳",
-    "福明特"
-  ];
-  List<String> rightItem4 = [
-    "11.0%以下",
-    "6.0%~6.5%",
-    "11.1%~11.9%",
-    "12.0%~12.9%",
-    "13.0%~13.9%",
-    "14.0%~14.9%",
-    "15.0%~15.9%",
-    "16.0%~16.9%",
-    "17.0%以上"
-  ];
+class _PageViewItemState extends State<PageViewItem>{
+  List<TypeList?> typeList = [];
+  List<ParameterList?> parameterList = [];
+  List<BannerList?> bannerList = [];
   int selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getCategoryTypeListData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +89,7 @@ class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClie
                         child: ListView.separated(
                           itemBuilder: (BuildContext context, int index) =>
                               leftItemWidget(index),
-                          itemCount: leftTypeList.length,
+                          itemCount: typeList.length,
                           shrinkWrap: true,
                           separatorBuilder: (BuildContext context, int index) {
                             return LineView(
@@ -165,13 +109,22 @@ class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClie
                       context: context,
                       child: ScrollConfiguration(
                         behavior: OverScrollBehavior(),
-                        child: ListView.builder(
-                          itemBuilder: (BuildContext context, int index) =>
-                              rightItemWidget(index),
-                          // itemCount: leftTypeList.length,
-                          itemCount: 5,
-                          shrinkWrap: true,
-                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              swipeWidget(),
+
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) =>
+                                    rightItemWidget(index),
+                                // itemCount: leftTypeList.length,
+                                itemCount: parameterList.length,
+                                shrinkWrap: true,
+                              ),
+                            ],
+                          ),
+                        )
                       )),
                 ))
           ],
@@ -180,88 +133,107 @@ class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClie
     );
   }
 
-  Widget rightItemWidget(int index) {
-    String fatherName = "";
-    String assetName = "";
-    List<String> rightListItem = [];
-    if (index == 1) {
-      fatherName = "价格";
-      assetName = "images/tv_bg_category_title1.png";
-      rightListItem = rightItem1;
-    } else if (index == 2) {
-      fatherName = "产地";
-      assetName = "images/tv_bg_category_title2.png";
-      rightListItem = rightItem2;
-    } else if (index == 3) {
-      fatherName = "葡萄";
-      assetName = "images/tv_bg_category_title3.png";
-      rightListItem = rightItem3;
-    } else if (index == 4) {
-      fatherName = "酒精度区间";
-      assetName = "images/tv_bg_category_title4.png";
-      rightListItem = rightItem4;
+  Widget swipeWidget(){
+    if(WajiuUtils.collectionIsEmpty(bannerList) == true){
+      return Text("");
     }
-    if (index == 0) {
-      return Container(
-        padding: EdgeInsets.only(left: 13, right: 13, top: 13),
-        child: Image.asset("images/categrory_wine_semi_sweet.jpeg"),
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-              height: 25,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(assetName), fit: BoxFit.fill)),
-              margin: EdgeInsets.only(left: 13, right: 13, top: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Text(fatherName,
-                      style: TextStyle(color: ColorConstant.color_606366,fontSize: 13),),
-                    // color: ColorConstant.systemColor,
-                    margin: EdgeInsets.only(left: 13),
-                  )
-                ],
-              )),
-          Container(
-            child: StaggeredGrid.count(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: rightTextItem(rightListItem),
-            ),
-            margin: EdgeInsets.only(left: 13, right: 13, top: 10),
-          )
-        ],
-      );
-    }
+    return Container(
+        padding: EdgeInsets.only(left: 13, right: 13),
+        height: MediaQuery.of(context).size.width / 2.285,
+        //根据具体情况来设置比例
+        width: double.infinity,
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Swiper(
+              onTap: (index) {
+              },
+              itemCount:  bannerList.length,
+              autoplay: false,
+              itemBuilder: (BuildContext context, int index) {
+                return CacheImageView(url:bannerList[index]?.name ?? "", boxFit: BoxFit.fill,);
+              },
+            )
+        ));
   }
 
-  List<Widget> rightTextItem(List<String> list) {
+  Widget rightItemWidget(int index) {
+    String fatherName = parameterList[index]?.title??"";
+    if(TextUtils.isEmpty(fatherName) || WajiuUtils.collectionIsEmpty(parameterList[index]?.list) == true){
+      return Text("");
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            height: 25,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(index%2==0?"images/tv_bg_category_title1.png":"images/tv_bg_category_title2.png"), fit: BoxFit.fill)),
+            margin: EdgeInsets.only(left: 13, right: 13, top: 15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 13),
+                  child: Text(fatherName,
+                    style: TextStyle(color: ColorConstant.color_606366,fontSize: 13),),
+                )
+              ],
+            )),
+        getTextAddImageList(parameterList[index],index)
+        // getRightItemWithImageWidget(index)
+      ],
+    );
+  }
+
+  Widget getTextAddImageList(ParameterList? parameterListItem,int index){
+    print("getTextAddImageList");
+    return Container(
+      margin: EdgeInsets.only(left: 13, right: 13, top: 10),
+      child: StaggeredGrid.count(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        children: rightTextAddImageItem(parameterListItem?.type??0,parameterListItem?.list??[]),
+      ),
+    );
+  }
+
+  List<Widget> rightTextAddImageItem(int type,List<ListBean?> list) {
+    print("rightTextAddImageItem $type");
     List<Widget> widgetList = [];
     for (int i = 0; i < list.length; i++) {
-      Widget widget = Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(top: 3, bottom: 3),
-        decoration: BoxDecoration(
-            color: ColorConstant.color_eeeeee,
-            border: Border.all(width: 1, color: ColorConstant.color_eeeeee),
-            //边框
-            borderRadius: BorderRadius.all(Radius.circular(2.0)) //边框圆角
+      if(WajiuUtils.collectionIsSafe(list, i)){
+        if(type == 1){
+          Widget widget = GestureDetector(
+            onTap: (){
+              GetNavigationUtils.navigateRightToLeft(ProductListPage());
+            },
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 3, bottom: 3),
+              decoration: BoxDecoration(
+                  color: ColorConstant.color_eeeeee,
+                  border: Border.all(width: 1, color: ColorConstant.color_eeeeee),
+                  //边框
+                  borderRadius: BorderRadius.all(Radius.circular(2.0)) //边框圆角
+              ),
+              child: Center(
+                child: Text(
+                  list[i]?.name??"",maxLines: 1,overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontSize: 12,color: ColorConstant.color_606366),
+                ),
+              ),
             ),
-        child: Center(
-          child: Text(
-            list[i],
-            style: TextStyle(fontSize: 12,color: ColorConstant.color_606366),
-          ),
-        ),
-      );
-      widgetList.add(widget);
+          );
+          widgetList.add(widget);
+        }else{
+          Widget widget = CacheImageView(url: list[i]?.name??"");
+          widgetList.add(widget);
+          // Text("sdfdsf");
+        }
+      }
     }
     return widgetList;
   }
@@ -270,16 +242,16 @@ class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClie
     bool selected = selectedIndex == index;
     return GestureDetector(
       onTap: () {
-        print("selectedIndex的下标为：$selectedIndex,index的下标为$index");
         selectedIndex = index;
-        setState(() {});
+        getSecondCategoryTypeListData(typeList[index]?.value??"");
+        // setState(() {});
       },
       child: Container(
         padding: EdgeInsets.only(top: 13, bottom: 13, right: 10),
         color:
             selected ? ColorConstant.color_ffffff : ColorConstant.color_eeeeee,
         child: Text(
-          leftTypeList[index],
+          typeList[index]?.name??"",
           textAlign: TextAlign.right,
           style: TextStyle(
               color: selected
@@ -289,5 +261,51 @@ class _PageViewItemState extends State<PageViewItem> with AutomaticKeepAliveClie
         ),
       ),
     );
+  }
+
+  void getCategoryTypeListData(){
+    DioInstance.getInstance().get(ApiService.categoryTypeList, <String, dynamic>{},
+        success: (resultData) {
+          CategoryTypeListModel model = CategoryTypeListModel.fromJson(resultData);
+          print("getCategoryTypeListData2");
+
+          if (null != model) {
+            int status = model.states;
+            String msg = model.msg;
+            if (status == 200) {
+              typeList = model.result?.typeList??[];
+              getSecondCategoryTypeListData(typeList[0]?.value??"");
+            }
+          } else {
+
+          }
+        }, fail: (reason, code) {
+
+        });
+  }
+
+  void getSecondCategoryTypeListData(String reqId){
+    print("getSecondCategoryTypeListData");
+    var params = Map<String, dynamic>();
+    params["reqId"] = reqId;
+    DioInstance.getInstance().get(ApiService.secondCategoryTypeList, params,
+        success: (resultData) {
+          CategorySecondTypeListModel model = CategorySecondTypeListModel.fromJson(resultData);
+          if (null != model) {
+            int status = model.states;
+            String msg = model.msg;
+            if (status == 200) {
+              parameterList = model.result?.parameterList??[];
+              bannerList = model.result?.bannerList??[];
+              setState(() {
+              });
+              print("接口请求结束了！");
+            }
+          } else {
+
+          }
+        }, fail: (reason, code) {
+
+        });
   }
 }

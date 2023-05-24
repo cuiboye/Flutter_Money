@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class ShareDataWidget extends InheritedWidget {
   final int? data; //需要在子树中共享的数据，保存点击次数
-  ShareDataWidget({Key? key, this.data, required Widget child})
-      : super(key: key, child: child);
+  ShareDataWidget({Key? key, this.data, required Widget child}): super(key: key, child: child);
 
 
   //可以看到dependOnInheritedElement方法中主要是注册了依赖关系！看到这里也就清晰了，调用dependOnInheritedWidgetOfExactType()
@@ -21,11 +20,11 @@ class ShareDataWidget extends InheritedWidget {
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static ShareDataWidget? of(BuildContext context) {
     //dependOnInheritedWidgetOfExactType会注册依赖关系，它会将 InheritedWidget 存储到 Map 中
-    // return context.dependOnInheritedWidgetOfExactType<ShareDataWidget>();
+    return context.dependOnInheritedWidgetOfExactType<ShareDataWidget>();
 
     //使用下面这句，将不会再回调didChangeDependencies
     //getElementForInheritedWidgetOfExactType不会注册依赖关系
-    return context.getElementForInheritedWidgetOfExactType<ShareDataWidget>()?.widget as ShareDataWidget;
+    // return context.getElementForInheritedWidgetOfExactType<ShareDataWidget>()?.widget as ShareDataWidget;
   }
 
   //该回调决定当data发生变化时，是否通知子树中依赖data的Widget重新build

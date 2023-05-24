@@ -8,7 +8,7 @@ class ProviderCountExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<CountNotifier>(context);
-
+    print("ProviderCountExample-build");
     return Scaffold(
       appBar: AppBar(
         title: Text("ProviderCount"),

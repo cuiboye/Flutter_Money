@@ -6,6 +6,11 @@ class ApiService{
   static const String login = "/api/login/appLogin";
   //获取首页数据
   static const String indexApp = "/api/index/indexApp";
+  //分类-一级数据
+  static const String categoryTypeList = "/api/product/category/type_list";
+  //分类-二级数据
+  static const String secondCategoryTypeList = "/api/product/category/param_list";
+  static const String productListScrenn = "api/product/list/screen";
   //名庄现货列表
   static const String appGaoduan = "/api/shop/appGaoduan/5/9";
   //全球热卖 加载更多

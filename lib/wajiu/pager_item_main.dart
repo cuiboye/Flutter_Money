@@ -816,21 +816,26 @@ class _PageItemMainState extends State<
                   children: [
                     Stack(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: ColorConstant.color_ffffff,
-                              border: Border.all(
-                                  width: 1, color: ColorConstant.color_eeeeee),
-                              //边框
-                              borderRadius:
+                        Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: ColorConstant.color_ffffff,
+                                  border: Border.all(
+                                      width: 1, color: ColorConstant.color_eeeeee),
+                                  //边框
+                                  borderRadius:
                                   BorderRadius.all(Radius.circular(1.0)) //边框圆角
                               ),
-                          padding: EdgeInsets.only(
-                              left: 20, right: 20, top: 20, bottom: 40),
-                          margin: EdgeInsets.only(bottom: 8),
-                          child: CacheImageView(
-                              url:
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 20, top: 20, bottom: 40),
+                              margin: EdgeInsets.only(bottom: 8),
+                              height: 200,
+                              child: CacheImageView(
+                                  url:
                                   "${newProductPriorities[index]?.productPic}?imageView2/2/w/740/h/314/q/100"),
+                            )
+                          ],
                         ),
                         Positioned(
                             bottom: 8,

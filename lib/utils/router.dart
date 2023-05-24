@@ -30,6 +30,7 @@ import 'package:flutter_money/layout/gridview_layout.dart';
 import 'package:flutter_money/layout/linearlayout.dart';
 import 'package:flutter_money/layout/linearlayout2.dart';
 import 'package:flutter_money/layout/pageview.dart';
+import 'package:flutter_money/layout/product_list_page.dart';
 import 'package:flutter_money/layout/scaffold_layout.dart';
 import 'package:flutter_money/layout/size_container.dart';
 import 'package:flutter_money/layout/stack_positioned.dart';
@@ -119,6 +120,7 @@ RouterUtils {
       "vplistview": (BuildContext context) => VPListView(),
       "mingzhuangxianhuopage": (BuildContext context) => MingzhuangxianhuoPage(),
       "wajiugoodsdetail": (BuildContext context) => WajiuGoodsDetail(),
+      "productlistpage": (BuildContext context) => ProductListPage(),
       "honordemopage": (BuildContext context) => HonorDemoPage(),
       "wajiusplashpage": (BuildContext context) => WajiuSplashPage(),
       "statefulwidget": (BuildContext context) => StatefulWidgetDemo(),

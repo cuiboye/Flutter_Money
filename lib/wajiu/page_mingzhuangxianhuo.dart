@@ -75,7 +75,7 @@ class _MingzhuangxianhuoViewState extends State<MingzhuangxianhuoView> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CacheImageViewWithSize(
+              CacheImageViewWithWidth(
                   url:
                       "${productList[index]?.picture}?imageView2/2/w/740/h/314/q/100",
                   width: 92),

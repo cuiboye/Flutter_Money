@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
  * 第一步：创建模型
  * 1）混入了ChangeNotifier
  * 2）调用了notifyListeners()
- * 因为模型使用了ChangeNotifier，那么我们就可以访问notifyListeners()，并且在带哦用它的任何时候，ChangeNotifierProvider
+ * 因为模型使用了ChangeNotifier，那么我们就可以访问notifyListeners()，并且在使用它的任何时候，ChangeNotifierProvider
  * 都会收到通知并且消费者将重建UI
  */
 class ProvideDemo extends StatefulWidget {

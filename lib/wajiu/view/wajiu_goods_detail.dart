@@ -460,6 +460,7 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
   }
 
   void _handleDragStart(DragStartDetails details) {
+    print("_handleDragStart");
     ///先判断 Listview 是否可见或者可以调用
     ///一般不可见时 hasClients false ，因为 PageView 也没有 keepAlive
     if (_listScrollController?.hasClients == true &&
@@ -487,6 +488,8 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
+    print("_handleDragUpdate");
+
     if (_activeScrollController == _listScrollController &&
 
         ///手指向上移动，也就是快要显示出底部 PageView
@@ -495,6 +498,8 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
         ///到了底部，切换到 PageView
         _activeScrollController?.position.pixels ==
             _activeScrollController?.position.maxScrollExtent) {
+      print("_handleDragUpdate1");
+
       ///切换相应的控制器
       _activeScrollController = _pageController;
       _drag?.cancel();
@@ -510,14 +515,20 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
               localPosition: details.localPosition),
           _disposeDrag);
     }
+    print("_handleDragUpdate2");
+
     _drag?.update(details);
   }
 
   void _handleDragEnd(DragEndDetails details) {
+    print("_handleDragEnd");
+
     _drag?.end(details);
   }
 
   void _handleDragCancel() {
+    print("_handleDragCancel");
+
     _drag?.cancel();
   }
 
@@ -598,38 +609,20 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
                 ),
                 //这里还有问题，因为是自定义的手势，这个WebView滑动有问题
 
-                Container(
-                  child: WebView(
-                    initialUrl: getAssetsPath("assets/files/good_detail.html"),
-                    //JS执行模式 是否允许JS执行
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onWebResourceError: (WebResourceError error){
-                      print("${error.description}");
-                    },
-                    onPageFinished: (String url){
-                      print("$url");
-                    },
-                    onWebViewCreated: (WebViewController controller){
-                      print("加载完成");
-                    },
-                  )
+                WebView(
+                  initialUrl: getAssetsPath("assets/files/good_detail.html"),
+                  //JS执行模式 是否允许JS执行
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebResourceError: (WebResourceError error){
+                    print("${error.description}");
+                  },
+                  onPageFinished: (String url){
+                    print("$url");
+                  },
+                  onWebViewCreated: (WebViewController controller){
+                    print("加载完成");
+                  },
                 )
-                // Container(
-                //   child: WebView(
-                //     initialUrl: getAssetsPath("assets/files/good_detail.html"),
-                //     //JS执行模式 是否允许JS执行
-                //     javascriptMode: JavascriptMode.unrestricted,
-                //     onWebResourceError: (WebResourceError error){
-                //       print("${error.description}");
-                //     },
-                //     onPageFinished: (String url){
-                //       print("$url");
-                //     },
-                //     onWebViewCreated: (WebViewController controller){
-                //       print("加载完成");
-                //     },
-                //   ),
-                // )
               ],
             ),
           ),

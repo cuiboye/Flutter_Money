@@ -60,7 +60,7 @@ dependencies:
   cached_network_image: ^3.2.1
   flutter_rating_bar: ^4.0.1
   sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
-  get: ^4.6.5 #getx
+  get: ^4.6.5 #getx状态管理
   # 这个暂时先注释，安卓会报：Failed to transform activity-1.6.1.aar (androidx.activity:activity:1.6.1)
 #  image_picker: ^0.8.6+4 #选择图片
   animations: ^2.0.3 #flutter官方提供的动画
@@ -87,6 +87,8 @@ dependencies:
 #  flutter_html: ^2.2.1
   #GridView动态布局，解决GridView高度固定的问题
   flutter_staggered_grid_view: ^0.6.2
+  #帧动画
+  frame_animate_widget: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

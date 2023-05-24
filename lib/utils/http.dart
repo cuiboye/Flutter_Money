@@ -113,8 +113,6 @@ class DioInstance {
     _dio?.post(uri, queryParameters: params,data: formData,options: Options(contentType: "multipart/form-data",responseType: ResponseType.plain)).then((response) {
       if (response.statusCode == 200) {
         if (success != null) {
-          print("接口请求成功了");
-          print("${response.data}");
           success(json.decode(response.data));
         }
       } else {

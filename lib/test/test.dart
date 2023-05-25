@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
+import 'package:flutter_money/wajiu/constant/color.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -14,19 +15,24 @@ class _TestState extends State<Test> {
   Widget build(BuildContext context) {
     return CustomMaterialApp(
       home: Scaffold(
-        body: Row(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // 直接通过of静态方法来获取ScaffoldState
-                ScaffoldState _state = Scaffold.of(context);
-                // 打开抽屉菜单
-                _state.openDrawer();
-              },
-              child: Text('打开抽屉菜单2'),
-            )
-          ],
-        ),
+        body: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
+          print("Parent的尺寸：$constraints");
+          return Text("hello");
+        }),
+        // body: ConstrainedBox(constraints: BoxConstraints(
+        //     minWidth: 0,
+        //     maxWidth: 100,
+        //     minHeight: 0,
+        //     maxHeight: 100
+        //
+        // ),
+        //   child: Container(
+        //     height: 1000,
+        //     width: 10000,
+        //     color: ColorConstant.systemColor,
+        //     child: Text("sdfds"),
+        //   ),
+        // ),
         appBar:CustomAppbar(
           title: 'Test',
           context: context,

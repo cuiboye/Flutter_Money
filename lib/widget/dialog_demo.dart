@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/extension/text_extension.dart';
 import 'package:flutter_money/utils/dialog_utils.dart';
 import 'package:flutter_money/utils/toast_utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import '../utils/text_utils.dart';
 import '../view/custom_appbar.dart';
@@ -360,14 +360,14 @@ class _DialogDemoState extends State<DialogDemo> {
     if(TextUtils.isEmpty(into)){
       return;
     }
-    Fluttertoast.showToast(
-        msg: into,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+    // Fluttertoast.showToast(
+    //     msg: into,
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.CENTER,
+    //     timeInSecForIosWeb: 1,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 16.0
+    // );
   }
 }

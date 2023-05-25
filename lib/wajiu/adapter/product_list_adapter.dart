@@ -77,7 +77,7 @@ class _ProductListAdapterState extends State<ProductListAdapter> {
               itemBuilder: (context, index) {
                 return Container(
                   width: double.infinity,
-                  margin: EdgeInsets.only(top: 5),
+                  margin: const EdgeInsets.only(top: 5),
                   alignment: Alignment.topLeft,
                   child: CacheImageViewWithHeight(url: productListItem?.productMarksImg[index]??"",height: 15,),
                 );

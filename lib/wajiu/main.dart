@@ -9,7 +9,7 @@ import 'package:flutter_money/wajiu/constant/app_strings.dart';
 import 'package:flutter_money/wajiu/pager_item_main.dart';
 import 'package:flutter_money/wajiu/pager_item_mine.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../layout/pagerview_item.dart';

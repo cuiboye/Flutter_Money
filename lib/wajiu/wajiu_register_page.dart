@@ -6,7 +6,7 @@ import 'package:flutter_money/utils/http.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/model/login_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 class WajiuRegisterPage extends StatefulWidget {
   @override
   _WajiuRegisterPageState createState() => _WajiuRegisterPageState();

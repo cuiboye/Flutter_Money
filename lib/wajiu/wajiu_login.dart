@@ -15,7 +15,7 @@ import 'package:flutter_money/wajiu/constant/app_strings.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/wajiu_phone_login.dart';
 import 'package:flutter_money/wajiu/wajiu_register_page.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../view/custom_appbar.dart';

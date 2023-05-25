@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/extension/text_extension.dart';
 import 'package:flutter_money/view/keep_alive_wrapper.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 import '../view/custom_appbar.dart';
 import '../view/custom_materialapp.dart';

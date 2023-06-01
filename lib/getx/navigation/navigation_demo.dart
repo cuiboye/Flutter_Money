@@ -46,7 +46,7 @@ class _NavigationDemoState extends State<NavigationDemo>
                 ElevatedButton(
                     onPressed: () =>
                         GetNavigationUtils.navigateRightToLeftWithParams(
-                            NavigationPage2(),"第一个页面的参数")?.then((value) => {
+                            NavigationPage2(),"我是第一个页面的传递过来的参数")?.then((value) => {
                               print("$value")
                         }),
                     child: Text("通过非名称跳转，传递参数")

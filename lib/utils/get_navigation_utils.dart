@@ -13,6 +13,11 @@ import '../getx/navigation/navigation_demo3.dart';
  * Get.back()：返回到上一个页面(对应于Get.to放到到路由页面跳转有效，off方法页面跳转无效)
  */
 class GetNavigationUtils {
+  //销毁当前页面
+  static void back(){
+    Get.back();
+  }
+
   //返回上一个页面并携带参数
   static void backWithParams(dynamic backParams){
     Get.back(result: "$backParams");
@@ -28,7 +33,9 @@ class GetNavigationUtils {
     Get.to(page, transition: Transition.rightToLeft);
   }
 
-  //通过非名字跳转，传递参数;接收上一个页面返回的参数
+  //通过非名字跳转，
+  //arguments： 传递到下一个页面的参数;
+  //接收上一个页面返回的参数：通过then取上一个页面返回的参数
   //下个页面返回的参数如下设置：
   //Get.back(result: "我是第二个页面返回的数据")
   static Future<dynamic>? navigateRightToLeftWithParams(dynamic page,dynamic arguments) {
@@ -41,6 +48,8 @@ class GetNavigationUtils {
   }
 
   //跳转到下一个页面，销毁前面所有的页面
+  //page如果和tag是同一个页面，则销毁page前面所有的页面
+  //page如果和tag不是同一个页面，则跳转到tag页面并销毁中间所有的页面
   static void navigateRightToLeftWithAllOff(dynamic page,String tag) {
     // Get.offUntil(
     //     GetPageRoute<dynamic>(
@@ -70,12 +79,9 @@ class GetNavigationUtils {
   }
 
   //可以销毁多个页面，这是单纯的销毁，没有参数返回
+  //pageNumber 表示销毁页面的个数
   static void destroryMorePageNoParams(int pageNumber) {
     Get.close(pageNumber);
   }
 
-  //销毁当前页面
-  static void back(){
-    Get.back();
-  }
 }

@@ -21,15 +21,12 @@ class _NavigationDemoState extends State<NavigationPage2> {
   void initState() {
     //接收参数
     String arguments = Get.arguments;
-    print("initState: ${arguments}");
+    print("接收到的参数为: ${arguments}");
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    //在这里接收参数
-    String arguments = Get.arguments;
-    print("${arguments}");
     return CustomMaterialApp(
       home: Scaffold(
           appBar: CustomAppbar(context: context,
@@ -38,7 +35,7 @@ class _NavigationDemoState extends State<NavigationPage2> {
           body:Column(
             children: [
               ElevatedButton(
-                  onPressed: ()=>{GetNavigationUtils.navigateRightToLeftWithAllOff(NavigationPage3(),"NavigationPage3")},
+                  onPressed: ()=>{GetNavigationUtils.navigateRightToLeftWithAllOff(NavigationPage3(),"NavigationDemo")},
                   child: Text("跳转到第三个页面,从第三个页面点击返回将返回到第一个页面")
               ),
               ElevatedButton(

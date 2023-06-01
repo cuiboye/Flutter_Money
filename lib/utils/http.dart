@@ -82,7 +82,7 @@ class DioInstance {
     _dio?.get(uri, queryParameters: params,options:Options(responseType: ResponseType.plain)).then((response) {
       if (response.statusCode == 200) {
         if (success != null) {
-          print("33333 ${json.decode(response.data)}");
+          debugPrint("33333 ${json.decode(response.data)}");
           success(json.decode(response.data));
         }
       } else {

@@ -182,8 +182,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('App的生命周期', AppRecycleLifePage(), 'app_recyclelife'),
         //Widget的生命周期
         _item('Widget的生命周期', WidgetLifecycle(), 'widget_recyclelife'),
-        _item('navigation_page', NavigationDemo(), 'navigation_page'),
-        _item('GetX_State', GetXStateDemo(), 'getx_state_demo'),
+        _item('getx路由跳转', NavigationDemo(), 'navigation_page'),
+        _item('getx状态管理', GetXStateDemo(), 'getx_state_demo'),
         _item('Flutter和Native通信', ChannerMain(), 'channer_main'),
         _item('Webview以及和js交互', WebViewNativeDemo(), 'channer_main'),
         _item('InheritedWidget的使用', InheritedWidgetTestRoute(),

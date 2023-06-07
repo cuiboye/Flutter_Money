@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
+import 'package:flutter_money/wajiu/order_list_tabbarview_item.dart';
 
 class OrderListPage extends StatefulWidget {
   @override
@@ -100,7 +101,8 @@ class _OrderListPageState extends State<OrderListPage>
   List<Widget> _tabBarViews() {
     return list.map<Widget>((value) {
       return Center(
-        child: Text("hello"),
+        // child: Text("hello"),
+        child: NewsDioView(),
       );
     }).toList();
   }

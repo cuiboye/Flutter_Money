@@ -4,8 +4,8 @@ import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
-import 'package:flutter_money/widget/custom_container_layout.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:get/get.dart';
 
 // class Test extends StatelessWidget {
 //   const Test({Key? key}) : super(key: key);
@@ -402,4 +402,101 @@ class _TestState extends State<Test> {
 //   PartialCourseData.fromCourseData(CourseData courseData)
 //       : name = courseData.name,
 //         description = courseData.description;
+// }
+
+
+// abstract class INewsProvider {
+//   Future<Response<NewsPageListResponseEntity>> getNews();
+// }
+//
+// class NewsProvider extends BaseProvider implements INewsProvider {
+//   // 新闻分页
+//   // @override
+//   // Future<Response<NewsPageListResponseEntity>> getNews() => get("/news");
+//   @override
+//   Future<Response<NewsPageListResponseEntity>> getNews() async {
+//     var response = await get("/news");
+//     var data = NewsPageListResponseEntity.fromJson(response.body);
+//     return Response(
+//       statusCode: response.statusCode,
+//       statusText: response.statusText,
+//       body: data,
+//     );
+//   }
+// }
+// class NewsProvider extends BaseProvider implements INewsProvider {
+//   // 新闻分页
+//   // @override
+//   // Future<Response<NewsPageListResponseEntity>> getNews() => get("/news");
+//   @override
+//   Future<Response<NewsPageListResponseEntity>> getNews() async {
+//     var response = await get("/news");
+//     var response = await post("/news");
+//     var data = NewsPageListResponseEntity.fromJson(response.body);
+//     return Response(
+//       statusCode: response.statusCode,
+//       statusText: response.statusText,
+//       body: data,
+//     );
+//   }
+// }
+// //
+// //
+// class BaseProvider extends GetConnect {
+//   @override
+//   void onInit() {
+//     httpClient.baseUrl = SERVER_API_URL;
+//
+//     // 请求拦截
+//     httpClient.addRequestModifier<void>((request) {
+//       request.headers['Authorization'] = '12345678';
+//       return request;
+//     });
+//
+//     // 响应拦截
+//     httpClient.addResponseModifier((request, response) {
+//       return response;
+//     });
+//   }
+// }
+// class NewsController extends SuperController{
+//   @override
+//   void onInit() {
+//     super.onInit();
+//   }
+//
+//   @override
+//   void onPaused() {
+//   }
+// }
+//
+// class NewsController2 extends GetxController{
+//   @override
+//   void onInit() {
+//     super.onInit();
+//   }
+//   onpau
+//
+// }
+//
+// class NewsStateMixinController extends GetxController
+//     with StateMixin<NewsPageListResponseEntity> {
+//   final NewsStateMixinProvider provider;
+//   NewsStateMixinController({required this.provider});
+//
+//   // 拉取新闻列表
+//   Future<void> getNewsPageList() async {
+//     // 获取数据
+//     final Response response = await provider.getNews();
+//
+//     // 判断，如果有错误
+//     if (response.hasError) {
+//       // 改变数据，传入错误状态，在ui中会处理这些错误
+//       change(null, status: RxStatus.error(response.statusText));
+//     } else {
+//       // 否则，存储数据，改变状态为成功
+//       var data = NewsPageListResponseEntity.fromJson(response.body);
+//       change(data, status: RxStatus.success());
+//     }
+//   }
 // }

@@ -26,5 +26,6 @@ class ApiService{
   static const String getOrderList = "/danyuan/getOrderList";
   //余额
   static const String getBalanceData = "/mine/getBalancedata";
-
+  //我的订单
+  static const String getMyDelivery = "/api/buyCenter/myDelivery";
 }

@@ -282,3 +282,223 @@ name ??= "lisi";//当且仅当name为null时才赋值
 var result = name ?? "zhangsan";//name不为空返回name的值，name为空返回"zhangsan"
 
 
+GetX相关：
+GetX为我们提供了GetxController,GetxController主要的作用是用于UI代码与业务逻辑分离开来。
+GetX的使用：
+1）依赖注入
+依赖注入的目的?
+依赖注入是为了将依赖组件的配置和使用分离开，以降低使用者与依赖之间的耦合度。
+
+
+依赖注入的好处？
+重用代码
+更容易换掉依赖项的实现。由于控制反转，代码重用得以改进，并且类不再控制其依赖项的创建方式，而是支持任何配置。
+易于重构
+依赖项的创建分离，可以在创建对象时或编译时进行检查、修改，一处修改，使用处不需修改。
+易于测试
+类不管理其依赖项，因此在测试时，您可以传入不同的实现以测试所有不同用例。
+
+Get有一个简单而强大的依赖管理器，它允许你只用1行代码就能检索到 Controller 或者需要依赖的类，不需要提供上下文，不需要
+在 inheritedWidget 的子节点。
+注入依赖：Get.put<PutController>(PutController());
+获取依赖：Get.find<PutController>();
+
+Get.put()这是个立即注入内存的注入方法。调用后已经注入到内存中。
+通常Get.put()的实例的生命周期和 put 所在的 Widget 生命周期绑定，如果在全局 （main 方法里）put，那么这个实例就一直
+存在。如果在一个 Widget 里 put ，那么这个那么这个 Widget 从内存中删除，这个实例也会被销毁。注意，这里是删除，并不
+是dispose。
+
+Get.lazyPut
+懒加载一个依赖，只有在使用时才会被实例化。适用于不确定是否会被使用的依赖或者计算高昂的依赖。
+Get.lazyPut<LazyController>(() => LazyController());
+LazyController 在这时候并不会被创建，而是等到你使用的时候才会被 initialized，也就是执行下面这句话的
+时候才 initialized：
+Get.find<LazyController>();
+在使用后，使用时的 Wdiget 的生命周期结束，也就是这个 Widget dispose，这个实例就会被销毁。
+如果在一个 Widget 里 find，然后退出这个 widget，此时这个实例也被销毁，再进入另一个路由的 Widget，再次 find，GetX会
+打印错误信息，提醒没有 put 。及时全局注入，也一样。可以理解为， Get.lazyPut 注入的实例的生命周期是和在Get.find时的上
+下文所绑定。
+
+Get.putAsync
+注入一个异步创建的实例。比如SharedPreferences。
+Get.putAsync<SharedPreferences>(() async {
+    final sp = await SharedPreferences.getInstance();
+    return sp;
+  });
+
+===================Bindings类  start=======================
+上面实现了依赖注入和使用，但是和前面讲的手动注入一样，为了生命周期和使用的 Widget 绑定，需要在 Widget 里注入和使用，并
+没有完全解耦。要实现自动注入，我们就需要这个类。
+创建一个类并实现Binding
+class InjectSimpleBinding implements Bindings {}
+因为Bindings是抽象方法，所以要ide会提示要实现dependencies。在里面注入我们需要的实例：
+class InjectSimpleBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<Api>(() => Api());
+    Get.lazyPut<InjectSimpleController>(() => InjectSimpleController());
+  }
+}
+通知路由，我们要使用该 Binding 来建立路由管理器、依赖关系和状态之间的连接。
+这里有两种方式，如果使用的是命名路由表：
+GetPage(
+  name: Routes.INJECT,
+  page: () => InjectSimplePage(),
+  binding:InjectSimpleBinding(),
+),
+如果是直接跳转：
+Get.to(InjectSimplePage(), binding: InjectSimpleBinding());
+
+现在，我们不必再担心应用程序的内存管理，Get将为我们做这件事。
+上面我们注入依赖解耦了，但是获取还是略显不方便，GetX 也为我们考虑到了。GetView完美的搭配 Bindings。
+class InjectSimplePage extends GetView<InjectSimpleController> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('MyPage')),
+      body: Center(
+        child: Obx(() => Text(controller.obj.toString())),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.getAge();
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+这里完全没有Get.find，但是可以直接使用controller，因为GetView里封装好了：
+abstract class GetView<T> extends StatelessWidget {
+  const GetView({Key key}) : super(key: key);
+
+  final String tag = null;
+
+  T get controller => GetInstance().find<T>(tag: tag);
+
+  @override
+  Widget build(BuildContext context);
+}
+当然，也许有时候觉得每次声明一个 Bingings 类也很麻烦，那么可以使用 BindingsBuilder ，这样就可以简单地使用一
+个函数来实例化任何想要注入的东西。
+  GetPage(
+    name: '/details',
+    page: () => DetailsView(),
+    binding: BindingsBuilder(() => {
+      Get.lazyPut<DetailsController>(() => DetailsController());
+    }),
+Bindings的工作原理?
+Bindings 会创建过渡性工厂，在点击进入另一个页面的那一刻，这些工厂就会被创建，一旦路由过渡动画发生，就会被销毁。 工厂占
+用的内存很少，它们并不持有实例，而是一个具有我们想要的那个类的 "形状"的函数。 这在内存上的成本很低，但由于这个库的目的
+是用最少的资源获得最大的性能，所以Get连工厂都默认删除。
+
+而 GetX 因为不需要上下文，突破了InheritedWidget的限制，我们可以在全局和模块间共享状态，这正是 BLoc 、Provider 等
+框架的短板。
+可以把GetxController当做ChangeNotifier
+
+把一个变量变得可观察，变量每次改变的时候，使用它的小部件就会被更新：
+1）通过 .obs 
+var name = '新垣结衣'.obs;
+通过 Obx 或者 GetX 包裹并使用响应式变量的控件，在变量改变的时候就会被更新：
+Obx (() => Text (controller.name));
+2）使用 Rx{Type}
+final name = RxString('');
+3）使用 Rx，规定泛型 Rx
+final name = Rx<String>('');
+//自定义类 - 可以是任何类
+final user = Rx<User>();
+
+将一个对象转变成可观察的，也有2种方法：
+可以将我们的类值转换为 obs
+ini复制代码class RxUser {
+  final name = "Camila".obs;
+  final age = 18.obs;
+}
+
+或者可以将整个类转换为一个可观察的类。
+php复制代码class User {
+  User({String name, int age});
+  var name;
+  var age;
+}
+//实例化时。
+final user = User(name: "Camila", age: 18).obs;
+
+注意，转化为可观察的变量后，它的类型不再是原生类型，所以取值不能用变量本身，而是.value
+
+
+使用了GetBuilder这个 Widget 包裹了页面，在 init初始化SimpleController,然后每次点击，都会更新builder对应
+的 Widget ，GetxController通过update()更新GetBuilder。
+
+GetxController的生命周期？
+class GetBuilderCountController extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+  }
+  @override
+  void onReady() {
+    super.onReady();
+  }
+  @override
+  void onClose() {
+    super.onClose();
+  }
+}
+
+GetX是一个超轻和强大的解决方案。它结合了高性能状态管理、智能依赖注入和路由管理，快捷实用。
+1）GetX 专注于性能和最少的资源消耗。GetX 不使用 Streams 或 ChangeNotifier。
+2）它将节省开发时间，并提供您的应用程序可以提供的最大性能。使用GetX可以不用关心从内存中删除控制器。
+3）GetX 可以将视图和逻辑、依赖注入和导航的完全解耦。路由之间导航中不需要上下文，所以不依赖于
+小部件树。不需要通过MultiProviders注入到小部件树中。
+
+如果仅使用 Get 进行状态管理或依赖管理，则无需使用 GetMaterialApp。GetMaterialApp 对于路由、snackbars、国际
+化、bottomSheets、对话框以及与路由和缺少上下文相关的高级 api 是必需的。
+
+创建视图，使用 StatelessWidget 并节省一些 RAM(节省内存)，有了 Get，您可能不再需要使用 StatefulWidget。
+
+使用Get.put()实例化你的类，使它对所有的“子”路由（跳转到的后面的路由）都可用：
+Get.put<PutController>(PutController());
+你可以让Get找到一个正在被其他页面使用的Controller，并将它返回给你。
+
+Get有两个不同的状态管理器:简单状态管理器(我们称之为GetBuilder)和响应状态管理器(GetX/Obx)。
+
+GetConnect：封装了Dio
+
+ValueBuilder:StatefulWidget的简化版，通过updateFn替代setState来更新数据
+
+StateMixin:处理UI状态的另一种方法是使用StateMixin<T>. 要实现它，请使用with添加StateMixin<T> 到允许 T 模型的控制器。
+class Controller extends GetController with StateMixin<User>{}
+当状态需要改变时，可以通过调用change来更新UI
+change(data, status: RxStatus.success());
+RxStatus的status有下面几个:
+RxStatus.loading();
+RxStatus.success();
+RxStatus.empty();
+RxStatus.error('message');
+在View中这样使用：
+class OtherClass extends GetView<Controller> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: controller.obx(
+        (state)=>Text(state.name),
+        
+        // here you can put your custom loading indicator, but
+        // by default would be Center(child:CircularProgressIndicator())
+        onLoading: CustomLoadingIndicator(),
+        onEmpty: Text('No data found'),
+
+        // here also you can set your own error widget, but by
+        // default will be an Center(child:Text(error))
+        onError: (error)=>Text(error),
+      ),
+    );
+}
+
+GetView：它是一个const Stateless，可以得到一个已经注册的Controller
+
+
+get2.0之后，RxController 和 GetBuilder 现在已经合并，不需要记住要使用哪个控制器，只需使用 GetxController，它将用
+于简单的状态管理和响应式。

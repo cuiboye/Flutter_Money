@@ -1,26 +1,34 @@
-class WajiuProductListModel {
+class WajiuProductListNewModel {
   final Result? result;
   final int states;
   final String msg;
 
-  WajiuProductListModel({
+  WajiuProductListNewModel({
     required this.result,
     required this.states,
     required this.msg,
   });
 
-  factory WajiuProductListModel.fromJson(Map<String, dynamic> json) {
-    print("aaaa");
-    return WajiuProductListModel(
+  factory WajiuProductListNewModel.fromJson(Map<String, dynamic> json) {
+    print("444411");
+
+    return WajiuProductListNewModel(
       result: Result.fromJson(json['result']), //对象需要这样设置来取值
       states: json['states'],
       msg: json['msg'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    "msg": msg,
+    "result": result?.toJson(),
+    "states": states,
+  };
 }
 
 class Result {
   List<DeliveryList> delivery = [];
+
   Result({
     required this.delivery,
   });
@@ -28,12 +36,16 @@ class Result {
   //List数据赋值步骤：
   //1）
   factory Result.fromJson(Map<String, dynamic> json) {
+    if( json==null || json.isEmpty ){
+      return Result(delivery: []);
+    }
+    print("4444");
+    print("$json");
     return Result(
       delivery: List<DeliveryList>.from(
           json["delivery"].map((x) => DeliveryList.fromJson(x))),
     );
   }
-
   //2）
   Map<String, dynamic> toJson() => {
         "delivery": List<dynamic>.from(delivery.map((x) => x.toJson())),
@@ -58,24 +70,24 @@ class DeliveryList {
 
   //2）
   Map<String, dynamic> toJson() => {
-    "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
-  };
+        "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
+      };
 }
 
 class OrdersList {
-  final String? orderNumber;
+  final String? unionOrderNumber;
 
   OrdersList({
-    required  this.orderNumber,
+    required this.unionOrderNumber,
   });
 
   factory OrdersList.fromJson(Map<String, dynamic> json) {
     return OrdersList(
-      orderNumber: json['orderNumber'],
+      unionOrderNumber: json['unionOrderNumber'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "orderNumber": orderNumber,
-  };
+        "unionOrderNumber": unionOrderNumber,
+      };
 }

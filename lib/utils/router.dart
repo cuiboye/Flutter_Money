@@ -13,6 +13,8 @@ import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
+import 'package:flutter_money/getbuilder_view.dart';
+import 'package:flutter_money/getx_work_view.dart';
 import 'package:flutter_money/home_page.dart';
 import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/http/dio_demo.dart';
@@ -43,6 +45,8 @@ import 'package:flutter_money/mediaquery_youhua.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/route_demo_page.dart';
+import 'package:flutter_money/valuebuilder_view.dart';
+import 'package:flutter_money/view/statemixin_view.dart';
 import 'package:flutter_money/wajiu/list_anim_demo_page.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
@@ -68,6 +72,10 @@ import 'package:flutter_money/wajiu/order_list_page.dart';
 import 'package:flutter_money/wajiu/page/my_balance.dart';
 import 'package:flutter_money/wajiu/page_mingzhuangxianhuo.dart';
 import 'package:flutter_money/wajiu/sliver_list_demo_page.dart';
+import 'package:flutter_money/wajiu/view/getconnect_pagev_view.dart';
+import 'package:flutter_money/wajiu/view/getx_first_page.dart';
+import 'package:flutter_money/wajiu/view/getx_second_page.dart';
+import 'package:flutter_money/wajiu/view/getx_with_dio_view.dart';
 import 'package:flutter_money/wajiu/view/mingzhuangxianhuo_list_page.dart';
 import 'package:flutter_money/wajiu/view/vp_list_demo_page.dart';
 import 'package:flutter_money/wajiu/view/wajiu_goods_detail.dart';
@@ -80,6 +88,8 @@ import 'package:flutter_money/wajiu/wajiu_splash_page.dart';
 import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/button_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
+import 'package:flutter_money/widget/getx_obs_demo.dart';
+import 'package:flutter_money/widget/getxcontroller_demo.dart';
 import 'package:flutter_money/widget/icon_demo.dart';
 import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/input_add_form.dart';
@@ -245,6 +255,16 @@ RouterUtils {
       "pull_refresh_main": (BuildContext context) => PullRefreshMain(),
       "device_info": (BuildContext context) => DeviceInfoMain(),
       "homepage_widget": (BuildContext context) => HomePageWidget(),
+      "getx_obs_demo": (BuildContext context) => GetXObsDemo(),
+      "getxcontroller_demo": (BuildContext context) => GetxControllerDemo(),
+      "getbuilder_view": (BuildContext context) => GetBuilderView(),
+      "valuebuilder_view": (BuildContext context) => ValueBuilderView(),
+      "stateworkers_view": (BuildContext context) => StateWorkersView(),
+      "getx_with_dio_view": (BuildContext context) => GetXWithDioView(),
+      "getx_first_page_view": (BuildContext context) => GetxFirstPageView(),
+      "getx_second_page_view": (BuildContext context) => GetxSecondPageView(),
+      "getconnect_page_view": (BuildContext context) => GetConnectPageView(),
+      "statemixin_view": (BuildContext context) => StateMixinView(),
     };
     return routes;
   }

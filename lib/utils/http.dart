@@ -139,13 +139,13 @@ class DioInstance {
       params["req_token"] = "";
       params["systemType"] = "wajiu.ios";
     }else{
-      params["appVersion"] = "3.80.5";
+      params["appVersion"] = "3.80.7";
       params["systemType"] = "wajiu.android";
       params["macAddress"] = "E5:B0:R3:B7:02:13";
-      getLoginToken().then((value) {
-        // params["req_token"] =Uri.encodeComponent(value??"");
-        params["req_token"] ="60R64HMPXUjGBQikTPRZH5z5MdBHGMfFSHPlQcZLBt9sNuTyEsmhbw%253D%253D";
-      });
+      // getLoginToken().then((value) {
+      //   // params["req_token"] =Uri.encodeComponent(value??"");
+      //   params["req_token"] ="60R64HMPXUjGBQikTPRZH5z5MdBHGMfF9HPXdPnGedSN8NHbvoYneA%3D%3D";
+      // });
       params["deviceID"] = "02ffff10102b2ff0263d393677fc1b7270d9e08c8f";
     }
     return params;

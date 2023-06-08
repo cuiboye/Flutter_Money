@@ -1,14 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_money/wajiu/model/order_list_item_new_model.dart';
+import 'package:flutter_money/wajiu/model/orderlist.dart';
+import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 import 'package:get/get.dart';
 
 class BaseProvider extends GetConnect {
   @override
   void onInit() {
     super.onInit();
-    httpClient.defaultDecoder =
-        (val) => WajiuProductListNewModel.fromJson(val as Map<String, dynamic>);
+    // httpClient.defaultDecoder =
+    //     (val) => OrdertListNewModel.fromJson(val as Map<String, dynamic>);
     //baseurl
     httpClient.baseUrl = "https://wjapp.iopenx.com/";
 

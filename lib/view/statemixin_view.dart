@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/controller/statemixin_controller.dart';
-import 'package:flutter_money/wajiu/model/order_list_item_new_model.dart';
+import 'package:flutter_money/provide/statemixin_provider.dart';
+import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 
 import 'package:get/get.dart';
 class StateMixinView extends GetView<StateMinxinController> {
   StateMixinView({Key? key}) : super(key: key);
 
-  _buildListView(WajiuProductListNewModel? model) {
+  _buildListView(OrdertListNewModel? model) {
     print("44ss");
-    List<DeliveryList>  deliveryList = model?.result?.delivery??[];
+    List<ListBean> deliveryList = model?.result?.delivery??[];
     return ListView.separated(
-      itemCount: deliveryList.length,
+      itemCount: 5,
       itemBuilder: (context, index) {
-        final DeliveryList item = deliveryList[index];
-        return ListTile(
-          onTap: () => null,
-          title: Text(""),
-          trailing: Text("分类"),
-        );
+        // final DeliveryList item = deliveryList[index];
+        return Text(deliveryList[index]?.unionOrderNumber??"");
       },
       separatorBuilder: (BuildContext context, int index) {
         return Divider();
@@ -27,28 +24,16 @@ class StateMixinView extends GetView<StateMinxinController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("GetConnect Page"),
-      ),
-      body: controller.obx(
-            (state) => _buildListView(state),
-        onEmpty: Text("onEmpty"),
-        onLoading: Center(
-          child: Column(
-            children: [
-              Text("没有数据"),
-              ElevatedButton(
-                onPressed: () {
-                  controller.getOrderListData();
-                },
-                child: Text('拉取数据111'),
-              ),
-            ],
-          ),
+
+    Get.lazyPut<StateMixinProvider>(() => StateMixinProvider());
+    Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.find()));
+
+    return controller.obx((state) => _buildListView(state),
+        onEmpty: const Center(
+          child: Text("暂无数据"),
         ),
-        onError: (err) => Text(err.toString()),
-      ),
+        onLoading: const Text("加载中"),
+        onError: (err) => Text(err.toString())
     );
   }
 }

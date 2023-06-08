@@ -502,3 +502,12 @@ GetView：它是一个const Stateless，可以得到一个已经注册的Control
 
 get2.0之后，RxController 和 GetBuilder 现在已经合并，不需要记住要使用哪个控制器，只需使用 GetxController，它将用
 于简单的状态管理和响应式。
+
+如果代码中纯跳转一个页面的话可以使用GetView+GetxController+Bindings+GetConnect的方式请
+求数据，可以使用如下方式跳转：
+Get.to(StateMixinView(),binding: StateMixinBinding())
+但是如果是TabBar+TabBarView的方式，在TabBarView的item页面中请求数据的话，那么就不能使用上面的方式了，这个时候就
+需要把binding中的设置controller懒加载的语句放在view页面中：
+Get.lazyPut<StateMixinProvider>(() => StateMixinProvider());
+Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.find()));
+可以参考 order_list_page.dart 这个文件

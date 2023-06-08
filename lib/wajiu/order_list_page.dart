@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
+import 'package:flutter_money/view/statemixin_view.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/order_list_tabbarview_item.dart';
 
@@ -102,7 +103,8 @@ class _OrderListPageState extends State<OrderListPage>
     return list.map<Widget>((value) {
       return Center(
         // child: Text("hello"),
-        child: NewsDioView(),
+        // child: NewsDioView(),
+        child: StateMixinView(),
       );
     }).toList();
   }

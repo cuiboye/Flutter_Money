@@ -14,7 +14,7 @@ class StateMixinProvider extends BaseProvider implements IStateMixinProvider {
   Future<Response> getOrderListData() {
     var params = Map<String, dynamic>();
 
-    params["req_token"] = "60R64HMPXUjGBQikTPRZH5z5MdBHGMfFP32gCeLHZLT05B0y49hqmrA==1";
+    params["req_token"] = "60R64HMPXUjGBQikTPRZH5z5MdBHGMfFGLwH1fTTsZOfsxBMi1gimQ==";
     params["req_orderType"] = "1";
     params["page.size"] = "20";
     params["page"] = "1";

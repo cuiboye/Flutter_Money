@@ -104,7 +104,7 @@ class _OrderListPageState extends State<OrderListPage>
       return Center(
         // child: Text("hello"),
         // child: NewsDioView(),
-        child: StateMixinView(),
+        child: StateMixinView(value),
       );
     }).toList();
   }

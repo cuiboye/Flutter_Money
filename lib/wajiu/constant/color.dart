@@ -37,4 +37,6 @@ class ColorConstant{
   static const Color color_757575 = Color(0xff757575);
   static const Color color_f62d2d = Color(0xfff62d2d);
   static const Color color_c0c0c0 = Color(0xffc0c0c0);
+  static const Color color_black = Color(0xff000000);
+  static const Color color_dddddd = Color(0xffdddddd);
 }

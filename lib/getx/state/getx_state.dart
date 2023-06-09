@@ -78,7 +78,7 @@ class _GetXStateDemoState extends State<GetXStateDemo> {
               ),
               ElevatedButton(
                   onPressed: () =>
-                      Get.to(StateMixinView(),binding: StateMixinBinding()),
+                      Get.to(StateMixinView(""),binding: StateMixinBinding()),
                   child: Text("StateMixin+change()")
               ),
             ],

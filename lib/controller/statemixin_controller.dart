@@ -13,13 +13,14 @@ class StateMinxinController extends GetxController
   void onInit() {
     //这个接口在这里调用是因为一进页面就要请求数据，如果不是一进页面请求数据的话，可以在view中通
     //过controller.getOrderListData();的方式来请求接口
-    getOrderListData();
+    // getOrderListData();
   }
 
-  Future<void> getOrderListData() async {
+  Future<void> getOrderListData(String orderType) async {
     //获取数据
     final Response response = await provider.getOrderListData();
     print("777aa");
+    print("orderType $orderType");
     if (response.hasError) {
       //如果有错误
       //改变数据，传入状态，在UI中会处理这些错误

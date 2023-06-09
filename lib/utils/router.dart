@@ -264,7 +264,7 @@ RouterUtils {
       "getx_first_page_view": (BuildContext context) => GetxFirstPageView(),
       "getx_second_page_view": (BuildContext context) => GetxSecondPageView(),
       "getconnect_page_view": (BuildContext context) => GetConnectPageView(),
-      "statemixin_view": (BuildContext context) => StateMixinView(),
+      "statemixin_view": (BuildContext context) => StateMixinView(""),
     };
     return routes;
   }

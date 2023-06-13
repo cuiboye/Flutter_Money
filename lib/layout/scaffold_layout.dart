@@ -60,7 +60,7 @@ class _ScaffoldLayoutState extends State<ScaffoldLayout> {
         },
         type: BottomNavigationBarType.fixed,//这里需要设置为fixed，否则看不到文字
         items: [
-          _itemBottomNavigation('首页', Icons.home),
+          _itemBottomNavigation('首页1', Icons.home),
           _itemBottomNavigation('分类', Icons.list),
           _itemBottomNavigation('信息台', Icons.info_rounded),
           _itemBottomNavigation('搜索', Icons.search),

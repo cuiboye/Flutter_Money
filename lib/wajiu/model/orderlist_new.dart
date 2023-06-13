@@ -6,7 +6,7 @@ part 'orderlist_new.g.dart';
 class OrdertListNewModel{
 
   @JsonKey(name: 'msg')
-  String msg;
+  String? msg;
 
   @JsonKey(name: 'result')
   Result? result;
@@ -35,42 +35,55 @@ class Result{
 
 @JsonSerializable()
 class ListBean {
-
-  // @JsonKey(name: 'goodsLists')
-  // List<GoodsLists> goodsLists;
-
   @JsonKey(name: 'unionOrderNumber')
   String unionOrderNumber;
 
-  ListBean(this.unionOrderNumber);
+  @JsonKey(name: 'orderStatusStr')
+  String orderStatusStr;
+
+  @JsonKey(name: 'orders')
+  List<OrdersBean> orders;
+
+  ListBean(this.unionOrderNumber,this.orderStatusStr,this.orders);
 
   factory ListBean.fromJson(Map<String, dynamic> srcJson) => _$ListBeanFromJson(srcJson);
+}
 
+@JsonSerializable()
+class OrdersBean {
+  @JsonKey(name: 'orderProduct')
+  List<OrderListProductBean> orderProduct;
+
+  @JsonKey(name: 'orderStatusStr')
+  String orderStatusStr;
+
+  @JsonKey(name: 'orderTotalPriceStr')
+  String orderTotalPriceStr;
+
+  OrdersBean(this.orderProduct,this.orderStatusStr,this.orderTotalPriceStr);
+
+  factory OrdersBean.fromJson(Map<String, dynamic> srcJson) => _$OrdersBeanFromJson(srcJson);
 }
 
 
 @JsonSerializable()
-class GoodsLists{
+class OrderListProductBean {
+  @JsonKey(name: 'cname')
+  String? cname;
 
-  @JsonKey(name: 'beforePrice')
-  String beforePrice;
+  @JsonKey(name: 'stringOnePrice')
+  String? stringOnePrice;
 
-  @JsonKey(name: 'currentPrice')
-  String currentPrice;
+  @JsonKey(name: 'orderTypeStr')
+  String? orderTypeStr;
 
-  @JsonKey(name: 'goodsName')
-  String goodsName;
+  @JsonKey(name: 'isJiuZhouBianName')
+  String? isJiuZhouBianName;
 
-  @JsonKey(name: 'imagePath')
-  String imagePath;
+  @JsonKey(name: 'picture')
+  String? picture;
 
-  @JsonKey(name: 'type')
-  int type;
+  OrderListProductBean(this.cname,this.stringOnePrice,this.orderTypeStr,this.isJiuZhouBianName,this.picture);
 
-  GoodsLists(this.beforePrice,this.currentPrice,this.goodsName,this.imagePath,this.type,);
-
-  factory GoodsLists.fromJson(Map<String, dynamic> srcJson) => _$GoodsListsFromJson(srcJson);
-
+  factory OrderListProductBean.fromJson(Map<String, dynamic> srcJson) => _$OrderListProductBeanFromJson(srcJson);
 }
-
-

@@ -8,7 +8,7 @@ part of 'orderlist_new.dart';
 
 OrdertListNewModel _$OrdertListNewModelFromJson(Map<String, dynamic> json) =>
     OrdertListNewModel(
-      json['msg'] as String,
+      json['msg'] as String?,
       json['result'] == null
           ? null
           : Result.fromJson(json['result'] as Map<String, dynamic>),
@@ -34,25 +34,49 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
 
 ListBean _$ListBeanFromJson(Map<String, dynamic> json) => ListBean(
       json['unionOrderNumber'] as String,
+      json['orderStatusStr'] as String,
+      (json['orders'] as List<dynamic>)
+          .map((e) => OrdersBean.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ListBeanToJson(ListBean instance) => <String, dynamic>{
       'unionOrderNumber': instance.unionOrderNumber,
+      'orderStatusStr': instance.orderStatusStr,
+      'orders': instance.orders,
     };
 
-GoodsLists _$GoodsListsFromJson(Map<String, dynamic> json) => GoodsLists(
-      json['beforePrice'] as String,
-      json['currentPrice'] as String,
-      json['goodsName'] as String,
-      json['imagePath'] as String,
-      json['type'] as int,
+OrdersBean _$OrdersBeanFromJson(Map<String, dynamic> json) => OrdersBean(
+      (json['orderProduct'] as List<dynamic>)
+          .map((e) => OrderListProductBean.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['orderStatusStr'] as String,
+      json['orderTotalPriceStr'] as String,
     );
 
-Map<String, dynamic> _$GoodsListsToJson(GoodsLists instance) =>
+Map<String, dynamic> _$OrdersBeanToJson(OrdersBean instance) =>
     <String, dynamic>{
-      'beforePrice': instance.beforePrice,
-      'currentPrice': instance.currentPrice,
-      'goodsName': instance.goodsName,
-      'imagePath': instance.imagePath,
-      'type': instance.type,
+      'orderProduct': instance.orderProduct,
+      'orderStatusStr': instance.orderStatusStr,
+      'orderTotalPriceStr': instance.orderTotalPriceStr,
+    };
+
+OrderListProductBean _$OrderListProductBeanFromJson(
+        Map<String, dynamic> json) =>
+    OrderListProductBean(
+      json['cname'] as String?,
+      json['stringOnePrice'] as String?,
+      json['orderTypeStr'] as String?,
+      json['isJiuZhouBianName'] as String?,
+      json['picture'] as String?,
+    );
+
+Map<String, dynamic> _$OrderListProductBeanToJson(
+        OrderListProductBean instance) =>
+    <String, dynamic>{
+      'cname': instance.cname,
+      'stringOnePrice': instance.stringOnePrice,
+      'orderTypeStr': instance.orderTypeStr,
+      'isJiuZhouBianName': instance.isJiuZhouBianName,
+      'picture': instance.picture,
     };

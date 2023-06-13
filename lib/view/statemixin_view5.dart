@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/controller/statemixin_controller.dart';
+import 'package:flutter_money/controller/statemixin_controller5.dart';
 import 'package:flutter_money/provide/statemixin_provider.dart';
+import 'package:flutter_money/provide/statemixin_provider5.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
@@ -10,14 +12,14 @@ import 'package:flutter_money/widget/dash_line.dart';
 import 'package:get/get.dart';
 
 
-class PageItemWidget extends StatefulWidget{
+class PageItemWidget5 extends StatefulWidget{
   String orderType;
-  PageItemWidget(this.orderType);
+  PageItemWidget5(this.orderType);
   @override
-  _PageItemWidgetState createState() => _PageItemWidgetState();
+  _PageItemWidget5State createState() => _PageItemWidget5State();
 }
 
-class _PageItemWidgetState extends State<PageItemWidget>  with AutomaticKeepAliveClientMixin{
+class _PageItemWidget5State extends State<PageItemWidget5>  with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     return StateMixinView(widget.orderType);
@@ -27,7 +29,7 @@ class _PageItemWidgetState extends State<PageItemWidget>  with AutomaticKeepAliv
   bool get wantKeepAlive => true;
 }
 
-class StateMixinView extends GetView<StateMinxinController>{
+class StateMixinView extends GetView<StateMinxinController5>{
   String orderType;
   StateMixinView(this.orderType);
   _buildListView(OrdertListNewModel? model) {
@@ -248,9 +250,9 @@ class StateMixinView extends GetView<StateMinxinController>{
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<StateMixinProvider>(() => StateMixinProvider());
-    Get.lazyPut<StateMinxinController>(
-        () => StateMinxinController(provider: Get.find()));
+    Get.lazyPut<StateMixinProvider5>(() => StateMixinProvider5());
+    Get.lazyPut<StateMinxinController5>(
+        () => StateMinxinController5(provider: Get.find()));
     controller.getOrderListData(orderType);
     return controller.obx(
         (state) => Container(
@@ -258,7 +260,7 @@ class StateMixinView extends GetView<StateMinxinController>{
               color: ColorConstant.color_ebebeb,
             ),
         onEmpty:  Center(
-          child: Text("您没有更多的订单 全部"),
+          child: Text("您没有更多的订单 未成功"),
         ),
         onLoading: const Text("加载中"),
         onError: (err) => Text(err.toString()));

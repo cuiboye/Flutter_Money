@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/view/statemixin_view.dart';
+import 'package:flutter_money/view/statemixin_view2.dart';
+import 'package:flutter_money/view/statemixin_view3.dart';
+import 'package:flutter_money/view/statemixin_view4.dart';
+import 'package:flutter_money/view/statemixin_view5.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/order_list_tabbarview_item.dart';
+import 'package:flutter_money/wajiu/widget/fix_tabbarview.dart';
 
 class OrderListPage extends StatefulWidget {
   @override
@@ -14,32 +19,42 @@ class OrderListPage extends StatefulWidget {
 class _OrderListPageState extends State<OrderListPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
-  bool get wantKeepAlive => true;//保持页面状态
+  bool get wantKeepAlive => true; //保持页面状态
 
   late TabController _tabController;
+
+  late PageController _pageController;
+
   int _select = 0; //选中tab小标
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: list.length);
+
     _tabController.addListener(() {
-      setState(() {
+      if(_tabController.indexIsChanging){
         _select = _tabController.index;
-        print("$_select");
-      });
+        _pageController.jumpToPage(_select);
+      }
     });
+    _pageController = PageController();
   }
+
   @override
   void dispose() {
     // 释放资源
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return CustomMaterialApp(
       home: Scaffold(
-        appBar: CustomAppbar(context: context,title: "订单列表",),
+          appBar: CustomAppbar(
+            context: context,
+            title: "订单列表",
+          ),
           body: Column(
             children: [
               Container(
@@ -48,22 +63,49 @@ class _OrderListPageState extends State<OrderListPage>
                 child: TabBar(
                     indicatorColor: Colors.transparent,
                     //指示器设置为透明色
-                    indicatorPadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    indicatorPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     isScrollable: true,
                     //设置可滑动
                     controller: _tabController,
                     onTap: (value) {
-                      setState(() {
-                        _select = value;
-                      });
+                      print("onTap $value");
+                     // setState(() {
+                     //   _select = value;
+                     //   _pageController.jumpToPage(value);
+                     // });
+                      _select = value;
+                      // setState(() {
+                      //   _select = value;
+                      //   _pageController.jumpToPage(value);
+                      // });
+                      // print("当前点击的下标为 $value");
+                      // _select = value;
+                      // setState(() {
+                      // });
+                      // setState(() {
+                      //   _select = _tabController.index;
+                      //   _pageController.jumpToPage(_select);
+                      // });
                     },
                     //tabs tab标签
                     tabs: tabs()),
               ),
-              Expanded(child: TabBarView(//相当于Android的ViewPager
-                controller: _tabController,
-                children: _tabBarViews(),
-              ),)
+              Expanded(
+                child: FixTabBarView(
+                    pageController: _pageController,
+                    tabController: _tabController,
+                    // children: _tabBarViews()
+                    children: [
+                      PageItemWidget("全部"),
+                      PageItemWidget2("待支付"),
+                      PageItemWidget3("已发货"),
+                      PageItemWidget4("已完成"),
+                      PageItemWidget5("未成功"),
+
+
+                      // PageItemWidget4("已完成"),
+                    ]),
+              ),
             ],
           )),
     );
@@ -84,27 +126,28 @@ class _OrderListPageState extends State<OrderListPage>
       listTab.add(
         Tab(
             child: Container(
-              height: 44,
-              child:Align(
-                child: Text(
-                  "${list[i]}",
-                  style: TextStyle(
-                      color: _select == i ? ColorConstant.systemColor: Colors.black38),
-                ),
-                alignment: Alignment.center,
-              ),
-            )),
+          height: 44,
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              list[i],
+              style: TextStyle(
+                  color: _select == i
+                      ? ColorConstant.systemColor
+                      : Colors.black38),
+            ),
+          ),
+        )),
       );
     }
     return listTab;
   }
 
   List<Widget> _tabBarViews() {
-    return list.map<Widget>((value) {
+    String str = list[_select];
+    return list.map<Widget>((String value) {
       return Center(
-        // child: Text("hello"),
-        // child: NewsDioView(),
-        child: StateMixinView(value),
+        child: PageItemWidget(value),
       );
     }).toList();
   }

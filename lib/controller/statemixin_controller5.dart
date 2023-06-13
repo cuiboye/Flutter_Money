@@ -1,15 +1,16 @@
 import 'package:flutter_money/provide/statemixin_provider.dart';
+import 'package:flutter_money/provide/statemixin_provider5.dart';
 import 'package:flutter_money/utils/log_utils.dart';
 import 'package:flutter_money/utils/wajiu_utils.dart';
 import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class StateMinxinController extends GetxController
+class StateMinxinController5 extends GetxController
     with StateMixin<OrdertListNewModel> {
-  final StateMixinProvider provider;
+  final StateMixinProvider5 provider;
 
-  StateMinxinController({required this.provider});
+  StateMinxinController5({required this.provider});
 
   @override
   void onInit() {

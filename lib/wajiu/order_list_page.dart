@@ -8,8 +8,8 @@ import 'package:flutter_money/view/statemixin_view3.dart';
 import 'package:flutter_money/view/statemixin_view4.dart';
 import 'package:flutter_money/view/statemixin_view5.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
-import 'package:flutter_money/wajiu/order_list_tabbarview_item.dart';
 import 'package:flutter_money/wajiu/widget/fix_tabbarview.dart';
+import 'package:get/get.dart';
 
 class OrderListPage extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class _OrderListPageState extends State<OrderListPage>
 
   late PageController _pageController;
 
-  int _select = 0; //选中tab小标
+  RxInt _select = 0.obs; //选中tab小标
   @override
   void initState() {
     super.initState();
@@ -33,8 +33,8 @@ class _OrderListPageState extends State<OrderListPage>
 
     _tabController.addListener(() {
       if(_tabController.indexIsChanging){
-        _select = _tabController.index;
-        _pageController.jumpToPage(_select);
+        _select.value = _tabController.index;
+        _pageController.jumpToPage(_select.value);
       }
     });
     _pageController = PageController();
@@ -69,23 +69,7 @@ class _OrderListPageState extends State<OrderListPage>
                     controller: _tabController,
                     onTap: (value) {
                       print("onTap $value");
-                     // setState(() {
-                     //   _select = value;
-                     //   _pageController.jumpToPage(value);
-                     // });
-                      _select = value;
-                      // setState(() {
-                      //   _select = value;
-                      //   _pageController.jumpToPage(value);
-                      // });
-                      // print("当前点击的下标为 $value");
-                      // _select = value;
-                      // setState(() {
-                      // });
-                      // setState(() {
-                      //   _select = _tabController.index;
-                      //   _pageController.jumpToPage(_select);
-                      // });
+                      _select.value = value;
                     },
                     //tabs tab标签
                     tabs: tabs()),
@@ -101,9 +85,6 @@ class _OrderListPageState extends State<OrderListPage>
                       PageItemWidget3("已发货"),
                       PageItemWidget4("已完成"),
                       PageItemWidget5("未成功"),
-
-
-                      // PageItemWidget4("已完成"),
                     ]),
               ),
             ],
@@ -129,13 +110,15 @@ class _OrderListPageState extends State<OrderListPage>
           height: 44,
           child: Align(
             alignment: Alignment.center,
-            child: Text(
-              list[i],
-              style: TextStyle(
-                  color: _select == i
-                      ? ColorConstant.systemColor
-                      : Colors.black38),
-            ),
+              child: Obx((){
+                return Text(
+                  list[i],
+                  style: TextStyle(
+                      color: _select.value == i
+                          ? ColorConstant.systemColor
+                          : Colors.black38),
+                );
+              }),
           ),
         )),
       );
@@ -144,7 +127,7 @@ class _OrderListPageState extends State<OrderListPage>
   }
 
   List<Widget> _tabBarViews() {
-    String str = list[_select];
+    String str = list[_select.value];
     return list.map<Widget>((String value) {
       return Center(
         child: PageItemWidget(value),

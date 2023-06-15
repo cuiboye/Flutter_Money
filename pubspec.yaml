@@ -91,6 +91,8 @@ dependencies:
   frame_animate_widget: ^1.0.0
   #自己写的插件-测试
   flutter_customappbar_plugin: ^0.0.2
+  # loading
+  flutter_easyloading: ^3.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

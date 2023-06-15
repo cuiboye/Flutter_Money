@@ -32,6 +32,7 @@ import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/utils/router.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
+import 'package:flutter_money/view/loading_view.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
 import 'package:flutter_money/webview_native.dart';
@@ -134,6 +135,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             }),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
+        _item('Loading', LoadingView(), 'loading_view'),
         _item('测试路由嵌套', RouteDemoPage(), 'routedemopage'),
         _item('下拉筛选', DropSelectDemoPage(), 'dropselectdemopage'),
         _item('StatelessWidget组件的使用', StatelessWidgetDemo(), 'statelesswidget'),

@@ -13,6 +13,7 @@ class StateMixinProvider3 extends BaseProvider implements IStateMixinProvider3 {
   @override
   Future<Response> getOrderListData(String orderType) {
     var params = Map<String, dynamic>();
+    print("orderType 3");
 
     params["req_token"] = "60R64HMPXUjGBQikTPRZH5z5MdBHGMfFGLwH1fTTsZOfsxBMi1gimQ==";
     params["req_orderType"] = "3";

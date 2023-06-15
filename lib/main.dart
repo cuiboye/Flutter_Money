@@ -5,6 +5,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_money/animation/custom_animation.dart';
 import 'package:flutter_money/home_page.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/utils/router.dart';
@@ -83,7 +85,10 @@ class _SplashState extends State<MyApp> with NavigatorObserver{
     if (Theme.of(context).platform == TargetPlatform.android) {
       // android 平台
       SystemUiOverlayStyle _style =
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: Colors.transparent
+      );
       SystemChrome.setSystemUIOverlayStyle(_style);
       print("当前设备平台为：${TargetPlatform.android}");
     }
@@ -105,7 +110,9 @@ class _SplashState extends State<MyApp> with NavigatorObserver{
           title: 'Flutter Demo',
           home: Image.asset("images/launchimage.jpg",fit: BoxFit.fill),
           routes: RouterUtils.getRouter(),
-          // // RouterUtils.getRouter()
+          builder: EasyLoading.init(),//初始化EasyLoading
+          // getPages: RouterUtils.getPages,
+          // initialRoute: "/main",
         );
       },
       // child: const HomePage(title: 'First Method'),

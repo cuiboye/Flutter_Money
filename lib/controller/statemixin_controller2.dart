@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_money/provide/statemixin_provider.dart';
 import 'package:flutter_money/provide/statemixin_provider2.dart';
 import 'package:flutter_money/utils/log_utils.dart';

@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_money/provide/statemixin_provider.dart';
 import 'package:flutter_money/utils/log_utils.dart';
 import 'package:flutter_money/utils/wajiu_utils.dart';
@@ -18,8 +19,10 @@ class StateMinxinController extends GetxController
     // getOrderListData("全部","全部");
   }
 
-  Future<void> getOrderListData(String orderType) async {
-    final Response response = await provider.getOrderListData(orderType);
+  Future<void> getOrderListData(int pageNum,String orderType) async {
+    EasyLoading.show(status: 'loading...');
+    final Response response = await provider.getOrderListData(pageNum,orderType);
+    EasyLoading.dismiss();
     if (response.hasError) {
       //如果有错误
       //改变数据，传入状态，在UI中会处理这些错误

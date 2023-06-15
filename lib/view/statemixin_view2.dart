@@ -8,6 +8,7 @@ import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/widget/cache_image_view_with_size.dart';
 import 'package:flutter_money/widget/dash_line.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -19,14 +20,15 @@ class PageItemWidget2 extends StatefulWidget{
   _PageItemWidget2State createState() => _PageItemWidget2State();
 }
 
-class _PageItemWidget2State extends State<PageItemWidget2>  with AutomaticKeepAliveClientMixin{
+// class _PageItemWidget2State extends State<PageItemWidget2>  with AutomaticKeepAliveClientMixin{
+class _PageItemWidget2State extends State<PageItemWidget2>{
   @override
   Widget build(BuildContext context) {
     return StateMixinView(widget.orderType);
     // return Text(widget.value);
   }
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 }
 
 class StateMixinView extends GetView<StateMinxinController2>{
@@ -259,10 +261,26 @@ class StateMixinView extends GetView<StateMinxinController2>{
               child: _buildListView(state),
               color: ColorConstant.color_ebebeb,
             ),
-        onEmpty:  Center(
-          child: Text("您没有更多的订单 待支付"),
+        onEmpty:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/ic_order_nothing.png",width: 80,),
+            Container(
+              margin: EdgeInsets.only(top: 10.w),
+              child: Text("您没有更多的订单"),
+            )
+          ],
         ),
-        onLoading: const Text("加载中"),
+        onLoading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/ic_order_nothing.png",width: 80,),
+            Container(
+              margin: EdgeInsets.only(top: 10.w),
+              child: const Text("您没有更多的订单"),
+            )
+          ],
+        ),
         onError: (err) => Text(err.toString()));
   }
 }

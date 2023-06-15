@@ -46,6 +46,7 @@ import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/route_demo_page.dart';
 import 'package:flutter_money/valuebuilder_view.dart';
+import 'package:flutter_money/view/loading_view.dart';
 import 'package:flutter_money/view/statemixin_view.dart';
 import 'package:flutter_money/wajiu/list_anim_demo_page.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
@@ -97,6 +98,7 @@ import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
+import 'package:get/get.dart';
 
 import '../getx/navigation/navigation_demo2.dart';
 import '../getx/state/getx_state.dart';
@@ -265,7 +267,13 @@ RouterUtils {
       "getx_second_page_view": (BuildContext context) => GetxSecondPageView(),
       "getconnect_page_view": (BuildContext context) => GetConnectPageView(),
       "statemixin_view": (BuildContext context) => StateMixinView(""),
+      "loading_view": (BuildContext context) => LoadingView(),
     };
     return routes;
   }
+
+  static  List<GetPage> getPages = [
+    GetPage(name: "/main", page: () => MyApp()),
+    GetPage(name: "/statelesswidget", page: () => StatelessWidgetDemo()),
+  ];
 }

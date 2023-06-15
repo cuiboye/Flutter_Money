@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_money/wajiu/model/order_list_item_new_model.dart';
 import 'package:flutter_money/wajiu/model/orderlist.dart';
 import 'package:flutter_money/wajiu/model/orderlist_new.dart';
@@ -35,11 +36,13 @@ class BaseProvider extends GetConnect {
       }
       httpClient.printInfo();
       httpClient.printError();
+      EasyLoading.show(status: '加载数据中...');
       return request;
     });
 
     //响应拦截器
     httpClient.addResponseModifier((request, response) {
+      EasyLoading.dismiss();
       return response;
     });
   }

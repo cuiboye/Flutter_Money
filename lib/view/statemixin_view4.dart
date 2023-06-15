@@ -8,6 +8,7 @@ import 'package:flutter_money/wajiu/model/orderlist_new.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/widget/cache_image_view_with_size.dart';
 import 'package:flutter_money/widget/dash_line.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 
@@ -259,10 +260,26 @@ class StateMixinView extends GetView<StateMinxinController4>{
               child: _buildListView(state),
               color: ColorConstant.color_ebebeb,
             ),
-        onEmpty:  Center(
-          child: Text("您没有更多的订单 已完成"),
+        onEmpty:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/ic_order_nothing.png",width: 80,),
+            Container(
+              margin: EdgeInsets.only(top: 10.w),
+              child: Text("您没有更多的订单"),
+            )
+          ],
         ),
-        onLoading: const Text("加载中"),
+        onLoading:   Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("images/ic_order_nothing.png",width: 80,),
+            Container(
+              margin: EdgeInsets.only(top: 10.w),
+              child: Text("您没有更多的订单"),
+            )
+          ],
+        ),
         onError: (err) => Text(err.toString()));
   }
 }

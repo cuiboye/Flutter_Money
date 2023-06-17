@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 import 'package:flutter_money/provide/provider_mvvm_example/provide_demo.dart';
+import 'package:flutter_money/utils/dialog_utils.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/page/account_topup.dart';
@@ -66,13 +67,27 @@ class _PageItemMineState extends State<PageItemMine> {
                         children: [
                           Row(
                             children: [
-                              ClipOval(
-                                child: SizedBox(
-                                  width: 80,
-                                  height: 80,
-                                  child: Image.asset(
-                                    "images/napolun.jpeg",
-                                    fit: BoxFit.cover,
+                              GestureDetector(
+                                onTap: () {
+                                  DialogUtils.showPictureDialog(
+                                      context, "确定要删除吗?", (index) {
+                                    if (index == 0) {
+                                      print("相册");
+                                    } else if (index == 1) {
+                                      print("拍照");
+                                    } else if (index == 2) {
+                                      print("取消");
+                                    }
+                                  });
+                                },
+                                child: ClipOval(
+                                  child: SizedBox(
+                                    width: 80,
+                                    height: 80,
+                                    child: Image.asset(
+                                      "images/napolun.jpeg",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),

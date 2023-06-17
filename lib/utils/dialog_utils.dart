@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
+import 'package:flutter_money/wajiu/widget/line_view.dart';
 
 class DialogUtils {
   static Future<T?> showListDialog<T>({
@@ -206,6 +207,64 @@ class DialogUtils {
 
   }
 
+  /**
+   * 选择 图片/相册
+   */
+  static Future<void> showPictureDialog(BuildContext context, String contentMsg,ValueChanged<int> onTap) {
+    return showYDCDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+            child: Container(
+                width: 260,
+                padding: EdgeInsets.all(2),
+                margin: EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  //用一个BoxDecoration装饰器提供背景图片
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: ()=>onTap(0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        color: ColorConstant.color_ffffff,
+                        padding: const EdgeInsets.only(top: 10,bottom: 10),
+                        child: const Text("相册"),
+                      ),
+                    ),
+                    LineView(line_height: 1,),
+                    GestureDetector(
+                      onTap: ()=>onTap(1),
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: double.infinity,
+                        color: ColorConstant.color_ffffff,
+                        padding: const EdgeInsets.only(top: 10,bottom: 10),
+                        child: const Text("拍照"),
+                      ),
+                    ),
+                    LineView(line_height: 1,),
+                    GestureDetector(
+                      onTap: ()=>onTap(2),
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: ColorConstant.color_ffffff,
+                        width: double.infinity,
+                        padding: const EdgeInsets.only(top: 10,bottom: 10),
+                        child: const Text("取消"),
+                      ),
+                    ),
+                  ],
+                )),
+          );
+        });
+
+  }
   /**
    * 底部弹出框
    */

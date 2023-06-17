@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/utils/sp.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ class SharedPreferenceWidget extends StatefulWidget {
 }
 
 class _SharedPreferenceWidgetState extends State<SharedPreferenceWidget> {
+  String? result = "";
   @override
   Widget build(BuildContext context) {
     return CustomMaterialApp(
@@ -18,12 +20,20 @@ class _SharedPreferenceWidgetState extends State<SharedPreferenceWidget> {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  save().then((value) => {
-                        if (value) {print("保存成功")}
-                      });
+                  // save().then((value) => {
+                  //       if (value) {print("保存成功")}
+                  //     });
+                  Sp().setString("mmmmmm", "hello");
                 },
-                child: Text("存储数据")),
-            ElevatedButton(onPressed: () => getData(), child: Text("获取数据")),
+                child: const Text("存储数据")),
+            ElevatedButton(onPressed: () {
+              // getData();
+              result = Sp().get<String>("mmmmmm");
+              setState(() {
+
+              });
+              print("获取的数据为 $result");
+            }, child:  Text("$result")),
             ElevatedButton(onPressed: () => deleteData(), child: Text("删除数据"))
           ],
         ),

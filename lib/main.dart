@@ -16,7 +16,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'extension.dart'; //扩展方法
+import 'extension.dart';
+import 'utils/sp.dart'; //扩展方法
 //Flutter 应用中 main 函数为应用程序的入口。main 函数中调用了runApp 方法，它的功能是启
 //动Flutter应用。runApp它接受一个 Widget参数，
 //main函数使用了(=>)符号，这是 Dart 中单行函数或方法的简写。
@@ -34,7 +35,7 @@ void main() async{
   Widget error = const Text('...rendering error...');
   error = Scaffold(body: Center(child: error));
   ErrorWidget.builder = (FlutterErrorDetails errorDetails) => error;
-
+  await Sp.perInit();
   runZoned<Future<void>>(() async {
     runApp(const MyApp());
   }, onError: (error, stackTrace) async {

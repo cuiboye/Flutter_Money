@@ -62,7 +62,8 @@ dependencies:
   sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
   get: ^4.6.5 #getx
   # 这个暂时先注释，安卓会报：Failed to transform activity-1.6.1.aar (androidx.activity:activity:1.6.1)
-#  image_picker: ^0.8.6+4 #选择图片
+  #选择图片
+#  image_picker: ^0.8.5+3 #选择图片
   animations: ^2.0.3 #flutter官方提供的动画
   webview_flutter: ^3.0.4 # webview以及和js交互
   flutter_pickers: ^2.1.8 #省市区选择器 参考：https://zhuanlan.zhihu.com/p/350350490

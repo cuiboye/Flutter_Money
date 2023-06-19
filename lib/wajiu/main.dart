@@ -13,6 +13,7 @@ import 'package:flutter_money/wajiu/wajiu_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../layout/pagerview_item.dart';
+import '../utils/sp.dart';
 import '../view/custom_appbar.dart';
 import '../view/custom_materialapp.dart';
 
@@ -61,19 +62,31 @@ class _WajiuMainPageState extends State<WajiuMainPage> {
         onTap: (index) {
           //点击"我的"，判断是否已经登录
           if (index == 4) {
-            getLoginToken().then((value) {
-              ToastUtils.showToast("=======>获取的token为：$value" );
-              print("=======>获取的token为：$value" );
-              if (TextUtils.isEmpty(value)) {
-                ToastUtils.showToast("请先登录");
-                GetNavigationUtils.navigateRightToLeft(WajiuLogin());
-              } else {
-                _controller.jumpToPage(index); //跳转到PageView的对应页面
-                setState(() {
-                  _currentIndex = index;
-                });
-              }
-            });
+            String? token = Sp().get(Constant.LOGIN_TOKEN);
+            ToastUtils.showToast("=======>获取的token为：$token" );
+            print("=======>获取的token为：$token" );
+            if (TextUtils.isEmpty(token)) {
+              ToastUtils.showToast("请先登录");
+              GetNavigationUtils.navigateRightToLeft(WajiuLogin());
+            } else {
+              _controller.jumpToPage(index); //跳转到PageView的对应页面
+              setState(() {
+                _currentIndex = index;
+              });
+            }
+            // getLoginToken().then((value) {
+            //   ToastUtils.showToast("=======>获取的token为：$value" );
+            //   print("=======>获取的token为：$value" );
+            //   if (TextUtils.isEmpty(value)) {
+            //     ToastUtils.showToast("请先登录");
+            //     GetNavigationUtils.navigateRightToLeft(WajiuLogin());
+            //   } else {
+            //     _controller.jumpToPage(index); //跳转到PageView的对应页面
+            //     setState(() {
+            //       _currentIndex = index;
+            //     });
+            //   }
+            // });
           } else {
             _controller.jumpToPage(index); //跳转到PageView的对应页面
             setState(() {

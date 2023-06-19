@@ -56,7 +56,7 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
       body: Center(
         child: Column(
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 setState(() {
                   _count += 1;

@@ -14,7 +14,7 @@ import 'package:flutter_money/wajiu/model/category_type_list_model.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 
 class PageViewItem extends StatefulWidget {
   @override
@@ -144,15 +144,16 @@ class _PageViewItemState extends State<PageViewItem>{
         width: double.infinity,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Swiper(
-              onTap: (index) {
-              },
-              itemCount:  bannerList.length,
-              autoplay: false,
-              itemBuilder: (BuildContext context, int index) {
-                return CacheImageView(url:bannerList[index]?.name ?? "", boxFit: BoxFit.fill,);
-              },
-            )
+            // child: Swiper(
+            //   onTap: (index) {
+            //   },
+            //   itemCount:  bannerList.length,
+            //   autoplay: false,
+            //   itemBuilder: (BuildContext context, int index) {
+            //     return CacheImageView(url:bannerList[index]?.name ?? "", boxFit: BoxFit.fill,);
+            //   },
+            // )
+          child: Text("轮播图"),
         ));
   }
 

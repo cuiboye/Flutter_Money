@@ -12,7 +12,7 @@ OrdertListNewModel _$OrdertListNewModelFromJson(Map<String, dynamic> json) =>
       json['result'] == null
           ? null
           : Result.fromJson(json['result'] as Map<String, dynamic>),
-      json['states'] as int,
+      json['states'] as int?,
     );
 
 Map<String, dynamic> _$OrdertListNewModelToJson(OrdertListNewModel instance) =>
@@ -24,7 +24,8 @@ Map<String, dynamic> _$OrdertListNewModelToJson(OrdertListNewModel instance) =>
 
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       (json['delivery'] as List<dynamic>?)
-          ?.map((e) => ListBean.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              e == null ? null : ListBean.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -33,10 +34,11 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
     };
 
 ListBean _$ListBeanFromJson(Map<String, dynamic> json) => ListBean(
-      json['unionOrderNumber'] as String,
-      json['orderStatusStr'] as String,
-      (json['orders'] as List<dynamic>)
-          .map((e) => OrdersBean.fromJson(e as Map<String, dynamic>))
+      json['unionOrderNumber'] as String?,
+      json['orderStatusStr'] as String?,
+      (json['orders'] as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : OrdersBean.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -47,11 +49,13 @@ Map<String, dynamic> _$ListBeanToJson(ListBean instance) => <String, dynamic>{
     };
 
 OrdersBean _$OrdersBeanFromJson(Map<String, dynamic> json) => OrdersBean(
-      (json['orderProduct'] as List<dynamic>)
-          .map((e) => OrderListProductBean.fromJson(e as Map<String, dynamic>))
+      (json['orderProduct'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : OrderListProductBean.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['orderStatusStr'] as String,
-      json['orderTotalPriceStr'] as String,
+      json['orderStatusStr'] as String?,
+      json['orderTotalPriceStr'] as String?,
     );
 
 Map<String, dynamic> _$OrdersBeanToJson(OrdersBean instance) =>

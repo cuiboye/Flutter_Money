@@ -18,6 +18,7 @@ import 'package:flutter_money/wajiu/wajiu_register_page.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../utils/sp.dart';
 import '../view/custom_appbar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -178,7 +179,8 @@ class _WajiuLoginState extends State<WajiuLogin> {
         Result? result = model.result;
         if (null != result) {
           String? token = result.token;
-          saveToken(token);
+          //保存token
+          Sp().setString(Constant.LOGIN_TOKEN, token);
         }
 
         ToastUtils.showToast("登录成功");
@@ -189,19 +191,5 @@ class _WajiuLoginState extends State<WajiuLogin> {
     }, fail: (reason, code) {
       print("获取到的数据：$reason");
     });
-  }
-
-  /**
-   * 保存token
-   */
-  Future<bool> saveToken(String? token) async {
-    final prefs = await SharedPreferences.getInstance();
-    String loginToken = "";
-    if (TextUtils.isEmpty(token)) {
-      loginToken = "";
-    } else {
-      loginToken = "$token";
-    }
-    return await prefs.setString(Constant.LOGIN_TOKEN, loginToken);
   }
 }

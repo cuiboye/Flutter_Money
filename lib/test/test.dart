@@ -4,7 +4,7 @@ import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 
 // class Test extends StatelessWidget {

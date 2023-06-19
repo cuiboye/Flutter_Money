@@ -5,10 +5,10 @@ part 'home_main_model.g.dart';
 @JsonSerializable()
 class HomeMainModel {
   @JsonKey(name: 'states')
-  int states;
+  int? states;
 
   @JsonKey(name: 'msg')
-  String msg;
+  String? msg;
 
   @JsonKey(name: 'result')
   Result? result;
@@ -72,7 +72,7 @@ class KindSetList {
 @JsonSerializable()
 class ProductInfoList {
   @JsonKey(name: 'productId')
-  int productId;
+  int? productId;
 
   @JsonKey(name: 'cname')
   String? cname;
@@ -110,7 +110,7 @@ class WorldHotProducts {
   String? picture;
 
   @JsonKey(name: 'jnPrice')
-  double jnPrice;
+  double? jnPrice;
 
   @JsonKey(name: 'countryName')
   String? countryName;
@@ -152,10 +152,10 @@ class NewProductPriorities {
   String? productName;
 
   @JsonKey(name: 'startPrice')
-  String startPrice;
+  String? startPrice;
 
   @JsonKey(name: 'endPrice')
-  String endPrice;
+  String? endPrice;
 
   @JsonKey(name: 'maturityDate')
   String? maturityDate;
@@ -207,10 +207,10 @@ class IndexList {
   Focus_picture? focusPicture;
 
   @JsonKey(name: 'home_button')
-  Home_button homeButton;
+  Home_button? homeButton;
 
   @JsonKey(name: 'announcement')
-  Announcement announcement;
+  Announcement? announcement;
 
   IndexList(
     this.focusPicture,
@@ -279,7 +279,7 @@ class Ranking {
 @JsonSerializable()
 class Focus_picture {
   @JsonKey(name: 'appNewIndexCategories')
-  List<AppNewIndexCategories?> appNewIndexCategories;
+  List<AppNewIndexCategories?>? appNewIndexCategories;
 
   Focus_picture(
     this.appNewIndexCategories,
@@ -301,7 +301,7 @@ class AppNewIndexCategories {
   String? parameter;
 
   @JsonKey(name: 'urlType')
-  int urlType;
+  int? urlType;
 
   @JsonKey(name: 'appIndex')
   AppIndex? appIndex;
@@ -334,7 +334,7 @@ class AppIndex {
 @JsonSerializable()
 class Home_button {
   @JsonKey(name: 'appNewIndexCategories')
-  List<AppNewIndexCategories> appNewIndexCategories;
+  List<AppNewIndexCategories>? appNewIndexCategories;
 
   Home_button(
     this.appNewIndexCategories,
@@ -347,7 +347,7 @@ class Home_button {
 @JsonSerializable()
 class Announcement {
   @JsonKey(name: 'appNewIndexCategories')
-  List<AppNewIndexCategories> appNewIndexCategories;
+  List<AppNewIndexCategories>? appNewIndexCategories;
 
   Announcement(
     this.appNewIndexCategories,

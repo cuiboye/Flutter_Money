@@ -36,7 +36,7 @@ class StateMixinView extends GetView<StateMinxinController> {
   int pageNum = 1;
   bool hasData = false;
   String orderType;
-  List<ListBean> orderDdataList = [];
+  List<ListBean?> orderDdataList = [];
 
   StateMixinView(this.orderType);
 

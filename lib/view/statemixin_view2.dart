@@ -36,7 +36,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
   StateMixinView(this.orderType);
   _buildListView(OrdertListNewModel? model) {
     print("44ss");
-    List<ListBean> deliveryList = model?.result?.delivery ?? [];
+    List<ListBean?> deliveryList = model?.result?.delivery ?? [];
     return ListView.builder(
       itemCount: deliveryList.length,
       itemBuilder: (context, index) {
@@ -52,7 +52,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(deliveryList[index].unionOrderNumber ?? "",
+                    Text(deliveryList[index]?.unionOrderNumber ?? "",
                         style: const TextStyle(
                             fontSize: 14, color: ColorConstant.color_black)),
                     Container(
@@ -77,7 +77,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.only(
                     top: 10, bottom: 10, left: 13, right: 13),
-                child: Text(deliveryList[index].orders[0].orderStatusStr ?? "",
+                child: Text(deliveryList[index]?.orders?[0]?.orderStatusStr ?? "",
                   style: const TextStyle(
                       color: ColorConstant.color_8b8b8b,
                       fontSize: 13),
@@ -104,7 +104,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                               children: [
                                  CacheImageViewWithWidth(
                                   url:
-                                  deliveryList[index].orders[0].orderProduct[childIndex].picture ??"",
+                                  deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.picture ??"",
                                   width: 91,
                                 ),
                                 Expanded(
@@ -120,7 +120,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                                             CrossAxisAlignment.start,
                                         children: [
                                            Text(
-                                            deliveryList[index].orders[0].orderProduct[childIndex].cname ??"",
+                                            deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.cname ??"",
                                             maxLines: 1,
                                              overflow: TextOverflow.ellipsis,
                                              style: const TextStyle(
@@ -131,12 +131,12 @@ class StateMixinView extends GetView<StateMinxinController2>{
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children:  [
-                                              Text(deliveryList[index].orders[0].orderProduct[childIndex].stringOnePrice ??"",
+                                              Text(deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.stringOnePrice ??"",
                                                   style: const TextStyle(
                                                       color: ColorConstant
                                                           .systemColor)),
                                               Text(
-                                                deliveryList[index].orders[0].orderProduct[childIndex].isJiuZhouBianName ??"",
+                                                deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.isJiuZhouBianName ??"",
                                                 style: const TextStyle(
                                                     fontSize: 12,
                                                     color: ColorConstant
@@ -150,7 +150,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                                     Container(
                                       margin: EdgeInsets.only(left: 10),
                                       child:  Text(
-                                        deliveryList[index].orders[0].orderProduct[childIndex].orderTypeStr ?? "",
+                                        deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.orderTypeStr ?? "",
                                         style: const TextStyle(
                                             color: ColorConstant.color_888888,
                                             fontSize: 12),
@@ -164,7 +164,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                     ),
                   );
                 },
-                itemCount: deliveryList[index].orders[0].orderProduct.length,
+                itemCount: deliveryList[index]?.orders?[0]?.orderProduct?.length??0,
                 shrinkWrap: true,
               ),
               Container(
@@ -173,7 +173,7 @@ class StateMixinView extends GetView<StateMinxinController2>{
                 padding: const EdgeInsets.only(
                     top: 10, bottom: 10, right: 13),
                 child:  Text(
-                  deliveryList[index].orders[0].orderTotalPriceStr ?? "",
+                  deliveryList[index]?.orders?[0]?.orderTotalPriceStr ?? "",
                   style: const TextStyle(
                       fontSize: 13,
                       color: ColorConstant.color_343434),

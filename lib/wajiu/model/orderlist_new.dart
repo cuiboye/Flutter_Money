@@ -12,7 +12,7 @@ class OrdertListNewModel{
   Result? result;
 
   @JsonKey(name: 'states')
-  int states;
+  int? states;
 
   OrdertListNewModel(this.msg,this.result,this.states,);
 
@@ -24,7 +24,7 @@ class OrdertListNewModel{
 class Result{
 
   @JsonKey(name: 'delivery')
-  List<ListBean>? delivery;
+  List<ListBean?>? delivery;
 
   Result(this.delivery);
 
@@ -36,13 +36,13 @@ class Result{
 @JsonSerializable()
 class ListBean {
   @JsonKey(name: 'unionOrderNumber')
-  String unionOrderNumber;
+  String? unionOrderNumber;
 
   @JsonKey(name: 'orderStatusStr')
-  String orderStatusStr;
+  String? orderStatusStr;
 
   @JsonKey(name: 'orders')
-  List<OrdersBean> orders;
+  List<OrdersBean?>? orders;
 
   ListBean(this.unionOrderNumber,this.orderStatusStr,this.orders);
 
@@ -52,13 +52,13 @@ class ListBean {
 @JsonSerializable()
 class OrdersBean {
   @JsonKey(name: 'orderProduct')
-  List<OrderListProductBean> orderProduct;
+  List<OrderListProductBean?>? orderProduct;
 
   @JsonKey(name: 'orderStatusStr')
-  String orderStatusStr;
+  String? orderStatusStr;
 
   @JsonKey(name: 'orderTotalPriceStr')
-  String orderTotalPriceStr;
+  String? orderTotalPriceStr;
 
   OrdersBean(this.orderProduct,this.orderStatusStr,this.orderTotalPriceStr);
 

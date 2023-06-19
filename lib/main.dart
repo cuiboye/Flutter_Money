@@ -23,7 +23,7 @@ import 'utils/sp.dart'; //扩展方法
 //main函数使用了(=>)符号，这是 Dart 中单行函数或方法的简写。
 void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
-  SharedPreferences.setMockInitialValues({});
+  // SharedPreferences.setMockInitialValues({});//这个为flutter2.0的设置，现在不用了，2.0上使用有问题，重启app后数据获取失败
 
 
   //处理全局的错误
@@ -35,7 +35,11 @@ void main() async{
   Widget error = const Text('...rendering error...');
   error = Scaffold(body: Center(child: error));
   ErrorWidget.builder = (FlutterErrorDetails errorDetails) => error;
+
+  //下面这两句是初始化SharedPreference
+  WidgetsFlutterBinding.ensureInitialized();
   await Sp.perInit();
+
   runZoned<Future<void>>(() async {
     runApp(const MyApp());
   }, onError: (error, stackTrace) async {
@@ -62,7 +66,8 @@ class MyApp extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
 }
-class _SplashState extends State<MyApp> with NavigatorObserver{
+// class _SplashState extends State<MyApp> with NavigatorObserver{
+class _SplashState extends State<MyApp>{
   @override
   void initState() {
     super.initState();

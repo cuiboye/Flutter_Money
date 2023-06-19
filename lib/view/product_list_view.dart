@@ -12,7 +12,7 @@ import 'package:flutter_money/wajiu/model/wajiu_product_list_model.dart';
 import 'package:flutter_money/wajiu/service/wajiu_product_list_servoce.dart';
 import 'package:flutter_money/wajiu/viewmodel/wajiu_product_list_view_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:frame_animate_widget/frame_animate_widget.dart';
+// import 'package:frame_animate_widget/frame_animate_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -30,7 +30,6 @@ class _ProductListViewState extends State<ProductListView> with SingleTickerProv
 
   bool loadData = false;
   bool mInit = false;
-  final GlobalKey<FrameAnimationImageState> _keyGlobal =  GlobalKey<FrameAnimationImageState>();
 
   //素材列表
   List<String> images=[
@@ -48,9 +47,6 @@ class _ProductListViewState extends State<ProductListView> with SingleTickerProv
   @override
   void dispose() {
     super.dispose();
-    //页面销毁的时候停止动画
-    _keyGlobal.currentState?.reset();
-    _keyGlobal.currentState?.stop();
   }
 
   @override
@@ -141,7 +137,8 @@ class _ProductListViewState extends State<ProductListView> with SingleTickerProv
                                           //     ? "刷新成功!"
                                           //     : "刷新失败")
                                           //这个动画是需要做开始，停止操作的，这里没有处理，默认一直执行
-                                          child: FrameAnimationImage(_keyGlobal,images, width: 50, height: 50, interval: 300,start: true,),
+                                          child: Text("帧动画"),
+                                          // child: FrameAnimationImage(_keyGlobal,images, width: 50, height: 50, interval: 300,start: true,),
                                           //帧动画可以考虑使用gif图，上面的 animation.value.toInt() 有一些问题
                                           // child: Image.asset("images/zoulu.gif",width: 50,height: 50,),
                                         );

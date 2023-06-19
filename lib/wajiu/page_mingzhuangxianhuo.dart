@@ -13,7 +13,7 @@ import 'package:flutter_money/wajiu/widget/wajiu_detail_banner_indicator.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_money/widget/cache_image_view_with_size.dart';
 import 'package:flutter_money/widget/net_image_utils.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provider/provider.dart';
 
 class MingzhuangxianhuoView extends StatefulWidget {
@@ -148,34 +148,35 @@ class _MingzhuangxianhuoViewState extends State<MingzhuangxianhuoView> {
   }
 
   Widget listViewHeader(List<Noticelist?> noticelist) {
-    return Container(
-        //根据具体情况来设置比例
-        height: MediaQuery.of(context).size.width / 1.963,
-        width: MediaQuery.of(context).size.width,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(0.0),
-          child: Swiper(
-            onTap: (index) {},
-            itemCount: noticelist.length,
-            autoplay: false,
-            //是否自动轮播
-            pagination: SwiperPagination(
-                //指示器
-                margin: EdgeInsets.only(bottom: 5),
-                //在这里控制指示器距离底部的距离，默认距离是10
-                // alignment: Alignment.bottomCenter,//指示器的位置不在这里控制了，在NLIndicator中控制
-                builder: SwiperCustomPagination(
-                    builder: (BuildContext context, SwiperPluginConfig config) {
-                  return NLIndicator(config.activeIndex, noticelist.length);
-                })),
-            itemBuilder: (BuildContext context, int index) {
-              return CacheImageView(
-                url:
-                    "${noticelist[index]?.picture}?imageView2/2/w/740/h/314/q/100",
-                boxFit: BoxFit.fill,
-              );
-            },
-          ),
-        ));
+    // return Container(
+    //     //根据具体情况来设置比例
+    //     height: MediaQuery.of(context).size.width / 1.963,
+    //     width: MediaQuery.of(context).size.width,
+    //     child: ClipRRect(
+    //       borderRadius: BorderRadius.circular(0.0),
+    //       child: Swiper(
+    //         onTap: (index) {},
+    //         itemCount: noticelist.length,
+    //         autoplay: false,
+    //         //是否自动轮播
+    //         pagination: SwiperPagination(
+    //             //指示器
+    //             margin: EdgeInsets.only(bottom: 5),
+    //             //在这里控制指示器距离底部的距离，默认距离是10
+    //             // alignment: Alignment.bottomCenter,//指示器的位置不在这里控制了，在NLIndicator中控制
+    //             builder: SwiperCustomPagination(
+    //                 builder: (BuildContext context, SwiperPluginConfig config) {
+    //               return NLIndicator(config.activeIndex, noticelist.length);
+    //             })),
+    //         itemBuilder: (BuildContext context, int index) {
+    //           return CacheImageView(
+    //             url:
+    //                 "${noticelist[index]?.picture}?imageView2/2/w/740/h/314/q/100",
+    //             boxFit: BoxFit.fill,
+    //           );
+    //         },
+    //       ),
+    //     ));
+    return Text("轮播图");
   }
 }

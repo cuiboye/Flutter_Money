@@ -7,16 +7,16 @@ import 'package:flutter_money/widget/dash_line.dart';
 import '../wajiu/model/orderlist_new.dart';
 
 class OrderTotalAdapter extends StatelessWidget {
- final List<ListBean> orderDdataList;
+ final List<ListBean?> orderDdataList;
   OrderTotalAdapter(this.orderDdataList);
   @override
   Widget build(BuildContext context) {
     return getItem(orderDdataList);
   }
 
-  Widget getItem(List<ListBean> orderDdataList) {
+  Widget getItem(List<ListBean?> orderDdataList) {
     print("44ss");
-    List<ListBean> deliveryList = orderDdataList;
+    List<ListBean?> deliveryList = orderDdataList;
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -34,7 +34,7 @@ class OrderTotalAdapter extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(deliveryList[index].unionOrderNumber ?? "",
+                    Text(deliveryList[index]?.unionOrderNumber ?? "",
                         style: const TextStyle(
                             fontSize: 14, color: ColorConstant.color_black)),
                     Container(
@@ -60,7 +60,7 @@ class OrderTotalAdapter extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, bottom: 10, left: 13, right: 13),
                 child: Text(
-                  deliveryList[index].orders[0].orderStatusStr ?? "",
+                  deliveryList[index]?.orders?[0]?.orderStatusStr ?? "",
                   style: const TextStyle(
                       color: ColorConstant.color_8b8b8b, fontSize: 13),
                 ),
@@ -85,7 +85,7 @@ class OrderTotalAdapter extends StatelessWidget {
                               children: [
                                 CacheImageViewWithWidth(
                                   url:
-                                  "${deliveryList[index].orders[0].orderProduct[childIndex].picture}?imageView2/2/w/740/h/314/q/100" ??
+                                  "${deliveryList[index]?.orders?[0]?.orderProduct?[childIndex]?.picture}?imageView2/2/w/740/h/314/q/100" ??
                                       "",
                                   width: 91,
                                 ),
@@ -103,9 +103,9 @@ class OrderTotalAdapter extends StatelessWidget {
                                             children: [
                                               Text(
                                                 deliveryList[index]
-                                                    .orders[0]
-                                                    .orderProduct[childIndex]
-                                                    .cname ??
+                                                    ?.orders?[0]
+                                                    ?.orderProduct?[childIndex]
+                                                    ?.cname ??
                                                     "",
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
@@ -120,20 +120,20 @@ class OrderTotalAdapter extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                       deliveryList[index]
-                                                          .orders[0]
-                                                          .orderProduct[
+                                                          ?.orders?[0]
+                                                          ?.orderProduct?[
                                                       childIndex]
-                                                          .stringOnePrice ??
+                                                          ?.stringOnePrice ??
                                                           "",
                                                       style: const TextStyle(
                                                           color: ColorConstant
                                                               .systemColor)),
                                                   Text(
                                                     deliveryList[index]
-                                                        .orders[0]
-                                                        .orderProduct[
+                                                        ?.orders?[0]
+                                                        ?.orderProduct?[
                                                     childIndex]
-                                                        .isJiuZhouBianName ??
+                                                        ?.isJiuZhouBianName ??
                                                         "",
                                                     style: const TextStyle(
                                                         fontSize: 12,
@@ -149,9 +149,9 @@ class OrderTotalAdapter extends StatelessWidget {
                                           margin: EdgeInsets.only(left: 10),
                                           child: Text(
                                             deliveryList[index]
-                                                .orders[0]
-                                                .orderProduct[childIndex]
-                                                .orderTypeStr ??
+                                                ?.orders?[0]
+                                                ?.orderProduct?[childIndex]
+                                                ?.orderTypeStr ??
                                                 "",
                                             style: const TextStyle(
                                                 color: ColorConstant.color_888888,
@@ -166,7 +166,7 @@ class OrderTotalAdapter extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: deliveryList[index].orders[0].orderProduct.length,
+                itemCount: deliveryList[index]?.orders?[0]?.orderProduct?.length??0,
                 shrinkWrap: true,
               ),
               Container(
@@ -174,7 +174,7 @@ class OrderTotalAdapter extends StatelessWidget {
                 color: ColorConstant.color_ffffff,
                 padding: const EdgeInsets.only(top: 10, bottom: 10, right: 13),
                 child: Text(
-                  deliveryList[index].orders[0].orderTotalPriceStr ?? "",
+                  deliveryList[index]?.orders?[0]?.orderTotalPriceStr ?? "",
                   style: const TextStyle(
                       fontSize: 13, color: ColorConstant.color_343434),
                 ),

@@ -8,7 +8,7 @@ import 'package:flutter_money/wajiu/constant/color.dart';
 import 'package:flutter_money/wajiu/view/wajiu_detail_appbar.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/wajiu/widget/wajiu_detail_banner_indicator.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WajiuGoodsDetail extends StatefulWidget {
@@ -398,22 +398,23 @@ class KeepAliveListViewState extends State<KeepAliveListView>
       color: ColorConstant.color_ffffff,
       height: widget.headerHeight,
       width: double.infinity,
-      child: Swiper(
-        itemCount: 5,
-        autoplay: true, //是否自动轮播
-        pagination: SwiperPagination(
-            alignment: Alignment.bottomCenter,
-            builder: SwiperCustomPagination(
-                builder: (BuildContext context, SwiperPluginConfig config) {
-              return NLIndicator(config.activeIndex, 5);
-            })), //指示器
-        itemBuilder: (BuildContext context, int index) {
-          return Image.asset(
-            "images/wajiu_detail_test_pic.jpeg",
-            fit: BoxFit.fitHeight,
-          );
-        },
-      ),
+      // child: Swiper(
+      //   itemCount: 5,
+      //   autoplay: true, //是否自动轮播
+      //   pagination: SwiperPagination(
+      //       alignment: Alignment.bottomCenter,
+      //       builder: SwiperCustomPagination(
+      //           builder: (BuildContext context, SwiperPluginConfig config) {
+      //         return NLIndicator(config.activeIndex, 5);
+      //       })), //指示器
+      //   itemBuilder: (BuildContext context, int index) {
+      //     return Image.asset(
+      //       "images/wajiu_detail_test_pic.jpeg",
+      //       fit: BoxFit.fitHeight,
+      //     );
+      //   },
+      // ),
+      child: Text("轮播图"),
     );
   }
 

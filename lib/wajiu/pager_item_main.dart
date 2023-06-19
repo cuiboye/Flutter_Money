@@ -33,7 +33,8 @@ import 'package:flutter_money/wajiu/widget/marquee_widget.dart';
 import 'package:flutter_money/wajiu/widget/wajiu_detail_banner_indicator.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_money/widget/net_image_utils.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+// import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -324,6 +325,7 @@ class _PageItemMainState extends State<
                     return NetImageView(url:appNewIndexCategories[index]?.picture ?? "", boxFit: BoxFit.fill,);
                   },
                 ),
+                // child: Text("轮播图"),
               )),
         ),
         SliverToBoxAdapter(
@@ -1162,8 +1164,8 @@ class _PageItemMainState extends State<
       }
       HomeMainModel model = HomeMainModel.fromJson(resultData);
       if (null != model) {
-        int status = model.states;
-        String msg = model.msg;
+        int status = model?.states??0;
+        String msg = model?.msg??"";
         if (status == 200) {
           //初始化轮播图数据
           appNewIndexCategories =
@@ -1174,7 +1176,7 @@ class _PageItemMainState extends State<
               model.result?.indexList?.homeButton?.appNewIndexCategories ?? [];
           //快报
           announcementAppNewIndexCategories =
-              model.result?.indexList?.announcement.appNewIndexCategories ?? [];
+              model.result?.indexList?.announcement?.appNewIndexCategories ?? [];
           //排行榜，新品首发，新品推荐
           rankPictureUrl =
               "${model.result?.advertising?.ranking?.picture}?imageView2/2/w/740/h/314/q/100";

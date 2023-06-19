@@ -7,7 +7,7 @@ class BMFAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.titleStyle,
     this.backgroundColor,
-    this.isBack: true,
+    this.isBack=true,
     this.onBack,
     this.actions,
     this.bottom,

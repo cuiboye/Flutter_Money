@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: '>=3.0.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,10 +35,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   intl: ^0.18.1
-  collection: 1.16.0
+  collection: 1.17.1
   # 打开浏览器所需要的
   url_launcher: ^6.0.13
-#  fluttertoast: 8.0.2 这个插件突然报错了
+  fluttertoast: 8.0.2
   flutter_spinkit: ^5.1.0
   # 网络请求
   http: ^0.13.4
@@ -53,7 +53,8 @@ dependencies:
   dio_log: ^2.0.4 #基于dio的网络请求日志
   json_annotation: ^4.5.0 # 序列化
   shared_preferences: ^2.0.15  #SharedPreferences存储数据
-  flutter_swiper : ^1.1.6   #轮播组件
+#  flutter_swiper : ^1.1.6   #轮播组件 flutter3.0上会报错，flutter2.0上面没有问题
+  flutter_swiper_null_safety: ^1.0.2 #支持在flutter3.0上面使用
   flutter_screenutil: ^5.5.3 #屏幕适配
   permission_handler: ^10.0.0 #权限管理
   #图片缓存
@@ -62,8 +63,8 @@ dependencies:
   sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
   get: ^4.6.5 #getx
   # 这个暂时先注释，安卓会报：Failed to transform activity-1.6.1.aar (androidx.activity:activity:1.6.1)
-  #选择图片
-#  image_picker: ^0.8.5+3 #选择图片
+  #图片，相机
+  image_picker: ^0.8.7+5
   animations: ^2.0.3 #flutter官方提供的动画
   webview_flutter: ^3.0.4 # webview以及和js交互
   flutter_pickers: ^2.1.8 #省市区选择器 参考：https://zhuanlan.zhihu.com/p/350350490
@@ -88,8 +89,8 @@ dependencies:
 #  flutter_html: ^2.2.1
   #GridView动态布局，解决GridView高度固定的问题
   flutter_staggered_grid_view: ^0.6.2
-  #帧动画
-  frame_animate_widget: ^1.0.0
+#  #帧动画
+#  frame_animate_widget: ^1.0.0
   #自己写的插件-测试
   flutter_customappbar_plugin: ^0.0.2
   # loading

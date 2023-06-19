@@ -8,8 +8,8 @@ part of 'home_main_model.dart';
 
 HomeMainModel _$HomeMainModelFromJson(Map<String, dynamic> json) =>
     HomeMainModel(
-      json['states'] as int,
-      json['msg'] as String,
+      json['states'] as int?,
+      json['msg'] as String?,
       json['result'] == null
           ? null
           : Result.fromJson(json['result'] as Map<String, dynamic>),
@@ -84,7 +84,7 @@ Map<String, dynamic> _$KindSetListToJson(KindSetList instance) =>
 
 ProductInfoList _$ProductInfoListFromJson(Map<String, dynamic> json) =>
     ProductInfoList(
-      json['productId'] as int,
+      json['productId'] as int?,
       json['cname'] as String?,
       json['picture'] as String?,
       json['jnPrice'] as String?,
@@ -105,7 +105,7 @@ WorldHotProducts _$WorldHotProductsFromJson(Map<String, dynamic> json) =>
       json['cname'] as String?,
       json['ename'] as String?,
       json['picture'] as String?,
-      (json['jnPrice'] as num).toDouble(),
+      (json['jnPrice'] as num?)?.toDouble(),
       json['countryName'] as String?,
       json['grade'] as String?,
     );
@@ -126,8 +126,8 @@ NewProductPriorities _$NewProductPrioritiesFromJson(
       json['flag'] as String?,
       json['productPic'] as String?,
       json['productName'] as String?,
-      json['startPrice'] as String,
-      json['endPrice'] as String,
+      json['startPrice'] as String?,
+      json['endPrice'] as String?,
       json['maturityDate'] as String?,
     );
 
@@ -168,8 +168,12 @@ IndexList _$IndexListFromJson(Map<String, dynamic> json) => IndexList(
           ? null
           : Focus_picture.fromJson(
               json['focus_picture'] as Map<String, dynamic>),
-      Home_button.fromJson(json['home_button'] as Map<String, dynamic>),
-      Announcement.fromJson(json['announcement'] as Map<String, dynamic>),
+      json['home_button'] == null
+          ? null
+          : Home_button.fromJson(json['home_button'] as Map<String, dynamic>),
+      json['announcement'] == null
+          ? null
+          : Announcement.fromJson(json['announcement'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$IndexListToJson(IndexList instance) => <String, dynamic>{
@@ -223,8 +227,8 @@ Map<String, dynamic> _$RankingToJson(Ranking instance) => <String, dynamic>{
 
 Focus_picture _$Focus_pictureFromJson(Map<String, dynamic> json) =>
     Focus_picture(
-      (json['appNewIndexCategories'] as List<dynamic>)
-          .map((e) => e == null
+      (json['appNewIndexCategories'] as List<dynamic>?)
+          ?.map((e) => e == null
               ? null
               : AppNewIndexCategories.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -241,7 +245,7 @@ AppNewIndexCategories _$AppNewIndexCategoriesFromJson(
       json['indexName'] as String?,
       json['picture'] as String?,
       json['parameter'] as String?,
-      json['urlType'] as int,
+      json['urlType'] as int?,
       json['appIndex'] == null
           ? null
           : AppIndex.fromJson(json['appIndex'] as Map<String, dynamic>),
@@ -266,8 +270,9 @@ Map<String, dynamic> _$AppIndexToJson(AppIndex instance) => <String, dynamic>{
     };
 
 Home_button _$Home_buttonFromJson(Map<String, dynamic> json) => Home_button(
-      (json['appNewIndexCategories'] as List<dynamic>)
-          .map((e) => AppNewIndexCategories.fromJson(e as Map<String, dynamic>))
+      (json['appNewIndexCategories'] as List<dynamic>?)
+          ?.map(
+              (e) => AppNewIndexCategories.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -277,8 +282,9 @@ Map<String, dynamic> _$Home_buttonToJson(Home_button instance) =>
     };
 
 Announcement _$AnnouncementFromJson(Map<String, dynamic> json) => Announcement(
-      (json['appNewIndexCategories'] as List<dynamic>)
-          .map((e) => AppNewIndexCategories.fromJson(e as Map<String, dynamic>))
+      (json['appNewIndexCategories'] as List<dynamic>?)
+          ?.map(
+              (e) => AppNewIndexCategories.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

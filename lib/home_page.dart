@@ -10,6 +10,7 @@ import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
+import 'package:flutter_money/event_add_notifition.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/honor_demo_page.dart';
@@ -36,13 +37,20 @@ import 'package:flutter_money/view/loading_view.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
 import 'package:flutter_money/webview_native.dart';
+import 'package:flutter_money/widget/KeepAliveWrapperDemo.dart';
+import 'package:flutter_money/widget/LeftRightBoxDemo.dart';
+import 'package:flutter_money/widget/accurate_sizebox_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
+import 'package:flutter_money/widget/gradient_button_demo.dart';
+import 'package:flutter_money/widget/html_demo.dart';
+import 'package:flutter_money/widget/print_widget_log_demo.dart';
+import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'animated_switcher.dart';
+import 'view/animated_switcher.dart';
 import 'animation_main.dart';
 import 'animation_widget.dart';
 import 'animationbuild_example.dart';
@@ -64,7 +72,7 @@ import 'layout/linearlayout2.dart';
 import 'layout/scaffold_layout.dart';
 import 'getx/navigation/navigation_demo.dart';
 import 'getx/navigation/navigation_demo3.dart';
-import 'map/map_example.dart';
+// import 'map/map_example.dart';
 import 'mediaquery_youhua.dart';
 import 'scroll/scroll_widget.dart';
 import 'layout/size_container.dart';
@@ -135,7 +143,15 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             }),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
+        _item('事件处理与通知', EventAddNotifitonWidget(), 'event_add_notifition'),
         _item('Loading', LoadingView(), 'loading_view'),
+        _item('加载html代码', HtmlDemo(), 'htmldemo'),
+        _item('精确的SizeBox', AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
+        _item('ListView缓存', KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),
+        _item('图片缩放', ScaleViewDemo(), 'scaleviewdemo'),
+        _item('支持左-右布局的组件', LeftRightBoxDemo(), 'leftrightboxdemo'),
+        _item('渐变按钮', GradientButtonDemo(), 'gradientbuttondemo'),
+        _item('帮助组件打印约束', PrintWidgetLogDemo(), 'printwidgetlogdemo'),
         _item('测试路由嵌套', RouteDemoPage(), 'routedemopage'),
         _item('下拉筛选', DropSelectDemoPage(), 'dropselectdemopage'),
         _item('StatelessWidget组件的使用', StatelessWidgetDemo(), 'statelesswidget'),
@@ -199,7 +215,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             'animatedbuild_example'),
         _item('组合动画', StaggerAnimationExample(), 'stagger_animation'),
         _item('动画切换组件', AnimatedSwitcherExample(), 'animatedswitch_example'),
-        _item('百度地图', MapMainExample(), 'map_main_example'),
+        // _item('百度地图', MapMainExample(), 'map_main_example'),
         _item('极光推送', JiguangPushMain(), 'jiguang_push'),
         _item('上拉刷新下拉加载', PullRefreshMain(), 'pull_refresh_main'),
         _item('获取设备信息', DeviceInfoMain(), 'device_info'),

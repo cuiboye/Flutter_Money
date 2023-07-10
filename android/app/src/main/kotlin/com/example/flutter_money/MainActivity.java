@@ -142,34 +142,9 @@ public class MainActivity extends FlutterActivity {
             Log.e(TAG, "Error registering plugin device_info, io.flutter.plugins.deviceinfo.DeviceInfoPlugin", e);
         }
         try {
-            flutterEngine.getPlugins().add(new dev.fluttercommunity.plus.device_info.DeviceInfoPlusPlugin());
+            flutterEngine.getPlugins().add(new com.flutter_customappbar_plugin.FlutterCustomappbarPlugin());
         } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin device_info_plus, dev.fluttercommunity.plus.device_info.DeviceInfoPlusPlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.baidu.mapapi.base.FlutterBmfbasePlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_base, com.baidu.mapapi.base.FlutterBmfbasePlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.baidu.bmfmap.FlutterBmfmapPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_map, com.baidu.bmfmap.FlutterBmfmapPlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.baidu.mapapi.search.FlutterBmfsearchPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_search, com.baidu.mapapi.search.FlutterBmfsearchPlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.baidu.mapapi.utils.FlutterBmfUtilsPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin flutter_baidu_mapapi_utils, com.baidu.mapapi.utils.FlutterBmfUtilsPlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.baidu.flutter_bmflocation.FlutterBmflocationPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin flutter_bmflocation, com.baidu.flutter_bmflocation.FlutterBmflocationPlugin", e);
+            Log.e(TAG, "Error registering plugin flutter_customappbar_plugin, com.flutter_customappbar_plugin.FlutterCustomappbarPlugin", e);
         }
         try {
             flutterEngine.getPlugins().add(new net.jonhanson.flutter_native_splash.FlutterNativeSplashPlugin());
@@ -181,11 +156,21 @@ public class MainActivity extends FlutterActivity {
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin flutter_plugin_android_lifecycle, io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin", e);
         }
-//        try {
-//            flutterEngine.getPlugins().add(new io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin());
-//        } catch(Exception e) {
-//            Log.e(TAG, "Error registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin", e);
-//        }
+        try {
+            flutterEngine.getPlugins().add(new io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.jiguang.jpush.JPushPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin jpush_flutter, com.jiguang.jpush.JPushPlugin", e);
+        }
         try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
         } catch(Exception e) {

@@ -74,7 +74,7 @@ class GetBuilderView extends StatelessWidget {
 
             // id2
             GetBuilder<GetBuilderCountController>(
-              id: "id2",
+              id: "id2",//GetBuilder为所需要更新的控件分配id
               init: controller,
               initState: (_) {},
               builder: (_) {
@@ -108,7 +108,8 @@ class GetBuilderView extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                controller.update(["id2"]);
+                // controller.update(["id2"]);
+                controller.update(["id2"],controller.count2<10);//还可以为更新设置条件
               },
               child: Text('controller.update(id2)'),
             ),

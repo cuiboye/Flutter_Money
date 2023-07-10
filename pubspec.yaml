@@ -48,7 +48,7 @@ dependencies:
   flutter_color_plugin: ^1.1.0
   english_words: ^4.0.0
   provider: ^6.0.3   #provider状态管理
-#  path_provider: ^2.0.11 #文件操作
+  path_provider: ^2.0.11 #文件操作
   dio: ^4.0.6 #http请求封裝库
   dio_log: ^2.0.4 #基于dio的网络请求日志
   json_annotation: ^4.5.0 # 序列化
@@ -62,21 +62,21 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   sqflite: ^2.0.3 #sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据
   get: ^4.6.5 #getx
-  # 这个暂时先注释，安卓会报：Failed to transform activity-1.6.1.aar (androidx.activity:activity:1.6.1)
-  #图片，相机
+  # flutter2.0安卓会报：Failed to transform activity-1.6.1.aar (androidx.activity:activity:1.6.1)
+  #相册，相机
   image_picker: ^0.8.7+5
   animations: ^2.0.3 #flutter官方提供的动画
   webview_flutter: ^3.0.4 # webview以及和js交互
   flutter_pickers: ^2.1.8 #省市区选择器 参考：https://zhuanlan.zhihu.com/p/350350490
   #百度地图官网，flutter插件：https://lbsyun.baidu.com/index.php?title=flutter/loc/download
   #百度地图插件
-  flutter_baidu_mapapi_map: ^3.2.1
-  flutter_baidu_mapapi_search: ^3.2.0
-  flutter_baidu_mapapi_utils: ^3.2.0
+#  flutter_baidu_mapapi_map: ^3.3.2
+#  flutter_baidu_mapapi_search: ^3.3.2
+#  flutter_baidu_mapapi_utils: ^3.3.2
   #百度地图定位插件
-  flutter_bmflocation: ^3.2.0
+#  flutter_bmflocation: ^3.3.0
   #极光推送
-#  jpush_flutter: ^2.4.3
+  jpush_flutter: ^2.4.3
   #上拉加载下拉刷新,参考：https://pub.flutter-io.cn/packages/pull_to_refresh
   pull_to_refresh: ^2.0.0
   #获取设备信息
@@ -95,6 +95,12 @@ dependencies:
   flutter_customappbar_plugin: ^0.0.2
   # loading
   flutter_easyloading: ^3.0.5
+  # yaml文件解析器
+  yaml: ^3.1.2
+  # 路径
+  path: ^1.8.3
+  #加载html代码
+  flutter_html: ^3.0.0-beta.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

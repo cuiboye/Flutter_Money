@@ -1,0 +1,3 @@
+imageAssetPath: images
+outputDir: lib/res
+outputFile: res_images.dart

@@ -10,7 +10,7 @@ class GetConnectPageView extends GetView<OrderListWithConnectController> {
     return ListView.separated(
       itemCount: model?.result?.delivery?.length ?? 0,
       itemBuilder: (context, index) {
-        final DeliveryList? item = model?.result?.delivery[index];
+        final DeliveryList? item = model?.result?.delivery?[index];
         return ListTile(
           onTap: () => null,
           title: Text("${item?.orders}"),

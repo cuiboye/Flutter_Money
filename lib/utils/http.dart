@@ -70,7 +70,6 @@ class DioInstance {
   }
 
   Future<void> get(String uri, Map<String, dynamic> queryParametersMap, {Success? success, Fail? fail, After? after}) {
-
     var params = <String, dynamic>{};
     if(null == queryParametersMap){//外部接口有参数
       params.addAll(getCommitRequestParams());

@@ -271,8 +271,8 @@ class _PageViewItemState extends State<PageViewItem>{
           print("getCategoryTypeListData2");
 
           if (null != model) {
-            int status = model.states;
-            String msg = model.msg;
+            int status = model?.states??0;
+            String msg = model?.msg??"";
             if (status == 200) {
               typeList = model.result?.typeList??[];
               getSecondCategoryTypeListData(typeList[0]?.value??"");
@@ -293,8 +293,8 @@ class _PageViewItemState extends State<PageViewItem>{
         success: (resultData) {
           CategorySecondTypeListModel model = CategorySecondTypeListModel.fromJson(resultData);
           if (null != model) {
-            int status = model.states;
-            String msg = model.msg;
+            int status = model?.states??0;
+            String msg = model?.msg??"";
             if (status == 200) {
               parameterList = model.result?.parameterList??[];
               bannerList = model.result?.bannerList??[];

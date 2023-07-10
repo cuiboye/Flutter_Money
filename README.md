@@ -283,6 +283,18 @@ var result = name ?? "zhangsan";//name不为空返回name的值，name为空返�
 
 
 GetX相关：
+
+Getx的优势：
+依赖注入：GetX 是通过依赖注入的方式，存储相应的 XxxGetxController；已经脱离了 InheritedWidget 那一套玩法，自己手动去管理这些实例
+获取实例无需 BuildContext、GetBuilder 自动化的处理及其减少了入参等等
+跨页面交互
+GetX可以优雅的实现跨页面交互。
+路由管理
+Getx 内部实现了路由管理，使用非常简单
+GetX 实现了动态路由传参，也就是说直接在命名路由上拼参数，然后能拿到这些拼在路由上的参数
+实现了全局 BuildContext
+国际化，主题实现
+
 GetX为我们提供了GetxController,GetxController主要的作用是用于UI代码与业务逻辑分离开来。
 GetX的使用：
 1）依赖注入
@@ -298,6 +310,10 @@ GetX的使用：
 易于测试
 类不管理其依赖项，因此在测试时，您可以传入不同的实现以测试所有不同用例。
 
+
+Get有两个不同的状态管理器：简单的状态管理器（GetBuilder）和响应式状态管理器（GetX）。
+GetBuilder是手动控制的状态管理器，不使用ChangeNotifier，状态管理器使用较少的内存（接近0mb）。
+
 Get有一个简单而强大的依赖管理器，它允许你只用1行代码就能检索到 Controller 或者需要依赖的类，不需要提供上下文，不需要
 在 inheritedWidget 的子节点。
 注入依赖：Get.put<PutController>(PutController());
@@ -305,7 +321,7 @@ Get有一个简单而强大的依赖管理器，它允许你只用1行代码就�
 
 Get.put()这是个立即注入内存的注入方法。调用后已经注入到内存中。
 通常Get.put()的实例的生命周期和 put 所在的 Widget 生命周期绑定，如果在全局 （main 方法里）put，那么这个实例就一直
-存在。如果在一个 Widget 里 put ，那么这个那么这个 Widget 从内存中删除，这个实例也会被销毁。注意，这里是删除，并不
+存在。如果在一个 Widget 里 put ，那么这个 Widget 从内存中删除，这个实例也会被销毁。注意，这里是删除，并不
 是dispose。
 
 Get.lazyPut
@@ -401,6 +417,14 @@ Bindings 会创建过渡性工厂，在点击进入另一个页面的那一刻�
 var name = '新垣结衣'.obs;
 通过 Obx 或者 GetX 包裹并使用响应式变量的控件，在变量改变的时候就会被更新：
 Obx (() => Text (controller.name));
+
+//使一个List成为可观察的
+final list = List<User>().obs;
+
+ListView.builder (
+itemCount: controller.list.length //List使用的时候不需要.value
+)
+
 2）使用 Rx{Type}
 final name = RxString('');
 3）使用 Rx，规定泛型 Rx
@@ -423,9 +447,30 @@ php复制代码class User {
 }
 //实例化时。
 final user = User(name: "Camila", age: 18).obs;
-
 注意，转化为可观察的变量后，它的类型不再是原生类型，所以取值不能用变量本身，而是.value
 
+
+当你在使自己的类可观察时，有另外一种方式来更新它们：
+// model
+// 我们将使整个类成为可观察的，而不是每个属性。
+class User{
+User({this.name = '', this.age = 0});
+String name;
+int age;
+}
+// controller
+final user = User().obs;
+//当你需要更新user变量时。
+user.update( (user) { // 这个参数是你要更新的类本身。
+user.name = 'Jonny';
+user.age = 18;
+});
+// 更新user变量的另一种方式。
+user(User(name: 'João', age: 35));
+// view
+Obx(()=> Text("Name ${user.value.name}: Age: ${user.value.age}"));
+// 你也可以不使用.value来访问模型值。
+user().name; // 注意是user变量，而不是类变量（首字母是小写的）。
 
 使用了GetBuilder这个 Widget 包裹了页面，在 init初始化SimpleController,然后每次点击，都会更新builder对应
 的 Widget ，GetxController通过update()更新GetBuilder。
@@ -511,3 +556,301 @@ Get.to(StateMixinView(),binding: StateMixinBinding())
 Get.lazyPut<StateMixinProvider>(() => StateMixinProvider());
 Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.find()));
 可以参考 order_list_page.dart 这个文件
+
+
+除非你需要使用混合器，比如TickerProviderStateMixin，否则完全没有必要使用StatefulWidget与Get。
+
+不要在GetxController里面调用dispose方法，它不会有任何作用，记住控制器不是Widget，你不应该 "dispose "它，它会被Get自动智能地从内存中删除。如果你在上面使用了任何流，想
+关闭它，只要把它插入到close方法中就可以了。
+class Controller extends GetxController {
+    StreamController<User> user = StreamController<User>();
+    StreamController<String> name = StreamController<String>();
+    
+    ///关闭流用onClose方法，而不是dispose
+    @override
+    void onClose() {
+        user.close();
+        name.close();
+        super.onClose();
+    }
+}
+
+GetBuilder仍然是一个手动的状态管理器，你需要调用update()，就像你需要调用Provider的notifyListeners()一样。
+
+如果你想用GetBuilder完善一个widget的更新控件，你可以给它们分配唯一的ID。
+GetBuilder<Controller>(
+id: 'text', //这里
+init: Controller(), // 每个控制器只用一次
+builder: (_) => Text(
+'${Get.find<Controller>().counter}', //here
+),
+),
+并更新它：
+update(['text']);
+您还可以为更新设置条件。
+update(['text'], counter < 10);
+
+
+GetBuilder:
+GetBuilder的作用： GetBuilder 是一个 Widget 组件， 在 GetX 的状态管理中，GetBuilder 的主要作用是结合 GetxController 实现界面数据的更新。当调用 GetxController 的 update 方法
+时，GetBuilder 包裹的 Widget 就会刷新从而实现界面数据的更新。
+
+
+
+
+
+
+
+
+
+https://www.6hu.cc/archives/185654.html
+https://www.6hu.cc/archives/181590.html
+https://www.6hu.cc/archives/180960.html
+https://www.6hu.cc/archives/182561.html
+https://www.6hu.cc/archives/179518.html
+https://www.6hu.cc/archives/178483.html
+https://www.6hu.cc/archives/177983.html
+https://www.6hu.cc/archives/177490.html
+https://www.6hu.cc/archives/177008.html
+https://www.6hu.cc/archives/176404.html
+https://www.6hu.cc/archives/175016.html
+https://www.6hu.cc/archives/173039.html
+https://www.6hu.cc/archives/172632.html
+https://www.6hu.cc/archives/171630.html
+https://www.6hu.cc/archives/171564.html
+https://www.6hu.cc/archives/170816.html
+https://www.6hu.cc/archives/170515.html
+https://www.6hu.cc/archives/169226.html
+https://www.6hu.cc/archives/168770.html
+https://www.6hu.cc/archives/168161.html
+https://www.6hu.cc/archives/166497.html
+https://www.6hu.cc/archives/165634.html
+https://www.6hu.cc/archives/165604.html
+https://www.6hu.cc/archives/185591.html
+https://www.6hu.cc/archives/163928.html
+https://www.6hu.cc/archives/163693.html
+https://www.6hu.cc/archives/184527.html
+https://www.6hu.cc/archives/163300.html
+https://www.6hu.cc/archives/162435.html
+https://www.6hu.cc/archives/161288.html
+https://www.6hu.cc/archives/158531.html
+https://www.6hu.cc/archives/158308.html
+https://www.6hu.cc/archives/157436.html
+https://www.6hu.cc/archives/157151.html
+https://www.6hu.cc/archives/155622.html
+https://www.6hu.cc/archives/153744.html
+https://www.6hu.cc/archives/153516.html
+https://www.6hu.cc/archives/151273.html
+https://www.6hu.cc/archives/150537.html
+https://www.6hu.cc/archives/147310.html
+https://www.6hu.cc/archives/146181.html
+https://www.6hu.cc/archives/143323.html
+https://www.6hu.cc/archives/141643.html
+https://www.6hu.cc/archives/141181.html
+https://www.6hu.cc/archives/139905.html
+https://www.6hu.cc/archives/139926.html
+https://www.6hu.cc/archives/139247.html
+https://www.6hu.cc/archives/137503.html
+https://www.6hu.cc/archives/136670.html
+https://www.6hu.cc/archives/134842.html
+https://www.6hu.cc/archives/133183.html
+https://www.6hu.cc/archives/132753.html
+https://www.6hu.cc/archives/130027.html
+https://www.6hu.cc/archives/127990.html
+https://www.6hu.cc/archives/127323.html
+https://www.6hu.cc/archives/126370.html
+https://www.6hu.cc/archives/124341.html
+https://www.6hu.cc/archives/124221.html
+https://www.6hu.cc/archives/122443.html
+https://www.6hu.cc/archives/122413.html
+https://www.6hu.cc/archives/122188.html
+https://www.6hu.cc/archives/121911.html
+https://www.6hu.cc/archives/120631.html
+https://www.6hu.cc/archives/120270.html
+https://www.6hu.cc/archives/119761.html
+https://www.6hu.cc/archives/117985.html
+https://www.6hu.cc/archives/117544.html
+https://www.6hu.cc/archives/116867.html
+https://www.6hu.cc/archives/114392.html
+https://www.6hu.cc/archives/113907.html
+https://www.6hu.cc/archives/109670.html
+https://www.6hu.cc/archives/109334.html
+https://www.6hu.cc/archives/109310.html
+https://www.6hu.cc/archives/109135.html
+https://www.6hu.cc/archives/106235.html
+https://www.6hu.cc/archives/104578.html
+https://www.6hu.cc/archives/103355.html
+https://www.6hu.cc/archives/102941.html
+https://www.6hu.cc/archives/101478.html
+https://www.6hu.cc/archives/101135.html
+https://www.6hu.cc/archives/100118.html
+https://www.6hu.cc/archives/99698.html
+https://www.6hu.cc/archives/99566.html
+https://www.6hu.cc/archives/98969.html
+https://www.6hu.cc/archives/98549.html
+https://www.6hu.cc/archives/95813.html
+https://www.6hu.cc/archives/95620.html
+https://www.6hu.cc/archives/95052.html
+https://www.6hu.cc/archives/94969.html
+https://www.6hu.cc/archives/94362.html
+https://www.6hu.cc/archives/94189.html
+https://www.6hu.cc/archives/94181.html
+https://www.6hu.cc/archives/92588.html
+https://www.6hu.cc/archives/91913.html
+https://www.6hu.cc/archives/91863.html
+https://www.6hu.cc/archives/90239.html
+https://www.6hu.cc/archives/90244.html
+https://www.6hu.cc/archives/90182.html
+https://www.6hu.cc/archives/89584.html
+https://www.6hu.cc/archives/89557.html
+https://www.6hu.cc/archives/88245.html
+https://www.6hu.cc/archives/88013.html
+https://www.6hu.cc/archives/87212.html
+https://www.6hu.cc/archives/86871.html
+https://www.6hu.cc/archives/86203.html
+https://www.6hu.cc/archives/84930.html
+https://www.6hu.cc/archives/84613.html
+https://www.6hu.cc/archives/84559.html
+https://www.6hu.cc/archives/84496.html
+https://www.6hu.cc/archives/83706.html
+https://www.6hu.cc/archives/83692.html
+https://www.6hu.cc/archives/83365.html
+https://www.6hu.cc/archives/83399.html
+https://www.6hu.cc/archives/82456.html
+https://www.6hu.cc/archives/82314.html
+https://www.6hu.cc/archives/81725.html
+https://www.6hu.cc/archives/81673.html
+https://www.6hu.cc/archives/81389.html
+https://www.6hu.cc/archives/79635.html
+https://www.6hu.cc/archives/78098.html
+https://www.6hu.cc/archives/77982.html
+https://www.6hu.cc/archives/76854.html
+https://www.6hu.cc/archives/76333.html
+https://www.6hu.cc/archives/76035.html
+https://www.6hu.cc/archives/75911.html
+https://www.6hu.cc/archives/75671.html
+https://www.6hu.cc/archives/75328.html
+https://www.6hu.cc/archives/75234.html
+https://www.6hu.cc/archives/74533.html
+https://www.6hu.cc/archives/74045.html
+https://www.6hu.cc/archives/73947.html
+https://www.6hu.cc/archives/73605.html
+https://www.6hu.cc/archives/73251.html
+https://www.6hu.cc/archives/73258.html
+https://www.6hu.cc/archives/72877.html
+https://www.6hu.cc/archives/72547.html
+https://www.6hu.cc/archives/72003.html
+https://www.6hu.cc/archives/71959.html
+https://www.6hu.cc/archives/71848.html
+https://www.6hu.cc/archives/71633.html
+https://www.6hu.cc/archives/71414.html
+https://www.6hu.cc/archives/70601.html
+https://www.6hu.cc/archives/69174.html
+https://www.6hu.cc/archives/68899.html
+https://www.6hu.cc/archives/68505.html
+https://www.6hu.cc/archives/68561.html
+https://www.6hu.cc/archives/67846.html
+https://www.6hu.cc/archives/67776.html
+https://www.6hu.cc/archives/67748.html
+https://www.6hu.cc/archives/67646.html
+https://www.6hu.cc/archives/67268.html
+https://www.6hu.cc/archives/66153.html
+https://www.6hu.cc/archives/64956.html
+https://www.6hu.cc/archives/64139.html
+https://www.6hu.cc/archives/64048.html
+https://www.6hu.cc/archives/64060.html
+https://www.6hu.cc/archives/63994.html
+https://www.6hu.cc/archives/63710.html
+https://www.6hu.cc/archives/56843.html
+https://www.6hu.cc/archives/56324.html
+https://www.6hu.cc/archives/55849.html
+https://www.6hu.cc/archives/53319.html
+https://www.6hu.cc/archives/45984.html
+https://www.6hu.cc/archives/47550.html
+https://www.6hu.cc/archives/44944.html
+https://www.6hu.cc/archives/45420.html
+https://www.6hu.cc/archives/44947.html
+https://www.6hu.cc/archives/44685.html
+https://www.6hu.cc/archives/39144.html
+https://www.6hu.cc/archives/39367.html
+https://www.6hu.cc/archives/38060.html
+https://www.6hu.cc/archives/37602.html
+https://www.6hu.cc/archives/36006.html
+https://www.6hu.cc/archives/32576.html
+https://www.6hu.cc/archives/28762.html 已看
+https://www.6hu.cc/archives/25990.html 已看
+https://www.6hu.cc/archives/19672.html
+https://www.6hu.cc/archives/19673.html
+https://www.6hu.cc/archives/1330.html 已看
+https://www.6hu.cc/archives/728.html 已看
+
+
+1.黑白色实现方案，只需要一个组件ColorFiltered
+runApp(const ColorFiltered(
+colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+child: MyApp()));
+2.State.setState
+StatelessWidget 经过 StatelessElement.build 触发 build
+StatefulWidget 经过 StatefulElement.build 触发 State.build
+State.setState内部所做的工作：
+1）setState的参数是一个VoidCallBack，这个回调就是我们自己写好的信息改变逻辑
+2）将StatefulWidget对应的StatefulElement标记为dirty
+3)在垂直同步信号回调后，会经过Native到Flutter engine调用Flutter的drawFrame方法，将之前标记为dirty的Element
+进行重新构建，在 widget 重新构建时会执行State.build()方法，Flutter 框架会调用widget.canUpdate来检测 widget 树中同一位置的新旧节点，然
+后决定是否需要更新，widget.canUpdate会在新旧 widget 的 key和 runtimeType 同时相等时会返回true，也就是说在在新
+旧 widget 的key和runtimeType同时相 等时Element会被复用，旧的Element会使用新Widget配置数据更新，反之则会创建一
+个新的Element。
+3.多渠道打包
+两种方式
+1）通过命令一个个的打渠道包
+1.1在main入口添加：
+void main() async{
+    String appMarket = EnvironmentConfig.CHANNEL;
+    String debug = EnvironmentConfig.DEBUG;
+}
+1.2在任意地方添加：
+class EnvironmentConfig {
+    static const CHANNEL = String.fromEnvironment('CHANNEL');
+    //DEBUG = Y 是调试模式，其他为生产模式
+    static const DEBUG = String.fromEnvironment('DEBUG');
+}
+1.3在andorid/app/build.gradle中添加：
+添加到顶部,获取参数
+// 获取渠道参数使用,这里设置一下默认值
+def dartEnvironmentVariables = [
+    CHANNEL: 'YYB',
+    DEBUG: '',
+]
+if (project.hasProperty('dart-defines')) {
+dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+.split(',').collectEntries { entry ->
+def pair = URLDecoder.decode(entry).split('=')
+[(pair.first()): pair.last()]
+}
+}
+//使用
+android {
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                output ->
+                    def outputFile = output.outputFile
+                    if (outputFile.name.contains("release")) {
+                        outputFileName = "APP_${dartEnvironmentVariables.CHANNEL}.apk"
+                    }
+            }
+    }
+}
+1.4 多渠道调试与打包指令
+# 调试例子1：设置渠道为应用宝。
+flutter run --dart-define=CHANNEL=YYB
+# 调试例子2：设置渠道为应用宝。DEBUG参数是Y
+flutter run --dart-define=CHANNEL=YYB --dart-define=DEBUG=Y
+#打包例子1：打包应用宝渠道包
+flutter build apk --dart-define=CHANNEL=YYB
+#打包例子2：打包应用宝渠道包,DEBUG参数是Y
+flutter build apk --dart-define=CHANNEL=YYB --dart-define=DEBUG=Y
+2）使用脚本打渠道包
+1.1在项目的根目录创建目录shell，shell目录下创建papk.sh文件
+1.2在项目的根目录创建目录prod
+1.3执行 ./shell/papk.sh

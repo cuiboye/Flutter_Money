@@ -7,13 +7,13 @@ part 'category_type_list_model.g.dart';
 class CategoryTypeListModel{
 
   @JsonKey(name: 'states')
-  int states;
+  int? states;
 
   @JsonKey(name: 'msg')
-  String msg;
+  String? msg;
 
   @JsonKey(name: 'result')
-  Result result;
+  Result? result;
 
   CategoryTypeListModel(this.states,this.msg,this.result,);
 
@@ -26,7 +26,7 @@ class CategoryTypeListModel{
 class Result{
 
   @JsonKey(name: 'typeList')
-  List<TypeList?> typeList;
+  List<TypeList?>? typeList;
 
   Result(this.typeList,);
 
@@ -45,7 +45,7 @@ class TypeList{
   String? value;
 
   @JsonKey(name: 'key')
-  String key;
+  String? key;
 
   TypeList(this.name,this.value,this.key,);
 

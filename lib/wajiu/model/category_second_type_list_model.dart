@@ -8,13 +8,13 @@ part 'category_second_type_list_model.g.dart';
 class CategorySecondTypeListModel {
 
   @JsonKey(name: 'states')
-  int states;
+  int? states;
 
   @JsonKey(name: 'msg')
-  String msg;
+  String? msg;
 
   @JsonKey(name: 'result')
-  Result result;
+  Result? result;
 
   CategorySecondTypeListModel(this.states,this.msg,this.result,);
 
@@ -27,10 +27,10 @@ class CategorySecondTypeListModel {
 class Result {
 
   @JsonKey(name: 'bannerList')
-  List<BannerList> bannerList;
+  List<BannerList>? bannerList;
 
   @JsonKey(name: 'parameterList')
-  List<ParameterList?> parameterList;
+  List<ParameterList?>? parameterList;
 
   Result(this.bannerList,this.parameterList);
 
@@ -59,7 +59,7 @@ class BannerList{
 class ParameterList{
 
   @JsonKey(name: 'title')
-  String title;
+  String? title;
 
   @JsonKey(name: 'name')
   String? name;
@@ -68,10 +68,10 @@ class ParameterList{
   List<ListBean?>? list;
 
   @JsonKey(name: 'reqName')
-  String reqName;
+  String? reqName;
 
   @JsonKey(name: 'type')
-  int type;
+  int? type;
 
   ParameterList(this.title,this.list,this.reqName,this.type,this.name);
 
@@ -87,10 +87,10 @@ class ListBean{
   String? name;
 
   @JsonKey(name: 'value')
-  dynamic value;
+  dynamic? value;
 
   @JsonKey(name: 'hotFlag')
-  int hotFlag;
+  int? hotFlag;
 
   ListBean(this.name,this.value,this.hotFlag);
 

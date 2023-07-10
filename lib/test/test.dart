@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_money/res/res_images.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:flutter_money/wajiu/constant/color.dart';
@@ -387,8 +388,24 @@ class _TestState extends State<Test> {
                   fit: BoxFit.cover,
                 ),
               ),
+              PhysicalModel(
+                //PhysicalModel和ClipRRect的区别：ClipRRect不能设置z轴和阴影，其他效果跟PhysicalModel 基本一致
+                color: Colors.transparent,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(ImageRes.appHomeDingdanBluePNG.full,
+                  width: 130,
+                  height: 130,
+                  fit: BoxFit.cover,
+                ),
+              ),
+               Container(
+                color: Colors.red,
+                child: Text("多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分"),
+              )
             ],
-          )),
+          )
+      ),
     );
   }
   // PartialCourseData partialCourseData = PartialCourseData.fromCourseData(courseData)

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
-import 'package:flutter_money/animated_switcher.dart';
+import 'package:flutter_money/view/animated_switcher.dart';
 import 'package:flutter_money/animation_main.dart';
 import 'package:flutter_money/animation_widget.dart';
 import 'package:flutter_money/animationbuild_example.dart';
@@ -11,6 +11,7 @@ import 'package:flutter_money/channel/flutter_open_native_page.dart';
 import 'package:flutter_money/channel/flutter_to_native_withdata_main.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
+import 'package:flutter_money/event_add_notifition.dart';
 import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/getbuilder_view.dart';
@@ -87,13 +88,20 @@ import 'package:flutter_money/wajiu/wajiu_phone_login_password.dart';
 import 'package:flutter_money/wajiu/wajiu_register_page.dart';
 import 'package:flutter_money/wajiu/wajiu_splash_page.dart';
 import 'package:flutter_money/webview_native.dart';
+import 'package:flutter_money/widget/KeepAliveWrapperDemo.dart';
+import 'package:flutter_money/widget/LeftRightBoxDemo.dart';
+import 'package:flutter_money/widget/accurate_sizebox_demo.dart';
 import 'package:flutter_money/widget/button_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/getx_obs_demo.dart';
 import 'package:flutter_money/widget/getxcontroller_demo.dart';
+import 'package:flutter_money/widget/gradient_button_demo.dart';
+import 'package:flutter_money/widget/html_demo.dart';
 import 'package:flutter_money/widget/icon_demo.dart';
 import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/input_add_form.dart';
+import 'package:flutter_money/widget/print_widget_log_demo.dart';
+import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
@@ -107,7 +115,7 @@ import '../inherited_widget_example.dart';
 import '../inherited_widget_test.dart';
 import '../main.dart';
 import '../getx/navigation/navigation_demo3.dart';
-import '../map/map_example.dart';
+// import '../map/map_example.dart';
 
 
 class
@@ -116,13 +124,21 @@ RouterUtils {
     Map<String, WidgetBuilder>? routes = {
       "main": (BuildContext context) => MyApp(),
       "statelesswidget": (BuildContext context) => StatelessWidgetDemo(),
+      "accuratesizedboxdemo": (BuildContext context) => AccurateSizedBoxDemo(),
+      "event_add_notifition": (BuildContext context) => EventAddNotifitonWidget(),
       "routedemopage": (BuildContext context) => RouteDemoPage(),
+      "printwidgetlogdemo": (BuildContext context) => PrintWidgetLogDemo(),
+      "gradientbuttondemo": (BuildContext context) => const GradientButtonDemo(),
+      "leftrightboxdemo": (BuildContext context) => const LeftRightBoxDemo(),
+      "keepalivewrapperdemo": (BuildContext context) => const KeepAliveWrapperDemo(),
+      "htmldemo": (BuildContext context) => const HtmlDemo(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
       "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
       "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),
       "listanimdemopage2": (BuildContext context) => ListAnimDemoPage2(),
       "wajiuphoneloginpassword": (BuildContext context) => WajiuPhoneLoginPassword(),
       "wajiuregisterpage": (BuildContext context) => WajiuRegisterPage(),
+      "scaleviewdemo": (BuildContext context) => ScaleViewDemo(),
       "mybalance": (BuildContext context) => MyBalance(),
       "listscrolldockpage": (BuildContext context) => ListScrollDockPage(),
       "dropselectdemopage": (BuildContext context) => DropSelectDemoPage(),
@@ -252,7 +268,7 @@ RouterUtils {
       "animatedbuild_example": (BuildContext context) => AnimatedBuilderExample(),
       "stagger_animation": (BuildContext context) => StaggerAnimationExample(),
       "animatedswitch_example": (BuildContext context) => AnimatedSwitcherExample(),
-      "map_main_example": (BuildContext context) => MapMainExample(),
+      // "map_main_example": (BuildContext context) => MapMainExample(),
       "jiguang_push": (BuildContext context) => JiguangPushMain(),
       "pull_refresh_main": (BuildContext context) => PullRefreshMain(),
       "device_info": (BuildContext context) => DeviceInfoMain(),

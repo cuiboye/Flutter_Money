@@ -10,7 +10,9 @@ class GetxWithDioController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    //初始化数据，网络请求的操作可以放在这里
     print("onInit");
+    getMyDelivery();
   }
 
   @override

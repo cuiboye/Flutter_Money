@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_money/utils/http.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
@@ -110,7 +111,7 @@ class _DioDemoState extends State<DioDemo> {
         children: [
           ElevatedButton(
               onPressed: () {
-                // getImage();
+                getImage();
               },
               child: Text("选择图片")),
           SizedBox(
@@ -195,15 +196,16 @@ class _DioDemoState extends State<DioDemo> {
   }
 
   // //使用相机或者从相册选择图片
-  // Future<void> getImage() async {
-  //   var image = await ImagePicker()
-  //       .getImage(source: ImageSource.gallery, imageQuality: 1);
-  //   setState(() {
-  //     print("getImage");
-  //     _imagePath = image?.path;
-  //   });
-  //   _uploadImage(_imagePath);
-  // }
+  Future<void> getImage() async {
+    var image = await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 1);//相册
+        // .getImage(source: ImageSource.camera, imageQuality: 1);//相机
+    setState(() {
+      print("getImage");
+      _imagePath = image?.path;
+    });
+    _uploadImage(_imagePath);
+  }
 
   //上传图片，除了图片还可以上传其他文件，post提交
   //FormData 将提交的参数 name与value进行组合，实现表单数据的序列化，从而减少表单元素的拼接

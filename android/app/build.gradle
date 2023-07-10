@@ -25,10 +25,35 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+/// 获取渠道参数使用,这里设置一下默认值
+//def dartEnvironmentVariables = [
+//        CHANNEL: 'YYB',
+//        DEBUG: '',
+//]
+//if (project.hasProperty('dart-defines')) {
+//    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+//            .split(',')
+//            .collectEntries { entry ->
+//                def pair = URLDecoder.decode(entry).split('=')
+//                [(pair.first()): pair.last()]
+//            }
+//}
+
 android {
 //    compileSdkVersion flutter.compileSdkVersion
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
+
+//    android.applicationVariants.all {
+//        variant ->
+//            variant.outputs.all {
+//                output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile.name.contains("release")) {
+//                        outputFileName = "APP_${dartEnvironmentVariables.CHANNEL}.apk"
+//                    }
+//            }
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -84,6 +109,10 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
+            ndk{
+                //"armeabi","armeabi-v7a","arm64-v8a","x86_64","x86"  //x86是兼容模拟器的
+                abiFilters "armeabi","armeabi-v7a","arm64-v8a"  //手机没什么x86框架的,只包含arm32和arm64即可
+            }
         }
     }
 }

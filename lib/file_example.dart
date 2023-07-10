@@ -15,7 +15,7 @@ class FileExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String name = "Jimi";
-    writeString(name);
+
 
     return CustomMaterialApp(
       home: Scaffold(
@@ -23,7 +23,9 @@ class FileExample extends StatelessWidget {
           title: "文件操作",
 
         ),
-        body: Text("文件操作",style: TextStyle(fontSize: 12,color: ColorUtil.color("#333333")))
+        body: ElevatedButton(
+            onPressed:  ()=>writeString(name),
+            child: Text("文件操作",style: TextStyle(fontSize: 12,color: ColorUtil.color("#333333"))))
       ),
     );
   }

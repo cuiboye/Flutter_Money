@@ -1,7 +1,7 @@
 class WajiuProductListNewModel {
   final Result? result;
-  final int states;
-  final String msg;
+  final int? states;
+  final String? msg;
 
   WajiuProductListNewModel({
     required this.result,
@@ -13,9 +13,9 @@ class WajiuProductListNewModel {
     print("444411");
 
     return WajiuProductListNewModel(
-      result: Result.fromJson(json['result']), //对象需要这样设置来取值
-      states: json['states'],
-      msg: json['msg'],
+      result: Result.fromJson(json['result']??Map<String,dynamic>), //对象需要这样设置来取值
+      states: json['states']??0,
+      msg: json['msg']??"",
     );
   }
 
@@ -27,7 +27,7 @@ class WajiuProductListNewModel {
 }
 
 class Result {
-  List<DeliveryList> delivery = [];
+  List<DeliveryList>? delivery = [];
 
   Result({
     required this.delivery,
@@ -36,6 +36,7 @@ class Result {
   //List数据赋值步骤：
   //1）
   factory Result.fromJson(Map<String, dynamic> json) {
+    print("55555");
     if( json==null || json.isEmpty ){
       return Result(delivery: []);
     }
@@ -48,12 +49,12 @@ class Result {
   }
   //2）
   Map<String, dynamic> toJson() => {
-        "delivery": List<dynamic>.from(delivery.map((x) => x.toJson())),
+        "delivery": List<dynamic>.from(delivery!.map((x) => x.toJson())),
       };
 }
 
 class DeliveryList {
-  List<OrdersList> orders = [];
+  List<OrdersList>? orders = [];
 
   DeliveryList({
     required this.orders,
@@ -70,7 +71,7 @@ class DeliveryList {
 
   //2）
   Map<String, dynamic> toJson() => {
-        "orders": List<dynamic>.from(orders.map((x) => x.toJson())),
+        "orders": List<dynamic>.from(orders!.map((x) => x.toJson())),
       };
 }
 

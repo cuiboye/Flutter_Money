@@ -14,7 +14,7 @@ class GetXObsDemo extends StatelessWidget{
         appBar: CustomAppbar(context: context,title: "obs测试",),
         body: Column(
           children: [
-            Obx(() => Text("count1 -> " + count.toString())),
+            Obx(() => Text("count1 -> ${count.value}")),
             // Obx((){
             //   return Text("count1 -> ${count.toString()}" + );
             // }),

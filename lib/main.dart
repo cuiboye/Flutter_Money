@@ -41,7 +41,9 @@ void main() async{
   await Sp.perInit();
 
   runZoned<Future<void>>(() async {
-    runApp(const MyApp());
+    runApp(const ColorFiltered(
+        colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+        child: MyApp()));
   }, onError: (error, stackTrace) async {
     print("========> ${error.toString()}");
   });
@@ -49,6 +51,9 @@ void main() async{
   PaintingBinding.instance.imageCache.maximumSize =100000;
   PaintingBinding.instance?.imageCache?.maximumSizeBytes =
       300 << 20;
+
+  // String appMarket = EnvironmentConfig.CHANNEL;
+  // String debug = EnvironmentConfig.DEBUG;
 }
 
 void setCustomErrorPage(){
@@ -105,7 +110,7 @@ class _SplashState extends State<MyApp>{
 
     //屏幕适配，入口初始化一次
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(375, 667),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -114,7 +119,7 @@ class _SplashState extends State<MyApp>{
           //去除右上角的"DEBUG"水印
           debugShowCheckedModeBanner:false,
           title: 'Flutter Demo',
-          home: Image.asset("images/launchimage.jpg",fit: BoxFit.fill),
+          home:  Image.asset("images/launchimage.jpg",fit: BoxFit.fill),
           routes: RouterUtils.getRouter(),
           builder: EasyLoading.init(),//初始化EasyLoading
           // getPages: RouterUtils.getPages,
@@ -126,4 +131,9 @@ class _SplashState extends State<MyApp>{
   }
 }
 
+// class EnvironmentConfig {
+//   static const CHANNEL = String.fromEnvironment('CHANNEL');
+//   //DEBUG = Y 是调试模式，其他为生产模式
+//   static const DEBUG = String.fromEnvironment('DEBUG');
+// }
 

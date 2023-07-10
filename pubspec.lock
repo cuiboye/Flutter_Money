@@ -213,10 +213,10 @@ packages:
     dependency: transitive
     description:
       name: csslib
-      sha256: "706b5707578e0c1b4b7550f64078f0a0f19dec3f50a178ffae7006b0a9ca58fb"
+      sha256: "831883fb353c8bdc1d71979e5b342c7d88acfbc643113c14ae51e2442ea0f20f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "0.17.3"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -249,54 +249,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
-  device_info_plus:
-    dependency: transitive
-    description:
-      name: device_info_plus
-      sha256: b809c4ed5f7fcdb325ccc70b80ad934677dc4e2aa414bf46859a42bfdfafcbb6
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.3"
-  device_info_plus_linux:
-    dependency: transitive
-    description:
-      name: device_info_plus_linux
-      sha256: "77a8b3c4af06bc46507f89304d9f49dfc64b4ae004b994532ed23b34adeae4b3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  device_info_plus_macos:
-    dependency: transitive
-    description:
-      name: device_info_plus_macos
-      sha256: "37961762fbd46d3620c7b69ca606671014db55fc1b7a11e696fd90ed2e8fe03d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  device_info_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: device_info_plus_platform_interface
-      sha256: "83fdba24fcf6846d3b10f10dfdc8b6c6d7ada5f8ed21d62ea2909c2dfa043773"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  device_info_plus_web:
-    dependency: transitive
-    description:
-      name: device_info_plus_web
-      sha256: "5890f6094df108181c7a29720bc23d0fd6159f17d82787fac093d1fefcaf6325"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
-  device_info_plus_windows:
-    dependency: transitive
-    description:
-      name: device_info_plus_windows
-      sha256: "23a2874af0e23ee6e3a2a0ebcecec3a9da13241f2cb93a93a44c8764df123dd7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   dio:
     dependency: "direct main"
     description:
@@ -390,38 +342,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_baidu_mapapi_base:
-    dependency: transitive
-    description:
-      name: flutter_baidu_mapapi_base
-      sha256: "985a7ea57c46445a7be081dbdcf22408958fcc4acdbe9affa8cff95a05c04447"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.2"
-  flutter_baidu_mapapi_map:
-    dependency: "direct main"
-    description:
-      name: flutter_baidu_mapapi_map
-      sha256: bf5d4f5e3e1e907ca20a3ec1d2d7a8871778ad1f0c18f9ead10d1238ff20f0d1
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.2"
-  flutter_baidu_mapapi_search:
-    dependency: "direct main"
-    description:
-      name: flutter_baidu_mapapi_search
-      sha256: "1b2cace10f78693d72a81498c82d712703424af142a5956f47e9bafc830b06a3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.2"
-  flutter_baidu_mapapi_utils:
-    dependency: "direct main"
-    description:
-      name: flutter_baidu_mapapi_utils
-      sha256: "5ae094e50b4df59ba535a21bafc4b1f281189db46ec4fc320cbc08c76b7739c2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.2"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -430,14 +350,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
-  flutter_bmflocation:
-    dependency: "direct main"
-    description:
-      name: flutter_bmflocation
-      sha256: "4720b5a1cbce212f85a96ae23a24e8226e030386fa3f46fc48d72f9d09d6d776"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.1"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -470,6 +382,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.5"
+  flutter_html:
+    dependency: "direct main"
+    description:
+      name: flutter_html
+      sha256: "02ad69e813ecfc0728a455e4bf892b9379983e050722b1dce00192ee2e41d1ee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0-beta.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -644,10 +564,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "216dbfb6609e46f78613b8913d046a162588ad4f34909ae7bf85e9f94ea6d922"
+      sha256: "0d6d8d041bfc712351c2247e0248caf7b33cf8c687d82b7efcd8bb542826d619"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.7"
+    version: "0.8.7+1"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -712,6 +632,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jpush_flutter:
+    dependency: "direct main"
+    description:
+      name: jpush_flutter
+      sha256: "938f6e88ee8a1b1e67dfafc8115d31d2f62ae3ca0b11532d00c019d3bf6c8bcf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.4"
   js:
     dependency: transitive
     description:
@@ -744,6 +672,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  list_counter:
+    dependency: transitive
+    description:
+      name: list_counter
+      sha256: c447ae3dfcd1c55f0152867090e67e219d42fe6d4f2807db4bbe8b8d69912237
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   logging:
     dependency: transitive
     description:
@@ -809,7 +745,7 @@ packages:
     source: hosted
     version: "2.1.0"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
@@ -817,7 +753,7 @@ packages:
     source: hosted
     version: "1.8.3"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "3087813781ab814e4157b172f1a11c46be20179fcc9bea043e0fba36bc0acaa2"
@@ -1358,7 +1294,7 @@ packages:
     source: hosted
     version: "6.3.0"
   yaml:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: yaml
       sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"

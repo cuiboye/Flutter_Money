@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 class GetXWithDioView extends GetView<GetxWithDioController> {
   @override
   Widget build(BuildContext context) {
-    controller.getMyDelivery();
     return Scaffold(
       appBar: AppBar(
         title: Text("GetConnect Page"),

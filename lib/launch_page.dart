@@ -21,7 +21,21 @@ class _LaunchPageState extends State<LaunchPage> {
             GestureDetector(
               onTap: ()=>_launchInBrowser(Uri.parse("http://www.baidu.com")),
               child: Text("打开浏览器"),
-            )
+
+            ),
+            GestureDetector(
+              onTap: () => {
+                canLaunchUrl(Uri(scheme: 'tel', path: "15201063591"))
+                    .then((value) => {
+                          if (value == true)
+                            {
+                              launchUrl(
+                                  Uri(scheme: 'tel', path: "15201063591"))
+                            }
+                        })
+              },
+              child: Text("拨打电话"),
+            ),
           ],
         ),
         appBar:CustomAppbar(

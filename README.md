@@ -727,56 +727,34 @@ https://www.6hu.cc/archives/77982.html
 https://www.6hu.cc/archives/76854.html
 https://www.6hu.cc/archives/76333.html
 https://www.6hu.cc/archives/76035.html
-https://www.6hu.cc/archives/75911.html
-https://www.6hu.cc/archives/75671.html
-https://www.6hu.cc/archives/75328.html
-https://www.6hu.cc/archives/75234.html
-https://www.6hu.cc/archives/74533.html
-https://www.6hu.cc/archives/74045.html
-https://www.6hu.cc/archives/73947.html
-https://www.6hu.cc/archives/73605.html
-https://www.6hu.cc/archives/73251.html
-https://www.6hu.cc/archives/73258.html
-https://www.6hu.cc/archives/72877.html
-https://www.6hu.cc/archives/72547.html
-https://www.6hu.cc/archives/72003.html
-https://www.6hu.cc/archives/71959.html
-https://www.6hu.cc/archives/71848.html
-https://www.6hu.cc/archives/71633.html
-https://www.6hu.cc/archives/71414.html
-https://www.6hu.cc/archives/70601.html
-https://www.6hu.cc/archives/69174.html
-https://www.6hu.cc/archives/68899.html
-https://www.6hu.cc/archives/68505.html
-https://www.6hu.cc/archives/68561.html
-https://www.6hu.cc/archives/67846.html
-https://www.6hu.cc/archives/67776.html
-https://www.6hu.cc/archives/67748.html
-https://www.6hu.cc/archives/67646.html
-https://www.6hu.cc/archives/67268.html
-https://www.6hu.cc/archives/66153.html
-https://www.6hu.cc/archives/64956.html
-https://www.6hu.cc/archives/64139.html
-https://www.6hu.cc/archives/64048.html
-https://www.6hu.cc/archives/64060.html
-https://www.6hu.cc/archives/63994.html
-https://www.6hu.cc/archives/63710.html
-https://www.6hu.cc/archives/56843.html
-https://www.6hu.cc/archives/56324.html
-https://www.6hu.cc/archives/55849.html
-https://www.6hu.cc/archives/53319.html
-https://www.6hu.cc/archives/45984.html
-https://www.6hu.cc/archives/47550.html
-https://www.6hu.cc/archives/44944.html
-https://www.6hu.cc/archives/45420.html
-https://www.6hu.cc/archives/44947.html
-https://www.6hu.cc/archives/44685.html
-https://www.6hu.cc/archives/39144.html
-https://www.6hu.cc/archives/39367.html
-https://www.6hu.cc/archives/38060.html
-https://www.6hu.cc/archives/37602.html
-https://www.6hu.cc/archives/36006.html
-https://www.6hu.cc/archives/32576.html
+https://www.6hu.cc/archives/75911.html 已看
+https://www.6hu.cc/archives/75671.html 已看
+https://www.6hu.cc/archives/74045.html 已看
+https://www.6hu.cc/archives/73947.html 已看
+https://www.6hu.cc/archives/73605.html 已看
+https://www.6hu.cc/archives/73251.html 已看
+https://www.6hu.cc/archives/73258.html 已看
+https://www.6hu.cc/archives/71848.html 已看
+https://www.6hu.cc/archives/71633.html 已看
+https://www.6hu.cc/archives/71414.html 已看
+https://www.6hu.cc/archives/70601.html 已看
+https://www.6hu.cc/archives/69174.html 已看
+https://www.6hu.cc/archives/68899.html 已看
+https://www.6hu.cc/archives/67776.html 已看
+https://www.6hu.cc/archives/67748.html 已看
+https://www.6hu.cc/archives/67646.html 已看
+https://www.6hu.cc/archives/67268.html 已看
+https://www.6hu.cc/archives/66153.html 已看
+https://www.6hu.cc/archives/64956.html 已看
+https://www.6hu.cc/archives/64048.html 已看
+https://www.6hu.cc/archives/55849.html 已看
+https://www.6hu.cc/archives/53319.html 已看
+https://www.6hu.cc/archives/44944.html 已看
+https://www.6hu.cc/archives/45420.html 已看
+https://www.6hu.cc/archives/39367.html 已看
+https://www.6hu.cc/archives/37602.html 已看
+https://www.6hu.cc/archives/36006.html 已看
+https://www.6hu.cc/archives/32576.html 已看
 https://www.6hu.cc/archives/28762.html 已看
 https://www.6hu.cc/archives/25990.html 已看
 https://www.6hu.cc/archives/19672.html
@@ -800,57 +778,93 @@ State.setState内部所做的工作：
 后决定是否需要更新，widget.canUpdate会在新旧 widget 的 key和 runtimeType 同时相等时会返回true，也就是说在在新
 旧 widget 的key和runtimeType同时相 等时Element会被复用，旧的Element会使用新Widget配置数据更新，反之则会创建一
 个新的Element。
-3.多渠道打包
-两种方式
-1）通过命令一个个的打渠道包
-1.1在main入口添加：
-void main() async{
-    String appMarket = EnvironmentConfig.CHANNEL;
-    String debug = EnvironmentConfig.DEBUG;
-}
-1.2在任意地方添加：
-class EnvironmentConfig {
-    static const CHANNEL = String.fromEnvironment('CHANNEL');
-    //DEBUG = Y 是调试模式，其他为生产模式
-    static const DEBUG = String.fromEnvironment('DEBUG');
-}
-1.3在andorid/app/build.gradle中添加：
-添加到顶部,获取参数
-// 获取渠道参数使用,这里设置一下默认值
-def dartEnvironmentVariables = [
-    CHANNEL: 'YYB',
-    DEBUG: '',
-]
-if (project.hasProperty('dart-defines')) {
-dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
-.split(',').collectEntries { entry ->
-def pair = URLDecoder.decode(entry).split('=')
-[(pair.first()): pair.last()]
-}
-}
-//使用
-android {
-    android.applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                output ->
-                    def outputFile = output.outputFile
-                    if (outputFile.name.contains("release")) {
-                        outputFileName = "APP_${dartEnvironmentVariables.CHANNEL}.apk"
-                    }
-            }
-    }
-}
-1.4 多渠道调试与打包指令
-# 调试例子1：设置渠道为应用宝。
-flutter run --dart-define=CHANNEL=YYB
-# 调试例子2：设置渠道为应用宝。DEBUG参数是Y
-flutter run --dart-define=CHANNEL=YYB --dart-define=DEBUG=Y
-#打包例子1：打包应用宝渠道包
-flutter build apk --dart-define=CHANNEL=YYB
-#打包例子2：打包应用宝渠道包,DEBUG参数是Y
-flutter build apk --dart-define=CHANNEL=YYB --dart-define=DEBUG=Y
-2）使用脚本打渠道包
-1.1在项目的根目录创建目录shell，shell目录下创建papk.sh文件
-1.2在项目的根目录创建目录prod
-1.3执行 ./shell/papk.sh
+3.性能优化
+https://www.6hu.cc/archives/53319.html
+4.插件
+shimmer: ^3.0.0 骨架屏
+5.pubspec.yaml文件介绍
+https://www.6hu.cc/archives/64956.html
+https://www.6hu.cc/archives/67748.html
+6.Flutter多引擎
+默认情况下一个Activity或Fragment对应一个引擎，如果原生页面和Flutter页面混合嵌入，默认会创建多个引擎。
+一个引擎的原生和Flutter交互可以使用flutter boost框架；多引擎的可以使用谷歌的FlutterEngineGroup引擎。
+7.WebView和JS交互
+1）WebView的属性
+initialUrl：需要加载的url链接
+javascriptMode：JS执行模式，是否允许JS执行，默认是关闭的，需要设置如下属性来开启：
+javascriptMode: JavascriptMode.unrestricted
+onWebResourceError:错误回调
+onPageFinished：页面加载完成的回调
+javascriptChannels:javascriptChannels用于Flutter和JS交互
+javascriptChannels: <JavascriptChannel>[//javascriptChannels用于Flutter和JS交互
+JavascriptChannel(
+name: "Hello",
+onMessageReceived: (JavascriptMessage message) {//JS调用Flutter代码的时候执行
+// 这里接收到的就是 js 中发送过来的message。 和js里MessageDeal.postMessage(message) 中的message 对应 。
+// 可以根据message来做一些相应的处理
+print("${message.toString()},  ${message.hashCode}, message: ${message.message}") ;
+// 收到消息后回复一个消息给js那边，Flutter调用JS的方法
+_controller?.evaluateJavascript("showMessage ('我（Flutter）收到了你的消息[${message.message}].)");
+}),
+].toSet(),
+onPageStarted：开始加载
+onProgress：加载进度
+其他属性可以查看官方说明。
+上面的是旧版的，新版的可以看代码
+8.Dio封装
+https://www.6hu.cc/archives/67776.html
+9.如果在Android targetSdkVersion = 30或30以上在Android11上无法拨打电话的解决方法，下面内容添加到manifest标签下
+<queries>
+<intent>
+<action android:name="android.intent.action.VIEW" />
+<data android:scheme="https" />
+</intent>
+<intent>
+<action android:name="android.intent.action.SENDTO" />
+<data android:scheme="smsto" />
+</intent>
+<intent>
+<action android:name="android.intent.action.VIEW" />
+<data android:scheme="sms" />
+</intent>
+<intent>
+<action android:name="android.intent.action.VIEW" />
+<data android:scheme="tel" />
+</intent>
+<intent>
+<action android:name="android.intent.action.VIEW" />
+<data android:scheme="mailto" />
+</intent>
+<intent>
+<action android:name="android.intent.action.VIEW" />
+<data android:scheme="file" />
+</intent>
+<package android:name="com.tencent.mm" />
+<package android:name="com.eg.android.AlipayGphone" />
+</queries>
+参考官网：https://developer.android.com/training/basics/intents/package-visibility?hl=zh-cn
+10.
+StatefulWidget和StatelessWidget是没有对应的RenderObject
+在Flutter渲染流程中，最终是针对Render树中的目标进行渲染；当一个Widget被创立时，都会经过createElement办法创立一个Element加入到Element树中，然后会执行mount办法，此刻假如含有RenderObject(Element是否承
+继自RenderObjectElement)，则会在mount办法中经过createRenderObject办法创立RenderObject树，反之则不创立。
+11.富文本
+富文本可以使用RichText或者Text.rich
+Text.rich(TextSpan(children: [
+const TextSpan(text: "你好世界"),
+TextSpan(
+text: "你好世界",
+style: TextStyle(
+// color: _toggle ? Colors.blue : Colors.red),
+color: _toggle ? Colors.blue : Colors.red),
+recognizer: _gestureRecognizer
+..onTap = () {
+setState(() {
+_toggle = !_toggle ?? false;
+});
+}),
+const TextSpan(text: "你好世界"),
+]))
+12.物理虚拟键处理返回事件
+使用WillPopScope这个组件
+13.Flutter为什么可以热重载？
+https://www.6hu.cc/archives/75911.html

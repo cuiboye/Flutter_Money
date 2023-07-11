@@ -610,20 +610,20 @@ class _WajiuGoodsDetailState extends State<WajiuGoodsDetail> {
                 ),
                 //这里还有问题，因为是自定义的手势，这个WebView滑动有问题
 
-                WebView(
-                  initialUrl: getAssetsPath("assets/files/good_detail.html"),
-                  //JS执行模式 是否允许JS执行
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onWebResourceError: (WebResourceError error){
-                    print("${error.description}");
-                  },
-                  onPageFinished: (String url){
-                    print("$url");
-                  },
-                  onWebViewCreated: (WebViewController controller){
-                    print("加载完成");
-                  },
-                )
+                // WebView(
+                //   initialUrl: getAssetsPath("assets/files/good_detail.html"),//initialUrl要加载的url
+                //   //JS执行模式 是否允许JS执行
+                //   javascriptMode: JavascriptMode.unrestricted,
+                //   onWebResourceError: (WebResourceError error){
+                //     print("${error.description}");
+                //   },
+                //   onPageFinished: (String url){//WebView页面加载完成
+                //     print("$url");
+                //   },
+                //   onWebViewCreated: (WebViewController controller){//WebView被创立
+                //     print("加载完成");
+                //   },
+                // )
               ],
             ),
           ),

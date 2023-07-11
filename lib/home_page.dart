@@ -160,7 +160,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('StatefulWidget组件的使用', StatefulWidgetDemo(), 'statefulwidget'),
         _item('布局的使用', LayoutDemoWidget(), 'layoutwidget'),
         // _item('flutter和原生通信', const PlatformChannel(), 'channel'),
-        _item('打开第三方应用', LaunchPage(), 'launchpage'),
+        _item('打开和跳转第三方应用', LaunchPage(), 'launchpage'),
         _item('http网络请求', HttpDemo(), 'http'),
         _item('FutureBuilder使用', FutureBuilderDemo(), 'futurebuilder'),
         _item('Dio使用', DioDemo(), 'dio'),

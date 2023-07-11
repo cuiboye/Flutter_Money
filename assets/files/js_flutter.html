@@ -16,7 +16,7 @@
 
 <!--        这个方法是用来发送一个消息给Flutter的（即：js调用Flutter方法）-->
         function sendMessage (message ) {
-            Hello.postMessage(message);
+            postMessage(message);
             document.getElementById ("content2").innerHTML = message;
         }
 

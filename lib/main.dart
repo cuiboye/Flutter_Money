@@ -41,9 +41,10 @@ void main() async{
   await Sp.perInit();
 
   runZoned<Future<void>>(() async {
-    runApp(const ColorFiltered(
-        colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
-        child: MyApp()));
+    // runApp(const ColorFiltered(
+    //     colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+    //     child: MyApp()));//黑白屏
+    runApp( MyApp());
   }, onError: (error, stackTrace) async {
     print("========> ${error.toString()}");
   });
@@ -107,7 +108,6 @@ class _SplashState extends State<MyApp>{
     //扩展方法
     print("调用扩展方法");
     print("#90F7EC".toColor());
-
     //屏幕适配，入口初始化一次
     return ScreenUtilInit(
       designSize: const Size(375, 667),
@@ -117,6 +117,7 @@ class _SplashState extends State<MyApp>{
         //如果使用Getx的功能，需要将GetMaterialApp替换MaterialApp
         return GetMaterialApp(
           //去除右上角的"DEBUG"水印
+          showPerformanceOverlay: false,//功能图层会在当时运用的最上层，以 Flutter 引擎自绘的办法展现 GPU 与 UI 线程的履行图表
           debugShowCheckedModeBanner:false,
           title: 'Flutter Demo',
           home:  Image.asset("images/launchimage.jpg",fit: BoxFit.fill),

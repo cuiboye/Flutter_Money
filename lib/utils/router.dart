@@ -87,6 +87,7 @@ import 'package:flutter_money/wajiu/wajiu_phone_login.dart';
 import 'package:flutter_money/wajiu/wajiu_phone_login_password.dart';
 import 'package:flutter_money/wajiu/wajiu_register_page.dart';
 import 'package:flutter_money/wajiu/wajiu_splash_page.dart';
+import 'package:flutter_money/wajiu/widget/selection_area_widget.dart';
 import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/KeepAliveWrapperDemo.dart';
 import 'package:flutter_money/widget/LeftRightBoxDemo.dart';
@@ -105,6 +106,7 @@ import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
+import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:get/get.dart';
 
@@ -131,7 +133,9 @@ RouterUtils {
       "gradientbuttondemo": (BuildContext context) => const GradientButtonDemo(),
       "leftrightboxdemo": (BuildContext context) => const LeftRightBoxDemo(),
       "keepalivewrapperdemo": (BuildContext context) => const KeepAliveWrapperDemo(),
+      "selection_area_widget_page": (BuildContext context) => const SelectionAreawidgetPage(),
       "htmldemo": (BuildContext context) => const HtmlDemo(),
+      "timer_page": (BuildContext context) => const TimerPage(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
       "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
       "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),

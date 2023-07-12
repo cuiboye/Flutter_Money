@@ -603,44 +603,12 @@ GetBuilder的作用： GetBuilder 是一个 Widget 组件， 在 GetX 的状态�
 
 
 
-https://www.6hu.cc/archives/185654.html
-https://www.6hu.cc/archives/181590.html
-https://www.6hu.cc/archives/180960.html
-https://www.6hu.cc/archives/182561.html
-https://www.6hu.cc/archives/179518.html
-https://www.6hu.cc/archives/178483.html
-https://www.6hu.cc/archives/177983.html
-https://www.6hu.cc/archives/177490.html
-https://www.6hu.cc/archives/177008.html
-https://www.6hu.cc/archives/176404.html
-https://www.6hu.cc/archives/175016.html
-https://www.6hu.cc/archives/173039.html
-https://www.6hu.cc/archives/172632.html
-https://www.6hu.cc/archives/171630.html
-https://www.6hu.cc/archives/171564.html
-https://www.6hu.cc/archives/170816.html
-https://www.6hu.cc/archives/170515.html
-https://www.6hu.cc/archives/169226.html
-https://www.6hu.cc/archives/168770.html
-https://www.6hu.cc/archives/168161.html
-https://www.6hu.cc/archives/166497.html
-https://www.6hu.cc/archives/165634.html
-https://www.6hu.cc/archives/165604.html
-https://www.6hu.cc/archives/185591.html
-https://www.6hu.cc/archives/163928.html
-https://www.6hu.cc/archives/163693.html
-https://www.6hu.cc/archives/184527.html
-https://www.6hu.cc/archives/163300.html
-https://www.6hu.cc/archives/162435.html
-https://www.6hu.cc/archives/161288.html
-https://www.6hu.cc/archives/158531.html
-https://www.6hu.cc/archives/158308.html
-https://www.6hu.cc/archives/157436.html
-https://www.6hu.cc/archives/157151.html
-https://www.6hu.cc/archives/155622.html
-https://www.6hu.cc/archives/153744.html
-https://www.6hu.cc/archives/153516.html
-https://www.6hu.cc/archives/151273.html
+https://www.6hu.cc/archives/170816.html Flutter3.0新特性
+https://www.6hu.cc/archives/169226.html Flutter3.10新特性
+https://www.6hu.cc/archives/165634.html 已看
+https://www.6hu.cc/archives/185591.html 已看
+https://www.6hu.cc/archives/163928.html 已看
+https://www.6hu.cc/archives/158531.html 已看
 https://www.6hu.cc/archives/150537.html
 https://www.6hu.cc/archives/147310.html
 https://www.6hu.cc/archives/146181.html
@@ -694,39 +662,19 @@ https://www.6hu.cc/archives/95052.html
 https://www.6hu.cc/archives/94969.html
 https://www.6hu.cc/archives/94362.html
 https://www.6hu.cc/archives/94189.html
-https://www.6hu.cc/archives/94181.html
-https://www.6hu.cc/archives/92588.html
-https://www.6hu.cc/archives/91913.html
-https://www.6hu.cc/archives/91863.html
-https://www.6hu.cc/archives/90239.html
-https://www.6hu.cc/archives/90244.html
-https://www.6hu.cc/archives/90182.html
-https://www.6hu.cc/archives/89584.html
-https://www.6hu.cc/archives/89557.html
-https://www.6hu.cc/archives/88245.html
-https://www.6hu.cc/archives/88013.html
-https://www.6hu.cc/archives/87212.html
-https://www.6hu.cc/archives/86871.html
-https://www.6hu.cc/archives/86203.html
-https://www.6hu.cc/archives/84930.html
-https://www.6hu.cc/archives/84613.html
-https://www.6hu.cc/archives/84559.html
-https://www.6hu.cc/archives/84496.html
-https://www.6hu.cc/archives/83706.html
-https://www.6hu.cc/archives/83692.html
-https://www.6hu.cc/archives/83365.html
-https://www.6hu.cc/archives/83399.html
-https://www.6hu.cc/archives/82456.html
-https://www.6hu.cc/archives/82314.html
-https://www.6hu.cc/archives/81725.html
-https://www.6hu.cc/archives/81673.html
-https://www.6hu.cc/archives/81389.html
-https://www.6hu.cc/archives/79635.html
-https://www.6hu.cc/archives/78098.html
-https://www.6hu.cc/archives/77982.html
-https://www.6hu.cc/archives/76854.html
-https://www.6hu.cc/archives/76333.html
-https://www.6hu.cc/archives/76035.html
+https://www.6hu.cc/archives/90244.html 已看
+https://www.6hu.cc/archives/88245.html 3.3版本的新特性
+https://www.6hu.cc/archives/84930.html 已看
+https://www.6hu.cc/archives/84559.html 已看
+https://www.6hu.cc/archives/84496.html 已看
+https://www.6hu.cc/archives/83706.html 已看
+https://www.6hu.cc/archives/81673.html 已看
+https://www.6hu.cc/archives/81389.html Dart语法
+https://www.6hu.cc/archives/78098.html 静态资源多渠道定制
+https://www.6hu.cc/archives/77982.html 已看
+https://www.6hu.cc/archives/76854.html 多版本共存
+https://www.6hu.cc/archives/76333.html 已看
+https://www.6hu.cc/archives/76035.html 已看
 https://www.6hu.cc/archives/75911.html 已看
 https://www.6hu.cc/archives/75671.html 已看
 https://www.6hu.cc/archives/74045.html 已看
@@ -868,3 +816,86 @@ const TextSpan(text: "你好世界"),
 使用WillPopScope这个组件
 13.Flutter为什么可以热重载？
 https://www.6hu.cc/archives/75911.html
+14.InheritedWidget
+在 widget 树中从上到下同享数据的办法，比如咱们在应用的根 widget 中经过InheritedWidget共享了一个数据，那么咱们便能够在任意子widget 中来获取该同享的数据！这个特性在一些需要在
+整个 widget 树中同享数据的场景中非常便利！比如使用InheritedWidget 来共享运用主题（Theme）和 Locale (当前语言环境)信息的。
+InheritedWidget的在 widget 树中数据传递方向是从上到下的，这和Notification的传递方向正好相反。
+15.了解一下ChangeNotifier
+16.在Flutter三棵树中Widget和Element的节点是一一对应，而RenderObject是少于或等于Widget的数量的。当Widget是RenderObjectWidget的派生类的时分才有对应的RenderObject。
+RenderObject的子类会重写createRenderObject来创建对应的RenderObject。
+RepaintBoundary是集承继 SingleChildRenderObjectWidget,也属于RenderObjectWidget的派生类，所以RepaintBoundary也会有对应的RenderObject，当RepaintBoundary对应的RenderObject中的isRepaintBoundary
+为true时此时当前节点的RenderObject(以及子节点)的绘制会在新创立Layer完结,这样就和其他Layer做了隔离，由于Layer是能够复用的，这样帧改写的时分就不需要把每个RenderObject的paint办法都履行一遍。
+
+//关于Layer的介绍可参考 初识Flutter中的Layer，下面我们是看看isRepaintBoundary回来true时是怎样创立Layer的。
+
+17.RepaintBoundary，这个好好看看，自定义组件可能会用到这个属性
+https://www.6hu.cc/archives/81673.html
+
+//了解下UIKitView 和 AndroidView
+//如果在一个界面上一起实例化多个原生控件，就会对性能造成非常大的影响，所以咱们要防止在运用 flutter 控件也能完成的情况下去运用内嵌渠道视图。由于这样做，一方面需求分别在 Android 和 iOS 端写很多的适配桥接代码，违反了跨渠道技术的本意，也增加了后续的保护成本；另一方面究竟除去地图、WebView、相机等触及底层计划的特殊情况外，大部分原生代码能够完成的 UI 效果，彻底能够用 flutter 完成。
+//final修饰变量后，变量不能重新被赋值；如果final修饰的变量没有被赋值，那么这个变量只能赋值一次，后面就不能改变了；final声明的变量不赋值是不能使用的
+//late final int bbb;
+//  void play(){
+//    bbb = 6;
+//    debugPrint('$bbb');
+//  }
+//const
+//const修饰常量，声明的时候就需要赋值，这也是和final最大的区别；const修饰的常量不能再次赋值
+
+
+//同一个类文件中的顶层办法，能够拜访类的私有变量和办法
+void test(){
+EnvironmentConfig config = EnvironmentConfig();
+config._play();
+debugPrint('${config._count}');
+}
+
+class EnvironmentConfig {
+static const CHANNEL = String.fromEnvironment('CHANNEL');
+//DEBUG = Y 是调试模式，其他为生产模式
+static const DEBUG = String.fromEnvironment('DEBUG');
+var _count = 10;
+void _play(){
+
+}
+}
+
+布局和渲染流程？
+1）图画显现原理
+CPU担任图画数据核算, 然后交给 GPU
+GPU担任图画数据烘托, 烘托后放入帧缓冲区
+视频控制器根据笔直同步信号（VSync）以每秒60次的速度，从帧缓冲区读取帧数据交由显现器完结图画显现。
+UI线程运用Dart来构建视图结构数据(Widget)，这些数据会在GPU线程进行图层组成，随后交给Skia引擎加工成GPU数据，GPU数据经过OpenGL终究提供给GPU烘托。需要在两个VSync信号之间完结这些操作,不然会卡顿
+
+        2）Skia是什么？
+        Skia是一款C++开发的、跨平台、功能优秀的2D图画制作引擎
+        Skia是Android官方的图画烘托引擎，所以无需内嵌Skia引擎就可以取得天然的Skia支持；
+        iOS: 嵌入到Flutter的 iOS SDK中，代替了iOS闭源的Core Graphics/Core Animation/Core Text，这也正是 iOS App包体积比Android要大一些的原因。
+        Skia 优点
+        Skia一致了各个系统的烘托逻辑, 保证同一套代码在Android和iOS平台上的烘托作用是完全一致的。
+        3）Flutter界面烘托进程
+        页面中的Widget以树的方式组织成控件树。
+        为控件树中的每个Widget创建不同类型的绘制目标(RenderObject)，组成绘制目标树。
+        绘制目标树展现进程分为四个阶段：布局、制作、组成和绘制
+        4）布局
+        Flutter采用深度优先遍历绘制目标树，决定绘制目标树中各绘制目标在屏幕上的位置和尺度。
+        绘制目标树中的每个绘制目标都会接纳父目标的布局约束参数，决定自己的大小，
+        父目标依照控件逻辑决定各个子目标的位置，完成布局进程。
+        5）制作
+        把绘制目标制作到不同的图层上。
+        制作进程也是深度优先遍历，先制作本身，再制作子节点。
+          
+          Provider原理？
+            https://www.6hu.cc/archives/165634.html
+
+plugin和第三方插件，可以了解下：
+https://www.6hu.cc/archives/185591.html
+
+ConstraintLayout约束布局：
+https://www.6hu.cc/archives/163928.html
+
+3.7 新增 – ContextMenu 菜单：
+https://www.6hu.cc/archives/158531.html
+
+下面含有Dart的垃圾回收：
+https://www.6hu.cc/archives/158308.html

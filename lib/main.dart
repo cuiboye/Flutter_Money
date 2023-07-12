@@ -25,7 +25,6 @@ void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
   // SharedPreferences.setMockInitialValues({});//这个为flutter2.0的设置，现在不用了，2.0上使用有问题，重启app后数据获取失败
 
-
   //处理全局的错误
   FlutterError.onError = (FlutterErrorDetails details) async {
     // 转发至 Zone 的错误回调
@@ -117,24 +116,38 @@ class _SplashState extends State<MyApp>{
         //如果使用Getx的功能，需要将GetMaterialApp替换MaterialApp
         return GetMaterialApp(
           //去除右上角的"DEBUG"水印
-          showPerformanceOverlay: false,//功能图层会在当时运用的最上层，以 Flutter 引擎自绘的办法展现 GPU 与 UI 线程的履行图表
-          debugShowCheckedModeBanner:false,
-          title: 'Flutter Demo',
-          home:  Image.asset("images/launchimage.jpg",fit: BoxFit.fill),
-          routes: RouterUtils.getRouter(),
-          builder: EasyLoading.init(),//初始化EasyLoading
+            showPerformanceOverlay: false,
+            //功能图层会在当时运用的最上层，以 Flutter 引擎自绘的办法展现 GPU 与 UI 线程的履行图表
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            home: Image.asset("images/launchimage.jpg", fit: BoxFit.fill),
+            routes: RouterUtils.getRouter(),
+            //初始化EasyLoading
+          //Dart中的方法不能重载
+            builder: EasyLoading.init(),
           // getPages: RouterUtils.getPages,
           // initialRoute: "/main",
+
         );
       },
       // child: const HomePage(title: 'First Method'),
     );
   }
 }
+//同一个类文件中的顶层办法，能够拜访类的私有变量和办法
+void test(){
+  EnvironmentConfig config = EnvironmentConfig();
+  config._play();
+  debugPrint('${config._count}');
+}
 
-// class EnvironmentConfig {
-//   static const CHANNEL = String.fromEnvironment('CHANNEL');
-//   //DEBUG = Y 是调试模式，其他为生产模式
-//   static const DEBUG = String.fromEnvironment('DEBUG');
-// }
+class EnvironmentConfig {
+  static const CHANNEL = String.fromEnvironment('CHANNEL');
+  //DEBUG = Y 是调试模式，其他为生产模式
+  static const DEBUG = String.fromEnvironment('DEBUG');
+  var _count = 10;
+  void _play(){
+
+  }
+}
 

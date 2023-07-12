@@ -36,6 +36,7 @@ import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/loading_view.dart';
 import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_money/wajiu/wajiu_login.dart';
+import 'package:flutter_money/wajiu/widget/selection_area_widget.dart';
 import 'package:flutter_money/webview_native.dart';
 import 'package:flutter_money/widget/KeepAliveWrapperDemo.dart';
 import 'package:flutter_money/widget/LeftRightBoxDemo.dart';
@@ -46,6 +47,7 @@ import 'package:flutter_money/widget/html_demo.dart';
 import 'package:flutter_money/widget/print_widget_log_demo.dart';
 import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
+import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:jpush_flutter/jpush_flutter.dart';
@@ -147,8 +149,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('Loading', LoadingView(), 'loading_view'),
         _item('加载html代码', HtmlDemo(), 'htmldemo'),
         _item('精确的SizeBox', AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
+        _item('SelectionArea组件', SelectionAreawidgetPage(), 'selection_area_widget_page'),
         _item('ListView缓存', KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),
         _item('图片缩放', ScaleViewDemo(), 'scaleviewdemo'),
+        _item('Timer计时器', TimerPage(), 'timer_page'),
         _item('支持左-右布局的组件', LeftRightBoxDemo(), 'leftrightboxdemo'),
         _item('渐变按钮', GradientButtonDemo(), 'gradientbuttondemo'),
         _item('帮助组件打印约束', PrintWidgetLogDemo(), 'printwidgetlogdemo'),

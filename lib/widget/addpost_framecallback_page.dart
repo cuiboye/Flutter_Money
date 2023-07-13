@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
  * @function[功用简介 ]
  **/
 class AddPostFrameCallbackPage extends StatefulWidget {
-  const sssPage({Key? key}) : super(key: key);
+  const AddPostFrameCallbackPage({Key? key}) : super(key: key);
 
   @override
   _AddPostFrameCallbackPage createState() => _AddPostFrameCallbackPage();
@@ -24,8 +24,8 @@ class _AddPostFrameCallbackPage extends State<AddPostFrameCallbackPage> {
         appBar: AppBar(
           title: Text("sss"),
         ),
-        body: Center(
-          child: Column(),
+        body: const Center(
+          child: Text("")
         ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

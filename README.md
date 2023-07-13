@@ -982,3 +982,26 @@ https://www.6hu.cc/archives/104578.html
 
 自动生成代码模版：
 https://www.6hu.cc/archives/95620.html
+
+setState之前需要判断下当前页面是否存在：
+if (mounted){
+setState(() {
+});
+
+2.
+addPostFrameCallback回调方法在Widget渲染完结时触发，所以一般我们在获取页面中的 Widget 巨细、方位时运用到。
+
+处理方法就是运用addPostFrameCallback回调方法，等候页面 build 完结后在恳求数据：
+
+@override
+void initState() {
+WidgetsBinding.instance.addPostFrameCallback((_){
+/// 接口请求
+});
+}
+Getx中如果继承GetxController，如果需要在接口请求完成后获取Widget相关信息时，接口请求最好放到GetxController的重写方法onReady()中；如果不不需要获取Widget的相关信息，则可以放到onInit()方法中。
+void onInit() {
+super.onInit();
+//getx的onInit重写方法中使用了addPostFrameCallback来保证Widget渲染完成		
+Get.engine.addPostFrameCallback((_) => onReady());
+}

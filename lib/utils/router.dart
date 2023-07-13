@@ -108,6 +108,7 @@ import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
 import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
+import 'package:flutter_money/widget/yueshu_page.dart';
 import 'package:get/get.dart';
 
 import '../getx/navigation/navigation_demo2.dart';
@@ -136,6 +137,7 @@ RouterUtils {
       "selection_area_widget_page": (BuildContext context) => const SelectionAreawidgetPage(),
       "htmldemo": (BuildContext context) => const HtmlDemo(),
       "timer_page": (BuildContext context) => const TimerPage(),
+      "yushu_page": (BuildContext context) => const YushuPage(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
       "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
       "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),

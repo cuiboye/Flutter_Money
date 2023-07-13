@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_money/provide/statemixin_provider.dart';
 import 'package:flutter_money/utils/log_utils.dart';
@@ -19,9 +20,17 @@ class StateMinxinController extends GetxController
     // getOrderListData("全部","全部");
   }
 
+  @override
+  void onReady() {
+
+  }
+
   Future<void> getOrderListData(int pageNum,String orderType) async {
     EasyLoading.show(status: 'loading...');
+    debugPrint("await执行之前");
     final Response response = await provider.getOrderListData(pageNum,orderType);
+    //这个语句会阻塞，知道response的结果返回，如果不惜那个语句阻塞，可以将不想被阻塞的语句放到getOrderListData方法之后
+    debugPrint("await执行之后");
     EasyLoading.dismiss();
     if (response.hasError) {
       //如果有错误

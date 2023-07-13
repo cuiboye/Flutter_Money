@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_money/wajiu/constant/apiservice.dart';
 import 'package:flutter_money/wajiu/model/order_list_item_new_model.dart';
 import 'package:flutter_money/wajiu/model/orderlist.dart';
@@ -13,6 +14,7 @@ class StateMixinProvider extends BaseProvider implements IStateMixinProvider {
   @override
   Future<Response> getOrderListData(int pageNum,String orderType) {
     print("当前页数为 $pageNum");
+    debugPrint("await执行");
     var params = <String, dynamic>{};
     params["req_token"] = "60R64HMPXUjGBQikTPRZH5z5MdBHGMfFGLwH1fTTsZOfsxBMi1gimQ==";
     params["req_orderType"] = "1";

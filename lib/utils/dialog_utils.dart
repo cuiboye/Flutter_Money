@@ -34,7 +34,8 @@ class DialogUtils {
   }) {
     return showDialog<T>(
         context: context,
-        barrierDismissible: barrierDismissible,
+        barrierColor: Colors.transparent,//去除背景色，默认是半透明
+        barrierDismissible: barrierDismissible,//点击外部区域是否可以dismiss
         builder: (context) {
           return MediaQuery(
             ///不受系统字体缩放影响
@@ -228,11 +229,13 @@ class DialogUtils {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: ()=>onTap(0),
                       child: Container(
                         alignment: Alignment.center,
                         width: double.infinity,
-                        color: ColorConstant.color_ffffff,
+
+                        // color: ColorConstant.color_ffffff,
                         padding: const EdgeInsets.only(top: 10,bottom: 10),
                         child: const Text("相册"),
                       ),

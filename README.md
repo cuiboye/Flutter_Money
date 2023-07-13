@@ -609,55 +609,16 @@ https://www.6hu.cc/archives/165634.html 已看
 https://www.6hu.cc/archives/185591.html 已看
 https://www.6hu.cc/archives/163928.html 已看
 https://www.6hu.cc/archives/158531.html 已看
-https://www.6hu.cc/archives/150537.html
-https://www.6hu.cc/archives/147310.html
-https://www.6hu.cc/archives/146181.html
-https://www.6hu.cc/archives/143323.html
-https://www.6hu.cc/archives/141643.html
-https://www.6hu.cc/archives/141181.html
-https://www.6hu.cc/archives/139905.html
-https://www.6hu.cc/archives/139926.html
-https://www.6hu.cc/archives/139247.html
-https://www.6hu.cc/archives/137503.html
-https://www.6hu.cc/archives/136670.html
-https://www.6hu.cc/archives/134842.html
-https://www.6hu.cc/archives/133183.html
-https://www.6hu.cc/archives/132753.html
-https://www.6hu.cc/archives/130027.html
-https://www.6hu.cc/archives/127990.html
-https://www.6hu.cc/archives/127323.html
-https://www.6hu.cc/archives/126370.html
-https://www.6hu.cc/archives/124341.html
-https://www.6hu.cc/archives/124221.html
-https://www.6hu.cc/archives/122443.html
-https://www.6hu.cc/archives/122413.html
-https://www.6hu.cc/archives/122188.html
-https://www.6hu.cc/archives/121911.html
-https://www.6hu.cc/archives/120631.html
-https://www.6hu.cc/archives/120270.html
-https://www.6hu.cc/archives/119761.html
-https://www.6hu.cc/archives/117985.html
-https://www.6hu.cc/archives/117544.html
-https://www.6hu.cc/archives/116867.html
-https://www.6hu.cc/archives/114392.html
-https://www.6hu.cc/archives/113907.html
-https://www.6hu.cc/archives/109670.html
-https://www.6hu.cc/archives/109334.html
-https://www.6hu.cc/archives/109310.html
-https://www.6hu.cc/archives/109135.html
-https://www.6hu.cc/archives/106235.html
-https://www.6hu.cc/archives/104578.html
-https://www.6hu.cc/archives/103355.html
-https://www.6hu.cc/archives/102941.html
-https://www.6hu.cc/archives/101478.html
-https://www.6hu.cc/archives/101135.html
-https://www.6hu.cc/archives/100118.html
-https://www.6hu.cc/archives/99698.html
-https://www.6hu.cc/archives/99566.html
-https://www.6hu.cc/archives/98969.html
-https://www.6hu.cc/archives/98549.html
-https://www.6hu.cc/archives/95813.html
-https://www.6hu.cc/archives/95620.html
+https://www.6hu.cc/archives/150537.html 已看
+https://www.6hu.cc/archives/146181.html 多版本管理fvm
+https://www.6hu.cc/archives/143323.html 已看
+https://www.6hu.cc/archives/141643.html Dio封装
+https://www.6hu.cc/archives/137503.html 已看
+https://www.6hu.cc/archives/121911.html pigeon的使用
+https://www.6hu.cc/archives/120270.html NativeBridge
+https://www.6hu.cc/archives/114392.html 下载文件并用原生打开
+https://www.6hu.cc/archives/99566.html 通信机制
+https://www.6hu.cc/archives/98549.html CustomPainter自定义绘画
 https://www.6hu.cc/archives/95052.html
 https://www.6hu.cc/archives/94969.html
 https://www.6hu.cc/archives/94362.html
@@ -899,3 +860,125 @@ https://www.6hu.cc/archives/158531.html
 
 下面含有Dart的垃圾回收：
 https://www.6hu.cc/archives/158308.html
+
+Dart中var与dynamic的差异?
+运用var来声明变量，dart会在编译阶段自动推导出类型。而dynamic不在编译期间做类型检查而是在运行期间做类型校验。
+var如果在声明变量的时候赋值了，后面不能改变变量的类型；dynamic声明的时候赋值了后面可以改变变量的类型。
+
+说一下什么是空安全，相关操作符有哪些？
+late关键字，?. ?? ?=
+dart 扩展有了解过吗？怎样运用？
+使用on作用在类上，可以为类额外的增加方法，比如为Container增加一个边距
+dynamic类型的变量能够进行扩展吗？不能够
+
+Future<void> getOrderListData(int pageNum,String orderType) async {
+    debugPrint("await执行之前");
+    final Response response = await provider.getOrderListData(pageNum,orderType);
+    //这个语句会阻塞，知道response的结果返回，如果不惜那个语句阻塞，可以将不想被阻塞的语句放到getOrderListData方法之后
+    debugPrint("await执行之后");
+}
+
+了解下extends,implemens,minxin的区别
+
+构造函数：
+1）命名构造函数：可以更清晰的表明函数目的
+class Point {
+    num x, y;
+    Point(this.x, this.y);
+    // 命名结构函数
+    Point.origin() {
+        x = 0;
+        y = 0;
+    }
+}
+2）重定向构造函数：重定向构造函数的函数体为空， 构造函数的调用在冒号 (:) 之后。
+class Point {
+    num x, y;
+    // 类的主结构函数。
+    Point(this.x, this.y);
+    // 指向主结构函数
+    Point.alongXAxis(num x) : this(x, 0);
+}
+
+在flutter里streams是什么？有几种streams？有什么场景用到它？
+Stream 用来处理接连的异步操作，Stream 是一个笼统类，用于表明一序列异步数据的源。它是一种产生接连事情的方式，能够生成数据事情或许过错事情，以及流完毕时的完结事情 Stream 分单订阅流和广播流。 网络状况的监控
+
+future和steam有什么不一样？
+在 Flutter 中有两种处理异步操作的方式 Future 和 Stream，Future 用于处理单个异步操作，Stream 用来处理接连的异步操作。
+
+main()和runApp()函数在flutter的作用别离是什么？有什么关系吗？
+main函数是相似于java语言的程序运转进口函数。
+runApp函数是烘托根widget树的函数。
+一般状况下runApp函数会在main函数里履行。
+
+Hot Restart 和 Hot Reload 有什么差异吗？
+Hot Reload比Hot Restart快，Hot Reload会编译咱们文件里新加的代码并发送给dart虚拟机，dart会更新widgets来改动UI，而Hot Restart会让dart 虚拟机从头编译运用。另一方面也是由于
+这样， Hot Reload会保存之前的state，而Hot Restart回你重置一切的state回到初始值。
+Hot Reload：小闪电
+Hot Restart：AndroidStudio底部的Run菜单-左上角（在小闪电的右边）
+
+Flutter GestureDetector 手势检测类用过吗？有时分分明设置了GestureDetector,可是却并不是悉数范围可点，只要中心部分有文案的地方能点击，请问是为什么怎样解决？
+如果child不为null 则默以为 HitTestBehavior.deferToChild 
+如果child为null则默以为HitTestBehavior.translucent
+HitTestBehavior.deferToChild 只有有子 Widget 通过了 Hit-Test，才接收一系列的事件，接收
+区域也会被限制在该子 Widget 区域中。
+HitTestBehavior.opaque 能够通过 Hit-Test，接收事件，且能阻止在它之前的 Widget（直观
+来看就是被它挡住的 Widget）接收事件。简单来说就是事件 不能透传。
+HitTestBehavior.translucent 能够通过 Hit-Test，接收事件，且不会阻止它之前的 Widget（直
+观来看就是被它挡住的 Widget）接收事件。简单来说就是事件 能透传。
+解决：设置HitTestBehavior.opaque
+
+Flutter ListView怎样翻滚到指定position，列表翻滚原生是怎样的，怎样监听listview翻滚到了哪个Item？假设Item是不固定高度的呢？
+
+Flutter布局束缚规矩是什么姿态的？子类想要多少就要多少吗？
+首要，上层 widget 向基层 widget 传递束缚条件；
+然后，基层 widget 向上层 widget 传递大小信息。  
+最后，上层 widget 决定基层 widget 的方位。
+
+Flutter中的异常捕获？
+同步异常用try catch捕获，异步异常用Flutter的catchError。
+//运用try-catch捕获同步反常
+try {
+    throw StateError('This is a Dart exception');
+}catch(e) {
+    print(e);
+}
+
+/运用catchError捕获异步反常
+Future.delayed(Duration(seconds: 1))
+.then((e) => throw StateError('This is a Dart exception in Future.'))
+.catchError((e)=>print(e));
+
+flutter组件反常用下面方式
+ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
+//错误提示页面
+    return Scaffold(
+        body: Center(
+        child: Text("Custom Error Widget"),
+    ));
+};
+
+在没有运用try-catch、catchError句子的状况下，无论是同步反常仍是异步反常，都能够运用Zone直接捕获到。 同时，假设需求会集捕获Flutter运用中未处理的反常，那么能够把main函数中的runApp句子也放置
+在Zone中，这样就能够在检测到代码运转反常时对捕获的反常信息进行统一处理。
+FlutterError.onError = (FlutterErrorDetails details) async {
+// 转发至 Zone 的错误回调
+Zone.current.handleUncaughtError(details.exception, details.stack!);
+};
+
+runZoned<Future<void>>(() async {
+    runApp( MyApp());
+    }, onError: (error, stackTrace) async {
+    print("========> ${error.toString()}");
+});
+
+约束布局，这个要研究明白：
+https://flutter.cn/docs/ui/layout/constraints
+https://www.6hu.cc/archives/137503.html
+
+约束布局：YushuPage这个文件
+
+Flutter3.7的新特性：
+https://www.6hu.cc/archives/104578.html
+
+自动生成代码模版：
+https://www.6hu.cc/archives/95620.html

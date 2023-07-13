@@ -49,6 +49,7 @@ import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
+import 'package:flutter_money/widget/yueshu_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -148,6 +149,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('事件处理与通知', EventAddNotifitonWidget(), 'event_add_notifition'),
         _item('Loading', LoadingView(), 'loading_view'),
         _item('加载html代码', HtmlDemo(), 'htmldemo'),
+        _item('对约束布局的理解', YushuPage(), 'yushu_page'),
         _item('精确的SizeBox', AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
         _item('SelectionArea组件', SelectionAreawidgetPage(), 'selection_area_widget_page'),
         _item('ListView缓存', KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),

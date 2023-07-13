@@ -25,12 +25,9 @@ void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
   // SharedPreferences.setMockInitialValues({});//这个为flutter2.0的设置，现在不用了，2.0上使用有问题，重启app后数据获取失败
 
-  //处理全局的错误
-  FlutterError.onError = (FlutterErrorDetails details) async {
-    // 转发至 Zone 的错误回调
-    Zone.current.handleUncaughtError(details.exception, details.stack!);
-  };
 
+
+  //这里处理的是组件异常
   Widget error = const Text('...rendering error...');
   error = Scaffold(body: Center(child: error));
   ErrorWidget.builder = (FlutterErrorDetails errorDetails) => error;
@@ -39,6 +36,13 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Sp.perInit();
 
+  //处理全局的错误
+  FlutterError.onError = (FlutterErrorDetails details) async {
+    // 转发至 Zone 的错误回调
+    Zone.current.handleUncaughtError(details.exception, details.stack!);
+  };
+
+  //runZoned中可以处理运行中的异常
   runZoned<Future<void>>(() async {
     // runApp(const ColorFiltered(
     //     colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
@@ -149,5 +153,29 @@ class EnvironmentConfig {
   void _play(){
 
   }
+}
+
+class FatherInterface{
+  int money = 0;
+  int count = 0;
+  int get getMoney =>money;
+  int get getCount =>count;
+}
+
+class Son implements FatherInterface{
+  @override
+  int money = 0;
+
+  @override
+  // TODO: implement getMoney
+  int get getMoney => throw UnimplementedError();
+
+  @override
+  int count = 0;
+
+  @override
+  // TODO: implement getCount
+  int get getCount => throw UnimplementedError();
+
 }
 

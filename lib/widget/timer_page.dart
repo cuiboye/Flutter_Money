@@ -80,9 +80,11 @@ class _TimerPageState extends State<TimerPage> {
   void dispose() {
     if(null!=timer1 && timer1?.isActive==true){
       timer1?.cancel();
+      timer1 = null;
     }
     if(null!=timer2 && timer2?.isActive==true){
       timer2?.cancel();
+      timer1 = null;
     }
 
     super.dispose();

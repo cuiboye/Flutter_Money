@@ -619,9 +619,7 @@ https://www.6hu.cc/archives/120270.html NativeBridge
 https://www.6hu.cc/archives/114392.html 下载文件并用原生打开
 https://www.6hu.cc/archives/99566.html 通信机制
 https://www.6hu.cc/archives/98549.html CustomPainter自定义绘画
-https://www.6hu.cc/archives/95052.html
-https://www.6hu.cc/archives/94969.html
-https://www.6hu.cc/archives/94362.html
+https://www.6hu.cc/archives/95052.html 已看
 https://www.6hu.cc/archives/94189.html
 https://www.6hu.cc/archives/90244.html 已看
 https://www.6hu.cc/archives/88245.html 3.3版本的新特性
@@ -1005,3 +1003,27 @@ super.onInit();
 //getx的onInit重写方法中使用了addPostFrameCallback来保证Widget渲染完成		
 Get.engine.addPostFrameCallback((_) => onReady());
 }
+
+判断是否为Release包：
+bool enviroment = bool.fromEnvironment("dart.vm.product");//判断是否为Release包
+ToastUtils.showToast(enviroment?"正式环境":"非正式环境");
+或者是通过 kReleaseMode
+ToastUtils.showToast(kReleaseMode?"正式环境":"非正式环境");
+
+import 'package:flutter/foundation.dart';
+if(kReleaseMode){
+// release 方式该做的事
+}
+if(kProfileMode){
+// profile 方式该做的事
+}
+if(kDebugMode){
+// debug 方式该做的作业
+}
+
+
+获取顶部和底部的安全区域：
+顶部
+final double statusBarHeight = MediaQuery.of(context).padding.top;
+底部
+final double bottomHeight = MediaQuery.of(context).padding.bottom;

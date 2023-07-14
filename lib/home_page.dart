@@ -2,7 +2,9 @@
 //动端和web端的视觉设计语言， Flutter 默认提供了一套丰富的 Material 风格的UI组件。
 
 import 'dart:async';
+import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
@@ -32,6 +34,7 @@ import 'package:flutter_money/statefulwidget_demo.dart';
 import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/utils/router.dart';
+import 'package:flutter_money/utils/toast_utils.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/loading_view.dart';
 import 'package:flutter_money/wajiu/main.dart';
@@ -104,7 +107,7 @@ class HomePageWidget extends StatelessWidget {
           callback: () => print("我是主页"),
           context: context,
         ),
-        body: RouteNavigator()); //home 为 Flutter 应用的首页，它也是一个 widget。
+        body: const RouteNavigator()); //home 为 Flutter 应用的首页，它也是一个 widget。
         // body: Text("sdfds")
     // child: const HomePage(title: 'First Method'),
     return Text("sdfdsfdsdf");
@@ -127,8 +130,14 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         child: SingleChildScrollView(
             child: Column(
       children: <Widget>[
-       Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
+        ElevatedButton(onPressed: () {
+          // bool enviroment = bool.fromEnvironment("dart.vm.product");//判断是否为Release包
+          // ToastUtils.showToast(enviroment?"正式环境":"非正式环境");
+          //或者是通过 kReleaseMode
+          ToastUtils.showToast(kReleaseMode?"正式环境":"非正式环境");
+        }, child: const Text("判断是否为发布环境")),
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
          children: [
            Text("ListView和PageView花式嵌套可以查看:"),
            Text("1)ListViewNestVP 垂直  ListView 嵌套垂直  ViewPager，"),

@@ -29,9 +29,19 @@ class StateMinxinController extends GetxController
     EasyLoading.show(status: 'loading...');
     debugPrint("await执行之前");
     final Response response = await provider.getOrderListData(pageNum,orderType);
-    //这个语句会阻塞，知道response的结果返回，如果不惜那个语句阻塞，可以将不想被阻塞的语句放到getOrderListData方法之后
+    //这个语句会阻塞，知道response的结果返回，如果不想后面的语句被阻塞，可以将不想被阻塞的语句放到getOrderListData方法之后
     debugPrint("await执行之后");
     EasyLoading.dismiss();
+
+    debugPrint("接口返回数据 ${response.bodyString}");
+    debugPrint("response.hasError ${response.hasError}");
+    debugPrint("response.isOk ${response.isOk}");
+    debugPrint("接口请求Header ${response.request?.headers?.toString()}");
+    debugPrint("接口请求地址 ${response.request?.url}");
+    debugPrint("接口请求方法 ${response.request?.method}");
+    debugPrint("http响应码 ${response.statusCode}");
+
+
     if (response.hasError) {
       //如果有错误
       //改变数据，传入状态，在UI中会处理这些错误

@@ -4,9 +4,11 @@ import 'package:flutter_money/bindings/getx_with_dio_binding.dart';
 import 'package:flutter_money/bindings/orderlist_with_getconnect_binding.dart';
 import 'package:flutter_money/bindings/statemixin_binding.dart';
 import 'package:flutter_money/controller/getx_work_controller.dart';
+import 'package:flutter_money/controller/statemixin_controller.dart';
 import 'package:flutter_money/getbuilder_view.dart';
 import 'package:flutter_money/getx/state/other_page.dart';
 import 'package:flutter_money/getx_work_view.dart';
+import 'package:flutter_money/provide/statemixin_provider.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/valuebuilder_view.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
@@ -78,9 +80,13 @@ class _GetXStateDemoState extends State<GetXStateDemo> {
               ),
               ElevatedButton(
                   onPressed: () =>
-                      Get.to(StateMixinView(""),binding: StateMixinBinding()),
-                  child: Text("StateMixin+change()")
-              ),
+                      // Get.to(StateMixinView(""), binding: StateMixinBinding()),//如果觉得每次创建一个Bindings类比较麻烦，可以使用BindingsBuilder
+                      Get.to(StateMixinView(""), binding: BindingsBuilder(() {
+                        Get.lazyPut<StateMixinProvider>(() => StateMixinProvider());
+                        Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.find()));
+                      })),
+                  child: Text("StateMixin+change()")),
+              GetView
             ],
           )
       ),

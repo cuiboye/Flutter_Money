@@ -100,14 +100,16 @@ class HomePageWidget extends StatelessWidget {
     print("调用扩展方法");
     print("#90F7EC".toColor());
 
-    return Scaffold(
-        appBar: CustomAppbar(
-          title: '主页',
-          showLeftArrow: true,
-          callback: () => print("我是主页"),
-          context: context,
-        ),
-        body: const RouteNavigator()); //home 为 Flutter 应用的首页，它也是一个 widget。
+    return CustomMaterialApp(
+      home: Scaffold(
+          appBar: CustomAppbar(
+            title: '主页',
+            showLeftArrow: true,
+            callback: () => print("我是主页"),
+            context: context,
+          ),
+          body: const RouteNavigator()),
+    );//home 为 Flutter 应用的首页，它也是一个 widget。
         // body: Text("sdfds")
     // child: const HomePage(title: 'First Method'),
     return Text("sdfdsfdsdf");

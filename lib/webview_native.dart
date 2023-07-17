@@ -64,17 +64,9 @@ class _WebViewNativeDemoState extends State<WebViewNativeDemo> {
         },
       ),
     );
-    // initialUrl: "http://h5test.wajiu.com/",//这个链接中包含了图片和视频
-    // initialUrl: "https://blog.csdn.net/MoonAndroid/article/details/121414901",//这个链接中包含了图片和视频
-    // initialUrl: getAssetsPath("assets/files/good_detail.html"),//这个链接中包含了图片和视频
-    //   initialUrl: getAssetsPath("assets/files/helloword.html"),//这个链接是测试Fluttter调用JS
-    // initialUrl: getAssetsPath("assets/files/js_flutter.html"),
 
     // _controller.loadRequest(Uri.parse('http://h5test.wajiu.com/'));
-    // _controller.loadFile(getAssetsPath("assets/files/helloword.html"));
-    // _controller.loadFlutterAsset(getAssetsPath("assets/files/good_detail.html"));
-    _controller.loadFile("assets/files/good_detail.html");//ios加载本地的html加载不出来
-    // _controller.loadFile(getAssetsPath("assets/files/js_flutter.html"));
+    _controller.loadFile(getAssetsPath("assets/files/good_detail.html"));
   }
   @override
   Widget build(BuildContext context) {
@@ -89,7 +81,7 @@ class _WebViewNativeDemoState extends State<WebViewNativeDemo> {
                 // You can handle JS result here.
               });
             },
-            child: Text('Flutter调用JS'),
+            child: const Text('Flutter调用JS'),
           ),
           appBar: CustomAppbar(context: context, title: "WebView以及和JS交互"),
           body: WebViewWidget(controller: _controller)),

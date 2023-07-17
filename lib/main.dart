@@ -119,9 +119,9 @@ class _SplashState extends State<MyApp>{
       builder: (context, child) {
         //如果使用Getx的功能，需要将GetMaterialApp替换MaterialApp
         return GetMaterialApp(
-          //去除右上角的"DEBUG"水印
-            showPerformanceOverlay: false,
             //功能图层会在当时运用的最上层，以 Flutter 引擎自绘的办法展现 GPU 与 UI 线程的履行图表
+            showPerformanceOverlay: false,
+            //去除右上角的"DEBUG"水印
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             home: Image.asset("images/launchimage.jpg", fit: BoxFit.fill),
@@ -131,9 +131,8 @@ class _SplashState extends State<MyApp>{
             builder: EasyLoading.init(),
           // getPages: RouterUtils.getPages,
           // initialRoute: "/main",
-
         );
-      },
+      },ListView
       // child: const HomePage(title: 'First Method'),
     );
   }

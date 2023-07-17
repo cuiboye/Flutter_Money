@@ -49,7 +49,7 @@ class _DioDemoState extends State<TextDemo> {
         ),
         body: Column(
           children: [
-            Text("我是一个Text", textAlign: TextAlign.right).withContainer(),
+            const Text("我是一个Text", textAlign: TextAlign.right).withContainer(),
             Text(
               "我是一个Text,此时textAlign才有效" * 4,
               textAlign: TextAlign.center,
@@ -83,7 +83,7 @@ class _DioDemoState extends State<TextDemo> {
                 recognizer: _recognizer,
               ),
             ])),
-            DefaultTextStyle(//默认文本样式
+            const DefaultTextStyle(//默认文本样式
               //1.设置文本默认样式
               style: TextStyle(
                 color: Colors.red,

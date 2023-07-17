@@ -1,4 +1,4 @@
-1.Sqflite数据库使用
+[1.Sqflite数据库使用
 sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理数据库数据，适用于需要查询大量持久化数据的应用。
 
 参考文档：https://liujunmin.com/flutter/database/sqlite.html
@@ -8,24 +8,24 @@ sqflite是Flutter的SQLite插件，它能在App端能够高效的存储和处理
 
 openDatabase()的构造函数为：
 Future<Database> openDatabase(String path,
-    {int? version,
-    OnDatabaseConfigureFn? onConfigure,
-    OnDatabaseCreateFn? onCreate,
-    OnDatabaseVersionChangeFn? onUpgrade,
-    OnDatabaseVersionChangeFn? onDowngrade,
-    OnDatabaseOpenFn? onOpen,
-    bool readOnly = false,
-    bool singleInstance = true}) {
-  final options = OpenDatabaseOptions(
-      version: version,
-      onConfigure: onConfigure,
-      onCreate: onCreate,
-      onUpgrade: onUpgrade,
-      onDowngrade: onDowngrade,
-      onOpen: onOpen,
-      readOnly: readOnly,
-      singleInstance: singleInstance);
-  return databaseFactory.openDatabase(path, options: options);
+{int? version,
+OnDatabaseConfigureFn? onConfigure,
+OnDatabaseCreateFn? onCreate,
+OnDatabaseVersionChangeFn? onUpgrade,
+OnDatabaseVersionChangeFn? onDowngrade,
+OnDatabaseOpenFn? onOpen,
+bool readOnly = false,
+bool singleInstance = true}) {
+final options = OpenDatabaseOptions(
+version: version,
+onConfigure: onConfigure,
+onCreate: onCreate,
+onUpgrade: onUpgrade,
+onDowngrade: onDowngrade,
+onOpen: onOpen,
+readOnly: readOnly,
+singleInstance: singleInstance);
+return databaseFactory.openDatabase(path, options: options);
 }
 参数说明：
 字段	属性	描述
@@ -42,7 +42,7 @@ singleInstance	bool	是否返回数据库的路径，默认ture
 
 使用方式
 void _isOpenDataBase() async {
-    print(database.isOpen);
+print(database.isOpen);
 }
 3）关闭数据库
 当我们不需要使用数据库的时候，一定要关闭数据库，否则应用程序永远不会关闭，知道应用程序终止时才会关闭。
@@ -51,9 +51,9 @@ void _isOpenDataBase() async {
 
 使用方式
 void _closeDatabase() async {
-    print(database.isOpen);
-    await database.close();
-    print(database.isOpen);
+print(database.isOpen);
+await database.close();
+print(database.isOpen);
 }
 4)表操作
 方法	         属性	     描述
@@ -75,7 +75,7 @@ name: 是DartString类型，和数据库表中对应的是TEXT类型，存储人
 age: 是Dart的int类型，和数据库表中对应的是INTEGER类型，存储人的年龄。
 使用方法
 void _createTable() async {
-	database.execute("CREATE TABLE person(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)");
+database.execute("CREATE TABLE person(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)");
 }
 6)插入数据
 插入数据
@@ -88,22 +88,22 @@ int result = await database.rawInsert("INSERT INTO person(name, age) values('Jim
 第二种：insert()
 更优雅的插入方式
 int result = await database.insert("person", {
-  "name": "是Jimi啊",
-  "age": 28
+"name": "是Jimi啊",
+"age": 28
 });
 7）查询数据
 修改数据有两种方法，一种通过rawUpdate()，还有一种通过update()，下面我们来看下这两种方式：
 构造函数
 Future<List<Map<String, Object?>>> query(String table,
-                                         {bool? distinct,
-                                          List<String>? columns,
-                                          String? where,
-                                          List<Object?>? whereArgs,
-                                          String? groupBy,
-                                          String? having,
-                                          String? orderBy,
-                                          int? limit,
-                                          int? offset});
+{bool? distinct,
+List<String>? columns,
+String? where,
+List<Object?>? whereArgs,
+String? groupBy,
+String? having,
+String? orderBy,
+int? limit,
+int? offset});
 详细描述
 字段	      属性	  描述
 table	String	需要查询的表名
@@ -135,7 +135,7 @@ int result = await database.rawUpdate('UPDATE person SET name = "是Jimi哦" whe
 更优雅的更新方式
 
 int result = await database.update("person", {
-  "name": "我是Jimi啊"
+"name": "我是Jimi啊"
 }, where: "id = 4");
 9）删除表
 删除表我们直接使用无返回值的execute()即可。
@@ -154,11 +154,11 @@ int result = await database.delete("person", where: "id = 2");
 批量处理的意思就是多条sql语句进行批量操作，我们可以通过batch来批量操作，等操作完成后使用commit进行提交，代码如下：
 var batch = database.batch();
 batch.insert("person", {
- "name": "是Jimi啊",
- "age": 28
+"name": "是Jimi啊",
+"age": 28
 });
 batch.update("person", {
- "name": "我是Jimi啊"
+"name": "我是Jimi啊"
 }, where: "id = 2");
 var results = await batch.commit();
 
@@ -172,8 +172,8 @@ android.enableR8.libraries = false
 #Disables R8 for all modules.
 android.enableR8 = false
 2)What went wrong:
-  Execution failed for task ':app:transformClassesAndResourcesWithProguardForRelease'.
-  java.io.IOException: Can't read [/Users/wj/Library/Android/sdk/platforms/android-33/optional/android.car.jar] (Can't process class [android/car/Car$CarServiceLifecycleListener.class] (Unsupported version number [55.0] (maximum 54.0, Java 10)))   
+Execution failed for task ':app:transformClassesAndResourcesWithProguardForRelease'.
+java.io.IOException: Can't read [/Users/wj/Library/Android/sdk/platforms/android-33/optional/android.car.jar] (Can't process class [android/car/Car$CarServiceLifecycleListener.class] (Unsupported version number [55.0] (maximum 54.0, Java 10)))   
 解决方法：报错前app下的build.gradle中的compileSdkVersion为33，改为31就可以了
 3)Execution failed for task ':app:transformClassesAndResourcesWithProguardForRelease'.
 java.io.IOException: Can't write [/Users/wj/cuiboye/FlutterProject/flutter_money/build/app/intermediates/transforms/proguard/release/0.jar] (Can't read [/Users/wj/cuiboye/FlutterProject/flutter_money/build/app/tmp/kotlin-classes/release(;;;;;;;**.class)] (Can't read [com] (Can't read [example] (Can't read [flutter_money] (Can't read [MainActivity.class] (Duplicate jar entry [com/example/flutter_money/MainActivity.class]))))))
@@ -185,9 +185,9 @@ flutter build apk --release --no-sound-null-safety
 1）通过MaterialApp+Scaffold的方式，系统自动为我们适配全面屏的安全区域
 2）使用 MediaQuery 来控制距离上下的距离
 3）在Android的AndroidManifest中添加设置：
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="2.3" />
+<meta-data
+android:name="android.max_aspect"
+android:value="2.3" />
 5.百度地图
 可以参考官方：
 https://lbsyun.baidu.com/index.php?title=flutter/loc/create-map/location
@@ -199,38 +199,38 @@ jpush_flutter: ^2.3.6
 2）开启极光推送
 JPush jpushTag =  JPush();
 jpushTag.setup(
-    appKey: '03fe40aece7ccb8a95b48478',
-    channel: 'developer-default',
-    production: true,
-    debug: true);
+appKey: '03fe40aece7ccb8a95b48478',
+channel: 'developer-default',
+production: true,
+debug: true);
 /// 监听jpush
 jpushTag.addEventHandler(
-  onReceiveNotification: (Map<String, dynamic> message) async {
-    print('jpushTag接收到的数据为： + $message');
-    // if (message.length > 0) G.hideMessage = true;
-  },
-  onOpenNotification: (Map<String, dynamic> message) async {
-    /// 点击通知栏消息，跳转至消息列表页面
-    // G.hideMessage = true;
-    // G.pushNamed('/echo', callback: (val) => false);
-  },
+onReceiveNotification: (Map<String, dynamic> message) async {
+print('jpushTag接收到的数据为： + $message');
+// if (message.length > 0) G.hideMessage = true;
+},
+onOpenNotification: (Map<String, dynamic> message) async {
+/// 点击通知栏消息，跳转至消息列表页面
+// G.hideMessage = true;
+// G.pushNamed('/echo', callback: (val) => false);
+},
 );
 Android中的配置：
 1）AndroidManifest.xml中配置：
 <meta-data
-    android:name="com.baidu.lbsapi.API_KEY"
-    android:value="wZqKbGEtWCYiTGO5YX3CG9PIwXmH3IbR" />
+android:name="com.baidu.lbsapi.API_KEY"
+android:value="wZqKbGEtWCYiTGO5YX3CG9PIwXmH3IbR" />
 2）app中的build.gradle中的defaultConfig配置：
 manifestPlaceholders = [
-        JPUSH_PKGNAME: applicationId,
-        JPUSH_APPKEY : "03fe40aece7ccb8a95b48478", /*NOTE: JPush 上注册的包名对应的 Appkey.*/
-        JPUSH_CHANNEL: "developer-default", /*暂时填写默认值即可.*/
+JPUSH_PKGNAME: applicationId,
+JPUSH_APPKEY : "03fe40aece7ccb8a95b48478", /*NOTE: JPush 上注册的包名对应的 Appkey.*/
+JPUSH_CHANNEL: "developer-default", /*暂时填写默认值即可.*/
 ]
 3）正式环境记得在配置混淆
 
 7.配置闪屏页
 1）pubspec.yaml添加依赖
- flutter_native_splash: ^2.2.8
+flutter_native_splash: ^2.2.8
 2)新建flutter_native_splash.yaml
 3)运行此包
 flutter pub run flutter_native_splash:create
@@ -265,14 +265,14 @@ Flutter:
 12.Dart中async和await区别
 13.Flutter的生命周期有哪几个
 14.Future还是isolate场景分析？
-    1、如果一段代码不会被中断，那么就直接使用正常的同步执行就行。
-    2、如果代码段可以独立运行而不会影响应用程序的流畅性，建议使用 Future  （需要花费几毫秒时间）
-    3、如果繁重的处理可能要花一些时间才能完成，而且会影响应用程序的流畅性，建议使用 isolate （需要几百毫秒）
-    下面列出一些使用 isolate 的具体场景:
-    1、JSON解析: 解码JSON，这是HttpRequest的结果，可能需要一些时间，可以使用封装好的 isolate 的 compute 顶层方法。
-    2、加解密: 加解密过程比较耗时
-    3、图片处理: 比如裁剪图片比较耗时
-    4、从网络中加载大图
+1、如果一段代码不会被中断，那么就直接使用正常的同步执行就行。
+2、如果代码段可以独立运行而不会影响应用程序的流畅性，建议使用 Future  （需要花费几毫秒时间）
+3、如果繁重的处理可能要花一些时间才能完成，而且会影响应用程序的流畅性，建议使用 isolate （需要几百毫秒）
+下面列出一些使用 isolate 的具体场景:
+1、JSON解析: 解码JSON，这是HttpRequest的结果，可能需要一些时间，可以使用封装好的 isolate 的 compute 顶层方法。
+2、加解密: 加解密过程比较耗时
+3、图片处理: 比如裁剪图片比较耗时
+4、从网络中加载大图
 15.级联操作符 .. 和  .
 Dart 当中的 「..」意思是 「级联操作符」，为了方便配置而使用。「..」和「.」不同的是 调用「..」后返回的
 相当于是 this，而「.」返回的则是该方法返回的值 。
@@ -338,9 +338,9 @@ Get.find<LazyController>();
 Get.putAsync
 注入一个异步创建的实例。比如SharedPreferences。
 Get.putAsync<SharedPreferences>(() async {
-    final sp = await SharedPreferences.getInstance();
-    return sp;
-  });
+final sp = await SharedPreferences.getInstance();
+return sp;
+});
 
 ===================Bindings类  start=======================
 上面实现了依赖注入和使用，但是和前面讲的手动注入一样，为了生命周期和使用的 Widget 绑定，需要在 Widget 里注入和使用，并
@@ -349,18 +349,18 @@ Get.putAsync<SharedPreferences>(() async {
 class InjectSimpleBinding implements Bindings {}
 因为Bindings是抽象方法，所以要ide会提示要实现dependencies。在里面注入我们需要的实例：
 class InjectSimpleBinding implements Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut<Api>(() => Api());
-    Get.lazyPut<InjectSimpleController>(() => InjectSimpleController());
-  }
+@override
+void dependencies() {
+Get.lazyPut<Api>(() => Api());
+Get.lazyPut<InjectSimpleController>(() => InjectSimpleController());
+}
 }
 通知路由，我们要使用该 Binding 来建立路由管理器、依赖关系和状态之间的连接。
 这里有两种方式，如果使用的是命名路由表：
 GetPage(
-  name: Routes.INJECT,
-  page: () => InjectSimplePage(),
-  binding:InjectSimpleBinding(),
+name: Routes.INJECT,
+page: () => InjectSimplePage(),
+binding:InjectSimpleBinding(),
 ),
 如果是直接跳转：
 Get.to(InjectSimplePage(), binding: InjectSimpleBinding());
@@ -368,41 +368,41 @@ Get.to(InjectSimplePage(), binding: InjectSimpleBinding());
 现在，我们不必再担心应用程序的内存管理，Get将为我们做这件事。
 上面我们注入依赖解耦了，但是获取还是略显不方便，GetX 也为我们考虑到了。GetView完美的搭配 Bindings。
 class InjectSimplePage extends GetView<InjectSimpleController> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('MyPage')),
-      body: Center(
-        child: Obx(() => Text(controller.obj.toString())),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.getAge();
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+return Scaffold(
+appBar: AppBar(title: Text('MyPage')),
+body: Center(
+child: Obx(() => Text(controller.obj.toString())),
+),
+floatingActionButton: FloatingActionButton(
+onPressed: () {
+controller.getAge();
+},
+child: Icon(Icons.add),
+),
+);
+}
 }
 这里完全没有Get.find，但是可以直接使用controller，因为GetView里封装好了：
 abstract class GetView<T> extends StatelessWidget {
-  const GetView({Key key}) : super(key: key);
+const GetView({Key key}) : super(key: key);
 
-  final String tag = null;
+final String tag = null;
 
-  T get controller => GetInstance().find<T>(tag: tag);
+T get controller => GetInstance().find<T>(tag: tag);
 
-  @override
-  Widget build(BuildContext context);
+@override
+Widget build(BuildContext context);
 }
 当然，也许有时候觉得每次声明一个 Bingings 类也很麻烦，那么可以使用 BindingsBuilder ，这样就可以简单地使用一
 个函数来实例化任何想要注入的东西。
-  GetPage(
-    name: '/details',
-    page: () => DetailsView(),
-    binding: BindingsBuilder(() => {
-      Get.lazyPut<DetailsController>(() => DetailsController());
-    }),
+GetPage(
+name: '/details',
+page: () => DetailsView(),
+binding: BindingsBuilder(() => {
+Get.lazyPut<DetailsController>(() => DetailsController());
+}),
 Bindings的工作原理?
 Bindings 会创建过渡性工厂，在点击进入另一个页面的那一刻，这些工厂就会被创建，一旦路由过渡动画发生，就会被销毁。 工厂占
 用的内存很少，它们并不持有实例，而是一个具有我们想要的那个类的 "形状"的函数。 这在内存上的成本很低，但由于这个库的目的
@@ -413,7 +413,7 @@ Bindings 会创建过渡性工厂，在点击进入另一个页面的那一刻�
 可以把GetxController当做ChangeNotifier
 
 把一个变量变得可观察，变量每次改变的时候，使用它的小部件就会被更新：
-1）通过 .obs 
+1）通过 .obs
 var name = '新垣结衣'.obs;
 通过 Obx 或者 GetX 包裹并使用响应式变量的控件，在变量改变的时候就会被更新：
 Obx (() => Text (controller.name));
@@ -435,15 +435,15 @@ final user = Rx<User>();
 将一个对象转变成可观察的，也有2种方法：
 可以将我们的类值转换为 obs
 ini复制代码class RxUser {
-  final name = "Camila".obs;
-  final age = 18.obs;
+final name = "Camila".obs;
+final age = 18.obs;
 }
 
 或者可以将整个类转换为一个可观察的类。
 php复制代码class User {
-  User({String name, int age});
-  var name;
-  var age;
+User({String name, int age});
+var name;
+var age;
 }
 //实例化时。
 final user = User(name: "Camila", age: 18).obs;
@@ -477,18 +477,18 @@ user().name; // 注意是user变量，而不是类变量（首字母是小写的
 
 GetxController的生命周期？
 class GetBuilderCountController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-  }
-  @override
-  void onReady() {
-    super.onReady();
-  }
-  @override
-  void onClose() {
-    super.onClose();
-  }
+@override
+void onInit() {
+super.onInit();
+}
+@override
+void onReady() {
+super.onReady();
+}
+@override
+void onClose() {
+super.onClose();
+}
 }
 
 GetX是一个超轻和强大的解决方案。它结合了高性能状态管理、智能依赖注入和路由管理，快捷实用。
@@ -523,9 +523,9 @@ RxStatus.empty();
 RxStatus.error('message');
 在View中这样使用：
 class OtherClass extends GetView<Controller> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+@override
+Widget build(BuildContext context) {
+return Scaffold(
 
       body: controller.obx(
         (state)=>Text(state.name),
@@ -563,9 +563,9 @@ Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.fin
 不要在GetxController里面调用dispose方法，它不会有任何作用，记住控制器不是Widget，你不应该 "dispose "它，它会被Get自动智能地从内存中删除。如果你在上面使用了任何流，想
 关闭它，只要把它插入到close方法中就可以了。
 class Controller extends GetxController {
-    StreamController<User> user = StreamController<User>();
-    StreamController<String> name = StreamController<String>();
-    
+StreamController<User> user = StreamController<User>();
+StreamController<String> name = StreamController<String>();
+
     ///关闭流用onClose方法，而不是dispose
     @override
     void onClose() {
@@ -605,185 +605,32 @@ GetBuilder的作用： GetBuilder 是一个 Widget 组件， 在 GetX 的状态�
 
 https://www.6hu.cc/archives/170816.html Flutter3.0新特性
 https://www.6hu.cc/archives/169226.html Flutter3.10新特性
-https://www.6hu.cc/archives/165634.html 已看
-https://www.6hu.cc/archives/185591.html 已看
-https://www.6hu.cc/archives/163928.html 已看
-https://www.6hu.cc/archives/158531.html 已看
-https://www.6hu.cc/archives/150537.html 已看
 https://www.6hu.cc/archives/146181.html 多版本管理fvm
-https://www.6hu.cc/archives/143323.html 已看
 https://www.6hu.cc/archives/141643.html Dio封装
-https://www.6hu.cc/archives/137503.html 已看
 https://www.6hu.cc/archives/121911.html pigeon的使用
 https://www.6hu.cc/archives/120270.html NativeBridge
 https://www.6hu.cc/archives/114392.html 下载文件并用原生打开
 https://www.6hu.cc/archives/99566.html 通信机制
 https://www.6hu.cc/archives/98549.html CustomPainter自定义绘画
-https://www.6hu.cc/archives/95052.html 已看
-https://www.6hu.cc/archives/94189.html
-https://www.6hu.cc/archives/90244.html 已看
 https://www.6hu.cc/archives/88245.html 3.3版本的新特性
-https://www.6hu.cc/archives/84930.html 已看
-https://www.6hu.cc/archives/84559.html 已看
-https://www.6hu.cc/archives/84496.html 已看
-https://www.6hu.cc/archives/83706.html 已看
-https://www.6hu.cc/archives/81673.html 已看
 https://www.6hu.cc/archives/81389.html Dart语法
 https://www.6hu.cc/archives/78098.html 静态资源多渠道定制
-https://www.6hu.cc/archives/77982.html 已看
 https://www.6hu.cc/archives/76854.html 多版本共存
-https://www.6hu.cc/archives/76333.html 已看
-https://www.6hu.cc/archives/76035.html 已看
-https://www.6hu.cc/archives/75911.html 已看
-https://www.6hu.cc/archives/75671.html 已看
-https://www.6hu.cc/archives/74045.html 已看
-https://www.6hu.cc/archives/73947.html 已看
-https://www.6hu.cc/archives/73605.html 已看
-https://www.6hu.cc/archives/73251.html 已看
-https://www.6hu.cc/archives/73258.html 已看
-https://www.6hu.cc/archives/71848.html 已看
-https://www.6hu.cc/archives/71633.html 已看
-https://www.6hu.cc/archives/71414.html 已看
-https://www.6hu.cc/archives/70601.html 已看
-https://www.6hu.cc/archives/69174.html 已看
-https://www.6hu.cc/archives/68899.html 已看
-https://www.6hu.cc/archives/67776.html 已看
-https://www.6hu.cc/archives/67748.html 已看
-https://www.6hu.cc/archives/67646.html 已看
-https://www.6hu.cc/archives/67268.html 已看
-https://www.6hu.cc/archives/66153.html 已看
-https://www.6hu.cc/archives/64956.html 已看
-https://www.6hu.cc/archives/64048.html 已看
-https://www.6hu.cc/archives/55849.html 已看
-https://www.6hu.cc/archives/53319.html 已看
-https://www.6hu.cc/archives/44944.html 已看
-https://www.6hu.cc/archives/45420.html 已看
-https://www.6hu.cc/archives/39367.html 已看
-https://www.6hu.cc/archives/37602.html 已看
-https://www.6hu.cc/archives/36006.html 已看
-https://www.6hu.cc/archives/32576.html 已看
-https://www.6hu.cc/archives/28762.html 已看
-https://www.6hu.cc/archives/25990.html 已看
-https://www.6hu.cc/archives/19672.html
-https://www.6hu.cc/archives/19673.html
-https://www.6hu.cc/archives/1330.html 已看
-https://www.6hu.cc/archives/728.html 已看
 
 
-1.黑白色实现方案，只需要一个组件ColorFiltered
-runApp(const ColorFiltered(
-colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
-child: MyApp()));
-2.State.setState
-StatelessWidget 经过 StatelessElement.build 触发 build
-StatefulWidget 经过 StatefulElement.build 触发 State.build
-State.setState内部所做的工作：
-1）setState的参数是一个VoidCallBack，这个回调就是我们自己写好的信息改变逻辑
-2）将StatefulWidget对应的StatefulElement标记为dirty
-3)在垂直同步信号回调后，会经过Native到Flutter engine调用Flutter的drawFrame方法，将之前标记为dirty的Element
-进行重新构建，在 widget 重新构建时会执行State.build()方法，Flutter 框架会调用widget.canUpdate来检测 widget 树中同一位置的新旧节点，然
-后决定是否需要更新，widget.canUpdate会在新旧 widget 的 key和 runtimeType 同时相等时会返回true，也就是说在在新
-旧 widget 的key和runtimeType同时相 等时Element会被复用，旧的Element会使用新Widget配置数据更新，反之则会创建一
-个新的Element。
-3.性能优化
-https://www.6hu.cc/archives/53319.html
 4.插件
 shimmer: ^3.0.0 骨架屏
 5.pubspec.yaml文件介绍
 https://www.6hu.cc/archives/64956.html
 https://www.6hu.cc/archives/67748.html
-6.Flutter多引擎
-默认情况下一个Activity或Fragment对应一个引擎，如果原生页面和Flutter页面混合嵌入，默认会创建多个引擎。
-一个引擎的原生和Flutter交互可以使用flutter boost框架；多引擎的可以使用谷歌的FlutterEngineGroup引擎。
-7.WebView和JS交互
-1）WebView的属性
-initialUrl：需要加载的url链接
-javascriptMode：JS执行模式，是否允许JS执行，默认是关闭的，需要设置如下属性来开启：
-javascriptMode: JavascriptMode.unrestricted
-onWebResourceError:错误回调
-onPageFinished：页面加载完成的回调
-javascriptChannels:javascriptChannels用于Flutter和JS交互
-javascriptChannels: <JavascriptChannel>[//javascriptChannels用于Flutter和JS交互
-JavascriptChannel(
-name: "Hello",
-onMessageReceived: (JavascriptMessage message) {//JS调用Flutter代码的时候执行
-// 这里接收到的就是 js 中发送过来的message。 和js里MessageDeal.postMessage(message) 中的message 对应 。
-// 可以根据message来做一些相应的处理
-print("${message.toString()},  ${message.hashCode}, message: ${message.message}") ;
-// 收到消息后回复一个消息给js那边，Flutter调用JS的方法
-_controller?.evaluateJavascript("showMessage ('我（Flutter）收到了你的消息[${message.message}].)");
-}),
-].toSet(),
-onPageStarted：开始加载
-onProgress：加载进度
-其他属性可以查看官方说明。
-上面的是旧版的，新版的可以看代码
+
+
 8.Dio封装
 https://www.6hu.cc/archives/67776.html
-9.如果在Android targetSdkVersion = 30或30以上在Android11上无法拨打电话的解决方法，下面内容添加到manifest标签下
-<queries>
-<intent>
-<action android:name="android.intent.action.VIEW" />
-<data android:scheme="https" />
-</intent>
-<intent>
-<action android:name="android.intent.action.SENDTO" />
-<data android:scheme="smsto" />
-</intent>
-<intent>
-<action android:name="android.intent.action.VIEW" />
-<data android:scheme="sms" />
-</intent>
-<intent>
-<action android:name="android.intent.action.VIEW" />
-<data android:scheme="tel" />
-</intent>
-<intent>
-<action android:name="android.intent.action.VIEW" />
-<data android:scheme="mailto" />
-</intent>
-<intent>
-<action android:name="android.intent.action.VIEW" />
-<data android:scheme="file" />
-</intent>
-<package android:name="com.tencent.mm" />
-<package android:name="com.eg.android.AlipayGphone" />
-</queries>
-参考官网：https://developer.android.com/training/basics/intents/package-visibility?hl=zh-cn
-10.
-StatefulWidget和StatelessWidget是没有对应的RenderObject
-在Flutter渲染流程中，最终是针对Render树中的目标进行渲染；当一个Widget被创立时，都会经过createElement办法创立一个Element加入到Element树中，然后会执行mount办法，此刻假如含有RenderObject(Element是否承
-继自RenderObjectElement)，则会在mount办法中经过createRenderObject办法创立RenderObject树，反之则不创立。
-11.富文本
-富文本可以使用RichText或者Text.rich
-Text.rich(TextSpan(children: [
-const TextSpan(text: "你好世界"),
-TextSpan(
-text: "你好世界",
-style: TextStyle(
-// color: _toggle ? Colors.blue : Colors.red),
-color: _toggle ? Colors.blue : Colors.red),
-recognizer: _gestureRecognizer
-..onTap = () {
-setState(() {
-_toggle = !_toggle ?? false;
-});
-}),
-const TextSpan(text: "你好世界"),
-]))
-12.物理虚拟键处理返回事件
-使用WillPopScope这个组件
-13.Flutter为什么可以热重载？
-https://www.6hu.cc/archives/75911.html
-14.InheritedWidget
-在 widget 树中从上到下同享数据的办法，比如咱们在应用的根 widget 中经过InheritedWidget共享了一个数据，那么咱们便能够在任意子widget 中来获取该同享的数据！这个特性在一些需要在
-整个 widget 树中同享数据的场景中非常便利！比如使用InheritedWidget 来共享运用主题（Theme）和 Locale (当前语言环境)信息的。
-InheritedWidget的在 widget 树中数据传递方向是从上到下的，这和Notification的传递方向正好相反。
+
+
 15.了解一下ChangeNotifier
-16.在Flutter三棵树中Widget和Element的节点是一一对应，而RenderObject是少于或等于Widget的数量的。当Widget是RenderObjectWidget的派生类的时分才有对应的RenderObject。
-RenderObject的子类会重写createRenderObject来创建对应的RenderObject。
-RepaintBoundary是集承继 SingleChildRenderObjectWidget,也属于RenderObjectWidget的派生类，所以RepaintBoundary也会有对应的RenderObject，当RepaintBoundary对应的RenderObject中的isRepaintBoundary
-为true时此时当前节点的RenderObject(以及子节点)的绘制会在新创立Layer完结,这样就和其他Layer做了隔离，由于Layer是能够复用的，这样帧改写的时分就不需要把每个RenderObject的paint办法都履行一遍。
+16.
 
 //关于Layer的介绍可参考 初识Flutter中的Layer，下面我们是看看isRepaintBoundary回来true时是怎样创立Layer的。
 
@@ -819,31 +666,7 @@ void _play(){
 }
 }
 
-布局和渲染流程？
-1）图画显现原理
-CPU担任图画数据核算, 然后交给 GPU
-GPU担任图画数据烘托, 烘托后放入帧缓冲区
-视频控制器根据笔直同步信号（VSync）以每秒60次的速度，从帧缓冲区读取帧数据交由显现器完结图画显现。
-UI线程运用Dart来构建视图结构数据(Widget)，这些数据会在GPU线程进行图层组成，随后交给Skia引擎加工成GPU数据，GPU数据经过OpenGL终究提供给GPU烘托。需要在两个VSync信号之间完结这些操作,不然会卡顿
 
-        2）Skia是什么？
-        Skia是一款C++开发的、跨平台、功能优秀的2D图画制作引擎
-        Skia是Android官方的图画烘托引擎，所以无需内嵌Skia引擎就可以取得天然的Skia支持；
-        iOS: 嵌入到Flutter的 iOS SDK中，代替了iOS闭源的Core Graphics/Core Animation/Core Text，这也正是 iOS App包体积比Android要大一些的原因。
-        Skia 优点
-        Skia一致了各个系统的烘托逻辑, 保证同一套代码在Android和iOS平台上的烘托作用是完全一致的。
-        3）Flutter界面烘托进程
-        页面中的Widget以树的方式组织成控件树。
-        为控件树中的每个Widget创建不同类型的绘制目标(RenderObject)，组成绘制目标树。
-        绘制目标树展现进程分为四个阶段：布局、制作、组成和绘制
-        4）布局
-        Flutter采用深度优先遍历绘制目标树，决定绘制目标树中各绘制目标在屏幕上的位置和尺度。
-        绘制目标树中的每个绘制目标都会接纳父目标的布局约束参数，决定自己的大小，
-        父目标依照控件逻辑决定各个子目标的位置，完成布局进程。
-        5）制作
-        把绘制目标制作到不同的图层上。
-        制作进程也是深度优先遍历，先制作本身，再制作子节点。
-          
           Provider原理？
             https://www.6hu.cc/archives/165634.html
 
@@ -859,72 +682,22 @@ https://www.6hu.cc/archives/158531.html
 下面含有Dart的垃圾回收：
 https://www.6hu.cc/archives/158308.html
 
-Dart中var与dynamic的差异?
-运用var来声明变量，dart会在编译阶段自动推导出类型。而dynamic不在编译期间做类型检查而是在运行期间做类型校验。
-var如果在声明变量的时候赋值了，后面不能改变变量的类型；dynamic声明的时候赋值了后面可以改变变量的类型。
 
-说一下什么是空安全，相关操作符有哪些？
-late关键字，?. ?? ?=
-dart 扩展有了解过吗？怎样运用？
-使用on作用在类上，可以为类额外的增加方法，比如为Container增加一个边距
-dynamic类型的变量能够进行扩展吗？不能够
 
-Future<void> getOrderListData(int pageNum,String orderType) async {
-    debugPrint("await执行之前");
-    final Response response = await provider.getOrderListData(pageNum,orderType);
-    //这个语句会阻塞，知道response的结果返回，如果不惜那个语句阻塞，可以将不想被阻塞的语句放到getOrderListData方法之后
-    debugPrint("await执行之后");
-}
-
-了解下extends,implemens,minxin的区别
-
-构造函数：
-1）命名构造函数：可以更清晰的表明函数目的
-class Point {
-    num x, y;
-    Point(this.x, this.y);
-    // 命名结构函数
-    Point.origin() {
-        x = 0;
-        y = 0;
-    }
-}
-2）重定向构造函数：重定向构造函数的函数体为空， 构造函数的调用在冒号 (:) 之后。
-class Point {
-    num x, y;
-    // 类的主结构函数。
-    Point(this.x, this.y);
-    // 指向主结构函数
-    Point.alongXAxis(num x) : this(x, 0);
-}
 
 在flutter里streams是什么？有几种streams？有什么场景用到它？
 Stream 用来处理接连的异步操作，Stream 是一个笼统类，用于表明一序列异步数据的源。它是一种产生接连事情的方式，能够生成数据事情或许过错事情，以及流完毕时的完结事情 Stream 分单订阅流和广播流。 网络状况的监控
 
-future和steam有什么不一样？
-在 Flutter 中有两种处理异步操作的方式 Future 和 Stream，Future 用于处理单个异步操作，Stream 用来处理接连的异步操作。
+
 
 main()和runApp()函数在flutter的作用别离是什么？有什么关系吗？
 main函数是相似于java语言的程序运转进口函数。
 runApp函数是烘托根widget树的函数。
 一般状况下runApp函数会在main函数里履行。
 
-Hot Restart 和 Hot Reload 有什么差异吗？
-Hot Reload比Hot Restart快，Hot Reload会编译咱们文件里新加的代码并发送给dart虚拟机，dart会更新widgets来改动UI，而Hot Restart会让dart 虚拟机从头编译运用。另一方面也是由于
-这样， Hot Reload会保存之前的state，而Hot Restart回你重置一切的state回到初始值。
-Hot Reload：小闪电
-Hot Restart：AndroidStudio底部的Run菜单-左上角（在小闪电的右边）
 
-Flutter GestureDetector 手势检测类用过吗？有时分分明设置了GestureDetector,可是却并不是悉数范围可点，只要中心部分有文案的地方能点击，请问是为什么怎样解决？
-如果child不为null 则默以为 HitTestBehavior.deferToChild 
-如果child为null则默以为HitTestBehavior.translucent
-HitTestBehavior.deferToChild 只有有子 Widget 通过了 Hit-Test，才接收一系列的事件，接收
-区域也会被限制在该子 Widget 区域中。
-HitTestBehavior.opaque 能够通过 Hit-Test，接收事件，且能阻止在它之前的 Widget（直观
-来看就是被它挡住的 Widget）接收事件。简单来说就是事件 不能透传。
-HitTestBehavior.translucent 能够通过 Hit-Test，接收事件，且不会阻止它之前的 Widget（直
-观来看就是被它挡住的 Widget）接收事件。简单来说就是事件 能透传。
-解决：设置HitTestBehavior.opaque
+
+
 
 Flutter ListView怎样翻滚到指定position，列表翻滚原生是怎样的，怎样监听listview翻滚到了哪个Item？假设Item是不固定高度的呢？
 
@@ -933,41 +706,6 @@ Flutter布局束缚规矩是什么姿态的？子类想要多少就要多少吗�
 然后，基层 widget 向上层 widget 传递大小信息。  
 最后，上层 widget 决定基层 widget 的方位。
 
-Flutter中的异常捕获？
-同步异常用try catch捕获，异步异常用Flutter的catchError。
-//运用try-catch捕获同步反常
-try {
-    throw StateError('This is a Dart exception');
-}catch(e) {
-    print(e);
-}
-
-/运用catchError捕获异步反常
-Future.delayed(Duration(seconds: 1))
-.then((e) => throw StateError('This is a Dart exception in Future.'))
-.catchError((e)=>print(e));
-
-flutter组件反常用下面方式
-ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
-//错误提示页面
-    return Scaffold(
-        body: Center(
-        child: Text("Custom Error Widget"),
-    ));
-};
-
-在没有运用try-catch、catchError句子的状况下，无论是同步反常仍是异步反常，都能够运用Zone直接捕获到。 同时，假设需求会集捕获Flutter运用中未处理的反常，那么能够把main函数中的runApp句子也放置
-在Zone中，这样就能够在检测到代码运转反常时对捕获的反常信息进行统一处理。
-FlutterError.onError = (FlutterErrorDetails details) async {
-// 转发至 Zone 的错误回调
-Zone.current.handleUncaughtError(details.exception, details.stack!);
-};
-
-runZoned<Future<void>>(() async {
-    runApp( MyApp());
-    }, onError: (error, stackTrace) async {
-    print("========> ${error.toString()}");
-});
 
 约束布局，这个要研究明白：
 https://flutter.cn/docs/ui/layout/constraints
@@ -978,8 +716,7 @@ https://www.6hu.cc/archives/137503.html
 Flutter3.7的新特性：
 https://www.6hu.cc/archives/104578.html
 
-自动生成代码模版：
-https://www.6hu.cc/archives/95620.html
+
 
 setState之前需要判断下当前页面是否存在：
 if (mounted){
@@ -1004,26 +741,11 @@ super.onInit();
 Get.engine.addPostFrameCallback((_) => onReady());
 }
 
-判断是否为Release包：
-bool enviroment = bool.fromEnvironment("dart.vm.product");//判断是否为Release包
-ToastUtils.showToast(enviroment?"正式环境":"非正式环境");
-或者是通过 kReleaseMode
-ToastUtils.showToast(kReleaseMode?"正式环境":"非正式环境");
 
-import 'package:flutter/foundation.dart';
-if(kReleaseMode){
-// release 方式该做的事
-}
-if(kProfileMode){
-// profile 方式该做的事
-}
-if(kDebugMode){
-// debug 方式该做的作业
-}
 
 
 获取顶部和底部的安全区域：
 顶部
 final double statusBarHeight = MediaQuery.of(context).padding.top;
 底部
-final double bottomHeight = MediaQuery.of(context).padding.bottom;
+final double bottomHeight = MediaQuery.of(context).padding.bottom;]()

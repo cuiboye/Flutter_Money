@@ -41,8 +41,8 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
     };
 
 BannerList _$BannerListFromJson(Map<String, dynamic> json) => BannerList(
-      json['name'] as String,
-      json['value'] as String,
+      json['name'] as String?,
+      json['value'] as String?,
     );
 
 Map<String, dynamic> _$BannerListToJson(BannerList instance) =>

@@ -273,7 +273,7 @@ class StateMixinView extends GetView<StateMinxinController3>{
         onLoading:   Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/ic_order_nothing.png",width: 80,),
+            Image.asset("images/ic_order_nothing.png",width: 80.w,),
             Container(
               margin: EdgeInsets.only(top: 10.w),
               child: const Text("您没有更多的订单"),

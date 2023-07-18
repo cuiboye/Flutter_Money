@@ -14,6 +14,7 @@ import 'package:flutter_money/wajiu/model/category_type_list_model.dart';
 import 'package:flutter_money/wajiu/widget/line_view.dart';
 import 'package:flutter_money/widget/cache_image_view.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 // import 'package:flutter_swiper/flutter_swiper.dart';
 
 class PageViewItem extends StatefulWidget {
@@ -135,7 +136,7 @@ class _PageViewItemState extends State<PageViewItem>{
 
   Widget swipeWidget(){
     if(WajiuUtils.collectionIsEmpty(bannerList) == true){
-      return Text("");
+      return SizedBox();
     }
     return Container(
         padding: EdgeInsets.only(left: 13, right: 13),
@@ -144,16 +145,16 @@ class _PageViewItemState extends State<PageViewItem>{
         width: double.infinity,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            // child: Swiper(
-            //   onTap: (index) {
-            //   },
-            //   itemCount:  bannerList.length,
-            //   autoplay: false,
-            //   itemBuilder: (BuildContext context, int index) {
-            //     return CacheImageView(url:bannerList[index]?.name ?? "", boxFit: BoxFit.fill,);
-            //   },
-            // )
-          child: Text("轮播图"),
+          child: Swiper(
+            onTap: (index) {},
+            itemCount: bannerList.length,
+            //是否自动轮播
+            autoplay: false,
+            itemBuilder: (BuildContext context, int index) {
+              return CacheImageView(
+                url: bannerList[index]?.name ?? "", boxFit: BoxFit.fill,);
+            },
+          ),
         ));
   }
 

@@ -132,7 +132,7 @@ class _SplashState extends State<MyApp>{
           // getPages: RouterUtils.getPages,
           // initialRoute: "/main",
         );
-      },ListView
+      },
       // child: const HomePage(title: 'First Method'),
     );
   }

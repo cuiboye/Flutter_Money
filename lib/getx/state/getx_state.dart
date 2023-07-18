@@ -86,7 +86,6 @@ class _GetXStateDemoState extends State<GetXStateDemo> {
                         Get.lazyPut<StateMinxinController>(() => StateMinxinController(provider: Get.find()));
                       })),
                   child: Text("StateMixin+change()")),
-              GetView
             ],
           )
       ),

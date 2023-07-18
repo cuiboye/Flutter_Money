@@ -35,7 +35,6 @@ class Result {
   Result(this.bannerList,this.parameterList);
 
   factory Result.fromJson(Map<String, dynamic> srcJson) => _$ResultFromJson(srcJson);
-
 }
 
 
@@ -43,10 +42,10 @@ class Result {
 class BannerList{
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   @JsonKey(name: 'value')
-  String value;
+  String? value;
 
   BannerList(this.name,this.value,);
 

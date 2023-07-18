@@ -7,60 +7,65 @@ class InheritedContextExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('执行了 build 方法');
 
-    final countNotifier2 = context.watch<CountNotifier2>();
+    final countWatchNotifier = context.watch<CountNotifier2>();
     //
     //
     final count = context.select((CountNotifier2 countNotifier2) => countNotifier2.count);
+
+    //通过 Provider.of 获取值
+    final countProvider  = Provider.of<CountNotifier2>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
         title: Text("InheritedContextExample"),
       ),
 
-      /// Provider.of 获取值
       // body: Center(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.center,
       //     children: [
-      //       Text(Provider.of<CountNotifier2>(context).count.toString(),
-      //         style: TextStyle(
+      //       Text(Provider.of<CountNotifier2>(context, listen: false).count.toString(),
+      //         style: const TextStyle(
       //             color: Colors.red,
       //             fontSize: 50
       //         ),
       //       ),
+      //
       //       Padding(
-      //         padding: EdgeInsets.only(top: 20),
+      //         padding: const EdgeInsets.only(top: 20),
       //         child: ElevatedButton(
-      //           onPressed: () => Provider.of<CountNotifier2>(context, listen: false).increment(),
-      //           child: Text("点击加1"),
+      //           onPressed: () => countProvider.increment(),
+      //           child: const Text("点击加1"),
       //         ),
       //       ),
       //     ],
       //   ),
       // ),
 
-      /// read 获取值,不会刷新UI
-      // body: Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text(context.read<CountNotifier2>().count.toString(),
-      //         style: TextStyle(
-      //             color: Colors.red,
-      //             fontSize: 50
-      //         ),
-      //       ),
-      //       Padding(
-      //         padding: EdgeInsets.only(top: 20),
-      //         child: ElevatedButton(
-      //           onPressed: () => Provider.of<CountNotifier2>(context, listen: false).increment(),
-      //           child: Text("点击加1"),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      //read（）就是调用了Provider.of(this,listen: false);
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("${context.read<CountNotifier2>().count.toString()}",
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 50
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                onPressed: () => Provider.of<CountNotifier2>(context, listen: false).increment(),
+                child: Text("点击加1"),
+              ),
+            ),
+          ],
+        ),
+      ),
 
       /// Consumer 获取值
       // body: Center(
@@ -93,7 +98,7 @@ class InheritedContextExample extends StatelessWidget {
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.center,
       //     children: [
-      //       Text(countNotifier2.count.toString(),
+      //       Text(countWatchNotifier.count.toString(),
       //         style: TextStyle(
       //             color: Colors.red,
       //             fontSize: 50
@@ -102,7 +107,7 @@ class InheritedContextExample extends StatelessWidget {
       //       Padding(
       //         padding: EdgeInsets.only(top: 20),
       //         child: ElevatedButton(
-      //           onPressed: () => countNotifier2.increment(),
+      //           onPressed: () => countWatchNotifier.increment(),
       //           child: Text("点击加1"),
       //         ),
       //       ),
@@ -139,26 +144,26 @@ class InheritedContextExample extends StatelessWidget {
       // ),
 
       /// select
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(count.toString(),
-              style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 50
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () => Provider.of<CountNotifier2>(context, listen: false).increment(),
-                child: Text("点击加1"),
-              ),
-            )
-          ],
-        ),
-      ),
+      // body: Center(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       Text(count.toString(),
+      //         style: TextStyle(
+      //             color: Colors.red,
+      //             fontSize: 50
+      //         ),
+      //       ),
+      //       Padding(
+      //         padding: EdgeInsets.only(top: 20),
+      //         child: ElevatedButton(
+      //           onPressed: () => Provider.of<CountNotifier2>(context, listen: false).increment(),
+      //           child: Text("点击加1"),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

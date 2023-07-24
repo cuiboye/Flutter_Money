@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_money/animation/custom_animation.dart';
 import 'package:flutter_money/home_page.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
@@ -124,13 +125,22 @@ class _SplashState extends State<MyApp>{
             //去除右上角的"DEBUG"水印
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            home: Image.asset("images/launchimage.jpg", fit: BoxFit.fill),
+            home: Image.asset("images/launchimage.jpg", fit: BoxFit.fill),//背景图
             routes: RouterUtils.getRouter(),
-            //初始化EasyLoading
-          //Dart中的方法不能重载
+            //初始化EasyLoading加载圈
             builder: EasyLoading.init(),
-          // getPages: RouterUtils.getPages,
-          // initialRoute: "/main",
+          //国际化设置
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          //国际化设置的语言，这里设置为中文，在这里设置后，如果涉及到和日期相关需要设置国际化的话，日期组件showDatePicker中就不需要设置了
+          supportedLocales: const [
+            Locale('zh', 'CN'), //设置语言为中文
+          ],
+          // getPages: RouterUtils.getPages,//设置路由集合的另一种方法
+          // initialRoute: "/main",//初始化路由
         );
       },
       // child: const HomePage(title: 'First Method'),

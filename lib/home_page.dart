@@ -31,6 +31,7 @@ import 'package:flutter_money/route_demo_page.dart';
 import 'package:flutter_money/sharedpreference.dart';
 import 'package:flutter_money/sqflite_demo.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
+import 'package:flutter_money/task/custom_task_page.dart';
 import 'package:flutter_money/test/test.dart';
 import 'package:flutter_money/test_extension_widget.dart';
 import 'package:flutter_money/utils/router.dart';
@@ -50,6 +51,7 @@ import 'package:flutter_money/widget/html_demo.dart';
 import 'package:flutter_money/widget/print_widget_log_demo.dart';
 import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
+import 'package:flutter_money/widget/time_page.dart';
 import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_money/widget/yueshu_page.dart';
@@ -157,10 +159,12 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             }),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
+        _item('挖酒crm-客户任务详情', CustomTaskPagePage(), 'customtaskpagepage'),
         _item('事件处理与通知', EventAddNotifitonWidget(), 'event_add_notifition'),
         _item('Loading', LoadingView(), 'loading_view'),
         _item('加载html代码', HtmlDemo(), 'htmldemo'),
         _item('对约束布局的理解', YushuPage(), 'yushu_page'),
+        _item('时间选择器和时间格式转换', TimePage(), 'time_page'),
         _item('精确的SizeBox', AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
         _item('SelectionArea组件', SelectionAreawidgetPage(), 'selection_area_widget_page'),
         _item('ListView缓存', KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),

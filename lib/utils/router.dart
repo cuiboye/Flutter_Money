@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/task/custom_task_page.dart';
 import 'package:flutter_money/view/animated_switcher.dart';
 import 'package:flutter_money/animation_main.dart';
 import 'package:flutter_money/animation_widget.dart';
@@ -106,6 +107,7 @@ import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
 import 'package:flutter_money/widget/text_demo.dart';
+import 'package:flutter_money/widget/time_page.dart';
 import 'package:flutter_money/widget/timer_page.dart';
 import 'package:flutter_money/widget/weiget_main.dart';
 import 'package:flutter_money/widget/yueshu_page.dart';
@@ -131,11 +133,13 @@ RouterUtils {
       "event_add_notifition": (BuildContext context) => EventAddNotifitonWidget(),
       "routedemopage": (BuildContext context) => RouteDemoPage(),
       "printwidgetlogdemo": (BuildContext context) => PrintWidgetLogDemo(),
+      "customtaskpagepage": (BuildContext context) => CustomTaskPagePage(),
       "gradientbuttondemo": (BuildContext context) => const GradientButtonDemo(),
       "leftrightboxdemo": (BuildContext context) => const LeftRightBoxDemo(),
       "keepalivewrapperdemo": (BuildContext context) => const KeepAliveWrapperDemo(),
       "selection_area_widget_page": (BuildContext context) => const SelectionAreawidgetPage(),
       "htmldemo": (BuildContext context) => const HtmlDemo(),
+      "time_page": (BuildContext context) => const TimePage(),
       "timer_page": (BuildContext context) => const TimerPage(),
       "yushu_page": (BuildContext context) => const YushuPage(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),

@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -147,16 +148,29 @@ class _DialogDemoState extends State<DialogDemo> {
   }
 
   //日历选择器
-  Future<DateTime?> _showDatePicker1() {
+  Future<DateTime?> _showDatePicker1() async{
     var date = DateTime.now();
-    return showDatePicker(
+    DateTime?  dateTime = await showDatePicker(
       context: context,
-      initialDate: date,
-      firstDate: date,
-      lastDate: date.add( //未来30天可选
+      // locale: const Locale("zh"),//设置语言为中文
+      initialDate: date,//initialDate：初始化选中的日期
+      firstDate: date,//firstDate: 可选择的最早日期
+      lastDate: date.add(//lastDate：可选择的最晚日期
+        //未来30天可选
         Duration(days: 30),
       ),
     );
+    setState(() {
+      if(dateTime != null){
+        print("$dateTime");//2023-07-21 00:00:00.000
+        //格式化时间
+        print(formatDate(dateTime, [yyyy, '-', mm, '-', dd]));//2023-07-21
+        print(formatDate(
+            DateTime(1989, 02, 1, 15, 40, 10), [HH, ':', nn, ':', ss]));//15:40:10
+      }
+    });
+    //除了通过async和await的方式获取选择的时间，还可以通过Future的回调方法then
+    return dateTime;
   }
 
   //iOS风格的日历选择器需要使用showCupertinoModalPopup方法和CupertinoDatePicker组件来实现

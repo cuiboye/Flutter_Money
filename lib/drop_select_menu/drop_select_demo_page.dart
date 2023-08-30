@@ -43,28 +43,28 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   DropSelectMenu renderDropSelectMenu() {
-    return new DropSelectMenu(
+    return DropSelectMenu(
         maxMenuHeight: MediaQuery.of(context).size.height,
         menus: [
-          new DropSelectMenuBuilder(
+           DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectExpandedListMenu(
+                return  DropSelectExpandedListMenu(
                   data: selectExpand,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
               height: MediaQuery.of(context).size.height),
-          new DropSelectMenuBuilder(
+           DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectGridListMenu(
+                return  DropSelectGridListMenu(
                   data: selectChildGrid,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
               height: MediaQuery.of(context).size.height),
-          new DropSelectMenuBuilder(
+          DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectListMenu(
+                return  DropSelectListMenu(
                   data: selectNormal,
                   singleSelected: true,
                   itemBuilder: renderSelectItem,

@@ -104,6 +104,31 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   #时间格式化工具
   date_format: ^2.0.7
+  #CheckBox 复选框，可自定义，系统的不能自定义
+  roundcheckbox: ^2.0.5
+
+  #微信分享，登录
+  fluwx: ^4.2.6
+  #QQ分享，登录
+  tencent_kit: ^6.0.1
+  #图片缓存
+  flutter_cache_manager: ^3.3.1
+  #保存图片到相册
+  image_gallery_saver: ^2.0.3
+
+fluwx:
+  #IOS的appid
+  app_id: 'wx22d5ab853c3e8aea'
+  debug_logging: true # Logging in debug mode.
+  android:
+  #    interrupt_wx_request: true # Defaults to true.
+  #    flutter_activity: 'MainActivity' # Defaults to app's launcher
+  ios:
+    universal_link: https://bqjcd.share2dlink.com/
+tencent_kit:
+  app_id: '1108762481'
+#  universal_link: https://bqjcd.share2dlink.com/qq_conn/1108762481
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -15,15 +15,6 @@ class GetXObsDemo extends StatelessWidget{
         body: Column(
           children: [
             Obx(() => Text("count1 -> ${count.value}")),
-            // Obx((){
-            //   return Text("count1 -> ${count.toString()}" + );
-            // }),
-            ElevatedButton(
-              onPressed: () {
-                count.value++;
-              },
-              child: Text("add"),
-            ),
           ],
         )
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_money/utils/text_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ToastUtils{
+  ToastUtils._();
   static void showToast(String msg){
     if(TextUtils.isEmpty(msg)){
       return;

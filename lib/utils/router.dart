@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
+import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/task/custom_task_page.dart';
 import 'package:flutter_money/view/animated_switcher.dart';
 import 'package:flutter_money/animation_main.dart';
@@ -123,11 +125,12 @@ import '../getx/navigation/navigation_demo3.dart';
 // import '../map/map_example.dart';
 
 
-class
-RouterUtils {
+class RouterUtils {
   static Map<String, WidgetBuilder> getRouter() {
     Map<String, WidgetBuilder>? routes = {
       "main": (BuildContext context) => MyApp(),
+      "jiaohuwidgetpage": (BuildContext context) => const JiaohuWidgetPage(),
+      "customerinvitationcodepage": (BuildContext context) =>  CustomerInvitationCodePage(),
       "statelesswidget": (BuildContext context) => StatelessWidgetDemo(),
       "accuratesizedboxdemo": (BuildContext context) => AccurateSizedBoxDemo(),
       "event_add_notifition": (BuildContext context) => EventAddNotifitonWidget(),

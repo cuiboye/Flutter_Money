@@ -1,8 +1,6 @@
 //此行代码作用是导入了 Material UI 组件库。Material (opens new window)是一种标准的移
 //动端和web端的视觉设计语言， Flutter 默认提供了一套丰富的 Material 风格的UI组件。
 
-import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +15,8 @@ import 'package:flutter_money/file_example.dart';
 import 'package:flutter_money/flutter_widget_lifecycle.dart';
 import 'package:flutter_money/honor_demo_page.dart';
 import 'package:flutter_money/inherited_widget_example.dart';
+import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
+import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/list_scroll_dock_page.dart';
 import 'package:flutter_money/notification_demo.dart';
@@ -158,6 +158,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
                 byName = value;
               });
             }),
+        _item('对Didget进行截图，保存图片到相册，将图片分享到微信，QQ', CustomerInvitationCodePage(), 'customerinvitationcodepage'),
+        _item('交互式Widget', JiaohuWidgetPage(), 'jiaohuwidgetpage'),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
         _item('挖酒crm-客户任务详情', CustomTaskPagePage(), 'customtaskpagepage'),
         _item('事件处理与通知', EventAddNotifitonWidget(), 'event_add_notifition'),

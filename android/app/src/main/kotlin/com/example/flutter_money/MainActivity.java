@@ -162,6 +162,16 @@ public class MainActivity extends FlutterActivity {
             Log.e(TAG, "Error registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin", e);
         }
         try {
+            flutterEngine.getPlugins().add(new com.jarvan.fluwx.FluwxPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin fluwx, com.jarvan.fluwx.FluwxPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new com.example.imagegallerysaver.ImageGallerySaverPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin image_gallery_saver, com.example.imagegallerysaver.ImageGallerySaverPlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
@@ -190,6 +200,11 @@ public class MainActivity extends FlutterActivity {
             flutterEngine.getPlugins().add(new com.tekartik.sqflite.SqflitePlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin sqflite, com.tekartik.sqflite.SqflitePlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new io.github.v7lin.tencent_kit.TencentKitPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin tencent_kit, io.github.v7lin.tencent_kit.TencentKitPlugin", e);
         }
         try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.urllauncher.UrlLauncherPlugin());

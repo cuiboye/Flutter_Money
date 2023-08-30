@@ -48,4 +48,5 @@ class ColorConstant{
   static const Color color_d6d6d6 = Color(0xFFD6D6D6);
   static const Color color_e0e0e0 = Color(0xFFE0E0E0);
   static const Color color_f9f9fb = Color(0xFFF9F9FB);
+  static const Color gray300 = Color(0xFFE0E0E0);
 }

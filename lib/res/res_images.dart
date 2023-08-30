@@ -111,6 +111,8 @@ class ImageRes {
 
   static const String icCashDepositPNG = 'ic_cash_deposit.png';
 
+  static const String iconWeChatPNG = 'icon_we_chat.png';
+
   static const String appHomeXiaowakuaibaoPNG = 'app_home_xiaowakuaibao.png';
 
   static const String tabbarMineRedPNG = 'tabbar_mine_red.png';
@@ -120,6 +122,10 @@ class ImageRes {
   static const String mainPageBanner4JPEG = 'main_page_banner4.jpeg';
 
   static const String gsyCatPNG = 'gsy_cat.png';
+
+  static const String iconPicturePNG = 'icon_picture.png';
+
+  static const String iconQqPNG = 'icon_qq.png';
 
   static const String mineMyOrderYiwanchengPNG = 'mine_my_order_yiwancheng.png';
 
@@ -198,6 +204,8 @@ class ImageRes {
   static const String checkerboardImage5PNG = 'checkerboard_image5.png';
 
   static const String mineMyOrderDaifukuanPNG = 'mine_my_order_daifukuan.png';
+
+  static const String iconInviteCodeBgPNG = 'icon_invite_code_bg.png';
 
   static const String checkerboardImage4PNG = 'checkerboard_image4.png';
 

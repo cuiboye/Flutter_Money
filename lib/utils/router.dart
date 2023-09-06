@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/animated_container_page.dart';
+import 'package:flutter_money/animated_opacity_page.dart';
+import 'package:flutter_money/animation_main_page.dart';
+import 'package:flutter_money/custom_paint_page.dart';
+import 'package:flutter_money/download_button_page.dart';
 import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
 import 'package:flutter_money/jiaohu_widget_page.dart';
+import 'package:flutter_money/money_add_animation_page.dart';
 import 'package:flutter_money/task/custom_task_page.dart';
+import 'package:flutter_money/transition_animation_page.dart';
+import 'package:flutter_money/tween_animation_builder_page.dart';
 import 'package:flutter_money/view/animated_switcher.dart';
 import 'package:flutter_money/animation_main.dart';
 import 'package:flutter_money/animation_widget.dart';
@@ -105,6 +113,7 @@ import 'package:flutter_money/widget/icon_demo.dart';
 import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/input_add_form.dart';
 import 'package:flutter_money/widget/print_widget_log_demo.dart';
+import 'package:flutter_money/widget/provider_main_page.dart';
 import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/switch_selectbox_demo.dart';
@@ -129,6 +138,9 @@ class RouterUtils {
   static Map<String, WidgetBuilder> getRouter() {
     Map<String, WidgetBuilder>? routes = {
       "main": (BuildContext context) => MyApp(),
+      "custompaintpage": (BuildContext context) => CustomPaintPage(),
+      "tweendemo": (BuildContext context) => const TweenDemo(),
+      "demoflowpopmenu": (BuildContext context) => const DownloadButtonPage(),
       "jiaohuwidgetpage": (BuildContext context) => const JiaohuWidgetPage(),
       "customerinvitationcodepage": (BuildContext context) =>  CustomerInvitationCodePage(),
       "statelesswidget": (BuildContext context) => StatelessWidgetDemo(),
@@ -137,15 +149,19 @@ class RouterUtils {
       "routedemopage": (BuildContext context) => RouteDemoPage(),
       "printwidgetlogdemo": (BuildContext context) => PrintWidgetLogDemo(),
       "customtaskpagepage": (BuildContext context) => CustomTaskPagePage(),
+      "transtionanimationpage": (BuildContext context) => TranstionAnimationPage(),
       "gradientbuttondemo": (BuildContext context) => const GradientButtonDemo(),
       "leftrightboxdemo": (BuildContext context) => const LeftRightBoxDemo(),
       "keepalivewrapperdemo": (BuildContext context) => const KeepAliveWrapperDemo(),
       "selection_area_widget_page": (BuildContext context) => const SelectionAreawidgetPage(),
+      "animatedopacitypage": (BuildContext context) => const AnimatedOpacityPage(),
       "htmldemo": (BuildContext context) => const HtmlDemo(),
       "time_page": (BuildContext context) => const TimePage(),
       "timer_page": (BuildContext context) => const TimerPage(),
       "yushu_page": (BuildContext context) => const YushuPage(),
       "wajiuLogin": (BuildContext context) => WajiuLogin(),
+      "tweenanimationbuildpage": (BuildContext context) => TweenAnimationBuildPage(),
+      "animatedcontainerpage": (BuildContext context) => AnimatedContainerPage(),
       "wajiuphonelogin": (BuildContext context) => WajiuPhoneLogin(),
       "sliverlistdemopage": (BuildContext context) => SliverListDemoPage(),
       "listanimdemopage2": (BuildContext context) => ListAnimDemoPage2(),
@@ -276,7 +292,7 @@ class RouterUtils {
       "catch_error": (BuildContext context) => CatchError(),
       //多级可展开的列表
       "expansiontile_sample": (BuildContext context) => ExpansionTileSample(),
-      "animation_main": (BuildContext context) => AnimationMain(),
+      "animationmainpage": (BuildContext context) => AnimationMainPage(),
       "animatedwidget_example": (BuildContext context) => AnimatedWidgetExample(),
       "animatedbuild_example": (BuildContext context) => AnimatedBuilderExample(),
       "stagger_animation": (BuildContext context) => StaggerAnimationExample(),
@@ -297,6 +313,7 @@ class RouterUtils {
       "getconnect_page_view": (BuildContext context) => GetConnectPageView(),
       "statemixin_view": (BuildContext context) => StateMixinView(""),
       "loading_view": (BuildContext context) => LoadingView(),
+      "providermainpage": (BuildContext context) => const ProviderMainPage(),
     };
     return routes;
   }

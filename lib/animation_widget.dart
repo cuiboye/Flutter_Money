@@ -33,7 +33,7 @@ class _AnimationMainState extends State<AnimatedWidgetExample> with SingleTicker
     print("build");
     return CustomMaterialApp(
       home: Scaffold(
-        appBar: CustomAppbar(context: context,title: "动画",),
+        appBar: CustomAppbar(context: context,title: "AnimatedWidget的使用",),
         body: Column(
           children: [
             Row(

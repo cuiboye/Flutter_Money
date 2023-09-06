@@ -6,9 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/animation_main_page.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
+import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/device_info_main.dart';
+import 'package:flutter_money/download_button_page.dart';
 import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_money/event_add_notifition.dart';
 import 'package:flutter_money/file_example.dart';
@@ -19,6 +22,7 @@ import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
 import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/list_scroll_dock_page.dart';
+import 'package:flutter_money/money_add_animation_page.dart';
 import 'package:flutter_money/notification_demo.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/provide_demo.dart';
@@ -158,27 +162,29 @@ class _RouteNavigatorState extends State<RouteNavigator> {
                 byName = value;
               });
             }),
+        _item('使用CustomPaint绘制Widget', const CustomPaintPage(), 'custompaintpage'),
+        _item('金钱累加动画效果', const TweenDemo(), 'tweendemo'),
         _item('对Didget进行截图，保存图片到相册，将图片分享到微信，QQ', CustomerInvitationCodePage(), 'customerinvitationcodepage'),
-        _item('交互式Widget', JiaohuWidgetPage(), 'jiaohuwidgetpage'),
+        _item('下载按钮', const DownloadButtonPage(), 'downloadbuttonpage'),
+        _item('交互式Widget', const JiaohuWidgetPage(), 'jiaohuwidgetpage'),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),
         _item('挖酒crm-客户任务详情', CustomTaskPagePage(), 'customtaskpagepage'),
-        _item('事件处理与通知', EventAddNotifitonWidget(), 'event_add_notifition'),
+        _item('事件处理与通知', const EventAddNotifitonWidget(), 'event_add_notifition'),
         _item('Loading', LoadingView(), 'loading_view'),
-        _item('加载html代码', HtmlDemo(), 'htmldemo'),
-        _item('对约束布局的理解', YushuPage(), 'yushu_page'),
-        _item('时间选择器和时间格式转换', TimePage(), 'time_page'),
-        _item('精确的SizeBox', AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
-        _item('SelectionArea组件', SelectionAreawidgetPage(), 'selection_area_widget_page'),
-        _item('ListView缓存', KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),
-        _item('图片缩放', ScaleViewDemo(), 'scaleviewdemo'),
-        _item('Timer计时器', TimerPage(), 'timer_page'),
-        _item('支持左-右布局的组件', LeftRightBoxDemo(), 'leftrightboxdemo'),
-        _item('渐变按钮', GradientButtonDemo(), 'gradientbuttondemo'),
-        _item('帮助组件打印约束', PrintWidgetLogDemo(), 'printwidgetlogdemo'),
-        _item('测试路由嵌套', RouteDemoPage(), 'routedemopage'),
+        _item('加载html代码', const HtmlDemo(), 'htmldemo'),
+        _item('对约束布局的理解', const YushuPage(), 'yushu_page'),
+        _item('时间选择器和时间格式转换', const TimePage(), 'time_page'),
+        _item('精确的SizeBox', const AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
+        _item('SelectionArea组件', const SelectionAreawidgetPage(), 'selection_area_widget_page'),
+        _item('ListView缓存', const KeepAliveWrapperDemo(), 'keepalivewrapperdemo'),
+        _item('图片缩放', const ScaleViewDemo(), 'scaleviewdemo'),
+        _item('Timer计时器', const TimerPage(), 'timer_page'),
+        _item('支持左-右布局的组件', const LeftRightBoxDemo(), 'leftrightboxdemo'),
+        _item('渐变按钮', const GradientButtonDemo(), 'gradientbuttondemo'),
+        _item('帮助组件打印约束', const PrintWidgetLogDemo(), 'printwidgetlogdemo'),
+        _item('测试路由嵌套', const RouteDemoPage(), 'routedemopage'),
         _item('下拉筛选', DropSelectDemoPage(), 'dropselectdemopage'),
         _item('StatelessWidget组件的使用', StatelessWidgetDemo(), 'statelesswidget'),
-        _item('共性元素动画', HonorDemoPage(), 'honordemopage'),
         _item('wajiuLogin', WajiuLogin(), 'wajiuLogin'),
         _item('StatefulWidget组件的使用', StatefulWidgetDemo(), 'statefulwidget'),
         _item('布局的使用', LayoutDemoWidget(), 'layoutwidget'),
@@ -208,15 +214,6 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             'sharedpreference'),
         _item('测试', Test(), 'test'),
         _item('挖酒相关', WajiuMainPage(), 'wajiu_main_page'),
-        _item('Provider的例子', ProvideDemo(), 'provider_example'),
-        _item('Provider计数器', ProvideDemo2(), 'provider_count_example'),
-        _item('ChangeNotifierProvider', ProvideDemo3(),
-            'changenotifier_provider_example'),
-        _item('Provider_Selector相关', ProvideDemo4(),
-            'changenotifier_provider_example'),
-        _item('inderited_provider_example', ProvideDemo5(),
-            'inderited_provider_example'),
-        _item('Provider+MVVM', ProvideDemo6(), 'mvvm_provider_example'),
         _item('文件操作', FileExample(), 'file_example'),
         _item('Sqflite数据库', SqfliteDemo(), 'sqflite_example'),
         //App的生命周期
@@ -229,16 +226,10 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('Webview以及和js交互', WebViewNativeDemo(), 'channer_main'),
         _item('InheritedWidget的使用', InheritedWidgetTestRoute(),
             'inderited_widget_test_router'),
-        _item('异常处理', CatchError(), 'catch_error'),
+        _item('异常处理', const CatchError(), 'catch_error'),
         _item('多级可展开的列表', ExpansionTileSample(), 'expansiontile_sample'),
-        _item('动画的基本使用', AnimationMain(), 'animation_main'),
-        _item('AnimatedWidget的使用', AnimatedWidgetExample(),
-            'animatedwidget_example'),
-        _item('AnimatedBuilder的使用', AnimatedBuilderExample(),
-            'animatedbuild_example'),
-        _item('组合动画', StaggerAnimationExample(), 'stagger_animation'),
-        _item('动画切换组件', AnimatedSwitcherExample(), 'animatedswitch_example'),
-        // _item('百度地图', MapMainExample(), 'map_main_example'),
+        _item('动画', AnimationMainPage(), 'animationmainpage'),
+
         _item('极光推送', JiguangPushMain(), 'jiguang_push'),
         _item('上拉刷新下拉加载', PullRefreshMain(), 'pull_refresh_main'),
         _item('获取设备信息', DeviceInfoMain(), 'device_info'),

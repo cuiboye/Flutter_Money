@@ -4,14 +4,14 @@ import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
 
 /**
- * 动画
+ * 动画的基本使用
  */
-class AnimationMain extends StatefulWidget {
+class AnimationBase extends StatefulWidget {
   @override
   _AnimationMainState createState() => _AnimationMainState();
 }
 
-class _AnimationMainState extends State<AnimationMain> with SingleTickerProviderStateMixin{
+class _AnimationMainState extends State<AnimationBase> with SingleTickerProviderStateMixin{
   late Animation<double> _animation;
   late AnimationController _animationController;
   bool _isforward = true;//是否是正向执行动画

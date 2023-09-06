@@ -7,6 +7,7 @@ import '../../view/custom_materialapp.dart';
 
 /**
  * 这个组件在Flutter3.3后才可以使用
+ * SelectionArea 选择多行文本
  */
 class SelectionAreawidgetPage extends StatefulWidget {
   const SelectionAreawidgetPage({super.key});

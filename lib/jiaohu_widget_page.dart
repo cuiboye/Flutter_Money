@@ -95,7 +95,7 @@ class _JiaohuWidgetPageState extends State<JiaohuWidgetPage> {
                 light = value;
               });
             },
-          )
+          ),
         ],
       ),
     );

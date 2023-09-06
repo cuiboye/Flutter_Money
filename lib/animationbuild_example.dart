@@ -10,7 +10,8 @@ import 'package:flutter_money/view/custom_materialapp.dart';
  * 把渲染过程也抽象出来，那就会好很多，而AnimatedBuilder正是将渲染逻辑分离出来,
  * 2)使用AnimatedBuild的好处
  * ---不用显式的去添加帧监听器，然后再调用setState() 了，这个好处和AnimatedWidget是一样的。
-   ---更好的性能：因为动画每一帧需要构建的 widget 的范围缩小了，如果没有builder，setState()将会在父组件上下文中调用，这将会导致父组件的build方法重新调用；而有了builder之后，只会导致动画widget自身的build重新调用，避免不必要的rebuild。
+   ---更好的性能：因为动画每一帧需要构建的 widget 的范围缩小了，如果没有builder，setState()将会在父组件上下文中调用，
+    这将会导致父组件的build方法重新调用；而有了builder之后，只会导致动画widget自身的build重新调用，避免不必要的rebuild。
    ---通过AnimatedBuilder可以封装常见的过渡效果来复用动画。下面我们通过封装一个
  */
 class AnimatedBuilderExample extends StatefulWidget {

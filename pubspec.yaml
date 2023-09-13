@@ -50,8 +50,10 @@ dependencies:
   english_words: ^4.0.0
   provider: ^6.0.3   #provider状态管理
   path_provider: ^2.0.11 #文件操作
-  dio: ^4.0.6 #http请求封裝库
-  dio_log: ^2.0.4 #基于dio的网络请求日志
+  dio: ^5.0.2 #http请求封裝库
+  #暂时先注释dio_log和dio_logger，因为加入了flutter_download_manager，flutter_download_manager需要dio版本为5.0以上，而dio_log和依赖dio的版本为4.0.0
+#  dio_log: ^2.0.4 #基于dio的网络请求日志
+  # dio_logger: ^4.0.8+8
   json_annotation: ^4.5.0 # 序列化
   shared_preferences: ^2.0.15  #SharedPreferences存储数据
 #  flutter_swiper : ^1.1.6   #轮播组件 flutter3.0上会报错，flutter2.0上面没有问题
@@ -116,6 +118,9 @@ dependencies:
   #保存图片到相册
   image_gallery_saver: ^2.0.3
 
+  flutter_downloader: ^1.11.2
+  android_path_provider: ^0.3.0
+  device_info_plus: ^8.0.0
 fluwx:
   #IOS的appid
   app_id: 'wx22d5ab853c3e8aea'

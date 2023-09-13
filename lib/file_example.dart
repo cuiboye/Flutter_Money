@@ -34,6 +34,7 @@ class FileExample extends StatelessWidget {
 /// 写入数据
 Future<void> writeString(String name) async {
   final file = await _getLocalDocumentFile();
+  debugPrint('file name ${file.toString()}');
   await file.writeAsString(name);
 
   final file1 = await _getLocalTemporaryFile();

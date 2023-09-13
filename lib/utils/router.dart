@@ -5,6 +5,7 @@ import 'package:flutter_money/animated_opacity_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/download_button_page.dart';
+import 'package:flutter_money/download_file_page.dart';
 import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
 import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/money_add_animation_page.dart';
@@ -140,6 +141,8 @@ class RouterUtils {
       "main": (BuildContext context) => MyApp(),
       "custompaintpage": (BuildContext context) => CustomPaintPage(),
       "tweendemo": (BuildContext context) => const TweenDemo(),
+      "downloadpage": (BuildContext context) => const DownloadPage(),
+      "myhomepage": (BuildContext context) =>  MyHomePage(),
       "demoflowpopmenu": (BuildContext context) => const DownloadButtonPage(),
       "jiaohuwidgetpage": (BuildContext context) => const JiaohuWidgetPage(),
       "customerinvitationcodepage": (BuildContext context) =>  CustomerInvitationCodePage(),

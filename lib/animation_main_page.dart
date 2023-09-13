@@ -6,6 +6,7 @@ import 'package:flutter_money/animated_opacity_page.dart';
 import 'package:flutter_money/animation_widget.dart';
 import 'package:flutter_money/animationbuild_example.dart';
 import 'package:flutter_money/honor_demo_page.dart';
+import 'package:flutter_money/layout/animatedlist.dart';
 import 'package:flutter_money/transition_animation_page.dart';
 import 'package:flutter_money/tween_animation_builder_page.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
@@ -38,7 +39,8 @@ class _AnimationMainPageState extends State<AnimationMainPage> {
           ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(AnimatedContainerPage()), child: Text('隐式动画')),
           ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(TweenAnimationBuildPage()), child: Text('TweenAnimationBuilder的使用')),
           ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(TranstionAnimationPage()), child: Text('Transtion Widget')),
-          ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(AnimatedOpacityPage()), child: Text('淡入淡出动画'))
+          ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(AnimatedOpacityPage()), child: Text('淡入淡出动画')),
+          ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(AnimatedListLayout()), child: Text('ListView列表动画'))
         ],
       ),
     );

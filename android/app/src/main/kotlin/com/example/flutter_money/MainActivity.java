@@ -137,14 +137,29 @@ public class MainActivity extends FlutterActivity {
     //这里是注册Flutter的插件
     public void registerWith(@NonNull FlutterEngine flutterEngine) {
         try {
+            flutterEngine.getPlugins().add(new com.mix1009.android_path_provider.AndroidPathProviderPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin android_path_provider, com.mix1009.android_path_provider.AndroidPathProviderPlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.deviceinfo.DeviceInfoPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin device_info, io.flutter.plugins.deviceinfo.DeviceInfoPlugin", e);
         }
         try {
+            flutterEngine.getPlugins().add(new dev.fluttercommunity.plus.device_info.DeviceInfoPlusPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin device_info_plus, dev.fluttercommunity.plus.device_info.DeviceInfoPlusPlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new com.flutter_customappbar_plugin.FlutterCustomappbarPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin flutter_customappbar_plugin, com.flutter_customappbar_plugin.FlutterCustomappbarPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new vn.hunghd.flutterdownloader.FlutterDownloaderPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin flutter_downloader, vn.hunghd.flutterdownloader.FlutterDownloaderPlugin", e);
         }
         try {
             flutterEngine.getPlugins().add(new net.jonhanson.flutter_native_splash.FlutterNativeSplashPlugin());

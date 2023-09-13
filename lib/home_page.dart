@@ -6,12 +6,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_money/ExpansionTileSample.dart';
+import 'package:flutter_money/aaa/home_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/download_button_page.dart';
+import 'package:flutter_money/download_file_page.dart';
 import 'package:flutter_money/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_money/event_add_notifition.dart';
 import 'package:flutter_money/file_example.dart';
@@ -52,6 +54,7 @@ import 'package:flutter_money/widget/accurate_sizebox_demo.dart';
 import 'package:flutter_money/widget/dialog_demo.dart';
 import 'package:flutter_money/widget/gradient_button_demo.dart';
 import 'package:flutter_money/widget/html_demo.dart';
+import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/print_widget_log_demo.dart';
 import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
@@ -134,6 +137,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
+
     return Scrollbar(
         child: SingleChildScrollView(
             child: Column(
@@ -164,7 +169,11 @@ class _RouteNavigatorState extends State<RouteNavigator> {
             }),
         _item('使用CustomPaint绘制Widget', const CustomPaintPage(), 'custompaintpage'),
         _item('金钱累加动画效果', const TweenDemo(), 'tweendemo'),
-        _item('对Didget进行截图，保存图片到相册，将图片分享到微信，QQ', CustomerInvitationCodePage(), 'customerinvitationcodepage'),
+        _item('进度条',  IndicatorWidget(), 'indicatorwidget'),
+        _item('文件下载', const DownloadPage(), 'downloadpage'),
+        _item('文件下载2',  DownloadFile2(  title: '下载文件',platform: platform,), 'downloadfile2'),
+
+        _item('对Widget进行截图，保存图片到相册，将图片分享到微信，QQ', CustomerInvitationCodePage(), 'customerinvitationcodepage'),
         _item('下载按钮', const DownloadButtonPage(), 'downloadbuttonpage'),
         _item('交互式Widget', const JiaohuWidgetPage(), 'jiaohuwidgetpage'),
         _item('列表停靠', ListScrollDockPage(), 'listscrolldockpage'),

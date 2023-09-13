@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.0'
     repositories {
 //        maven { url "https://storage.googleapis.com/download.flutter.io" }
         maven { url 'https://maven.aliyun.com/repository/google' }

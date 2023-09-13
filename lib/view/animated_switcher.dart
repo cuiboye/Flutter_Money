@@ -28,6 +28,8 @@ import 'package:flutter_money/view/custom_materialapp.dart';
     对旧child，绑定的动画会反向执行（reverse）
     对新child，绑定的动画会正向指向（forward）
     这样一下，便实现了对新、旧child的动画绑定。AnimatedSwitcher的默认值是AnimatedSwitcher.defaultTransitionBuilder ：
+
+    3)AnimatedCrossFade 淡入淡出
  */
 class AnimatedSwitcherExample extends StatefulWidget {
   @override
@@ -37,6 +39,9 @@ class AnimatedSwitcherExample extends StatefulWidget {
 
 class _AnimatedSwitcherExampleState extends State<AnimatedSwitcherExample> {
   int _count = 0;
+  bool  _first = false;
+  double _size = 100.0;
+  bool _large = false;
 @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +57,7 @@ class _AnimatedSwitcherExampleState extends State<AnimatedSwitcherExample> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AnimatedSwitcher(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 transitionBuilder: (Widget child, Animation<double> animation) {
                   //执行缩放动画
                   return ScaleTransition(scale: animation, child: child,);
@@ -69,14 +74,41 @@ class _AnimatedSwitcherExampleState extends State<AnimatedSwitcherExample> {
                   onPressed: (){
                     setState(() {
                       _count +=1;
+                      _first = !_first;
                     });
                   },
-                  child: Text("+1")
+                  child: const Text("+1")
+              ),
+              AnimatedCrossFade(
+                duration: const Duration(seconds: 3),
+                // firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
+                // secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
+                firstChild: Text('HelloWorld'),
+                secondChild: Text('HI'),
+                crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              ),
+              GestureDetector(
+                onTap: () => _updateSize(),
+                child: ColoredBox(
+                  color: Colors.amberAccent,
+                  child: AnimatedSize(
+                    curve: Curves.easeIn,
+                    duration: const Duration(seconds: 1),
+                    child: FlutterLogo(size: _size),
+                  ),
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _updateSize() {
+    setState(() {
+      _size = _large ? 100.0 : 250.0;
+      _large = !_large;
+    });
   }
 }

@@ -2,9 +2,11 @@
 //动端和web端的视觉设计语言， Flutter 默认提供了一套丰富的 Material 风格的UI组件。
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_money/animation/custom_animation.dart';
@@ -19,6 +21,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'extension.dart';
 import 'utils/sp.dart'; //扩展方法
+
+@pragma('vm:entry-point')
+void downloadCallback(
+    String id,
+    int status,
+    int progress,
+    ) {
+  print(
+    'Callback on background isolate: '
+        'task ($id) is in status ($status) and process ($progress)',
+  );
+
+  IsolateNameServer.lookupPortByName('downloader_send_port')
+      ?.send([id, status, progress]);
+}
+
 //Flutter 应用中 main 函数为应用程序的入口。main 函数中调用了runApp 方法，它的功能是启
 //动Flutter应用。runApp它接受一个 Widget参数，
 //main函数使用了(=>)符号，这是 Dart 中单行函数或方法的简写。
@@ -36,6 +54,9 @@ void main() async{
   //下面这两句是初始化SharedPreference
   WidgetsFlutterBinding.ensureInitialized();
   await Sp.perInit();
+  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  await FlutterDownloader.initialize(debug: true);
+  FlutterDownloader.registerCallback(downloadCallback, step: 1);
 
   //处理全局的错误
   FlutterError.onError = (FlutterErrorDetails details) async {

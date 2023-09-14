@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.flutter_money">
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- 百度地图需要的权限-->
@@ -13,8 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 百度地图需要的权限-->
-    
+
     <application
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
@@ -69,6 +68,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="wZqKbGEtWCYiTGO5YX3CG9PIwXmH3IbR" />
 
+        <!-- 下载所需要 start-->
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
             android:authorities="${applicationId}.flutter_downloader.provider"
@@ -101,5 +101,6 @@
                 android:name="vn.hunghd.flutterdownloader.MAX_CONCURRENT_TASKS"
                 android:value="5" />
         </provider>
+        <!-- 下载所需要 end-->
     </application>
 </manifest>

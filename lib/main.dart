@@ -44,8 +44,6 @@ void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
   // SharedPreferences.setMockInitialValues({});//这个为flutter2.0的设置，现在不用了，2.0上使用有问题，重启app后数据获取失败
 
-
-
   //这里处理的是组件异常
   Widget error = const Text('...rendering error...');
   error = Scaffold(body: Center(child: error));
@@ -69,7 +67,7 @@ void main() async{
     // runApp(const ColorFiltered(
     //     colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
     //     child: MyApp()));//黑白屏
-    runApp( MyApp());
+    runApp( const MyApp());
   }, onError: (error, stackTrace) async {
     print("========> ${error.toString()}");
   });

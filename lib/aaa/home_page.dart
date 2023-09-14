@@ -3,7 +3,6 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:android_path_provider/android_path_provider.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_money/aaa/data.dart';
@@ -11,10 +10,8 @@ import 'package:flutter_money/aaa/download_list_item.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
 class DownloadFile2 extends StatefulWidget with WidgetsBindingObserver {
-   DownloadFile2({super.key, required this.title, required this.platform});
+  DownloadFile2({super.key, required this.title, required this.platform});
 
   final TargetPlatform? platform;
 
@@ -66,7 +63,7 @@ class _MyHomePageState extends State<DownloadFile2> {
       final status = DownloadTaskStatus.fromInt(data[1] as int);
       final progress = data[2] as int;
 
-      print(
+      debugPrint(
         'Callback on UI isolate: '
         'task ($taskId) is in status ($status) and process ($progress)',
       );
@@ -80,8 +77,9 @@ class _MyHomePageState extends State<DownloadFile2> {
         });
       }
 
-      if(status == DownloadTaskStatus.complete && progress==100){//下载完成
-        // FlutterDownloader.open(taskId: taskId);//打开文件
+      if (status == DownloadTaskStatus.complete && progress == 100) {
+        //下载完成
+        FlutterDownloader.open(taskId: taskId);//打开文件
       }
     });
   }
@@ -126,7 +124,7 @@ class _MyHomePageState extends State<DownloadFile2> {
             return DownloadListItem(
               data: item,
               onTap: (task) async {
-                final success = await _openDownloadedFile(task);//打开文件
+                final success = await _openDownloadedFile(task); //打开文件
                 if (!success) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -138,23 +136,24 @@ class _MyHomePageState extends State<DownloadFile2> {
               onActionTap: (task) {
                 if (task.status == DownloadTaskStatus.undefined) {
                   debugPrint('aaaaaa');
-                  _requestDownload(task);//开始下载
+                  _requestDownload(task); //开始下载
+
                 } else if (task.status == DownloadTaskStatus.running) {
                   _pauseDownload(task);
-                  debugPrint('_pauseDownload');//暂停下载
+                  debugPrint('_pauseDownload'); //暂停下载
                 } else if (task.status == DownloadTaskStatus.paused) {
                   _resumeDownload(task);
-                  debugPrint('_resumeDownload');//继续下载
+                  debugPrint('_resumeDownload'); //继续下载
                 } else if (task.status == DownloadTaskStatus.complete ||
                     task.status == DownloadTaskStatus.canceled) {
-                  _delete(task);//下载完成后删除下载了
+                  _delete(task); //下载完成后删除下载了
                   debugPrint('_delete(task)');
                 } else if (task.status == DownloadTaskStatus.failed) {
                   debugPrint('_retryDownload');
                   _retryDownload(task);
                 }
               },
-              onCancel: _delete,//没有完成下载然后取消下载了
+              onCancel: _delete, //没有完成下载然后取消下载了
             );
           },
         ),
@@ -205,20 +204,21 @@ class _MyHomePageState extends State<DownloadFile2> {
   }
 
   Future<void> _requestDownload(TaskInfo task) async {
-    await [Permission.storage,].request();
-    debugPrint('_localPath $_localPath');
+    debugPrint(' _localPath$_localPath');
     debugPrint('_saveInPublicStorage $_saveInPublicStorage');
-    File file = File('$_localPath/aaa');
-    bool exists = await file.exists();
-    if(!exists){
-      await file.create();
-    }
     task.taskId = await FlutterDownloader.enqueue(
-      url: task.link!,//下载url
-      headers: {'authaaa': 'test_for_sql_encoding123123213'},//headers
-      savedDir: file.toString(),//存储目录，如 /storage/emulated/0/Download
+      url: task.link!,
+      //下载url
+      headers: {'auth': 'test_for_sql_encoding'},
+      //headers
+      savedDir: _localPath,
+      //存储目录，如 /storage/emulated/0/Download
       // savedDir: '/storage/emulated/0/Download',
-      showNotification: false,//是否在通知栏显示下载进度
+      showNotification: true,
+      //fileName的名称需要后缀，比如apk,jpg等等，否则会出现apk无法解析或者文件打开失败
+      fileName: 'wajiucrm${DateTime.now().microsecondsSinceEpoch}.apk',
+      // openFileFromNotification: false,
+      //是否在通知栏显示下载进度
       //是否存储在外部目录，在Android上的目录为：/storage/emulated/0/Download
       saveInPublicStorage: true,
     );
@@ -229,12 +229,15 @@ class _MyHomePageState extends State<DownloadFile2> {
   }
 
   Future<void> _resumeDownload(TaskInfo task) async {
+    debugPrint('_resumeDownload');
     final newTaskId = await FlutterDownloader.resume(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
 
   Future<void> _retryDownload(TaskInfo task) async {
-    await Permission.storage.request();
+    await [
+      Permission.storage,
+    ].request();
     final newTaskId = await FlutterDownloader.retry(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
@@ -249,7 +252,7 @@ class _MyHomePageState extends State<DownloadFile2> {
   }
 
   Future<void> _delete(TaskInfo task) async {
-   debugPrint('取消下载');
+    debugPrint('取消下载');
     await FlutterDownloader.remove(
       taskId: task.taskId!,
       shouldDeleteContent: true,
@@ -273,8 +276,6 @@ class _MyHomePageState extends State<DownloadFile2> {
   }
 
   Future<void> _prepare() async {
-    final downloads = await getDownloadsDirectory();
-    debugPrint('downloads $downloads');
     final tasks = await FlutterDownloader.loadTasks();
     debugPrint('tasks $tasks');
     if (tasks == null) {
@@ -353,6 +354,7 @@ class _MyHomePageState extends State<DownloadFile2> {
 
   Future<void> _prepareSaveDir() async {
     _localPath = (await _getSavedDir())!;
+    debugPrint('_localPath $_localPath');
     final savedDir = Directory(_localPath);
     if (!savedDir.existsSync()) {
       await savedDir.create();
@@ -384,21 +386,22 @@ class _MyHomePageState extends State<DownloadFile2> {
     return externalStorageDirPath;
   }
 
-
-
   Future<List<Directory?>> get _dirsOnIOS async {
     final temporary = await getTemporaryDirectory();
     final applicationSupport = await getApplicationSupportDirectory();
     final library = await getLibraryDirectory();
     final applicationDocuments = await getApplicationDocumentsDirectory();
     final downloads = await getDownloadsDirectory();
-
-    print('temporary: $temporary');
-    print('applicationSupport: $applicationSupport');
-    print('library: $library');
-    print('applicationDocuments: $applicationDocuments');
-    print('downloads: $downloads');
-
+    // /var/mobile/Containers/Data/Application/B783CAE6-FBF5-4F84-8ABF-C716FE663D4C/Library/Caches
+    debugPrint('temporary: $temporary');
+    // /var/mobile/Containers/Data/Application/B783CAE6-FBF5-4F84-8ABF-C716FE663D4C/Library/Application Support
+    debugPrint('applicationSupport: $applicationSupport');
+    // /var/mobile/Containers/Data/Application/B783CAE6-FBF5-4F84-8ABF-C716FE663D4C/Library
+    debugPrint('library: $library');
+    // /var/mobile/Containers/Data/Application/B783CAE6-FBF5-4F84-8ABF-C716FE663D4C/Documents
+    debugPrint('applicationDocuments: $applicationDocuments');
+    // /var/mobile/Containers/Data/Application/B783CAE6-FBF5-4F84-8ABF-C716FE663D4C/Downloads
+    debugPrint('downloads: $downloads');
 
     final dirs = [
       temporary,

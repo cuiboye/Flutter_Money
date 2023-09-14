@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio_log/interceptor/dio_log_interceptor.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -30,9 +31,12 @@ class DioInstance {
 
   Dio createDio() {
     BaseOptions baseOptions = BaseOptions(
-      connectTimeout: const Duration(microseconds: 30000),
-      receiveTimeout: const Duration(microseconds: 30000),
-      sendTimeout: const Duration(microseconds: 30000),
+      // connectTimeout: Duration(microseconds: 30000),
+      // receiveTimeout:  Duration(microseconds: 30000),
+      // sendTimeout: Duration(microseconds: 30000),
+      connectTimeout: 30000,
+      receiveTimeout:  30000,
+      sendTimeout: 30000,
       // baseUrl: "http://192.168.0.101:8083",
       baseUrl: "https://wjapp.iopenx.com/",
       responseType: ResponseType.json,
@@ -57,7 +61,7 @@ class DioInstance {
 
     var dio = Dio(baseOptions);
     //添加拦截器，这里添加Dio的日志
-    // dio.interceptors.add(DioLogInterceptor());
+    dio.interceptors.add(DioLogInterceptor());
 
     return dio;
   }

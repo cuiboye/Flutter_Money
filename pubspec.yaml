@@ -119,9 +119,13 @@ dependencies:
   #保存图片到相册
   image_gallery_saver: ^2.0.3
 
+  #下载相关
   flutter_downloader: ^1.11.2
   android_path_provider: ^0.3.0
   device_info_plus: ^8.0.0
+
+  #pdf预览
+  flutter_pdfview: ^1.3.1
 fluwx:
   #IOS的appid
   app_id: 'wx22d5ab853c3e8aea'

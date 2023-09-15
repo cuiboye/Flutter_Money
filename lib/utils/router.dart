@@ -9,6 +9,7 @@ import 'package:flutter_money/download_file_page.dart';
 import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
 import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/money_add_animation_page.dart';
+import 'package:flutter_money/pdf_view_page.dart';
 import 'package:flutter_money/task/custom_task_page.dart';
 import 'package:flutter_money/transition_animation_page.dart';
 import 'package:flutter_money/tween_animation_builder_page.dart';
@@ -132,7 +133,6 @@ import '../inherited_widget_example.dart';
 import '../inherited_widget_test.dart';
 import '../main.dart';
 import '../getx/navigation/navigation_demo3.dart';
-// import '../map/map_example.dart';
 
 
 class RouterUtils {

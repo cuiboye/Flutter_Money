@@ -26,6 +26,7 @@ import 'package:flutter_money/layout_demo.dart';
 import 'package:flutter_money/list_scroll_dock_page.dart';
 import 'package:flutter_money/money_add_animation_page.dart';
 import 'package:flutter_money/notification_demo.dart';
+import 'package:flutter_money/pdf_view_page.dart';
 import 'package:flutter_money/provide/Inherited_context_example/provide_demo5.dart';
 import 'package:flutter_money/provide/change_notifier_provider_example/provide_demo.dart';
 import 'package:flutter_money/provide/provider_count_example/provide_demo.dart';
@@ -167,6 +168,9 @@ class _RouteNavigatorState extends State<RouteNavigator> {
                 byName = value;
               });
             }),
+
+        const Text('pdf预览可以查看PdfPreviewWidget'),
+
         _item('使用CustomPaint绘制Widget', const CustomPaintPage(), 'custompaintpage'),
         _item('金钱累加动画效果', const TweenDemo(), 'tweendemo'),
         _item('进度条',  IndicatorWidget(), 'indicatorwidget'),

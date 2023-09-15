@@ -137,7 +137,10 @@ class _MyHomePageState extends State<DownloadFile2> {
                 if (task.status == DownloadTaskStatus.undefined) {
                   debugPrint('aaaaaa');
                   _requestDownload(task); //开始下载
-
+                  // FlutterDownloader.remove(
+                  //   taskId: "0079810f-386e-4c06-a104-587c9eb0cd2e",
+                  //   shouldDeleteContent: true,
+                  // );
                 } else if (task.status == DownloadTaskStatus.running) {
                   _pauseDownload(task);
                   debugPrint('_pauseDownload'); //暂停下载
@@ -147,6 +150,7 @@ class _MyHomePageState extends State<DownloadFile2> {
                 } else if (task.status == DownloadTaskStatus.complete ||
                     task.status == DownloadTaskStatus.canceled) {
                   _delete(task); //下载完成后删除下载了
+
                   debugPrint('_delete(task)');
                 } else if (task.status == DownloadTaskStatus.failed) {
                   debugPrint('_retryDownload');
@@ -216,7 +220,7 @@ class _MyHomePageState extends State<DownloadFile2> {
       // savedDir: '/storage/emulated/0/Download',
       showNotification: true,
       //fileName的名称需要后缀，比如apk,jpg等等，否则会出现apk无法解析或者文件打开失败
-      fileName: 'wajiucrm${DateTime.now().microsecondsSinceEpoch}.apk',
+      fileName: 'wajiucrm${DateTime.now().microsecondsSinceEpoch}.pdf',
       // openFileFromNotification: false,
       //是否在通知栏显示下载进度
       //是否存储在外部目录，在Android上的目录为：/storage/emulated/0/Download

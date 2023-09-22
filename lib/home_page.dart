@@ -10,6 +10,7 @@ import 'package:flutter_money/aaa/home_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
+import 'package:flutter_money/contact/contact_list_page.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/device_info_main.dart';
 import 'package:flutter_money/download_button_page.dart';
@@ -174,6 +175,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('使用CustomPaint绘制Widget', const CustomPaintPage(), 'custompaintpage'),
         _item('金钱累加动画效果', const TweenDemo(), 'tweendemo'),
         _item('进度条',  IndicatorWidget(), 'indicatorwidget'),
+        _item('联系人列表', const ContactListPage(), 'contactlistpage'),
         _item('文件下载', const DownloadPage(), 'downloadpage'),
         _item('文件下载2',  DownloadFile2(  title: '下载文件',platform: platform,), 'downloadfile2'),
 

@@ -3,6 +3,7 @@ import 'package:flutter_money/ExpansionTileSample.dart';
 import 'package:flutter_money/animated_container_page.dart';
 import 'package:flutter_money/animated_opacity_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
+import 'package:flutter_money/contact/contact_list_page.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/download_button_page.dart';
 import 'package:flutter_money/download_file_page.dart';
@@ -142,6 +143,7 @@ class RouterUtils {
       "custompaintpage": (BuildContext context) => CustomPaintPage(),
       "tweendemo": (BuildContext context) => const TweenDemo(),
       "downloadpage": (BuildContext context) => const DownloadPage(),
+      "contactlistpage": (BuildContext context) =>  const ContactListPage(),
       "myhomepage": (BuildContext context) =>  MyHomePage(),
       "demoflowpopmenu": (BuildContext context) => const DownloadButtonPage(),
       "jiaohuwidgetpage": (BuildContext context) => const JiaohuWidgetPage(),

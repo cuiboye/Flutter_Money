@@ -20,6 +20,10 @@ class ColorConstant{
   static const Color color_7a7a7a = Color(0xff7a7a7a);
   static const Color color_ebebeb = Color(0xffebebeb);
   static const Color color_3a3a3a = Color(0xff3a3a3a);
+  static const Color cab = Color(0xFFABABAB);
+  static const Color cee = Color(0xFFEEEEEE);
+  static const Color c66 = Color(0xFF666666);
+  static const Color c545759 = Color(0xFF545759);
   static const Color color_bababa = Color(0xffbababa);
   static const Color color_efefef = Color(0xffefefef);
   static const Color color_transparent = Color(0xff00000000);

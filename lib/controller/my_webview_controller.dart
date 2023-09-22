@@ -40,7 +40,7 @@ class MyWebViewController extends GetxController{
     controller.setNavigationDelegate(
       NavigationDelegate(
         onWebResourceError: (WebResourceError error) {
-          print("${error.description}");
+          print(error.description);
         },
         onPageFinished: (String url) {
           print("加载完成 $url");
@@ -64,9 +64,9 @@ class MyWebViewController extends GetxController{
 
   String getAssetsPath(String path) {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'file:///android_asset/flutter_assets/' + path;
+      return 'file:///android_asset/flutter_assets/$path';
     } else {
-      return 'file://Frameworks/App.framework/flutter_assets/' + path;
+      return 'file://Frameworks/App.framework/flutter_assets/$path';
     }
   }
 

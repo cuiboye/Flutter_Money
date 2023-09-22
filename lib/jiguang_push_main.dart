@@ -4,7 +4,7 @@ import 'package:flutter_money/ExpansionTileSample.dart';
 import 'package:flutter_money/utils/get_navigation_utils.dart';
 import 'package:flutter_money/view/custom_appbar.dart';
 import 'package:flutter_money/view/custom_materialapp.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
+// import 'package:jpush_flutter/jpush_flutter.dart';
 
 /**
  * 极光推送
@@ -21,31 +21,32 @@ class _JiguangPushMainState extends State<JiguangPushMain> {
       home: Scaffold(
         appBar: CustomAppbar(context: context, title: "极光推送",),
         body: ElevatedButton(
-          onPressed: ()=>startJiguangPush(),
+          // onPressed: ()=>startJiguangPush(),
+          onPressed: () {  },
           child: Text("开启极光推送"),
         )),
     );
   }
 
   //初始化极光推送
-  void startJiguangPush(){
-    JPush jpushTag =  JPush();
-    //debug就填debug:true，生产环境production:true
-    jpushTag.setup(
-        appKey: '03fe40aece7ccb8a95b48478',
-        channel: 'developer-default',
-        production: true,
-        debug: true);
-    /// 监听jpush
-    jpushTag.addEventHandler(
-      onReceiveNotification: (Map<String, dynamic> message) async {
-        print('jpushTag接收到的数据为： + $message');
-        // if (message.length > 0) G.hideMessage = true;
-      },
-      onOpenNotification: (Map<String, dynamic> message) async {
-        /// 点击通知栏消息，跳转至消息列表页面
-        GetNavigationUtils.navigateRightToLeft(ExpansionTileSample());
-      },
-    );
-  }
+  // void startJiguangPush(){
+  //   JPush jpushTag =  JPush();
+  //   //debug就填debug:true，生产环境production:true
+  //   jpushTag.setup(
+  //       appKey: '03fe40aece7ccb8a95b48478',
+  //       channel: 'developer-default',
+  //       production: true,
+  //       debug: true);
+  //   /// 监听jpush
+  //   jpushTag.addEventHandler(
+  //     onReceiveNotification: (Map<String, dynamic> message) async {
+  //       print('jpushTag接收到的数据为： + $message');
+  //       // if (message.length > 0) G.hideMessage = true;
+  //     },
+  //     onOpenNotification: (Map<String, dynamic> message) async {
+  //       /// 点击通知栏消息，跳转至消息列表页面
+  //       GetNavigationUtils.navigateRightToLeft(ExpansionTileSample());
+  //     },
+  //   );
+  // }
 }

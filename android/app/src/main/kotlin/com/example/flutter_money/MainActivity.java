@@ -49,11 +49,12 @@ public class MainActivity extends FlutterActivity {
 
     }
 
+
+
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
-        // 需要添加的插件
+        //需要添加的插件
         registerWith(flutterEngine);
-
 
         new EventChannel(flutterEngine.getDartExecutor(), CHARGING_CHANNEL).setStreamHandler(
                 new EventChannel.StreamHandler() {
@@ -142,6 +143,21 @@ public class MainActivity extends FlutterActivity {
             Log.e(TAG, "Error registering plugin android_path_provider, com.mix1009.android_path_provider.AndroidPathProviderPlugin", e);
         }
         try {
+            flutterEngine.getPlugins().add(new com.spencerccf.app_settings.AppSettingsPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin app_settings, com.spencerccf.app_settings.AppSettingsPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new sk.fourq.calllog.CallLogPlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin call_log, sk.fourq.calllog.CallLogPlugin", e);
+        }
+        try {
+            flutterEngine.getPlugins().add(new flutter.plugins.contactsservice.contactsservice.ContactsServicePlugin());
+        } catch(Exception e) {
+            Log.e(TAG, "Error registering plugin contacts_service, flutter.plugins.contactsservice.contactsservice.ContactsServicePlugin", e);
+        }
+        try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.deviceinfo.DeviceInfoPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin device_info, io.flutter.plugins.deviceinfo.DeviceInfoPlugin", e);
@@ -195,11 +211,6 @@ public class MainActivity extends FlutterActivity {
             flutterEngine.getPlugins().add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin image_picker_android, io.flutter.plugins.imagepicker.ImagePickerPlugin", e);
-        }
-        try {
-            flutterEngine.getPlugins().add(new com.jiguang.jpush.JPushPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin jpush_flutter, com.jiguang.jpush.JPushPlugin", e);
         }
         try {
             flutterEngine.getPlugins().add(new io.flutter.plugins.pathprovider.PathProviderPlugin());

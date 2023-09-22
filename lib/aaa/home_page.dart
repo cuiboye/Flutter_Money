@@ -9,6 +9,7 @@ import 'package:flutter_money/aaa/data.dart';
 import 'package:flutter_money/aaa/download_list_item.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:call_log/call_log.dart';
 
 class DownloadFile2 extends StatefulWidget with WidgetsBindingObserver {
   DownloadFile2({super.key, required this.title, required this.platform});
@@ -40,6 +41,26 @@ class _MyHomePageState extends State<DownloadFile2> {
     _saveInPublicStorage = false;
 
     _prepare();
+    getCallLog();
+  }
+
+  Future<void> getCallLog() async {
+    Iterable<CallLogEntry> entries = await CallLog.get();
+    for (var callLogItem in entries) {
+      debugPrint('name=${callLogItem.name},number=${callLogItem.number},duration=${callLogItem.duration}');
+    }
+    // var now = DateTime.now();
+    // int from = now.subtract(const Duration(days: 60)).millisecondsSinceEpoch;
+    // int to = now.subtract(const Duration(days: 30)).millisecondsSinceEpoch;
+    // Iterable<CallLogEntry> entries = await CallLog.query(
+    //   dateFrom: from,
+    //   dateTo: to,
+    //   durationFrom: 0,
+    //   durationTo: 60,
+    //   name: 'John Doe',
+    //   number: '901700000',
+    //   type: CallType.incoming,
+    // );
   }
 
   @override
@@ -137,10 +158,6 @@ class _MyHomePageState extends State<DownloadFile2> {
                 if (task.status == DownloadTaskStatus.undefined) {
                   debugPrint('aaaaaa');
                   _requestDownload(task); //开始下载
-                  // FlutterDownloader.remove(
-                  //   taskId: "0079810f-386e-4c06-a104-587c9eb0cd2e",
-                  //   shouldDeleteContent: true,
-                  // );
                 } else if (task.status == DownloadTaskStatus.running) {
                   _pauseDownload(task);
                   debugPrint('_pauseDownload'); //暂停下载
@@ -420,6 +437,7 @@ class _MyHomePageState extends State<DownloadFile2> {
 
   @override
   Widget build(BuildContext context) {
+    int number = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

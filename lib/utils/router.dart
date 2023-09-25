@@ -3,6 +3,7 @@ import 'package:flutter_money/ExpansionTileSample.dart';
 import 'package:flutter_money/animated_container_page.dart';
 import 'package:flutter_money/animated_opacity_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
+import 'package:flutter_money/contact/call_log_page.dart';
 import 'package:flutter_money/contact/contact_list_page.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/download_button_page.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_money/invitationcode/customer_invitationcode_page.dart';
 import 'package:flutter_money/jiaohu_widget_page.dart';
 import 'package:flutter_money/money_add_animation_page.dart';
 import 'package:flutter_money/pdf_view_page.dart';
+import 'package:flutter_money/set_use_page.dart';
 import 'package:flutter_money/task/custom_task_page.dart';
 import 'package:flutter_money/transition_animation_page.dart';
 import 'package:flutter_money/tween_animation_builder_page.dart';
@@ -142,8 +144,10 @@ class RouterUtils {
       "main": (BuildContext context) => MyApp(),
       "custompaintpage": (BuildContext context) => CustomPaintPage(),
       "tweendemo": (BuildContext context) => const TweenDemo(),
+      "setusepage": (BuildContext context) => const SetUsePage(),
       "downloadpage": (BuildContext context) => const DownloadPage(),
       "contactlistpage": (BuildContext context) =>  const ContactListPage(),
+      "calllogpage": (BuildContext context) =>  const CallLogPage(),
       "myhomepage": (BuildContext context) =>  MyHomePage(),
       "demoflowpopmenu": (BuildContext context) => const DownloadButtonPage(),
       "jiaohuwidgetpage": (BuildContext context) => const JiaohuWidgetPage(),

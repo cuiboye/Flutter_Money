@@ -10,6 +10,7 @@ import 'package:flutter_money/aaa/home_page.dart';
 import 'package:flutter_money/animation_main_page.dart';
 import 'package:flutter_money/app_recyclelife_page.dart';
 import 'package:flutter_money/channel/channer_main.dart';
+import 'package:flutter_money/contact/call_log_page.dart';
 import 'package:flutter_money/contact/contact_list_page.dart';
 import 'package:flutter_money/custom_paint_page.dart';
 import 'package:flutter_money/device_info_main.dart';
@@ -36,6 +37,7 @@ import 'package:flutter_money/provide/provider_mvvm_example/provide_demo.dart';
 import 'package:flutter_money/provide/selector_example/provide_demo.dart';
 import 'package:flutter_money/pull_refresh.dart';
 import 'package:flutter_money/route_demo_page.dart';
+import 'package:flutter_money/set_use_page.dart';
 import 'package:flutter_money/sharedpreference.dart';
 import 'package:flutter_money/sqflite_demo.dart';
 import 'package:flutter_money/statefulwidget_demo.dart';
@@ -170,12 +172,14 @@ class _RouteNavigatorState extends State<RouteNavigator> {
               });
             }),
 
-        const Text('pdf预览可以查看PdfPreviewWidget'),
+        const Text('pdf预览可以查看PdfPreviewWidget这个类'),
 
         _item('使用CustomPaint绘制Widget', const CustomPaintPage(), 'custompaintpage'),
         _item('金钱累加动画效果', const TweenDemo(), 'tweendemo'),
+        _item('setter和getter', const SetUsePage(), 'setusepage'),
         _item('进度条',  IndicatorWidget(), 'indicatorwidget'),
         _item('联系人列表', const ContactListPage(), 'contactlistpage'),
+        _item('通话记录', const CallLogPage(), 'calllogpage'),
         _item('文件下载', const DownloadPage(), 'downloadpage'),
         _item('文件下载2',  DownloadFile2(  title: '下载文件',platform: platform,), 'downloadfile2'),
 
@@ -234,7 +238,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         //App的生命周期
         _item('App的生命周期', AppRecycleLifePage(), 'app_recyclelife'),
         //Widget的生命周期
-        _item('Widget的生命周期', WidgetLifecycle(), 'widget_recyclelife'),
+        _item('Widget(State)的生命周期', WidgetLifecycle(), 'widget_recyclelife'),
         _item('getx路由跳转', NavigationDemo(), 'navigation_page'),
         _item('getx状态管理', GetXStateDemo(), 'getx_state_demo'),
         _item('Flutter和Native通信', ChannerMain(), 'channer_main'),

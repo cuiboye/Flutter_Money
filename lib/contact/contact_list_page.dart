@@ -20,7 +20,7 @@ class ContactListPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppbar(
         context:context,
-        title: '联系人',
+        title: '联系人列表',
       ),
       body: GetBuilder<ContactListController>(
           init: ContactListController(),
@@ -36,7 +36,7 @@ class ContactListPage extends StatelessWidget {
               indexBarItemHeight: 25.w,
               indexBarOptions: IndexBarOptions(
                   textStyle:
-                      TextStyle(color: ColorConstant.cab, fontSize: 13.sp)),
+                  TextStyle(color: ColorConstant.cab, fontSize: 13.sp)),
               indexHintBuilder: (context, hint) {
                 return Container(
                   alignment: Alignment.center,
@@ -48,7 +48,7 @@ class ContactListPage extends StatelessWidget {
                   ),
                   child: Text(hint,
                       style:
-                          const TextStyle(color: Colors.white, fontSize: 30.0)),
+                      const TextStyle(color: Colors.white, fontSize: 30.0)),
                 );
               },
               indexBarMargin: EdgeInsets.all(5.w),

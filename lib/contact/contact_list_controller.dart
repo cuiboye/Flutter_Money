@@ -1,63 +1,33 @@
-
 import 'package:azlistview/azlistview.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_money/contact/models.dart';
-import 'package:flutter_money/wj_global.dart';
+import 'package:flutter_money/mixin/contact_data_mixin.dart';
 import 'package:get/get.dart';
 import 'package:lpinyin/lpinyin.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 ///联系人列表
-class ContactListController extends GetxController {
+class ContactListController extends GetxController with ContactDataMixin {
   List<ContactInfo> contacts = [];
   double susItemHeight = 40;
 
   @override
   void onInit() {
     super.onInit();
-    _askPermissions();
+    requestContactPermission();
   }
 
-  Future<void> _askPermissions() async {
-    PermissionStatus permissionStatus = await _getContactPermission();
-    if (permissionStatus == PermissionStatus.granted) {
-      getContact();
-      debugPrint('已经获取权限');
-    } else {
-      _handleInvalidPermissions(permissionStatus);
+  void requestContactPermission() async {
+    bool hasPermissions = await askPermissions();
+    if (!hasPermissions) {
+      return;
     }
-  }
-
-  void _handleInvalidPermissions(PermissionStatus permissionStatus) {
-    if (permissionStatus == PermissionStatus.denied) {
-      //拒绝访问
-      showToast('权限已拒绝');
-    } else if (permissionStatus == PermissionStatus.permanentlyDenied) {
-      //永久拒绝访问
-      showToast('权限已永久拒绝');
-
-    }
-  }
-
-  Future<PermissionStatus> _getContactPermission() async {
-    PermissionStatus permission = await Permission.contacts.status;
-    if (permission != PermissionStatus.granted &&
-        permission != PermissionStatus.permanentlyDenied) {
-      PermissionStatus permissionStatus = await Permission.contacts.request();
-      return permissionStatus;
-    } else {
-      return permission;
-    }
-  }
-
-  Future<void> getContact() async {
-    List<Contact?> contactsList = await ContactsService.getContacts();
+    List<Contact?> contactsList = await getContact();
     for (var contactPerson in contactsList) {
       String phone = '';
-      if(contactPerson?.phones!=null && contactPerson?.phones?.isNotEmpty==true){
-        phone = contactPerson?.phones?[0].value??'';
-      }else{
+      if (contactPerson?.phones != null &&
+          contactPerson?.phones?.isNotEmpty == true) {
+        phone = contactPerson?.phones?[0].value ?? '';
+      } else {
         phone = '未知';
       }
       Map<String, dynamic> json = {

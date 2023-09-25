@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-///Flutter Widget的生命周期重点讲解StatefulWidget的生命周期
+///Flutter Widget的生命周期（准确的说应该是State的生命周期）重点讲解StatefulWidget的生命周期
 ///因为无状态的widget StatelessWidget只有createElement、与build两个生命周期方法
 ///StatefulWidget的生命周期方法按照时期不同可以分为三组：
 ///1.初始化时期
@@ -34,11 +34,11 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
 
   ///当依赖的State对象改变时会调用：
   ///a.在第一次构建widget时，在initState（）之后立即调用此方法；
-  ///b.如果的StatefulWidgets依赖于InheritedWidget，那么当当前State所依赖InheritedWidget中的变量改变时会再次调用它
+  ///b.如果的StatefulWidgets依赖于InheritedWidget，那么当前State所依赖InheritedWidget中的变量改变时会再次调用它
   ///拓展：InheritedWidget可以高效的将数据在Widget树中向下传递、共享，可参考：https://book.flutterchina.club/chapter7/inherited_widget.html
   @override
   void didChangeDependencies() {
-    print('---didChangeDependencies----');
+    debugPrint('---didChangeDependencies----');
     super.didChangeDependencies();
   }
 
@@ -47,7 +47,10 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
   ///另外当调用setState后也会再次调用该方法；
   @override
   Widget build(BuildContext context) {
-    print('---build-----');
+    debugPrint('---build-----');
+    setState(() {
+
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter页面生命周期'),
@@ -62,7 +65,7 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
                   _count += 1;
                 });
               },
-              child: Text(
+              child: const Text(
                 '点我',
                 style: TextStyle(fontSize: 26),
               ),
@@ -79,14 +82,14 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
   /// if (oldWidget.xxx != widget.xxx)...
   @override
   void didUpdateWidget(WidgetLifecycle oldWidget) {
-    print('----didUpdateWidget-----');
+    debugPrint('----didUpdateWidget-----');
     super.didUpdateWidget(oldWidget);
   }
 
   ///很少使用，在组件被移除时调用在dispose之前调用
   @override
   void deactivate() {
-    print('-----deactivate------');
+    debugPrint('-----deactivate------');
     super.deactivate();
   }
 
@@ -94,7 +97,7 @@ class _WidgetLifecycleState extends State<WidgetLifecycle> {
   ///通常在该方法中执行一些资源的释放工作比如，监听器的卸载，channel的销毁等
   @override
   void dispose() {
-    print('-----dispose-----');
+    debugPrint('-----dispose-----');
     super.dispose();
   }
 }

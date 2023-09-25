@@ -14,7 +14,7 @@ class AppRecycleLifePage extends StatefulWidget {
 class _AppRecycleLifePageState extends State<AppRecycleLifePage> with WidgetsBindingObserver{
   @override
   void initState() {
-    print("initState");
+    debugPrint("initState");
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }
@@ -39,11 +39,11 @@ class _AppRecycleLifePageState extends State<AppRecycleLifePage> with WidgetsBin
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    print('state = $state');
+    debugPrint('state = $state');
     if (state == AppLifecycleState.paused) {
-      print('App进入后台');
+      debugPrint('App进入后台');
     } else if (state == AppLifecycleState.resumed) {
-      print('App进去前台');
+      debugPrint('App进去前台');
     } else if (state == AppLifecycleState.inactive) {
       //不常用：应用程序处于非活动状态，并且未接收用户输入时调用，比如：来了个电话
     } else if (state == AppLifecycleState.detached) {
@@ -53,8 +53,9 @@ class _AppRecycleLifePageState extends State<AppRecycleLifePage> with WidgetsBin
 
   @override
   void dispose() {
+    //不用的时候记得移除它
     WidgetsBinding.instance.removeObserver(this);
-    print("dispose");
+    debugPrint("dispose");
     super.dispose();
   }
 }

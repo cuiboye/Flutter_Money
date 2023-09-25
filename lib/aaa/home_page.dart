@@ -41,26 +41,6 @@ class _MyHomePageState extends State<DownloadFile2> {
     _saveInPublicStorage = false;
 
     _prepare();
-    getCallLog();
-  }
-
-  Future<void> getCallLog() async {
-    Iterable<CallLogEntry> entries = await CallLog.get();
-    for (var callLogItem in entries) {
-      debugPrint('name=${callLogItem.name},number=${callLogItem.number},duration=${callLogItem.duration}');
-    }
-    // var now = DateTime.now();
-    // int from = now.subtract(const Duration(days: 60)).millisecondsSinceEpoch;
-    // int to = now.subtract(const Duration(days: 30)).millisecondsSinceEpoch;
-    // Iterable<CallLogEntry> entries = await CallLog.query(
-    //   dateFrom: from,
-    //   dateTo: to,
-    //   durationFrom: 0,
-    //   durationTo: 60,
-    //   name: 'John Doe',
-    //   number: '901700000',
-    //   type: CallType.incoming,
-    // );
   }
 
   @override
@@ -237,7 +217,7 @@ class _MyHomePageState extends State<DownloadFile2> {
       // savedDir: '/storage/emulated/0/Download',
       showNotification: true,
       //fileName的名称需要后缀，比如apk,jpg等等，否则会出现apk无法解析或者文件打开失败
-      fileName: 'wajiucrm${DateTime.now().microsecondsSinceEpoch}.pdf',
+      fileName: 'wajiucrm${DateTime.now().microsecondsSinceEpoch}.apk',
       // openFileFromNotification: false,
       //是否在通知栏显示下载进度
       //是否存储在外部目录，在Android上的目录为：/storage/emulated/0/Download

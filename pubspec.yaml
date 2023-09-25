@@ -137,7 +137,6 @@ dependencies:
   lpinyin: ^2.0.0
   contacts_service: ^0.6.3
   #获取手机联系人 end
-
 fluwx:
   #IOS的appid
   app_id: 'wx22d5ab853c3e8aea'

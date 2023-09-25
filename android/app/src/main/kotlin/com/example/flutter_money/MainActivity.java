@@ -143,11 +143,6 @@ public class MainActivity extends FlutterActivity {
             Log.e(TAG, "Error registering plugin android_path_provider, com.mix1009.android_path_provider.AndroidPathProviderPlugin", e);
         }
         try {
-            flutterEngine.getPlugins().add(new com.spencerccf.app_settings.AppSettingsPlugin());
-        } catch(Exception e) {
-            Log.e(TAG, "Error registering plugin app_settings, com.spencerccf.app_settings.AppSettingsPlugin", e);
-        }
-        try {
             flutterEngine.getPlugins().add(new sk.fourq.calllog.CallLogPlugin());
         } catch(Exception e) {
             Log.e(TAG, "Error registering plugin call_log, sk.fourq.calllog.CallLogPlugin", e);

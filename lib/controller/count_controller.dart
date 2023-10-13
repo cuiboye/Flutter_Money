@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 
 class CountController extends GetxController {
-  final _count = 0.obs;
+  final _count = 12.obs;
   set count(value) => this._count.value = value;
   get count => this._count.value;
 
-  final _count2 = 0.obs;
+  final _count2 = 15.obs;
   set count2(value) => this._count2.value = value;
   get count2 => this._count2.value;
 

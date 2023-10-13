@@ -299,112 +299,120 @@ class _TestState extends State<Test> {
   int num = 1;
   @override
   Widget build(BuildContext context) {
-    return CustomMaterialApp(
-      home: Scaffold(
-          appBar: CustomAppbar(
-            context: context,
-            title: "hello",
-          ),
-          body: Column(
-            children: [
-              // Visibility (//不可见时，不保留位置
-              //     visible: false, // 设置是否可见：true:可见 false:不可见
-              //     child: Text('Hello World')),
-              // // Offstage(//不可见时，不保留位置
-              // //     offstage: true, // 设置是否可见：true:不可见 false:可见
-              // //     child: Text('Hello World')),
-              // // Opacity(//不可见时，保留位置
-              // //     opacity: 0.0, // 设置是否可见：0:不可见 1:可见
-              // //     child: Text('Hello World')),
-              //
-              // Visibility(
-              //   //vip过期 或者数据为空 展示的视图
-              //   replacement: num==1
-              //       ? Container()
-              //       : Container(
-              //     child: Image.asset(
-              //       ImgAssets.icon_icon_com,
-              //       scale: 2.1,
-              //     ),
-              //   ),
-              //   //vip下要展示的视图
-              //   visible: !DateUtils.timeVipDiss(brandItemModel?.vipEndtime),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Container(
-              //         child: Image.asset(
-              //           Image..icon_tip_mxt,
-              //           scale: 2.1,
-              //         ),
-              //       ),
-              //       SizedBox(
-              //         width: 5,
-              //       ),
-              //       Text("盟信通认证，真实品牌商家",
-              //           maxLines: 1,
-              //           overflow: TextOverflow.ellipsis,
-              //           style: pingFangM(10, color: Color(0xFF666666))),
-              //       Container(
-              //         child: Image.asset(
-              //           ImgAssets.icon_toward_light,
-              //           scale: 2.5,
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              //
-              // Text("sdfds")
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),
-                ),
-                child: Image.asset(
-                  'images/main_page_banner1.jpeg',
-                  width: 120,
-                  height: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              ClipOval(//裁剪为圆形（宽和长相等）
-                child: Image.asset(
-                  'images/main_page_banner1.jpeg',
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              PhysicalModel(
-                //PhysicalModel和ClipRRect的区别：ClipRRect不能设置z轴和阴影，其他效果跟PhysicalModel 基本一致
-                color: Colors.transparent,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                clipBehavior: Clip.antiAlias,
-                child: Image.asset(
-                  'images/main_page_banner1.jpeg',
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              PhysicalModel(
-                //PhysicalModel和ClipRRect的区别：ClipRRect不能设置z轴和阴影，其他效果跟PhysicalModel 基本一致
-                color: Colors.transparent,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                clipBehavior: Clip.antiAlias,
-                child: Image.asset(ImageRes.appHomeDingdanBluePNG.full,
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.cover,
-                ),
-              ),
-               Container(
-                color: Colors.red,
-                child: Text("多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分"),
-              )
-            ],
-          )
+    return Scaffold(
+        appBar: CustomAppbar(
+          context: context,
+          title: "hello",
+        ),
+        // body: Container(
+        //   child: Column(
+        //     children: [
+        //       Text('hello'),
+        //       // Visibility (//不可见时，不保留位置
+        //       //     visible: false, // 设置是否可见：true:可见 false:不可见
+        //       //     child: Text('Hello World')),
+        //       // // Offstage(//不可见时，不保留位置
+        //       // //     offstage: true, // 设置是否可见：true:不可见 false:可见
+        //       // //     child: Text('Hello World')),
+        //       // // Opacity(//不可见时，保留位置
+        //       // //     opacity: 0.0, // 设置是否可见：0:不可见 1:可见
+        //       // //     child: Text('Hello World')),
+        //       //
+        //       // Visibility(
+        //       //   //vip过期 或者数据为空 展示的视图
+        //       //   replacement: num==1
+        //       //       ? Container()
+        //       //       : Container(
+        //       //     child: Image.asset(
+        //       //       ImgAssets.icon_icon_com,
+        //       //       scale: 2.1,
+        //       //     ),
+        //       //   ),
+        //       //   //vip下要展示的视图
+        //       //   visible: !DateUtils.timeVipDiss(brandItemModel?.vipEndtime),
+        //       //   child: Row(
+        //       //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       //     children: [
+        //       //       Container(
+        //       //         child: Image.asset(
+        //       //           Image..icon_tip_mxt,
+        //       //           scale: 2.1,
+        //       //         ),
+        //       //       ),
+        //       //       SizedBox(
+        //       //         width: 5,
+        //       //       ),
+        //       //       Text("盟信通认证，真实品牌商家",
+        //       //           maxLines: 1,
+        //       //           overflow: TextOverflow.ellipsis,
+        //       //           style: pingFangM(10, color: Color(0xFF666666))),
+        //       //       Container(
+        //       //         child: Image.asset(
+        //       //           ImgAssets.icon_toward_light,
+        //       //           scale: 2.5,
+        //       //         ),
+        //       //       )
+        //       //     ],
+        //       //   ),
+        //       // ),
+        //       //
+        //       // Text("sdfds")
+        //       // ClipRRect(
+        //       //   borderRadius: const BorderRadius.only(
+        //       //     topLeft: Radius.circular(50),
+        //       //     topRight: Radius.circular(50),
+        //       //   ),
+        //       //   child: Image.asset(
+        //       //     'images/main_page_banner1.jpeg',
+        //       //     width: 120,
+        //       //     height: 120,
+        //       //     fit: BoxFit.cover,
+        //       //   ),
+        //       // ),
+        //       // ClipOval(//裁剪为圆形（宽和长相等）
+        //       //   child: Image.asset(
+        //       //     'images/main_page_banner1.jpeg',
+        //       //     width: 130,
+        //       //     height: 130,
+        //       //     fit: BoxFit.cover,
+        //       //   ),
+        //       // ),
+        //       // PhysicalModel(
+        //       //   //PhysicalModel和ClipRRect的区别：ClipRRect不能设置z轴和阴影，其他效果跟PhysicalModel 基本一致
+        //       //   color: Colors.transparent,
+        //       //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+        //       //   clipBehavior: Clip.antiAlias,
+        //       //   child: Image.asset(
+        //       //     'images/main_page_banner1.jpeg',
+        //       //     width: 130,
+        //       //     height: 130,
+        //       //     fit: BoxFit.cover,
+        //       //   ),
+        //       // ),
+        //       // PhysicalModel(
+        //       //   //PhysicalModel和ClipRRect的区别：ClipRRect不能设置z轴和阴影，其他效果跟PhysicalModel 基本一致
+        //       //   color: Colors.transparent,
+        //       //   borderRadius: const BorderRadius.all(Radius.circular(10)),
+        //       //   clipBehavior: Clip.antiAlias,
+        //       //   child: Image.asset(ImageRes.appHomeDingdanBluePNG.full,
+        //       //     width: 130,
+        //       //     height: 130,
+        //       //     fit: BoxFit.cover,
+        //       //   ),
+        //       // ),
+        //       //  Container(
+        //       //   color: Colors.red,
+        //       //   child: Text("多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分多少发多少发多少发多少发多少发多少发多少发多少发多少丰富的水分"),
+        //       // )
+        //     ],
+        //   ),
+        //   color: ColorConstant.systemColor,
+        // )
+      body: Container(
+        color: ColorConstant.systemColor,
+        child: const Column(
+          children: [Text('Hello')],
+        ),
       ),
     );
   }

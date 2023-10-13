@@ -12,25 +12,25 @@ class GetXWorkCountController extends GetxController {
     super.onInit();
 
     // 每次
-    ever(_count, (value) {
-      print("ever -> " + value.toString());
-    });
+    // ever(_count, (value) {
+    //   print("ever -> " + value.toString());
+    // });
 
-    // 第一次
-    once(_count, (value) {
-      print("once -> " + value.toString());
-    });
-
-    // 防抖 2 秒内
-    debounce(
-      _count,
-          (value) {
-        print("debounce -> " + value.toString());
-      },
-      time: Duration(seconds: 2),
-    );
-
-    // 定时器 1 秒
+    // // 第一次
+    // once(_count, (value) {
+    //   print("once -> " + value.toString());
+    // });
+    //
+    // 防抖 2 秒内(print实际打印是在2秒后打印结果)
+    // debounce(
+    //   _count,
+    //       (value) {
+    //     print("debounce -> " + value.toString());
+    //   },
+    //   time: Duration(seconds: 2),
+    // );
+    //
+    // 定时器 1 秒（每隔1秒输出print的内容）
     interval(
       _count,
           (value) {

@@ -4,7 +4,7 @@ import 'package:flutter_money/view/custom_materialapp.dart';
 import 'package:get/get.dart';
 
 class GetXObsDemo extends StatelessWidget{
-  RxInt count = 0.obs;//使一个对象可观察，对象变化的时候刷新组件
+  RxInt count = 15.obs;//使一个对象可观察，对象变化的时候刷新组件
   // obs、extension、RxInt、Rx
   @override
   Widget build(BuildContext context) {

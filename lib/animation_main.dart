@@ -45,13 +45,13 @@ class _AnimationMainState extends State<AnimationBase> with SingleTickerProvider
         // reverse	动画正在反向执行
         // completed	动画在终点停止
         if(status == AnimationStatus.forward){
-          print("正向动画");
+          debugPrint("正向动画");
         }else if(status == AnimationStatus.reverse){
-          print("反向动画");
+          debugPrint("反向动画");
         }else if(status == AnimationStatus.dismissed){
-          print("动画在起始点停止");
+          debugPrint("动画在起始点停止");
         }else if(status == AnimationStatus.completed){
-          print("动画在终点停止");
+          debugPrint("动画在终点停止");
         }
       });
 

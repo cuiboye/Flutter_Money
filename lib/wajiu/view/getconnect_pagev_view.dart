@@ -18,7 +18,7 @@ class GetConnectPageView extends GetView<OrderListWithConnectController> {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return Divider();
+        return const Divider();
       },
     );
   }

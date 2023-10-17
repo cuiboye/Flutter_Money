@@ -17,6 +17,7 @@ import 'package:flutter_money/wajiu/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'statefulwidget_demo.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'extension.dart';
@@ -43,6 +44,10 @@ void downloadCallback(
 void main() async{
   //这里必须设置，否则会报：Shared preferences，No implementation found for method getAll on channel plugins.flutter.
   // SharedPreferences.setMockInitialValues({});//这个为flutter2.0的设置，现在不用了，2.0上使用有问题，重启app后数据获取失败
+
+  //解决Porvider莫名其妙的一个错误，建议设置如下语句
+  Provider.debugCheckInvalidValueType = null;
+
 
   //这里处理的是组件异常
   Widget error = const Text('...rendering error...');

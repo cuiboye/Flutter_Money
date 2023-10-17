@@ -22,7 +22,7 @@ class _ProviderMainPageState extends State<ProviderMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(context: context,title: '动画',),
+      appBar: CustomAppbar(context: context,title: 'Provider的使用',),
       body: Column(
         children: [
           ElevatedButton(onPressed: ()=>GetNavigationUtils.navigateRightToLeft(ProvideDemo()), child: Text('Provider的例子')),

@@ -24,7 +24,7 @@ class ApiService{
   static const String changeProductSelectStatus = "/shopcar/changeProductSelectStatus";
   //订单列表
   static const String getOrderList = "/danyuan/getOrderList";
-  //余额
+  //余额,这个用的不是挖酒的，是自己写的
   static const String getBalanceData = "/mine/getBalancedata";
   //我的订单
   static const String getMyDelivery = "/api/buyCenter/myDelivery";

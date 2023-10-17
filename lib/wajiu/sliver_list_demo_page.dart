@@ -298,42 +298,42 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                             context));
                   },
                 ),
-                // SliverToBoxAdapter(
-                //     //购物车列表
-                //     child: Container(
-                //       color: ColorConstant.color_ffffff,
-                //       child: ListView.builder(
-                //         physics: NeverScrollableScrollPhysics(),
-                //         shrinkWrap: true,
-                //         itemCount: mShopcarList.length,
-                //         itemBuilder: _itemBuilder,
-                //       ),
-                //     )),
-                //     //猜你喜欢列表
-                //     SliverToBoxAdapter(
-                //       child: Container(
-                //         child: StaggeredGrid.count(
-                //           crossAxisCount: 2,
-                //           mainAxisSpacing: 8,
-                //           crossAxisSpacing: 8,
-                //           children: GuessLikeWidget(),
-                //         ),
-                //         margin: EdgeInsets.only(bottom: 30),
-                //       )
-                //     )
+                SliverToBoxAdapter(
+                    //购物车列表
+                    child: Container(
+                      color: ColorConstant.color_ffffff,
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: mShopcarList.length,
+                        itemBuilder: _itemBuilder,
+                      ),
+                    )),
+                    //猜你喜欢列表
+                    SliverToBoxAdapter(
+                      child: Container(
+                        child: StaggeredGrid.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          children: GuessLikeWidget(),
+                        ),
+                        margin: EdgeInsets.only(bottom: 30),
+                      )
+                    )
 
 
                 //这个例子不适合PageView/TabbarView+TabBar的情况，只适合单个的ListView的情况
-                SliverFillRemaining(
-                  hasScrollBody: true,//hasScrollBody：包含可滚动组件
-                  child:  Container(
-                    child: PageView(
-                      children: [
-                        _pageView(),
-                        _pageView(),
-                      ],
-                    ),),
-                )
+                // SliverFillRemaining(
+                //   hasScrollBody: true,//hasScrollBody：包含可滚动组件
+                //   child:  Container(
+                //     child: PageView(
+                //       children: [
+                //         _pageView(),
+                //         _pageView(),
+                //       ],
+                //     ),),
+                // )
 
                   ],
                 ),

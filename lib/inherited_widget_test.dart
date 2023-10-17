@@ -20,6 +20,8 @@ import 'inherited_widget_example.dart';
    4）如果我们只想更新子树中依赖了ShareDataWidget的组件，而不想重新构建整个页面，解决的办法是使用缓存。
  */
 class InheritedWidgetTestRoute extends StatefulWidget {
+  const InheritedWidgetTestRoute({super.key});
+
   @override
   _InheritedWidgetTestRouteState createState() => _InheritedWidgetTestRouteState();
 }

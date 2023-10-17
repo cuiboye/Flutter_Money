@@ -60,6 +60,7 @@ import 'package:flutter_money/widget/gradient_button_demo.dart';
 import 'package:flutter_money/widget/html_demo.dart';
 import 'package:flutter_money/widget/indicator.dart';
 import 'package:flutter_money/widget/print_widget_log_demo.dart';
+import 'package:flutter_money/widget/provider_main_page.dart';
 import 'package:flutter_money/widget/scale_view_demo.dart';
 import 'package:flutter_money/widget/stagger_animation_example.dart';
 import 'package:flutter_money/widget/time_page.dart';
@@ -192,6 +193,7 @@ class _RouteNavigatorState extends State<RouteNavigator> {
         _item('Loading', LoadingView(), 'loading_view'),
         _item('加载html代码', const HtmlDemo(), 'htmldemo'),
         _item('对约束布局的理解', const YushuPage(), 'yushu_page'),
+        _item('Provider的使用', const ProviderMainPage(), 'yushu_page'),
         _item('时间选择器和时间格式转换', const TimePage(), 'time_page'),
         _item('精确的SizeBox', const AccurateSizedBoxDemo(), 'accuratesizedboxdemo'),
         _item('SelectionArea组件', const SelectionAreawidgetPage(), 'selection_area_widget_page'),
